@@ -1,0 +1,200 @@
+[
+  {
+    "type": "Patrimoine & Résultat",
+    "code_parent": 1,
+    "desc_parent": "Patrimoine et epargne long terme",
+    "sous_types": [
+      {
+        "nom": "Dettes Long Terme",
+        "no_sous_type": 3,
+        "desc_sous_type": "ensemble des dettes long terme",
+        "details": [
+          { "nom": "Crédit Immobilier", "no_detail": 1, "desc_detail": "" },
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Prêt Bancaire Long Terme", "no_detail": 2, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "Patrimoine net initial",
+        "no_sous_type": 0,
+        "desc_sous_type": "ensemble des biens et dettes au début dez suivi",
+        "details": [
+          { "nom": "Contrepartie Solde Début", "no_detail": 1, "desc_detail": "" },
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Patrimoine Initial Réel", "no_detail": 0, "desc_detail": "" }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Immobilisation",
+    "code_parent": 2,
+    "desc_parent": "Valeur dite immobilière, comprends l'immobilier et le mobilier",
+    "sous_types": [
+      {
+        "nom": "Autres biens immo",
+        "no_sous_type": 2,
+        "desc_sous_type": "Valeur & amélioration des autres biens immobiliers",
+        "details": [
+          { "nom": "Travaux & Amélioration", "no_detail": 1, "desc_detail": "Travaux impactant la valeur du bien et réestimation" },
+          { "nom": "Valeur du bien", "no_detail": 0, "desc_detail": "Valeur initial du bien" }
+        ]
+      },
+      {
+        "nom": "Créances Long Terme",
+        "no_sous_type": 5,
+        "desc_sous_type": "Capital & interet des prets consentis",
+        "details": [
+          { "nom": "Capital", "no_detail": 1, "desc_detail": "Capital des prêt consenti" },
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "Créances diverses" },
+          { "nom": "Intérêts à recevoir", "no_detail": 2, "desc_detail": "Interet à recevoir sur les prêts consenti" }
+        ]
+      },
+      {
+        "nom": "Immo Financières",
+        "no_sous_type": 0,
+        "desc_sous_type": "compte d'investissements & assurance vie",
+        "details": [
+          { "nom": "Assurance Vie", "no_detail": 0, "desc_detail": "Montant des assurances vie souscrites" },
+          { "nom": "Comptes d'investissement", "no_detail": 1, "desc_detail": "Montant des comptes d'investissements" },
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "Immo Financières diverses" }
+        ]
+      },
+      {
+        "nom": "Résidence principale",
+        "no_sous_type": 1,
+        "desc_sous_type": "Valeur & amélioration de la résidence principale",
+        "details": [
+          { "nom": "Travaux & Amélioration", "no_detail": 1, "desc_detail": "Travaux impactant la valeur du bien et réestimation" },
+          { "nom": "Valeur du bien", "no_detail": 0, "desc_detail": "Valeur initial du bien" }
+        ]
+      },
+      {
+        "nom": "Véhicules",
+        "no_sous_type": 3,
+        "desc_sous_type": "valeurs des différents véhicules",
+        "details": [
+          { "nom": "Autres Véhicules", "no_detail": 2, "desc_detail": "Valeur initial du bien" },
+          { "nom": "Véhicule Principal", "no_detail": 1, "desc_detail": "Valeur initial du bien" }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Trésorerie",
+    "code_parent": 5,
+    "desc_parent": "Comptes, epargne court terme et espèce",
+    "sous_types": [
+      {
+        "nom": "Compte courant",
+        "no_sous_type": 0,
+        "desc_sous_type": "Solde du compte courant principal",
+        "details": [
+          { "nom": "Compte courant principal", "no_detail": 1, "desc_detail": "Solde du compte courant principal" }
+        ]
+      },
+      {
+        "nom": "Comptes secondaires",
+        "no_sous_type": 1,
+        "desc_sous_type": "Solde des autres comptes bancaire",
+        "details": [
+          { "nom": "Compte joint", "no_detail": 1, "desc_detail": "Solde du compte courant joint" },
+          { "nom": "Compte Secondaire", "no_detail": 2, "desc_detail": "Solde des comptes secondaires" }
+        ]
+      },
+      {
+        "nom": "Dettes / Créances Courtes",
+        "no_sous_type": 6,
+        "desc_sous_type": "Capital et interet des dettes et créances courtes",
+        "details": [
+          { "nom": "Accompte sur salaire", "no_detail": 0, "desc_detail": "Accompte perçu sur salaire" },
+          { "nom": "Dettes diverses", "no_detail": 9, "desc_detail": "Dettes diverses code complémentaire perlet de distinguer" }
+        ]
+      },
+      {
+        "nom": "Epargne liquide",
+        "no_sous_type": 2,
+        "desc_sous_type": "Solde des comptes d'épargne",
+        "details": [
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "LEP Juju", "no_detail": 4, "desc_detail": "" },
+          { "nom": "LVA Greg", "no_detail": 1, "desc_detail": "" },
+          { "nom": "LVA Juju", "no_detail": 2, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "Virements Internes",
+        "no_sous_type": 8,
+        "desc_sous_type": "Compte de virements solde doit toujours etre 0",
+        "details": [
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Virement de compte à compte", "no_detail": 0, "desc_detail": "" }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Dépenses",
+    "code_parent": 6,
+    "desc_parent": "liste des catégorie de dépenses",
+    "sous_types": [
+      {
+        "nom": "Alimentation-Hygiène",
+        "no_sous_type": 1,
+        "desc_sous_type": "Dépenses d'alimentation",
+        "details": [
+          { "nom": "Alimentation", "no_detail": 1, "desc_detail": "Dépenses d'électricité" },
+          { "nom": "Animaux", "no_detail": 3, "desc_detail": "Dépense d'assurance" },
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Hygiène", "no_detail": 2, "desc_detail": "Dépense en eau & assainissement" },
+          { "nom": "Restaurant", "no_detail": 8, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "Cadeaux & dons",
+        "no_sous_type": 7,
+        "desc_sous_type": "Cadeaux et dons faits",
+        "details": [
+          { "nom": "Cadeaux Fetes", "no_detail": 1, "desc_detail": "" },
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "Charges Financières",
+        "no_sous_type": 8,
+        "desc_sous_type": "Frais bancaire diverses",
+        "details": [
+          { "nom": "CB", "no_detail": 2, "desc_detail": "Facturation Carte bleue" },
+          { "nom": "Compte", "no_detail": 1, "desc_detail": "Facturation comptes" },
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Frais", "no_detail": 3, "desc_detail": "Frais bancaire pour irrégularité et incident" },
+          { "nom": "Interet", "no_detail": 4, "desc_detail": "Interets débiteurs" }
+        ]
+      },
+      {
+        "nom": "Divers & imprévus",
+        "no_sous_type": 9,
+        "desc_sous_type": "Dépenses diverses",
+        "details": [
+          { "nom": "Divers", "no_detail": 0, "desc_detail": "Dépenses non catégorisées" }
+        ]
+      },
+      {
+        "nom": "Impôts & taxes",
+        "no_sous_type": 4,
+        "desc_sous_type": "Dépenses d'aux impots & taxes",
+        "details": [
+          { "nom": "Impôts sur le revenus", "no_detail": 1, "desc_detail": "" },
+          { "nom": "Taxes diverses", "no_detail": 9, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "Logement",
+        "no_sous_type": 0,
+        "desc_sous_type": "Dépenses liées au logement",
+        "details": [
+          { "nom": "Assurance du bien", "no_detail": 3, "desc_detail": "Dépense d'assurance" },
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Eau & Assainissement", "no_detail": 2, "desc_detail": "Dépense en eau & assainissement" },
+          { "nom": "Electricité", "no_detail": 1, "desc_detail": "Dépenses d'électricité" },
+          { "nom": "Entretien & Reparations", "no_detail": 5, "desc_detail": "Frais
