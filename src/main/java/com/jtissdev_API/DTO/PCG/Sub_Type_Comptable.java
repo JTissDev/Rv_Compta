@@ -1,4 +1,4 @@
-package com.jtissdev_API.DTO;
+package com.jtissdev_API.DTO.PCG;
 
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
@@ -216,7 +216,7 @@ public class Sub_Type_Comptable {
         if (parentCodeComptable == null || parentCodeComptable.isBlank()) {
             return local;
         }
-        return parentCodeComptable + "." + local;
+        return parentCodeComptable  + local;
     }
 
     /**

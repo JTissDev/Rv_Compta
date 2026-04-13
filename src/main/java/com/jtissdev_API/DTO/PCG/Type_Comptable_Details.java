@@ -27,7 +27,7 @@ public class Type_Comptable_Details {
      *
      * @since 1.0.0
      */
-    private int id;
+    private long id;
 
     /**
      * Human-readable name of the accounting type.
@@ -131,7 +131,7 @@ public class Type_Comptable_Details {
      *
      * @since 1.1.0
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 

@@ -1,6 +1,5 @@
-package com.jtissdev_API.DTO;
+package com.jtissdev_API.DTO.PCG;
 
-import com.jtissdev_API.DTO.PCG.Type_Comptable_Details;
 import jakarta.json.JsonObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests unitaires pour {@link Type_Comptable_Details}.
  */
-class Type_Comptable_DetailsTest {
+class Type_Comptable_Details_Test {
 
     // ================================================================================================================
     // Constructors Tests
