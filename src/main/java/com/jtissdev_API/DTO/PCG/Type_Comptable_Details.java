@@ -1,4 +1,4 @@
-package com.jtissdev_API.DTO;
+package com.jtissdev_API.DTO.PCG;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
