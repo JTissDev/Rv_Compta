@@ -8,18 +8,65 @@
   <packaging>jar</packaging>
 
   <name>Rv_Compta</name>
+  <description>API de gestion Comptable</description>
   <url>http://maven.apache.org</url>
 
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.2.0</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <!-- Informations sur l'organisation -->
+  <organization>
+    <name>JTissDevInfo</name>
+    <url>http://jtissdev.org</url>
+  </organization>
+
+  <!-- Informations sur le développeur -->
+  <developers>
+    <developer>
+      <id>jtissdev</id>
+      <name>Julien Tissier</name>
+      <email>jtissdev@gmail.com</email>
+      <roles>
+        <role>Architect</role>
+        <role>Developer</role>
+        <role>Project Owner</role>
+      </roles>
+    </developer>
+  </developers>
+
+
+  <!-- Informations sur la licence -->
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jakarta.version>2.1.2</jakarta.version>
   </properties>
 
   <dependencies>
+
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
+
+    <dependency>
+      <groupId>jakarta.json</groupId>
+      <artifactId>jakarta.json-api</artifactId>
+      <version>${jakarta.version}</version>
+    </dependency>
+
+
   </dependencies>
 </project>
