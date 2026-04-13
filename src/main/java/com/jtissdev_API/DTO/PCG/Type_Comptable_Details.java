@@ -337,4 +337,8 @@ public class Type_Comptable_Details {
                 ", parentCodeComptable='" + parentCodeComptable + '\'' +
                 '}';
     }
+
+    public void setParentCodeComptable(String fullCode) {
+        this.parentCodeComptable = fullCode;
+    }
 }
