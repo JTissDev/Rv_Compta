@@ -1,4 +1,4 @@
-package com.jtissdev_API.DTO;
+package com.jtissdev_API.DTO.PCG;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
@@ -14,7 +14,7 @@ import jakarta.json.JsonObjectBuilder;
  *
  * @author jtiss
  * @since 1.0.0
- * @version 1.1.0
+ * @version 1.0.1
  */
 public class Type_Comptable_Details {
 
@@ -25,14 +25,14 @@ public class Type_Comptable_Details {
     /**
      * Technical identifier used by the database.
      *
-     * @since 1.1.0
+     * @since 1.0.0
      */
-    private Long id;
+    private long id;
 
     /**
      * Human-readable name of the accounting type.
      *
-     * @since 1.1.0
+     * @since 1.0.0
      */
     private String name;
 
@@ -41,14 +41,14 @@ public class Type_Comptable_Details {
      * This code is combined with the parent accounting code
      * to build the full accounting code.
      *
-     * @since 1.1.0
+     * @since 1.0.0
      */
     private Integer codeComptable;
 
     /**
      * Human-readable description of the accounting type.
      *
-     * @since 1.1.0
+     * @since 1.0.0
      */
     private String description;
 
@@ -57,7 +57,7 @@ public class Type_Comptable_Details {
      * This is used as a prefix when computing the full accounting code.
      * It is meant to represent a higher-level accounting structure.
      *
-     * @since 1.1.0
+     * @since 1.0.0
      */
     private String parentCodeComptable;
 
@@ -69,7 +69,7 @@ public class Type_Comptable_Details {
      * Creates an empty {@code Type_Comptable_Details} instance.
      * All fields are initialized to {@code null}.
      *
-     * @since 1.1.0
+     * @since 1.0.0
      */
     public Type_Comptable_Details() {
         // Default constructor
@@ -86,7 +86,7 @@ public class Type_Comptable_Details {
      *
      * @since 1.1.0
      */
-    public Type_Comptable_Details(Long id,
+    public Type_Comptable_Details(int id,
                                   String name,
                                   Integer codeComptable,
                                   String description) {
@@ -108,7 +108,7 @@ public class Type_Comptable_Details {
      *
      * @since 1.1.0
      */
-    public Type_Comptable_Details(Long id,
+    public Type_Comptable_Details(int id,
                                   String name,
                                   Integer codeComptable,
                                   String description,
@@ -131,7 +131,7 @@ public class Type_Comptable_Details {
      *
      * @since 1.1.0
      */
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -220,7 +220,7 @@ public class Type_Comptable_Details {
      *
      * @since 1.1.0
      */
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -274,7 +274,7 @@ public class Type_Comptable_Details {
         JsonObjectBuilder builder = Json.createObjectBuilder();
 
         // id
-        if (id == null) {
+        if (false) {
             builder.addNull("id");
         } else {
             builder.add("id", id);
@@ -336,5 +336,9 @@ public class Type_Comptable_Details {
                 ", description='" + description + '\'' +
                 ", parentCodeComptable='" + parentCodeComptable + '\'' +
                 '}';
+    }
+
+    public void setParentCodeComptable(String fullCode) {
+        this.parentCodeComptable = fullCode;
     }
 }
