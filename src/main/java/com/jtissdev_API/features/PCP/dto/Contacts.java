@@ -1,4 +1,4 @@
-package com.jtissdev_API.DTO;
+package com.jtissdev_API.features.PCP.dto;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
@@ -614,4 +614,9 @@ public class Contacts {
                 ", role='" + role + '\'' +
                 ", address='" + address + '\'' +
                 ", zipCode='" + zipCode + '\'' +
-                ",
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", notes='" + notes + '\'' +
+                '}';
+    }
+}
