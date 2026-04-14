@@ -120,11 +120,13 @@ Le projet adopte une structure **Hybride Orientée Domaine**, fusionnant la clar
 
 ### 1. Organisation des Packages 📦
 * **`core/`** : Infrastructure transversale (Sécurité, Exceptions, Config, Utils).
-* **`features/`** : Le cœur métier divisé par domaines autonomes.
-  * **Controller** : Point d'entrée REST (Délégation au service).
-  * **Service** : Logique métier, gestion du cache (`ConcurrentHashMap`) et stratégie de données.
-  * **DTO** : Objets de transfert (ex: `hierarchy` pour l'arbre PCG, `core` pour le conteneur).
-  * **Entity & Repository** : Couche de persistance Spring Data JPA.
+* **`features/`** : Le cœur métier divisé par domaines.
+  * **core/** : **Socle commun aux fonctionnalités** (Conteneurs de données transversaux, DTO de base comme `PcgCoreDTO`, utilitaires métier partagés).
+  * **pcg/**, **pcp/**, **compta/** : Sous-modules spécialisés contenant leurs propres Controllers, Services et Logique spécifique.
+    * **Controller** : Point d'entrée REST (Délégation au service).
+    * **Service** : Logique métier, gestion du cache (`ConcurrentHashMap`) et stratégie de données.
+    * **DTO** : Objets de transfert (ex: `hierarchy` pour l'arbre PCG, `core` pour le conteneur).
+    * **Entity & Repository** : Couche de persistance Spring Data JPA.
 * **`engine/`** : Moteurs techniques spécialisés (Stateless).
   * **`loader/`** : Transformation de sources externes (JSON, Excel) en DTO.
   * **`persistence/`** : Synchronisation du référentiel (Fichier vers BDD).
@@ -165,11 +167,12 @@ L'API est configurée pour 4 environnements spécifiques :
 src/main/java/com/jtissdev_API/
 ├── core/                # Infrastructure (Config, Exceptions, Utils)
 ├── features/            # Modules métier
+│   ├── core             # Objets communs aux features (ex: DTO génériques)
 │   ├── pcg/             # Plan Comptable Général
-│   │   ├── dto/         # (core, hierarchy)
+│   │   ├── dto/         # (hierarchy)
 │   │   ├── service/     # Logique & Cache (PcgService)
 │   │   └── ...          # Controller, Repository, Entity
-│   ├── pcp/             # Plan Comptable Tiers (Client, Fournisseur)
+│   ├── pcp/             # Plan Comptable Particulier (Client, Fournisseur, detail )
 │   └── compta/          # Journaux et Écritures
 ├── engine/              # Automates de traitement techniques
 │   ├── loader/          # Loaders (JSON, Excel via POI)
