@@ -1,4 +1,4 @@
-package com.jtissdev_API.DTO.Tiers;
+package com.jtissdev_API.features.PCP.dto;
 
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
@@ -42,7 +42,7 @@ public class Tiers {
 	 *
 	 * @since 1.2.0
 	 */
-	private List<Contact_Tiers> contacts = new ArrayList<>();
+	private List<Contacts> contacts = new ArrayList<>();
 
 	// =========================================================
 	// == CONSTRUCTORS                                        ==
@@ -67,7 +67,7 @@ public class Tiers {
 	             boolean professionnel,
 	             Integer codeComptableParDefaut,
 	             String description,
-	             List<Contact_Tiers> contacts) {
+	             List<Contacts> contacts) {
 		this.id = id;
 		this.nomOuRaisonSociale = nomOuRaisonSociale;
 		this.professionnel = professionnel;
@@ -129,7 +129,7 @@ public class Tiers {
 	 *
 	 * @since 1.2.0
 	 */
-	public List<Contact_Tiers> getContacts() {
+	public List<Contacts> getContacts() {
 		return contacts;
 	}
 
@@ -140,7 +140,7 @@ public class Tiers {
 	 *
 	 * @since 1.2.0
 	 */
-	public void setContacts(List<Contact_Tiers> contacts) {
+	public void setContacts(List<Contacts> contacts) {
 		if (contacts == null) {
 			this.contacts = new ArrayList<>();
 		} else {
@@ -155,7 +155,7 @@ public class Tiers {
 	 *
 	 * @since 1.2.0
 	 */
-	public void addContact(Contact_Tiers contact) {
+	public void addContact(Contacts contact) {
 		if (contact != null) {
 			this.contacts.add(contact);
 		}
@@ -189,7 +189,7 @@ public class Tiers {
 
 		// Sérialisation de la liste de contacts
 		JsonArrayBuilder contactsArrayBuilder = Json.createArrayBuilder();
-		for (Contact_Tiers contact : contacts) {
+		for (Contacts contact : contacts) {
 			if (contact != null) {
 				contactsArrayBuilder.add(contact.toJson());
 			}

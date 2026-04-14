@@ -1,5 +1,8 @@
-package com.jtissdev_API.DTO.PCG;
+package com.jtissdev_API.features.core;
 
+import com.jtissdev_API.features.PCG.dto.Sub_Type_Comptable;
+import com.jtissdev_API.features.PCG.dto.Type_Comptable;
+import com.jtissdev_API.features.PCG.dto.Type_Comptable_Details;
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;

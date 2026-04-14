@@ -1,29 +1,22 @@
-package com.jtissdev_API.DTO.PCG;
+package com.jtissdev_API.features.PCG.dto;
 
 import jakarta.json.Json;
-import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Represents a sub accounting type (one level above detailed accounting types).
- * <p>
- * A {@code Sub_Type_Comptable} has its own identifier, name,
- * local accounting code, description and an optional parent accounting code.
- * It also contains a list of {@link Type_Comptable_Details} that belong
- * to this sub accounting type.
+ * Represents detailed information about an accounting type.
+ * This class contains information such as an identifier,
+ * the type's name, description, and associated accounting code.
  *
  * The full accounting code is built by combining the optional
  * parent accounting code with the local accounting code.
  *
  * @author jtiss
- * @since 1.1.0
- * @version 1.0.0
+ * @since 1.0.0
+ * @version 1.0.1
  */
-public class Sub_Type_Comptable {
+public class Type_Comptable_Details {
 
     // =========================================================
     // == FIELDS                                              ==
@@ -32,64 +25,59 @@ public class Sub_Type_Comptable {
     /**
      * Technical identifier used by the database.
      *
-     * @since 1.1.0
+     * @since 1.0.0
      */
-    private Long id;
+    private long id;
 
     /**
-     * Human-readable name of the sub accounting type.
+     * Human-readable name of the accounting type.
      *
-     * @since 1.1.0
+     * @since 1.0.0
      */
     private String name;
 
     /**
-     * Local accounting code (numeric value) for this sub type.
+     * Local accounting code (numeric value).
+     * This code is combined with the parent accounting code
+     * to build the full accounting code.
      *
-     * @since 1.1.0
+     * @since 1.0.0
      */
     private Integer codeComptable;
 
     /**
-     * Human-readable description of the sub accounting type.
+     * Human-readable description of the accounting type.
      *
-     * @since 1.1.0
+     * @since 1.0.0
      */
     private String description;
 
     /**
      * Parent accounting code.
      * This is used as a prefix when computing the full accounting code.
+     * It is meant to represent a higher-level accounting structure.
      *
-     * @since 1.1.0
+     * @since 1.0.0
      */
     private String parentCodeComptable;
-
-    /**
-     * List of detailed accounting types attached to this sub type.
-     *
-     * @since 1.1.0
-     */
-    private List<Type_Comptable_Details> detailsList;
 
     // =========================================================
     // == CONSTRUCTORS                                        ==
     // =========================================================
 
     /**
-     * Creates an empty {@code Sub_Type_Comptable} instance.
-     * All fields are initialized to {@code null}, and the list of details
-     * is initialized as an empty {@link ArrayList}.
+     * Creates an empty {@code Type_Comptable_Details} instance.
+     * All fields are initialized to {@code null}.
      *
-     * @since 1.1.0
+     * @since 1.0.0
      */
-    public Sub_Type_Comptable() {
-        this.detailsList = new ArrayList<>();
+    public Type_Comptable_Details() {
+        // Default constructor
     }
 
     /**
-     * Creates a new {@code Sub_Type_Comptable} instance
-     * without a parent accounting code.
+     * Creates a new {@code Type_Comptable_Details} instance with basic fields.
+     * The parent accounting code is not defined in this constructor.
      *
      * @param id            technical identifier used by the database
      * @param name          human-readable name
@@ -98,42 +86,38 @@ public class Sub_Type_Comptable {
      *
      * @since 1.1.0
      */
-    public Sub_Type_Comptable(Long id,
-                              String name,
-                              Integer codeComptable,
-                              String description) {
+    public Type_Comptable_Details(int id,
+                                  String name,
+                                  Integer codeComptable,
+                                  String description) {
         this.id = id;
         this.name = name;
         this.codeComptable = codeComptable;
         this.description = description;
-        this.detailsList = new ArrayList<>();
     }
 
     /**
-     * Creates a new {@code Sub_Type_Comptable} instance with
-     * a parent accounting code and an optional predefined list of details.
+     * Creates a new {@code Type_Comptable_Details} instance with
+     * a parent accounting code and all other fields.
      *
      * @param id                  technical identifier used by the database
      * @param name                human-readable name
      * @param codeComptable       local accounting numeric code
      * @param description         human-readable description
      * @param parentCodeComptable parent accounting code used as prefix
-     * @param detailsList         list of details; if {@code null}, an empty list will be used
      *
      * @since 1.1.0
      */
-    public Sub_Type_Comptable(Long id,
-                              String name,
-                              Integer codeComptable,
-                              String description,
-                              String parentCodeComptable,
-                              List<Type_Comptable_Details> detailsList) {
+    public Type_Comptable_Details(int id,
+                                  String name,
+                                  Integer codeComptable,
+                                  String description,
+                                  String parentCodeComptable) {
         this.id = id;
         this.name = name;
         this.codeComptable = codeComptable;
         this.description = description;
         this.parentCodeComptable = parentCodeComptable;
-        this.detailsList = (detailsList != null) ? detailsList : new ArrayList<>();
     }
 
     // =========================================================
@@ -147,14 +131,14 @@ public class Sub_Type_Comptable {
      *
      * @since 1.1.0
      */
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
     /**
-     * Returns the human-readable name of the sub accounting type.
+     * Returns the human-readable name of the accounting type.
      *
-     * @return the name
+     * @return the accounting type name
      *
      * @since 1.1.0
      */
@@ -174,7 +158,7 @@ public class Sub_Type_Comptable {
     }
 
     /**
-     * Returns the human-readable description of the sub accounting type.
+     * Returns the human-readable description of the accounting type.
      *
      * @return the description
      *
@@ -196,12 +180,18 @@ public class Sub_Type_Comptable {
     }
 
     /**
-     * Returns the full accounting code of this sub type.
+     * Returns the full accounting code.
      * <p>
      * If a parent accounting code is defined, the full code is built
      * by concatenating the parent code, a separator (".") and the
      * local accounting code. If no parent is defined, only the local
      * accounting code is returned as string.
+     * <p>
+     * Examples (assuming codeComptable = 101):
+     * <ul>
+     *   <li>parentCodeComptable = "60"  → "60101"</li>
+     *   <li>parentCodeComptable = null → "101"</li>
+     * </ul>
      *
      * @return the full accounting code, or {@code null} if
      *         the local accounting code is not defined
@@ -219,20 +209,8 @@ public class Sub_Type_Comptable {
         return parentCodeComptable  + local;
     }
 
-    /**
-     * Returns the list of detailed accounting types
-     * belonging to this sub type.
-     *
-     * @return a mutable list of {@link Type_Comptable_Details}
-     *
-     * @since 1.1.0
-     */
-    public List<Type_Comptable_Details> getDetailsList() {
-        return detailsList;
-    }
-
     // =========================================================
-    // == SETTERS                                             ==
+    // == SETTERS (NO PARENT CODE MODIFICATION)               ==
     // =========================================================
 
     /**
@@ -242,14 +220,14 @@ public class Sub_Type_Comptable {
      *
      * @since 1.1.0
      */
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * Sets the human-readable name of the sub accounting type.
+     * Sets the human-readable name of the accounting type.
      *
-     * @param name the new name
+     * @param name the new accounting type name
      *
      * @since 1.1.0
      */
@@ -269,7 +247,7 @@ public class Sub_Type_Comptable {
     }
 
     /**
-     * Sets the human-readable description of the sub accounting type.
+     * Sets the human-readable description of the accounting type.
      *
      * @param description the new description
      *
@@ -279,63 +257,16 @@ public class Sub_Type_Comptable {
         this.description = description;
     }
 
-    /**
-     * Sets the parent accounting code.
-     *
-     * @param parentCodeComptable the new parent accounting code
-     *
-     * @since 1.1.0
-     */
-    public void setParentCodeComptable(String parentCodeComptable) {
-        this.parentCodeComptable = parentCodeComptable;
-    }
-
-    /**
-     * Replaces the current details list.
-     *
-     * @param detailsList new list of details; if {@code null},
-     *                    an empty list will be used
-     *
-     * @since 1.1.0
-     */
-    public void setDetailsList(List<Type_Comptable_Details> detailsList) {
-        this.detailsList = (detailsList != null) ? detailsList : new ArrayList<>();
-    }
-
-    // =========================================================
-    // == COLLECTION HELPERS                                  ==
-    // =========================================================
-
-    /**
-     * Adds a new {@link Type_Comptable_Details} to this sub type.
-     * If the internal list is {@code null}, it will be initialized.
-     *
-     * @param details the details to add; ignored if {@code null}
-     *
-     * @since 1.1.0
-     */
-    public void addDetails(Type_Comptable_Details details) {
-        if (details == null) {
-            return;
-        }
-        if (this.detailsList == null) {
-            this.detailsList = new ArrayList<>();
-        }
-        this.detailsList.add(details);
-    }
-
     // =========================================================
     // == JSON & UTILITIES                                   ==
     // =========================================================
 
     /**
-     * Construit et renvoie un {@link JsonObject} représentant ce sous-type.
+     * Construit et renvoie un {@link JsonObject} représentant cet objet.
      * <p>
      * Les valeurs {@code null} sont encodées comme {@code null} JSON.
-     * La liste des détails est sérialisée en tableau JSON :
-     * chaque élément utilise sa propre méthode {@code toJson()}.
      *
-     * @return un {@link JsonObject} représentant cette instance
+     * @return un JsonObject représentant cette instance
      *
      * @since 1.1.0
      */
@@ -343,7 +274,7 @@ public class Sub_Type_Comptable {
         JsonObjectBuilder builder = Json.createObjectBuilder();
 
         // id
-        if (id == null) {
+        if (false) {
             builder.addNull("id");
         } else {
             builder.add("id", id);
@@ -385,19 +316,6 @@ public class Sub_Type_Comptable {
             builder.add("fullCode", fullCode);
         }
 
-        // detailsList (array)
-        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-        if (detailsList != null) {
-            for (Type_Comptable_Details d : detailsList) {
-                if (d == null) {
-                    arrayBuilder.addNull();
-                } else {
-                    arrayBuilder.add(d.toJson());
-                }
-            }
-        }
-        builder.add("detailsList", arrayBuilder);
-
         return builder.build();
     }
 
@@ -411,13 +329,16 @@ public class Sub_Type_Comptable {
      */
     @Override
     public String toString() {
-        return "Sub_Type_Comptable{" +
+        return "Type_Comptable_Details{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", codeComptable=" + codeComptable +
                 ", description='" + description + '\'' +
                 ", parentCodeComptable='" + parentCodeComptable + '\'' +
-                ", detailsListSize=" + (detailsList != null ? detailsList.size() : 0) +
                 '}';
+    }
+
+    public void setParentCodeComptable(String fullCode) {
+        this.parentCodeComptable = fullCode;
     }
 }

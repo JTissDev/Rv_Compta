@@ -1,4 +1,4 @@
-package com.jtissdev_API.DTO;
+package com.jtissdev_API;
 
 import org.junit.jupiter.api.Test;
 

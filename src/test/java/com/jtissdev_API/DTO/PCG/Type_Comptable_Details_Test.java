@@ -1,5 +1,6 @@
 package com.jtissdev_API.DTO.PCG;
 
+import com.jtissdev_API.features.PCG.dto.Type_Comptable_Details;
 import jakarta.json.JsonObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
