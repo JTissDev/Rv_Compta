@@ -197,4 +197,138 @@
           { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
           { "nom": "Eau & Assainissement", "no_detail": 2, "desc_detail": "Dépense en eau & assainissement" },
           { "nom": "Electricité", "no_detail": 1, "desc_detail": "Dépenses d'électricité" },
-          { "nom": "Entretien & Reparations", "no_detail": 5, "desc_detail": "Frais
+          { "nom": "Entretien & Reparations", "no_detail": 5, "desc_detail": "Frais d'entretien et de réparation" },
+          { "nom": "Internet", "no_detail": 4, "desc_detail": "Forfait internet" },
+          { "nom": "Streaming", "no_detail": 7, "desc_detail": "Dépenses de streaming pour la maison" },
+          { "nom": "Taxes Foncières", "no_detail": 8, "desc_detail": "Taxe foncière du logement" }
+        ]
+      },
+      {
+        "nom": "Loisirs & culture",
+        "no_sous_type": 6,
+        "desc_sous_type": "Dépenses de loisirs et culturel",
+        "details": [
+          { "nom": "Cinéma", "no_detail": 2, "desc_detail": "" },
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Livres", "no_detail": 1, "desc_detail": "" },
+          { "nom": "Sports", "no_detail": 3, "desc_detail": "" },
+          { "nom": "Vacances & voyages", "no_detail": 4, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "Personnelles",
+        "no_sous_type": 5,
+        "desc_sous_type": "Dépenses personnelles diverses ( coiffeur, vetements",
+        "details": [
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Vetements", "no_detail": 1, "desc_detail": "Dépenses achats de vetements" }
+        ]
+      },
+      {
+        "nom": "Santé",
+        "no_sous_type": 3,
+        "desc_sous_type": "Dépenses liées a la santé",
+        "details": [
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Medecin", "no_detail": 1, "desc_detail": "" },
+          { "nom": "Mutuelle", "no_detail": 2, "desc_detail": "" },
+          { "nom": "Pharmacie", "no_detail": 3, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "Transport",
+        "no_sous_type": 2,
+        "desc_sous_type": "Dépenses liées au transport",
+        "details": [
+          { "nom": "Amandes", "no_detail": 5, "desc_detail": "" },
+          { "nom": "Assurances", "no_detail": 3, "desc_detail": "Frais d'assurance" },
+          { "nom": "Carburant", "no_detail": 1, "desc_detail": "Frais de carbutant" },
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Entretien-Réparation", "no_detail": 2, "desc_detail": "Frais d'entretien et de réparation" },
+          { "nom": "Péage & parking", "no_detail": 4, "desc_detail": "" }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Revenus",
+    "code_parent": 7,
+    "desc_parent": "liste des catégories de revenus",
+    "sous_types": [
+      {
+        "nom": "Banquaire",
+        "no_sous_type": 5,
+        "desc_sous_type": "Interet des placement epargnes",
+        "details": [
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Intérêts LEP", "no_detail": 2, "desc_detail": "" },
+          { "nom": "Intérêts Livret A", "no_detail": 1, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "CAF",
+        "no_sous_type": 2,
+        "desc_sous_type": "allocations de la CAF",
+        "details": [
+          { "nom": "APL", "no_detail": 1, "desc_detail": "" },
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Prime d'activité", "no_detail": 3, "desc_detail": "" },
+          { "nom": "RSA", "no_detail": 2, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "D'entreprise",
+        "no_sous_type": 1,
+        "desc_sous_type": "Revenus d'entreprises personnelles",
+        "details": [
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Epines du berry", "no_detail": 1, "desc_detail": "" },
+          { "nom": "J.Tiss Developpeur", "no_detail": 2, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "Divers, Cadeaux et Dons",
+        "no_sous_type": 9,
+        "desc_sous_type": "revenus divers",
+        "details": [
+          { "nom": "cadeaux et dons", "no_detail": 1, "desc_detail": "" },
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "France Travail",
+        "no_sous_type": 3,
+        "desc_sous_type": "Allocations France Travail",
+        "details": [
+          { "nom": "Allocation chomage", "no_detail": 1, "desc_detail": "" },
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "Locatifs",
+        "no_sous_type": 6,
+        "desc_sous_type": "Loyers perçu pour les biens immobiliers",
+        "details": [
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "Pension Alimentaire",
+        "no_sous_type": 4,
+        "desc_sous_type": "Pension alimentaire et associés",
+        "details": [
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" }
+        ]
+      },
+      {
+        "nom": "Salaire",
+        "no_sous_type": 0,
+        "desc_sous_type": "revenus salariaux",
+        "details": [
+          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "nom": "Julien", "no_detail": 1, "desc_detail": "" }
+        ]
+      }
+    ]
+  }
+]
