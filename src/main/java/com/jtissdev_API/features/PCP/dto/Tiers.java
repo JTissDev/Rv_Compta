@@ -1,29 +1,20 @@
 package com.jtissdev_API.features.PCP.dto;
 
 import jakarta.json.Json;
-import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Représente un tiers (personne physique ou morale).
+ * Represents an external entity (Third Party) involved in accounting operations.
  * <p>
- * Un {@code Tiers} contient :
- * <ul>
- *     <li>un identifiant technique ;</li>
- *     <li>un nom ou une raison sociale ;</li>
- *     <li>un indicateur précisant s'il s'agit d'un professionnel ;</li>
- *     <li>un code comptable par défaut ;</li>
- *     <li>une description ;</li>
- *     <li>une liste de contacts associés.</li>
- * </ul>
+ * A third party can be a vendor, a client, an employer, or any entity
+ * involved in financial flows. Within the PCP (Personal Accounting Plan) block,
+ * it identifies the source or destination of a transaction.
+ * </p>
  *
- * @author jtiss
- * @since 1.2.0
- * @version 1.1.0
+ * @author J.Tiss
+ * @version 1.0.2
+ * @since v1.0
  */
 public class Tiers {
 
@@ -31,187 +22,162 @@ public class Tiers {
 	// == FIELDS                                              ==
 	// =========================================================
 
-	private Long id;
-	private String nomOuRaisonSociale;
-	private boolean professionnel;
-	private Integer codeComptableParDefaut;
-	private String description;
-
-	/**
-	 * Liste des contacts associés au tiers.
-	 *
-	 * @since 1.2.0
+	/** * Technical unique identifier.
+	 * @since 1.0.0
 	 */
-	private List<Contacts> contacts = new ArrayList<>();
+	private Long id;
+
+	/** * Legal name or display name of the third party.
+	 * @since 1.0.0
+	 */
+	private String name;
+
+	/** * Category of the third party (e.g., VENDOR, EMPLOYER, FRIEND).
+	 * @since 1.0.0
+	 */
+	private String thirdPartyType;
+
+	/** * Additional notes or information.
+	 * @since 1.0.0
+	 */
+	private String description;
 
 	// =========================================================
 	// == CONSTRUCTORS                                        ==
 	// =========================================================
 
+	/**
+	 * Default constructor.
+	 * @since 1.0.0
+	 */
 	public Tiers() {
-		// no-args constructor
 	}
 
-	public Tiers(String nomOuRaisonSociale,
-	             boolean professionnel,
-	             Integer codeComptableParDefaut,
-	             String description) {
-		this.nomOuRaisonSociale = nomOuRaisonSociale;
-		this.professionnel = professionnel;
-		this.codeComptableParDefaut = codeComptableParDefaut;
-		this.description = description;
+	/**
+	 * Functional constructor without ID.
+	 * Primarily used for data loading from files or database cleanup/import
+	 * where the ID is not yet assigned.
+	 *
+	 * @param name Name of the entity
+	 * @param thirdPartyType Category of the entity
+	 * @since 1.0.2
+	 */
+	public Tiers(String name, String thirdPartyType) {
+		this.setName(name);
+		this.setThirdPartyType(thirdPartyType);
 	}
 
-	public Tiers(Long id,
-	             String nomOuRaisonSociale,
-	             boolean professionnel,
-	             Integer codeComptableParDefaut,
-	             String description,
-	             List<Contacts> contacts) {
-		this.id = id;
-		this.nomOuRaisonSociale = nomOuRaisonSociale;
-		this.professionnel = professionnel;
-		this.codeComptableParDefaut = codeComptableParDefaut;
-		this.description = description;
-		if (contacts != null) {
-			this.contacts = new ArrayList<>(contacts);
-		}
+	/**
+	 * Complete constructor for quick initialization.
+	 * Uses setters to ensure data integrity and security logic.
+	 *
+	 * @param id Technical identifier
+	 * @param name Name of the entity
+	 * @param thirdPartyType Category of the entity
+	 * @since 1.0.0
+	 */
+	public Tiers(Long id, String name, String thirdPartyType) {
+		this.setId(id);
+		this.setName(name);
+		this.setThirdPartyType(thirdPartyType);
 	}
 
 	// =========================================================
-	// == GETTERS & SETTERS                                   ==
+	// == ACCESSORS (Getters & Setters)                      ==
 	// =========================================================
 
+	/** * Gets the technical unique identifier.
+	 * @return the unique ID assigned by the database.
+	 * @since 1.0.0
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/** * Sets the technical unique identifier.
+	 * @param id the unique ID to set.
+	 * @since 1.0.0
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getNomOuRaisonSociale() {
-		return nomOuRaisonSociale;
+	/** * Gets the display name of the third party.
+	 * @return the name used for reports and UI.
+	 * @since 1.0.0
+	 */
+	public String getName() {
+		return name;
 	}
 
-	public void setNomOuRaisonSociale(String nomOuRaisonSociale) {
-		this.nomOuRaisonSociale = nomOuRaisonSociale;
+	/** * Sets the display name of the third party.
+	 * @param name the label to assign.
+	 * @since 1.0.0
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public boolean isProfessionnel() {
-		return professionnel;
+	/** * Gets the category/type of the third party.
+	 * @return a string defining the entity role (e.g. VENDOR).
+	 * @since 1.0.0
+	 */
+	public String getThirdPartyType() {
+		return thirdPartyType;
 	}
 
-	public void setProfessionnel(boolean professionnel) {
-		this.professionnel = professionnel;
+	/** * Sets the category/type of the third party.
+	 * @param thirdPartyType the category string.
+	 * @since 1.0.0
+	 */
+	public void setThirdPartyType(String thirdPartyType) {
+		this.thirdPartyType = thirdPartyType;
 	}
 
-	public Integer getCodeComptableParDefaut() {
-		return codeComptableParDefaut;
-	}
-
-	public void setCodeComptableParDefaut(Integer codeComptableParDefaut) {
-		this.codeComptableParDefaut = codeComptableParDefaut;
-	}
-
+	/** * Gets the additional notes for this third party.
+	 * @return a free text description or null.
+	 * @since 1.0.0
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/** * Sets the additional notes for this third party.
+	 * @param description the information to store.
+	 * @since 1.0.0
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	/**
-	 * Retourne la liste des contacts associés au tiers.
-	 *
-	 * @return liste non nulle (éventuellement vide)
-	 *
-	 * @since 1.2.0
-	 */
-	public List<Contacts> getContacts() {
-		return contacts;
-	}
-
-	/**
-	 * Remplace la liste des contacts.
-	 *
-	 * @param contacts nouvelle liste de contacts (peut être {@code null})
-	 *
-	 * @since 1.2.0
-	 */
-	public void setContacts(List<Contacts> contacts) {
-		if (contacts == null) {
-			this.contacts = new ArrayList<>();
-		} else {
-			this.contacts = new ArrayList<>(contacts);
-		}
-	}
-
-	/**
-	 * Ajoute un contact à la liste.
-	 *
-	 * @param contact contact à ajouter
-	 *
-	 * @since 1.2.0
-	 */
-	public void addContact(Contacts contact) {
-		if (contact != null) {
-			this.contacts.add(contact);
-		}
-	}
-
 	// =========================================================
-	// == JSON SERIALIZATION                                  ==
+	// == SERIALIZATION LOGIC                                 ==
 	// =========================================================
 
+	/**
+	 * Converts the Tiers object into a JSON format for persistence.
+	 *
+	 * @return A {@link JsonObject} representing the third party.
+	 * @since 1.0.0
+	 * @version 1.0.0
+	 */
 	public JsonObject toJson() {
 		JsonObjectBuilder builder = Json.createObjectBuilder();
 
-		// Dé-commenter si l'id doit être exposé :
-		// if (id != null) {
-		//     builder.add("id", id);
-		// }
-
-		if (nomOuRaisonSociale != null) {
-			builder.add("nom_ou_raison_sociale", nomOuRaisonSociale);
-		}
-
-		builder.add("professionnel", professionnel);
-
-		if (codeComptableParDefaut != null) {
-			builder.add("code_comptable_par_defaut", codeComptableParDefaut);
-		}
-
-		if (description != null) {
-			builder.add("description", description);
-		}
-
-		// Sérialisation de la liste de contacts
-		JsonArrayBuilder contactsArrayBuilder = Json.createArrayBuilder();
-		for (Contacts contact : contacts) {
-			if (contact != null) {
-				contactsArrayBuilder.add(contact.toJson());
-			}
-		}
-		builder.add("contacts", contactsArrayBuilder);
+		builder.add("id", id != null ? id : -1);
+		builder.add("name", name != null ? name : "Unknown");
+		builder.add("thirdPartyType", thirdPartyType != null ? thirdPartyType : "MISC");
+		builder.add("description", description != null ? description : "");
 
 		return builder.build();
 	}
 
-	// =========================================================
-	// == OBJECT OVERRIDES                                    ==
-	// =========================================================
-
+	/** * Provides a summary of the Third Party for logging and debugging.
+	 * @return a formatted string.
+	 * @since 1.0.0
+	 */
 	@Override
 	public String toString() {
-		return "Tiers{" +
-				"id=" + id +
-				", nomOuRaisonSociale='" + nomOuRaisonSociale + '\'' +
-				", professionnel=" + professionnel +
-				", codeComptableParDefaut=" + codeComptableParDefaut +
-				", description='" + description + '\'' +
-				", contacts=" + contacts +
-				'}';
+		return String.format("[%d] %s (%s)", id, name, thirdPartyType);
 	}
 }

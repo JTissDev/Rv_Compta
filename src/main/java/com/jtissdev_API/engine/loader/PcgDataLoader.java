@@ -45,7 +45,7 @@ public class PcgDataLoader {
 		} catch (Exception e) {
 			// On affiche le chemin absolu en cas d'erreur pour déboguer facilement
 			String absolutePath = new java.io.File(fileName).getAbsolutePath();
-			throw new RuntimeException("Échec du chargement. Chemin tenté : " + absolutePath, e);
+			throw new RuntimeException("Failed to load PCG resource : " + absolutePath, e);
 		}
 	}
 
