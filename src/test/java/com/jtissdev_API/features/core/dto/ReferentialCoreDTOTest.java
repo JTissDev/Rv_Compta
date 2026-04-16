@@ -1,6 +1,7 @@
 package com.jtissdev_API.features.core.dto;
 
 import com.jtissdev_API.features.core.dto.referential.OperationStatus;
+import com.jtissdev_API.features.core.dto.referential.PaymentMethod;
 import jakarta.json.JsonObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -96,5 +97,25 @@ class ReferentialCoreDTOTest {
 		assertTrue(json.containsKey("operationStatuses"), "JSON should contain the statuses array");
 		assertEquals(1, json.getJsonArray("operationStatuses").size());
 		assertEquals("PREV", json.getJsonArray("operationStatuses").getJsonObject(0).getString("code"));
+	}
+
+	/**
+	 * Tests the addition of payment methods and fluent chaining.
+	 *
+	 * @since 0.2.0
+	 */
+	@Test
+	@DisplayName("Should add payment methods and support fluent chaining")
+	void testAddPaymentMethod() {
+		// Given
+		ReferentialCoreDTO dto = new ReferentialCoreDTO();
+		PaymentMethod method = new PaymentMethod("CB", "Carte", "Carte Bancaire");
+
+		// When
+		dto.addPaymentMethod(method);
+
+		// Then
+		assertEquals(1, dto.getPaymentMethods().size());
+		assertEquals("CB", dto.getPaymentMethods().get(0).getCode());
 	}
 }

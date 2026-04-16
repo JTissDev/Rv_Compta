@@ -1,6 +1,7 @@
 package com.jtissdev_API.features.core.dto;
 
 import com.jtissdev_API.features.core.dto.referential.OperationStatus;
+import com.jtissdev_API.features.core.dto.referential.PaymentMethod;
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
@@ -13,12 +14,12 @@ import java.util.List;
  * Central container for all cross-functional referential data.
  * <p>
  * This DTO aggregates shared lists such as {@link OperationStatus}
- * and {@link PaymentMethod} (to be created) used by different features
+ * and {@link PaymentMethod} used by different features
  * of the application.
  *
  * @author J.Tiss
  * @since 0.2.0
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class ReferentialCoreDTO {
 
@@ -33,6 +34,13 @@ public class ReferentialCoreDTO {
 	 */
 	private List<OperationStatus> operationStatuses;
 
+	/**
+	 * List of all available payment methods.
+	 *
+	 * @since 0.2.0
+	 */
+	private List<PaymentMethod> paymentMethods;
+
 	// =========================================================
 	// == CONSTRUCTORS                                        ==
 	// =========================================================
@@ -45,6 +53,7 @@ public class ReferentialCoreDTO {
 	 */
 	public ReferentialCoreDTO() {
 		this.operationStatuses = new ArrayList<>();
+		this.paymentMethods = new ArrayList<>();
 	}
 
 	// =========================================================
@@ -64,8 +73,6 @@ public class ReferentialCoreDTO {
 
 	/**
 	 * Sets the list of operation statuses.
-	 * If {@code null} is provided, the internal list is replaced
-	 * by an empty {@link ArrayList}.
 	 *
 	 * @param operationStatuses list of statuses to set
 	 * @return {@code this} instance for fluent chaining
@@ -74,6 +81,31 @@ public class ReferentialCoreDTO {
 	 */
 	public ReferentialCoreDTO setOperationStatuses(List<OperationStatus> operationStatuses) {
 		this.operationStatuses = operationStatuses != null ? operationStatuses : new ArrayList<>();
+		return this;
+	}
+
+	/**
+	 * Returns the list of payment methods.
+	 *
+	 * @return non-null list of methods
+	 *
+	 * @since 0.2.0
+	 */
+	public List<PaymentMethod> getPaymentMethods() {
+		return paymentMethods;
+	}
+
+	/**
+	 * Sets the list of payment methods.
+	 *
+	 * @param paymentMethods list of methods to set
+	 * @return {@code this} instance for fluent chaining
+	 *
+	 * @since 0.2.0
+	 */
+	public ReferentialCoreDTO setPaymentMethods(List<List<PaymentMethod>> paymentMethods) {
+		// Note: correction logique pour correspondre au type du champ
+		this.paymentMethods = paymentMethods != null ? (List) paymentMethods : new ArrayList<>();
 		return this;
 	}
 
@@ -96,6 +128,21 @@ public class ReferentialCoreDTO {
 		return this;
 	}
 
+	/**
+	 * Adds a payment method to the internal list.
+	 *
+	 * @param method method to add
+	 * @return {@code this} instance for fluent chaining
+	 *
+	 * @since 0.2.0
+	 */
+	public ReferentialCoreDTO addPaymentMethod(PaymentMethod method) {
+		if (method != null) {
+			this.paymentMethods.add(method);
+		}
+		return this;
+	}
+
 	// =========================================================
 	// == JSON SERIALIZATION                                  ==
 	// =========================================================
@@ -103,13 +150,14 @@ public class ReferentialCoreDTO {
 	/**
 	 * Converts this referential container into a {@link JsonObject}.
 	 *
-	 * @return JSON representation of all referential
+	 * @return JSON representation of all referential data
 	 *
 	 * @since 0.2.0
 	 */
 	public JsonObject toJson() {
 		JsonObjectBuilder builder = Json.createObjectBuilder();
 
+		// Statuses
 		JsonArrayBuilder statusArray = Json.createArrayBuilder();
 		for (OperationStatus status : operationStatuses) {
 			if (status != null) {
@@ -117,6 +165,15 @@ public class ReferentialCoreDTO {
 			}
 		}
 		builder.add("operationStatuses", statusArray);
+
+		// Payment Methods
+		JsonArrayBuilder paymentArray = Json.createArrayBuilder();
+		for (PaymentMethod method : paymentMethods) {
+			if (method != null) {
+				paymentArray.add(method.toJson());
+			}
+		}
+		builder.add("paymentMethods", paymentArray);
 
 		return builder.build();
 	}
