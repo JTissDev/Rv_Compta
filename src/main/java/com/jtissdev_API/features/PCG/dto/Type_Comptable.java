@@ -96,10 +96,10 @@ public class Type_Comptable {
 	                      String name,
 	                      Integer codeComptable,
 	                      String description) {
-		this.id = id;
-		this.name = name;
-		this.codeComptable = codeComptable;
-		this.description = description;
+		this.setId( id ) ;
+		this.setName( name ) ;
+		this.setCodeComptable( codeComptable ) ;
+		this.setDescription( description ) ;
 		this.subTypes = new ArrayList<>();
 	}
 
