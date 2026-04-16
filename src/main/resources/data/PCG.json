@@ -1,332 +1,332 @@
 [
   {
     "type": "Patrimoine & Résultat",
-    "code_parent": 1,
-    "desc_parent": "Patrimoine et epargne long terme",
-    "sous_types": [
+    "parent_code": 1,
+    "parent_desc": "Patrimoine et epargne long terme",
+    "subTypes": [
       {
-        "nom": "Dettes Long Terme",
-        "no_sous_type": 3,
-        "desc_sous_type": "ensemble des dettes long terme",
+        "name": "Dettes Long Terme",
+        "subType_Num": 3,
+        "subType_desc": "ensemble des dettes long terme",
         "details": [
-          { "nom": "Crédit Immobilier", "no_detail": 1, "desc_detail": "" },
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Prêt Bancaire Long Terme", "no_detail": 2, "desc_detail": "" }
+          { "name": "Crédit Immobilier", "no_detail": 1, "desc_detail": "" },
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Prêt Bancaire Long Terme", "no_detail": 2, "desc_detail": "" }
         ]
       },
       {
-        "nom": "Patrimoine net initial",
-        "no_sous_type": 0,
-        "desc_sous_type": "ensemble des biens et dettes au début dez suivi",
+        "name": "Patrimoine net initial",
+        "subType_Num": 0,
+        "subType_desc": "ensemble des biens et dettes au début dez suivi",
         "details": [
-          { "nom": "Contrepartie Solde Début", "no_detail": 1, "desc_detail": "" },
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Patrimoine Initial Réel", "no_detail": 0, "desc_detail": "" }
+          { "name": "Contrepartie Solde Début", "no_detail": 1, "desc_detail": "" },
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Patrimoine Initial Réel", "no_detail": 0, "desc_detail": "" }
         ]
       }
     ]
   },
   {
     "type": "Immobilisation",
-    "code_parent": 2,
-    "desc_parent": "Valeur dite immobilière, comprends l'immobilier et le mobilier",
-    "sous_types": [
+    "parent_code": 2,
+    "parent_desc": "Valeur dite immobilière, comprends l'immobilier et le mobilier",
+    "subTypes": [
       {
-        "nom": "Autres biens immo",
-        "no_sous_type": 2,
-        "desc_sous_type": "Valeur & amélioration des autres biens immobiliers",
+        "name": "Autres biens immo",
+        "subType_Num": 2,
+        "subType_desc": "Valeur & amélioration des autres biens immobiliers",
         "details": [
-          { "nom": "Travaux & Amélioration", "no_detail": 1, "desc_detail": "Travaux impactant la valeur du bien et réestimation" },
-          { "nom": "Valeur du bien", "no_detail": 0, "desc_detail": "Valeur initial du bien" }
+          { "name": "Travaux & Amélioration", "no_detail": 1, "desc_detail": "Travaux impactant la valeur du bien et réestimation" },
+          { "name": "Valeur du bien", "no_detail": 0, "desc_detail": "Valeur initial du bien" }
         ]
       },
       {
-        "nom": "Créances Long Terme",
-        "no_sous_type": 5,
-        "desc_sous_type": "Capital & interet des prets consentis",
+        "name": "Créances Long Terme",
+        "subType_Num": 5,
+        "subType_desc": "Capital & interet des prets consentis",
         "details": [
-          { "nom": "Capital", "no_detail": 1, "desc_detail": "Capital des prêt consenti" },
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "Créances diverses" },
-          { "nom": "Intérêts à recevoir", "no_detail": 2, "desc_detail": "Interet à recevoir sur les prêts consenti" }
+          { "name": "Capital", "no_detail": 1, "desc_detail": "Capital des prêt consenti" },
+          { "name": "Divers", "no_detail": 9, "desc_detail": "Créances diverses" },
+          { "name": "Intérêts à recevoir", "no_detail": 2, "desc_detail": "Interet à recevoir sur les prêts consenti" }
         ]
       },
       {
-        "nom": "Immo Financières",
-        "no_sous_type": 0,
-        "desc_sous_type": "compte d'investissements & assurance vie",
+        "name": "Immo Financières",
+        "subType_Num": 0,
+        "subType_desc": "compte d'investissements & assurance vie",
         "details": [
-          { "nom": "Assurance Vie", "no_detail": 0, "desc_detail": "Montant des assurances vie souscrites" },
-          { "nom": "Comptes d'investissement", "no_detail": 1, "desc_detail": "Montant des comptes d'investissements" },
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "Immo Financières diverses" }
+          { "name": "Assurance Vie", "no_detail": 0, "desc_detail": "Montant des assurances vie souscrites" },
+          { "name": "Comptes d'investissement", "no_detail": 1, "desc_detail": "Montant des comptes d'investissements" },
+          { "name": "Divers", "no_detail": 9, "desc_detail": "Immo Financières diverses" }
         ]
       },
       {
-        "nom": "Résidence principale",
-        "no_sous_type": 1,
-        "desc_sous_type": "Valeur & amélioration de la résidence principale",
+        "name": "Résidence principale",
+        "subType_Num": 1,
+        "subType_desc": "Valeur & amélioration de la résidence principale",
         "details": [
-          { "nom": "Travaux & Amélioration", "no_detail": 1, "desc_detail": "Travaux impactant la valeur du bien et réestimation" },
-          { "nom": "Valeur du bien", "no_detail": 0, "desc_detail": "Valeur initial du bien" }
+          { "name": "Travaux & Amélioration", "no_detail": 1, "desc_detail": "Travaux impactant la valeur du bien et réestimation" },
+          { "name": "Valeur du bien", "no_detail": 0, "desc_detail": "Valeur initial du bien" }
         ]
       },
       {
-        "nom": "Véhicules",
-        "no_sous_type": 3,
-        "desc_sous_type": "valeurs des différents véhicules",
+        "name": "Véhicules",
+        "subType_Num": 3,
+        "subType_desc": "valeurs des différents véhicules",
         "details": [
-          { "nom": "Autres Véhicules", "no_detail": 2, "desc_detail": "Valeur initial du bien" },
-          { "nom": "Véhicule Principal", "no_detail": 1, "desc_detail": "Valeur initial du bien" }
+          { "name": "Autres Véhicules", "no_detail": 2, "desc_detail": "Valeur initial du bien" },
+          { "name": "Véhicule Principal", "no_detail": 1, "desc_detail": "Valeur initial du bien" }
         ]
       }
     ]
   },
   {
     "type": "Trésorerie",
-    "code_parent": 5,
-    "desc_parent": "Comptes, epargne court terme et espèce",
-    "sous_types": [
+    "parent_code": 5,
+    "parent_desc": "Comptes, epargne court terme et espèce",
+    "subTypes": [
       {
-        "nom": "Compte courant",
-        "no_sous_type": 0,
-        "desc_sous_type": "Solde du compte courant principal",
+        "name": "Compte courant",
+        "subType_Num": 0,
+        "subType_desc": "Solde du compte courant principal",
         "details": [
-          { "nom": "Compte courant principal", "no_detail": 1, "desc_detail": "Solde du compte courant principal" }
+          { "name": "Compte courant principal", "no_detail": 1, "desc_detail": "Solde du compte courant principal" }
         ]
       },
       {
-        "nom": "Comptes secondaires",
-        "no_sous_type": 1,
-        "desc_sous_type": "Solde des autres comptes bancaire",
+        "name": "Comptes secondaires",
+        "subType_Num": 1,
+        "subType_desc": "Solde des autres comptes bancaire",
         "details": [
-          { "nom": "Compte joint", "no_detail": 1, "desc_detail": "Solde du compte courant joint" },
-          { "nom": "Compte Secondaire", "no_detail": 2, "desc_detail": "Solde des comptes secondaires" }
+          { "name": "Compte joint", "no_detail": 1, "desc_detail": "Solde du compte courant joint" },
+          { "name": "Compte Secondaire", "no_detail": 2, "desc_detail": "Solde des comptes secondaires" }
         ]
       },
       {
-        "nom": "Dettes / Créances Courtes",
-        "no_sous_type": 6,
-        "desc_sous_type": "Capital et interet des dettes et créances courtes",
+        "name": "Dettes / Créances Courtes",
+        "subType_Num": 6,
+        "subType_desc": "Capital et interet des dettes et créances courtes",
         "details": [
-          { "nom": "Accompte sur salaire", "no_detail": 0, "desc_detail": "Accompte perçu sur salaire" },
-          { "nom": "Dettes diverses", "no_detail": 9, "desc_detail": "Dettes diverses code complémentaire perlet de distinguer" }
+          { "name": "Accompte sur salaire", "no_detail": 0, "desc_detail": "Accompte perçu sur salaire" },
+          { "name": "Dettes diverses", "no_detail": 9, "desc_detail": "Dettes diverses code complémentaire perlet de distinguer" }
         ]
       },
       {
-        "nom": "Epargne liquide",
-        "no_sous_type": 2,
-        "desc_sous_type": "Solde des comptes d'épargne",
+        "name": "Epargne liquide",
+        "subType_Num": 2,
+        "subType_desc": "Solde des comptes d'épargne",
         "details": [
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "LEP Juju", "no_detail": 4, "desc_detail": "" },
-          { "nom": "LVA Greg", "no_detail": 1, "desc_detail": "" },
-          { "nom": "LVA Juju", "no_detail": 2, "desc_detail": "" }
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "LEP Juju", "no_detail": 4, "desc_detail": "" },
+          { "name": "LVA Greg", "no_detail": 1, "desc_detail": "" },
+          { "name": "LVA Juju", "no_detail": 2, "desc_detail": "" }
         ]
       },
       {
-        "nom": "Virements Internes",
-        "no_sous_type": 8,
-        "desc_sous_type": "Compte de virements solde doit toujours etre 0",
+        "name": "Virements Internes",
+        "subType_Num": 8,
+        "subType_desc": "Compte de virements solde doit toujours etre 0",
         "details": [
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Virement de compte à compte", "no_detail": 0, "desc_detail": "" }
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Virement de compte à compte", "no_detail": 0, "desc_detail": "" }
         ]
       }
     ]
   },
   {
     "type": "Dépenses",
-    "code_parent": 6,
-    "desc_parent": "liste des catégorie de dépenses",
-    "sous_types": [
+    "parent_code": 6,
+    "parent_desc": "liste des catégorie de dépenses",
+    "subTypes": [
       {
-        "nom": "Alimentation-Hygiène",
-        "no_sous_type": 1,
-        "desc_sous_type": "Dépenses d'alimentation",
+        "name": "Alimentation-Hygiène",
+        "subType_Num": 1,
+        "subType_desc": "Dépenses d'alimentation",
         "details": [
-          { "nom": "Alimentation", "no_detail": 1, "desc_detail": "Dépenses d'électricité" },
-          { "nom": "Animaux", "no_detail": 3, "desc_detail": "Dépense d'assurance" },
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Hygiène", "no_detail": 2, "desc_detail": "Dépense en eau & assainissement" },
-          { "nom": "Restaurant", "no_detail": 8, "desc_detail": "" }
+          { "name": "Alimentation", "no_detail": 1, "desc_detail": "Dépenses d'électricité" },
+          { "name": "Animaux", "no_detail": 3, "desc_detail": "Dépense d'assurance" },
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Hygiène", "no_detail": 2, "desc_detail": "Dépense en eau & assainissement" },
+          { "name": "Restaurant", "no_detail": 8, "desc_detail": "" }
         ]
       },
       {
-        "nom": "Cadeaux & dons",
-        "no_sous_type": 7,
-        "desc_sous_type": "Cadeaux et dons faits",
+        "name": "Cadeaux & dons",
+        "subType_Num": 7,
+        "subType_desc": "Cadeaux et dons faits",
         "details": [
-          { "nom": "Cadeaux Fetes", "no_detail": 1, "desc_detail": "" },
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" }
+          { "name": "Cadeaux Fetes", "no_detail": 1, "desc_detail": "" },
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" }
         ]
       },
       {
-        "nom": "Charges Financières",
-        "no_sous_type": 8,
-        "desc_sous_type": "Frais bancaire diverses",
+        "name": "Charges Financières",
+        "subType_Num": 8,
+        "subType_desc": "Frais bancaire diverses",
         "details": [
-          { "nom": "CB", "no_detail": 2, "desc_detail": "Facturation Carte bleue" },
-          { "nom": "Compte", "no_detail": 1, "desc_detail": "Facturation comptes" },
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Frais", "no_detail": 3, "desc_detail": "Frais bancaire pour irrégularité et incident" },
-          { "nom": "Interet", "no_detail": 4, "desc_detail": "Interets débiteurs" }
+          { "name": "CB", "no_detail": 2, "desc_detail": "Facturation Carte bleue" },
+          { "name": "Compte", "no_detail": 1, "desc_detail": "Facturation comptes" },
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Frais", "no_detail": 3, "desc_detail": "Frais bancaire pour irrégularité et incident" },
+          { "name": "Interet", "no_detail": 4, "desc_detail": "Interets débiteurs" }
         ]
       },
       {
-        "nom": "Divers & imprévus",
-        "no_sous_type": 9,
-        "desc_sous_type": "Dépenses diverses",
+        "name": "Divers & imprévus",
+        "subType_Num": 9,
+        "subType_desc": "Dépenses diverses",
         "details": [
-          { "nom": "Divers", "no_detail": 0, "desc_detail": "Dépenses non catégorisées" }
+          { "name": "Divers", "no_detail": 0, "desc_detail": "Dépenses non catégorisées" }
         ]
       },
       {
-        "nom": "Impôts & taxes",
-        "no_sous_type": 4,
-        "desc_sous_type": "Dépenses d'aux impots & taxes",
+        "name": "Impôts & taxes",
+        "subType_Num": 4,
+        "subType_desc": "Dépenses d'aux impots & taxes",
         "details": [
-          { "nom": "Impôts sur le revenus", "no_detail": 1, "desc_detail": "" },
-          { "nom": "Taxes diverses", "no_detail": 9, "desc_detail": "" }
+          { "name": "Impôts sur le revenus", "no_detail": 1, "desc_detail": "" },
+          { "name": "Taxes diverses", "no_detail": 9, "desc_detail": "" }
         ]
       },
       {
-        "nom": "Logement",
-        "no_sous_type": 0,
-        "desc_sous_type": "Dépenses liées au logement",
+        "name": "Logement",
+        "subType_Num": 0,
+        "subType_desc": "Dépenses liées au logement",
         "details": [
-          { "nom": "Assurance du bien", "no_detail": 3, "desc_detail": "Dépense d'assurance" },
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Eau & Assainissement", "no_detail": 2, "desc_detail": "Dépense en eau & assainissement" },
-          { "nom": "Electricité", "no_detail": 1, "desc_detail": "Dépenses d'électricité" },
-          { "nom": "Entretien & Reparations", "no_detail": 5, "desc_detail": "Frais d'entretien et de réparation" },
-          { "nom": "Internet", "no_detail": 4, "desc_detail": "Forfait internet" },
-          { "nom": "Streaming", "no_detail": 7, "desc_detail": "Dépenses de streaming pour la maison" },
-          { "nom": "Taxes Foncières", "no_detail": 8, "desc_detail": "Taxe foncière du logement" }
+          { "name": "Assurance du bien", "no_detail": 3, "desc_detail": "Dépense d'assurance" },
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Eau & Assainissement", "no_detail": 2, "desc_detail": "Dépense en eau & assainissement" },
+          { "name": "Electricité", "no_detail": 1, "desc_detail": "Dépenses d'électricité" },
+          { "name": "Entretien & Reparations", "no_detail": 5, "desc_detail": "Frais d'entretien et de réparation" },
+          { "name": "Internet", "no_detail": 4, "desc_detail": "Forfait internet" },
+          { "name": "Streaming", "no_detail": 7, "desc_detail": "Dépenses de streaming pour la maison" },
+          { "name": "Taxes Foncières", "no_detail": 8, "desc_detail": "Taxe foncière du logement" }
         ]
       },
       {
-        "nom": "Loisirs & culture",
-        "no_sous_type": 6,
-        "desc_sous_type": "Dépenses de loisirs et culturel",
+        "name": "Loisirs & culture",
+        "subType_Num": 6,
+        "subType_desc": "Dépenses de loisirs et culturel",
         "details": [
-          { "nom": "Cinéma", "no_detail": 2, "desc_detail": "" },
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Livres", "no_detail": 1, "desc_detail": "" },
-          { "nom": "Sports", "no_detail": 3, "desc_detail": "" },
-          { "nom": "Vacances & voyages", "no_detail": 4, "desc_detail": "" }
+          { "name": "Cinéma", "no_detail": 2, "desc_detail": "" },
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Livres", "no_detail": 1, "desc_detail": "" },
+          { "name": "Sports", "no_detail": 3, "desc_detail": "" },
+          { "name": "Vacances & voyages", "no_detail": 4, "desc_detail": "" }
         ]
       },
       {
-        "nom": "Personnelles",
-        "no_sous_type": 5,
-        "desc_sous_type": "Dépenses personnelles diverses ( coiffeur, vetements",
+        "name": "Personnelles",
+        "subType_Num": 5,
+        "subType_desc": "Dépenses personnelles diverses ( coiffeur, vetements",
         "details": [
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Vetements", "no_detail": 1, "desc_detail": "Dépenses achats de vetements" }
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Vetements", "no_detail": 1, "desc_detail": "Dépenses achats de vetements" }
         ]
       },
       {
-        "nom": "Santé",
-        "no_sous_type": 3,
-        "desc_sous_type": "Dépenses liées a la santé",
+        "name": "Santé",
+        "subType_Num": 3,
+        "subType_desc": "Dépenses liées a la santé",
         "details": [
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Medecin", "no_detail": 1, "desc_detail": "" },
-          { "nom": "Mutuelle", "no_detail": 2, "desc_detail": "" },
-          { "nom": "Pharmacie", "no_detail": 3, "desc_detail": "" }
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Medecin", "no_detail": 1, "desc_detail": "" },
+          { "name": "Mutuelle", "no_detail": 2, "desc_detail": "" },
+          { "name": "Pharmacie", "no_detail": 3, "desc_detail": "" }
         ]
       },
       {
-        "nom": "Transport",
-        "no_sous_type": 2,
-        "desc_sous_type": "Dépenses liées au transport",
+        "name": "Transport",
+        "subType_Num": 2,
+        "subType_desc": "Dépenses liées au transport",
         "details": [
-          { "nom": "Amandes", "no_detail": 5, "desc_detail": "" },
-          { "nom": "Assurances", "no_detail": 3, "desc_detail": "Frais d'assurance" },
-          { "nom": "Carburant", "no_detail": 1, "desc_detail": "Frais de carbutant" },
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Entretien-Réparation", "no_detail": 2, "desc_detail": "Frais d'entretien et de réparation" },
-          { "nom": "Péage & parking", "no_detail": 4, "desc_detail": "" }
+          { "name": "Amandes", "no_detail": 5, "desc_detail": "" },
+          { "name": "Assurances", "no_detail": 3, "desc_detail": "Frais d'assurance" },
+          { "name": "Carburant", "no_detail": 1, "desc_detail": "Frais de carbutant" },
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Entretien-Réparation", "no_detail": 2, "desc_detail": "Frais d'entretien et de réparation" },
+          { "name": "Péage & parking", "no_detail": 4, "desc_detail": "" }
         ]
       }
     ]
   },
   {
     "type": "Revenus",
-    "code_parent": 7,
-    "desc_parent": "liste des catégories de revenus",
-    "sous_types": [
+    "parent_code": 7,
+    "parent_desc": "liste des catégories de revenus",
+    "subTypes": [
       {
-        "nom": "Banquaire",
-        "no_sous_type": 5,
-        "desc_sous_type": "Interet des placement epargnes",
+        "name": "Banquaire",
+        "subType_Num": 5,
+        "subType_desc": "Interet des placement epargnes",
         "details": [
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Intérêts LEP", "no_detail": 2, "desc_detail": "" },
-          { "nom": "Intérêts Livret A", "no_detail": 1, "desc_detail": "" }
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Intérêts LEP", "no_detail": 2, "desc_detail": "" },
+          { "name": "Intérêts Livret A", "no_detail": 1, "desc_detail": "" }
         ]
       },
       {
-        "nom": "CAF",
-        "no_sous_type": 2,
-        "desc_sous_type": "allocations de la CAF",
+        "name": "CAF",
+        "subType_Num": 2,
+        "subType_desc": "allocations de la CAF",
         "details": [
-          { "nom": "APL", "no_detail": 1, "desc_detail": "" },
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Prime d'activité", "no_detail": 3, "desc_detail": "" },
-          { "nom": "RSA", "no_detail": 2, "desc_detail": "" }
+          { "name": "APL", "no_detail": 1, "desc_detail": "" },
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Prime d'activité", "no_detail": 3, "desc_detail": "" },
+          { "name": "RSA", "no_detail": 2, "desc_detail": "" }
         ]
       },
       {
-        "nom": "D'entreprise",
-        "no_sous_type": 1,
-        "desc_sous_type": "Revenus d'entreprises personnelles",
+        "name": "D'entreprise",
+        "subType_Num": 1,
+        "subType_desc": "Revenus d'entreprises personnelles",
         "details": [
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Epines du berry", "no_detail": 1, "desc_detail": "" },
-          { "nom": "J.Tiss Developpeur", "no_detail": 2, "desc_detail": "" }
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Epines du berry", "no_detail": 1, "desc_detail": "" },
+          { "name": "J.Tiss Developpeur", "no_detail": 2, "desc_detail": "" }
         ]
       },
       {
-        "nom": "Divers, Cadeaux et Dons",
-        "no_sous_type": 9,
-        "desc_sous_type": "revenus divers",
+        "name": "Divers, Cadeaux et Dons",
+        "subType_Num": 9,
+        "subType_desc": "revenus divers",
         "details": [
-          { "nom": "cadeaux et dons", "no_detail": 1, "desc_detail": "" },
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" }
+          { "name": "cadeaux et dons", "no_detail": 1, "desc_detail": "" },
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" }
         ]
       },
       {
-        "nom": "France Travail",
-        "no_sous_type": 3,
-        "desc_sous_type": "Allocations France Travail",
+        "name": "France Travail",
+        "subType_Num": 3,
+        "subType_desc": "Allocations France Travail",
         "details": [
-          { "nom": "Allocation chomage", "no_detail": 1, "desc_detail": "" },
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" }
+          { "name": "Allocation chomage", "no_detail": 1, "desc_detail": "" },
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" }
         ]
       },
       {
-        "nom": "Locatifs",
-        "no_sous_type": 6,
-        "desc_sous_type": "Loyers perçu pour les biens immobiliers",
+        "name": "Locatifs",
+        "subType_Num": 6,
+        "subType_desc": "Loyers perçu pour les biens immobiliers",
         "details": [
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" }
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" }
         ]
       },
       {
-        "nom": "Pension Alimentaire",
-        "no_sous_type": 4,
-        "desc_sous_type": "Pension alimentaire et associés",
+        "name": "Pension Alimentaire",
+        "subType_Num": 4,
+        "subType_desc": "Pension alimentaire et associés",
         "details": [
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" }
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" }
         ]
       },
       {
-        "nom": "Salaire",
-        "no_sous_type": 0,
-        "desc_sous_type": "revenus salariaux",
+        "name": "Salaire",
+        "subType_Num": 0,
+        "subType_desc": "revenus salariaux",
         "details": [
-          { "nom": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "nom": "Julien", "no_detail": 1, "desc_detail": "" }
+          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
+          { "name": "Julien", "no_detail": 1, "desc_detail": "" }
         ]
       }
     ]
