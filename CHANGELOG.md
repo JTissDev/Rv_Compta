@@ -1,6 +1,25 @@
 # 📜 Changelog - Rv_Compta
 
-All notable changes to this project will be documented in this file.
+thAll notable changes to this project will be documented in is file.
+
+# Changelog
+
+## [0.4.0-SNAPSHOT] - In Progress
+### Added
+- Implementation of the Excel Import module (data stream processing).
+- Mapping Logic: Transformation of Excel rows into `OperationDTO` objects.
+- JSON Export: Serialization of the `JournalDTO` into a structured JSON format.
+
+## [0.3.0] - 2024-04-16
+### Added
+- Complete data structure overhaul (v0.3).
+- Creation of DTOs: `JournalDTO`, `OperationDTO`, `MovementDTO`.
+- Support for multi-tiers and multi-payment methods at the line level (`MovementDTO`).
+- Implementation of Fluent API and exhaustive Javadoc documentation.
+- Comprehensive unit tests for data structure validation.
+### Changed
+- Migration of Tiers and Payment Methods from Operation level to Movement level (BDD Schema sync).
+- Systematic use of `BigDecimal` for financial precision.
 
 ## [0.2.0] - 2026-04-16
 ### ✨ Added
