@@ -1,6 +1,5 @@
-package com.jtissdev_API.features.Compta.dto;
+package com.jtissdev_API.features.compta.dto;
 
-import com.jtissdev_API.features.compta.dto.MovementDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
