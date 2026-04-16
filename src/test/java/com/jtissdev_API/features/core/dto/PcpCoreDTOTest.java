@@ -1,5 +1,6 @@
 package com.jtissdev_API.features.core.dto;
 
+import com.jtissdev_API.features.PCP.dto.Details_Comptable;
 import com.jtissdev_API.features.PCP.dto.Tiers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -66,5 +67,20 @@ class PcpCoreDTOTest {
 		assertThat(pcpCore.getThirdParties())
 				.contains(newTiers)
 				.hasSize(1);
+	}
+
+	@Test
+	@DisplayName("Details - Should correctly store and retrieve Level 4 details")
+	void details_ShouldWorkCorrectly() {
+		// Given
+		PcpCoreDTO pcpCore = new PcpCoreDTO();
+		Details_Comptable car = new Details_Comptable(".P106", "Vehicule", "Peugeot 106");
+
+		// When
+		pcpCore.getDetails().add(car);
+
+		// Then
+		assertThat(pcpCore.getDetails()).hasSize(1);
+		assertThat(pcpCore.getDetails().get(0).getCode()).isEqualTo(".P106");
 	}
 }
