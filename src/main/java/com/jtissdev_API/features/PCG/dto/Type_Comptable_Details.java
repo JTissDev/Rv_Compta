@@ -120,6 +120,27 @@ public class Type_Comptable_Details {
         this.parentCodeComptable = parentCodeComptable;
     }
 
+    /**
+     * Constructs a new {@code Type_Comptable_Details} instance with the specified name,
+     * local accounting code, description, and parent accounting code.
+     *
+     * @param name                 the human-readable name of the accounting type
+     * @param CodeComptable        the local accounting numeric code
+     * @param description          the human-readable description of the accounting type
+     * @param parentCodeComptable  the parent accounting code that acts as a prefix
+     *
+     * @since 1.0
+     */
+    public Type_Comptable_Details(String name,
+                                  Integer CodeComptable,
+                                  String description,
+                                  String parentCodeComptable) {
+        this.name = name;
+        this.codeComptable = CodeComptable;
+        this.description = description;
+        this.parentCodeComptable = parentCodeComptable;
+    }
+
     // =========================================================
     // == GETTERS                                             ==
     // =========================================================

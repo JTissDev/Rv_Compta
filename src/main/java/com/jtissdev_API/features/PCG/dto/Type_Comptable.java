@@ -326,12 +326,29 @@ public class Type_Comptable {
 	 */
 	@Override
 	public String toString() {
-		return "Type_Comptable{" +
-				       "id=" + id +
-				       ", name='" + name + '\'' +
-				       ", codeComptable=" + codeComptable +
-				       ", description='" + description + '\'' +
-				       ", subTypes=" + (subTypes != null ? subTypes.size() : 0) +
-				       '}';
+		StringBuilder sb = new StringBuilder();
+		sb.append("Type_Comptable {")
+				.append("\n  id=").append(id)
+				.append(",\n  name='").append(name).append('\'')
+				.append(",\n  codeComptable=").append(codeComptable)
+				.append(",\n  description='").append(description).append('\'');
+
+		if (subTypes != null && !subTypes.isEmpty()) {
+			sb.append(",\n  subTypes=[");
+			for (int i = 0; i < subTypes.size(); i++) {
+				// On ajoute un retour à la ligne et des espaces pour décaler les subtypes
+				sb.append("\n    ").append(subTypes.get(i).toString().replace("\n", "\n    "));
+
+				if (i < subTypes.size() - 1) {
+					sb.append(",");
+				}
+			}
+			sb.append("\n  ]");
+		} else {
+			sb.append(",\n  subTypes=0");
+		}
+
+		sb.append("\n}");
+		return sb.toString();
 	}
 }
