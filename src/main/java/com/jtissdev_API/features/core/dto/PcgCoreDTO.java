@@ -11,14 +11,19 @@ import java.util.List;
  * different features of the application.
  * * @author JtissDev
  * @version 1.1
+ * @since 0.1
  */
 public class PcgCoreDTO {
 
-	/** List of main accounting classes (e.g., Class 1, Class 2, etc.) */
+	/**
+	 * List of main accounting classes (e.g., Class 1, Class 2, etc.)
+	 * @since 0.1
+	 */
 	private List<Type_Comptable> accountingClasses;
 
 	/**
 	 * Default constructor initializing an empty collection of accounting classes.
+	 * @since 0.1
 	 */
 	public PcgCoreDTO() {
 		this.accountingClasses = new ArrayList<>();
@@ -27,6 +32,7 @@ public class PcgCoreDTO {
 	/**
 	 * Gets the list of all top-level accounting classes.
 	 * * @return A list of {@link Type_Comptable} objects
+	 * @since 0.1
 	 */
 	public List<Type_Comptable> getAccountingClasses() {
 		return accountingClasses;
@@ -35,6 +41,7 @@ public class PcgCoreDTO {
 	/**
 	 * Sets the list of top-level accounting classes.
 	 * * @param accountingClasses The list of classes to set
+	 * @since 0.1
 	 */
 	public void setAccountingClasses(List<Type_Comptable> accountingClasses) {
 		this.accountingClasses = accountingClasses;
@@ -43,6 +50,7 @@ public class PcgCoreDTO {
 	/**
 	 * Helper method to add a single accounting class to the container.
 	 * * @param typeComptable The class to add
+	 * @since 0.1
 	 */
 	public void addAccountingClass(Type_Comptable typeComptable) {
 		if (this.accountingClasses == null) {
@@ -51,6 +59,14 @@ public class PcgCoreDTO {
 		this.accountingClasses.add(typeComptable);
 	}
 
+	/**
+	 * Returns a string representation of the object, summarizing its key details.
+	 * The string includes an overview of the PCG Core DTO and a detailed listing
+	 * of included accounting classes.
+	 *
+	 * @return A string representation of the PCG Core DTO including all accounting classes.
+	 * @since 0.1
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("PCG Core DTO:\n")

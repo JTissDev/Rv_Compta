@@ -20,7 +20,7 @@ import java.util.List;
  * its full accounting code is therefore equal to its local accounting code.
  *
  * @author jtiss
- * @since 1.1.0
+ * @since 0.1
  * @version 1.0.0
  */
 public class Type_Comptable {
@@ -32,14 +32,14 @@ public class Type_Comptable {
 	/**
 	 * Technical identifier used by the database.
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	private Long id;
 
 	/**
 	 * Human-readable name of the root accounting type.
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	private String name;
 
@@ -48,21 +48,21 @@ public class Type_Comptable {
 	 * Since this type cannot have a parent code, this value is
 	 * also considered to be the full accounting code.
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	private Integer codeComptable;
 
 	/**
 	 * Human-readable description of the root accounting type.
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	private String description;
 
 	/**
 	 * List of sub accounting types attached to this root type.
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	private List<Sub_Type_Comptable> subTypes;
 
@@ -75,7 +75,7 @@ public class Type_Comptable {
 	 * All fields are initialized to {@code null}, and the list
 	 * of sub types is initialized to an empty {@link ArrayList}.
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public Type_Comptable() {
 		this.subTypes = new ArrayList<>();
@@ -90,7 +90,7 @@ public class Type_Comptable {
 	 * @param codeComptable local accounting code (numeric value)
 	 * @param description   human-readable description of the root accounting type
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public Type_Comptable(Long id,
 	                      String name,
@@ -112,7 +112,7 @@ public class Type_Comptable {
 	 *
 	 * @return technical identifier, or {@code null} if not set
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public Long getId() {
 		return id;
@@ -124,7 +124,7 @@ public class Type_Comptable {
 	 * @param id technical identifier to set
 	 * @return {@code this} instance for fluent chaining
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public Type_Comptable setId(Long id) {
 		this.id = id;
@@ -136,7 +136,7 @@ public class Type_Comptable {
 	 *
 	 * @return name, or {@code null} if not set
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public String getName() {
 		return name;
@@ -148,7 +148,7 @@ public class Type_Comptable {
 	 * @param name name to set
 	 * @return {@code this} instance for fluent chaining
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public Type_Comptable setName(String name) {
 		this.name = name;
@@ -160,7 +160,7 @@ public class Type_Comptable {
 	 *
 	 * @return local accounting code, or {@code null} if not set
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public Integer getCodeComptable() {
 		return codeComptable;
@@ -172,7 +172,7 @@ public class Type_Comptable {
 	 * @param codeComptable code to set
 	 * @return {@code this} instance for fluent chaining
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public Type_Comptable setCodeComptable(Integer codeComptable) {
 		this.codeComptable = codeComptable;
@@ -184,7 +184,7 @@ public class Type_Comptable {
 	 *
 	 * @return description, or {@code null} if not set
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public String getDescription() {
 		return description;
@@ -196,7 +196,7 @@ public class Type_Comptable {
 	 * @param description description to set
 	 * @return {@code this} instance for fluent chaining
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public Type_Comptable setDescription(String description) {
 		this.description = description;
@@ -208,7 +208,7 @@ public class Type_Comptable {
 	 *
 	 * @return non-null list of sub accounting types (may be empty)
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public List<Sub_Type_Comptable> getSubTypes() {
 		return subTypes;
@@ -222,7 +222,7 @@ public class Type_Comptable {
 	 * @param subTypes list of sub accounting types to set
 	 * @return {@code this} instance for fluent chaining
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public Type_Comptable setSubTypes(List<Sub_Type_Comptable> subTypes) {
 		this.subTypes = subTypes != null ? subTypes : new ArrayList<>();
@@ -240,7 +240,7 @@ public class Type_Comptable {
 	 * @param subType sub accounting type to add
 	 * @return {@code this} instance for fluent chaining
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public Type_Comptable addSubType(Sub_Type_Comptable subType) {
 		if (subType != null) {
@@ -261,7 +261,7 @@ public class Type_Comptable {
 	 *
 	 * @return full accounting code as string, or {@code null} if not defined
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public String getFullCodeComptable() {
 		return codeComptable != null ? codeComptable.toString() : null;
@@ -279,7 +279,7 @@ public class Type_Comptable {
 	 *
 	 * @return JSON representation of this instance
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public JsonObject toJson() {
 		JsonObjectBuilder builder = Json.createObjectBuilder();
@@ -322,7 +322,7 @@ public class Type_Comptable {
 	 *
 	 * @return string representation of this instance
 	 *
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	@Override
 	public String toString() {

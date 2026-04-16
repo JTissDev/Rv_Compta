@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author J.Tiss
  * @version 1.1.0
- * @since v1.0
+ * @since 0.1
  */
 public class PcpCoreDTO {
 
@@ -24,13 +24,13 @@ public class PcpCoreDTO {
 
 	/**
 	 * List of all registered third parties (Vendors, Friends, etc.).
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	private List<Tiers> thirdParties;
 
 	/**
 	 * List of specific Level 4 accounting objects (Accounts, Vehicles, etc.).
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	private List<Details_Comptable> details;
 
@@ -40,7 +40,7 @@ public class PcpCoreDTO {
 
 	/**
 	 * Default constructor initializing empty collections.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public PcpCoreDTO() {
 		this.thirdParties = new ArrayList<>();
@@ -54,7 +54,7 @@ public class PcpCoreDTO {
 	/**
 	 * Gets the list of third parties.
 	 * @return the list of {@link Tiers}.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public List<Tiers> getThirdParties() {
 		return thirdParties;
@@ -63,7 +63,7 @@ public class PcpCoreDTO {
 	/**
 	 * Gets the list of Level 4 accounting details.
 	 * @return the list of {@link Details_Comptable}.
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public List<Details_Comptable> getDetails() {
 		return details;
@@ -76,7 +76,7 @@ public class PcpCoreDTO {
 	/**
 	 * Sets the list of third parties.
 	 * @param thirdParties the list to assign.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public void setThirdParties(List<Tiers> thirdParties) {
 		this.thirdParties = thirdParties;
@@ -85,7 +85,7 @@ public class PcpCoreDTO {
 	/**
 	 * Sets the list of Level 4 accounting details.
 	 * @param details the list to assign.
-	 * @since 1.1.0
+	 * @since 0.1
 	 */
 	public void setDetails(List<Details_Comptable> details) {
 		this.details = details;

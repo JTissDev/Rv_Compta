@@ -13,7 +13,7 @@ import jakarta.json.JsonObjectBuilder;
  * parent accounting code with the local accounting code.
  *
  * @author jtiss
- * @since 1.0.0
+ * @since 0.1
  * @version 1.0.1
  */
 public class Type_Comptable_Details {
@@ -25,14 +25,14 @@ public class Type_Comptable_Details {
     /**
      * Technical identifier used by the database.
      *
-     * @since 1.0.0
+     * @since 0.1
      */
     private long id;
 
     /**
      * Human-readable name of the accounting type.
      *
-     * @since 1.0.0
+     * @since 0.1
      */
     private String name;
 
@@ -41,14 +41,14 @@ public class Type_Comptable_Details {
      * This code is combined with the parent accounting code
      * to build the full accounting code.
      *
-     * @since 1.0.0
+     * @since 0.1
      */
     private Integer codeComptable;
 
     /**
      * Human-readable description of the accounting type.
      *
-     * @since 1.0.0
+     * @since 0.1
      */
     private String description;
 
@@ -57,7 +57,7 @@ public class Type_Comptable_Details {
      * This is used as a prefix when computing the full accounting code.
      * It is meant to represent a higher-level accounting structure.
      *
-     * @since 1.0.0
+     * @since 0.1
      */
     private String parentCodeComptable;
 
@@ -69,7 +69,7 @@ public class Type_Comptable_Details {
      * Creates an empty {@code Type_Comptable_Details} instance.
      * All fields are initialized to {@code null}.
      *
-     * @since 1.0.0
+     * @since 0.1
      */
     public Type_Comptable_Details() {
         // Default constructor
@@ -84,7 +84,7 @@ public class Type_Comptable_Details {
      * @param codeComptable local accounting numeric code
      * @param description   human-readable description
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public Type_Comptable_Details(int id,
                                   String name,
@@ -106,7 +106,7 @@ public class Type_Comptable_Details {
      * @param description         human-readable description
      * @param parentCodeComptable parent accounting code used as prefix
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public Type_Comptable_Details(int id,
                                   String name,
@@ -129,7 +129,7 @@ public class Type_Comptable_Details {
      * @param description          the human-readable description of the accounting type
      * @param parentCodeComptable  the parent accounting code that acts as a prefix
      *
-     * @since 1.0
+     * @since 0.1
      */
     public Type_Comptable_Details(String name,
                                   Integer CodeComptable,
@@ -150,7 +150,7 @@ public class Type_Comptable_Details {
      *
      * @return the technical identifier
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public long getId() {
         return id;
@@ -161,7 +161,7 @@ public class Type_Comptable_Details {
      *
      * @return the accounting type name
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public String getName() {
         return name;
@@ -172,7 +172,7 @@ public class Type_Comptable_Details {
      *
      * @return the local accounting code
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public Integer getCodeComptable() {
         return codeComptable;
@@ -183,7 +183,7 @@ public class Type_Comptable_Details {
      *
      * @return the description
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public String getDescription() {
         return description;
@@ -194,7 +194,7 @@ public class Type_Comptable_Details {
      *
      * @return the parent accounting code, or {@code null} if not defined
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public String getParentCodeComptable() {
         return parentCodeComptable;
@@ -217,7 +217,7 @@ public class Type_Comptable_Details {
      * @return the full accounting code, or {@code null} if
      *         the local accounting code is not defined
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public String getFullCode() {
         if (codeComptable == null) {
@@ -239,7 +239,7 @@ public class Type_Comptable_Details {
      *
      * @param id the new identifier
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public void setId(int id) {
         this.id = id;
@@ -250,7 +250,7 @@ public class Type_Comptable_Details {
      *
      * @param name the new accounting type name
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public void setName(String name) {
         this.name = name;
@@ -261,7 +261,7 @@ public class Type_Comptable_Details {
      *
      * @param codeComptable the new local accounting code
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public void setCodeComptable(Integer codeComptable) {
         this.codeComptable = codeComptable;
@@ -272,7 +272,7 @@ public class Type_Comptable_Details {
      *
      * @param description the new description
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public void setDescription(String description) {
         this.description = description;
@@ -289,7 +289,7 @@ public class Type_Comptable_Details {
      *
      * @return un JsonObject représentant cette instance
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public JsonObject toJson() {
         JsonObjectBuilder builder = Json.createObjectBuilder();
@@ -346,7 +346,7 @@ public class Type_Comptable_Details {
      *
      * @return a human-readable string representation
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     @Override
     public String toString() {

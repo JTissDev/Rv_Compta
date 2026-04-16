@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author J.Tiss
  * @version 1.0.0
- * @since v1.0
+ * @since v0.1
  */
 @Component
 public class DetailsDataLoader {
@@ -32,7 +32,7 @@ public class DetailsDataLoader {
 	 * @param fileName The name of the file located in the /data folder at project root.
 	 * @return A list of initialized {@link Details_Comptable}.
 	 * @throws RuntimeException if the file cannot be found or parsed.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public List<Details_Comptable> loadDetailsFromJson(String fileName) {
 		List<Details_Comptable> detailsList = new ArrayList<>();

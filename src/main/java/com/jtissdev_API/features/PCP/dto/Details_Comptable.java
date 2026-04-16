@@ -13,7 +13,7 @@ import jakarta.json.JsonObjectBuilder;
  *
  * @author J.Tiss
  * @version 1.0.2
- * @since v1.0
+ * @since 0.1
  */
 public class Details_Comptable {
 
@@ -23,25 +23,25 @@ public class Details_Comptable {
 
 	/**
 	 * Unique alphanumeric code for the detail (e.g., ".442").
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	private String code;
 
 	/**
 	 * Category or functional group of the detail (e.g., "Banque", "Vehicule").
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	private String type;
 
 	/**
 	 * Display name or label for the specific object.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	private String nom;
 
 	/**
 	 * Additional notes or technical description of the object.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	private String description;
 
@@ -51,7 +51,7 @@ public class Details_Comptable {
 
 	/**
 	 * Default constructor.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public Details_Comptable() {
 	}
@@ -62,7 +62,7 @@ public class Details_Comptable {
 	 * @param code Unique code of the detail
 	 * @param type Category of the detail
 	 * @param nom Display name of the detail
-	 * @since 1.0.1
+	 * @since 0.1
 	 */
 	public Details_Comptable(String code, String type, String nom) {
 		this.setCode(code);
@@ -77,7 +77,7 @@ public class Details_Comptable {
 	 * @param type Category of the detail
 	 * @param nom Display name of the detail
 	 * @param description Technical description of the object
-	 * @since 1.0.2
+	 * @since 0.1
 	 */
 	public Details_Comptable(String code, String type, String nom, String description) {
 		this.setCode(code);
@@ -93,7 +93,7 @@ public class Details_Comptable {
 	/**
 	 * Gets the unique alphanumeric code.
 	 * @return the detail code.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public String getCode() {
 		return code;
@@ -102,7 +102,7 @@ public class Details_Comptable {
 	/**
 	 * Gets the category/type of the detail.
 	 * @return the type string.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public String getType() {
 		return type;
@@ -111,7 +111,7 @@ public class Details_Comptable {
 	/**
 	 * Gets the display name of the detail.
 	 * @return the name/label.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public String getNom() {
 		return nom;
@@ -120,7 +120,7 @@ public class Details_Comptable {
 	/**
 	 * Gets the additional notes for this detail.
 	 * @return the description text.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public String getDescription() {
 		return description;
@@ -133,7 +133,7 @@ public class Details_Comptable {
 	/**
 	 * Sets the unique alphanumeric code.
 	 * @param code the code to assign.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public void setCode(String code) {
 		this.code = code;
@@ -142,7 +142,7 @@ public class Details_Comptable {
 	/**
 	 * Sets the category/type of the detail.
 	 * @param type the type label to assign.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public void setType(String type) {
 		this.type = type;
@@ -151,7 +151,7 @@ public class Details_Comptable {
 	/**
 	 * Sets the display name of the detail.
 	 * @param nom the label to assign.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -160,7 +160,7 @@ public class Details_Comptable {
 	/**
 	 * Sets the additional notes for this detail.
 	 * @param description the information to store.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -174,7 +174,7 @@ public class Details_Comptable {
 	 * Converts the object into a JSON format for persistence.
 	 *
 	 * @return A {@link JsonObject} representing the detail.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public JsonObject toJson() {
 		JsonObjectBuilder builder = Json.createObjectBuilder();
@@ -190,7 +190,7 @@ public class Details_Comptable {
 	/**
 	 * Provides a summary of the detail for logging and debugging.
 	 * @return a formatted string.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	@Override
 	public String toString() {

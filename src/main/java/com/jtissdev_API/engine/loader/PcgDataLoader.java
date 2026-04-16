@@ -19,7 +19,8 @@ import java.io.InputStream;
  * Engine component responsible for loading and parsing Accounting Plan data
  * from external physical resources.
  * @author JtissDev
- * @version 1.0
+ * @version 1.0.0
+ * @since 0.1
  */
 @Component
 public class PcgDataLoader {
@@ -30,6 +31,8 @@ public class PcgDataLoader {
 	 * @param fileName The name of the target file (e.g., "pcg.json")
 	 * @return A populated PcgCoreDTO containing the hierarchical tree
 	 * @throws RuntimeException If the file is missing or the JSON structure is invalid
+	 *
+	 * @since 0.1
 	 */
 	public PcgCoreDTO loadFromJson(String fileName) {
 		// On utilise FileSystemResource pour lire le fichier sur le disque
@@ -53,6 +56,8 @@ public class PcgDataLoader {
 	 * Maps a Jakarta JsonObject to the internal DTO domain model.
 	 * @param json The source JsonObject to parse
 	 * @return A mapped PcgCoreDTO instance
+	 * @since 0.1
+	 * @version 1.0.0
 	 */
 	private PcgCoreDTO mapToDto(JsonObject json) {
 		PcgCoreDTO core = new PcgCoreDTO();
@@ -70,7 +75,7 @@ public class PcgDataLoader {
 	 * </p>
 	 *
 	 * @author J.Tiss - jtissdev@gmail.com
-	 * @since 1.0.0
+	 * @since 0.1
 	 * @version 1.1.1
 	 * @param json The root JsonArray containing accounting classes.
 	 * @return A fully populated PcgCoreDTO object.

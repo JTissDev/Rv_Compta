@@ -20,7 +20,7 @@ import java.util.List;
  * parent accounting code with the local accounting code.
  *
  * @author jtiss
- * @since 1.1.0
+ * @since 0.1
  * @version 1.0.0
  */
 public class Sub_Type_Comptable {
@@ -32,28 +32,28 @@ public class Sub_Type_Comptable {
     /**
      * Technical identifier used by the database.
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     private Long id;
 
     /**
      * Human-readable name of the sub accounting type.
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     private String name;
 
     /**
      * Local accounting code (numeric value) for this sub type.
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     private Integer codeComptable;
 
     /**
      * Human-readable description of the sub accounting type.
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     private String description;
 
@@ -61,14 +61,14 @@ public class Sub_Type_Comptable {
      * Parent accounting code.
      * This is used as a prefix when computing the full accounting code.
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     private String parentCodeComptable;
 
     /**
      * List of detailed accounting types attached to this sub type.
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     private List<Type_Comptable_Details> detailsList;
 
@@ -81,7 +81,7 @@ public class Sub_Type_Comptable {
      * All fields are initialized to {@code null}, and the list of details
      * is initialized as an empty {@link ArrayList}.
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public Sub_Type_Comptable() {
         this.detailsList = new ArrayList<>();
@@ -96,7 +96,7 @@ public class Sub_Type_Comptable {
      * @param codeComptable local accounting numeric code
      * @param description   human-readable description
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public Sub_Type_Comptable(Long id,
                               String name,
@@ -120,7 +120,7 @@ public class Sub_Type_Comptable {
      * @param parentCodeComptable parent accounting code used as prefix
      * @param detailsList         list of details; if {@code null}, an empty list will be used
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public Sub_Type_Comptable(Long id,
                               String name,
@@ -145,7 +145,7 @@ public class Sub_Type_Comptable {
      *
      * @return the technical identifier
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public Long getId() {
         return id;
@@ -156,7 +156,7 @@ public class Sub_Type_Comptable {
      *
      * @return the name
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public String getName() {
         return name;
@@ -167,7 +167,7 @@ public class Sub_Type_Comptable {
      *
      * @return the local accounting code
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public Integer getCodeComptable() {
         return codeComptable;
@@ -178,7 +178,7 @@ public class Sub_Type_Comptable {
      *
      * @return the description
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public String getDescription() {
         return description;
@@ -189,7 +189,7 @@ public class Sub_Type_Comptable {
      *
      * @return the parent accounting code, or {@code null} if not defined
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public String getParentCodeComptable() {
         return parentCodeComptable;
@@ -206,7 +206,7 @@ public class Sub_Type_Comptable {
      * @return the full accounting code, or {@code null} if
      *         the local accounting code is not defined
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public String getFullCode() {
         if (codeComptable == null) {
@@ -225,7 +225,7 @@ public class Sub_Type_Comptable {
      *
      * @return a mutable list of {@link Type_Comptable_Details}
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public List<Type_Comptable_Details> getDetailsList() {
         return detailsList;
@@ -240,7 +240,7 @@ public class Sub_Type_Comptable {
      *
      * @param id the new identifier
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public void setId(Long id) {
         this.id = id;
@@ -251,7 +251,7 @@ public class Sub_Type_Comptable {
      *
      * @param name the new name
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public void setName(String name) {
         this.name = name;
@@ -262,7 +262,7 @@ public class Sub_Type_Comptable {
      *
      * @param codeComptable the new local accounting code
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public void setCodeComptable(Integer codeComptable) {
         this.codeComptable = codeComptable;
@@ -273,7 +273,7 @@ public class Sub_Type_Comptable {
      *
      * @param description the new description
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public void setDescription(String description) {
         this.description = description;
@@ -284,7 +284,7 @@ public class Sub_Type_Comptable {
      *
      * @param parentCodeComptable the new parent accounting code
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public void setParentCodeComptable(String parentCodeComptable) {
         this.parentCodeComptable = parentCodeComptable;
@@ -296,7 +296,7 @@ public class Sub_Type_Comptable {
      * @param detailsList new list of details; if {@code null},
      *                    an empty list will be used
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public void setDetailsList(List<Type_Comptable_Details> detailsList) {
         this.detailsList = (detailsList != null) ? detailsList : new ArrayList<>();
@@ -312,7 +312,7 @@ public class Sub_Type_Comptable {
      *
      * @param details the details to add; ignored if {@code null}
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public void addDetails(Type_Comptable_Details details) {
         if (details == null) {
@@ -337,7 +337,7 @@ public class Sub_Type_Comptable {
      *
      * @return un {@link JsonObject} représentant cette instance
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     public JsonObject toJson() {
         JsonObjectBuilder builder = Json.createObjectBuilder();
@@ -407,7 +407,7 @@ public class Sub_Type_Comptable {
      *
      * @return a human-readable string representation
      *
-     * @since 1.1.0
+     * @since 0.1
      */
     @Override
     public String toString() {
