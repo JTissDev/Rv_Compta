@@ -411,13 +411,30 @@ public class Sub_Type_Comptable {
      */
     @Override
     public String toString() {
-        return "Sub_Type_Comptable{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", codeComptable=" + codeComptable +
-                ", description='" + description + '\'' +
-                ", parentCodeComptable='" + parentCodeComptable + '\'' +
-                ", detailsListSize=" + (detailsList != null ? detailsList.size() : 0) +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Sub_Type_Comptable {")
+                .append("\n    id=").append(id)
+                .append(",\n    name='").append(name).append('\'')
+                .append(",\n    codeComptable=").append(codeComptable)
+                .append(",\n    description='").append(description).append('\'')
+                .append(",\n    parentCodeComptable='").append(parentCodeComptable).append('\'');
+
+        if (detailsList != null && !detailsList.isEmpty()) {
+            sb.append(",\n    detailsList=[");
+            for (int i = 0; i < detailsList.size(); i++) {
+                // On ajoute encore un cran d'indentation pour les détails
+                sb.append("\n      ").append(detailsList.get(i).toString().replace("\n", "\n      "));
+
+                if (i < detailsList.size() - 1) {
+                    sb.append(",");
+                }
+            }
+            sb.append("\n    ]");
+        } else {
+            sb.append(",\n    detailsList=0");
+        }
+
+        sb.append("\n  }");
+        return sb.toString();
     }
 }

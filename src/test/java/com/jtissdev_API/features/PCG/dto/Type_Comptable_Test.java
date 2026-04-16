@@ -1,8 +1,5 @@
-package com.jtissdev_API.DTO.PCG;
+package com.jtissdev_API.features.PCG.dto;
 
-import com.jtissdev_API.features.PCG.dto.Sub_Type_Comptable;
-import com.jtissdev_API.features.PCG.dto.Type_Comptable;
-import com.jtissdev_API.features.PCG.dto.Type_Comptable_Details;
 import jakarta.json.JsonObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
