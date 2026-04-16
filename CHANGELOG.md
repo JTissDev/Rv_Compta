@@ -1,17 +1,28 @@
 # 📜 Changelog - Rv_Compta
 
-Toutes les modifications notables de ce projet seront documentées dans ce fichier.
+All notable changes to this project will be documented in this file.
+
+## [0.2.0] - 2026-04-16
+### ✨ Added
+- Initialized the **PCP** (Personal Accounting Plan) module.
+- Created `Tiers` and `Details_Comptable` DTOs with full Javadoc.
+- Implemented technical loaders `TiersDataLoader` and `DetailsDataLoader` using `FileSystemResource`.
+- Updated the central container `PcpCoreDTO`.
+
+### 🧪 Tests
+- Unit test coverage for DTOs and Loaders within the PCP block.
+- Validated "Truth Test" (Test de Vérité) via the application's `CommandLineRunner`.
 
 ## [0.1.0] - 2026-04-14
-### ✨ Ajouté
-- Définition de l'architecture **Hybride Orientée Domaine**.
-- Création du script de génération automatique des packages `gen_features.sh`.
-- Structure complète du `README.md` avec gestion des 4 environnements.
-- Initialisation des fichiers de suivi (`TODO.md`, `CHANGELOG.md`).
+### ✨ Added
+- Defined the **Hybrid Domain-Oriented** architecture.
+- Created the automatic package generation script `gen_features.sh`.
+- Full `README.md` structure with 4-environment management.
+- Initialized tracking files (`TODO.md`, `CHANGELOG.md`).
 
-### 🏗️ Changé
-- Centralisation des moteurs techniques dans le package `engine/`.
-- Modularisation des fonctionnalités métier dans `features/`.
+### 🏗️ Changed
+- Centralized technical engines within the `engine/` package.
+- Modularized business logic into the `features/` package.
 
 ---
-> Format basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+> Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).

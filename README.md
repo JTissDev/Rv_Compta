@@ -172,7 +172,9 @@ src/main/java/com/jtissdev_API/
 │   │   ├── dto/         # (hierarchy)
 │   │   ├── service/     # Logique & Cache (PcgService)
 │   │   └── ...          # Controller, Repository, Entity
-│   ├── pcp/             # Plan Comptable Particulier (Client, Fournisseur, detail )
+│   ├── pcp/             # Plan Comptable Particulier
+│   │   ├── dto/         # Tiers, Details_Comptable
+│   │   └── ...
 │   └── compta/          # Journaux et Écritures
 ├── engine/              # Automates de traitement techniques
 │   ├── loader/          # Loaders (JSON, Excel via POI)
