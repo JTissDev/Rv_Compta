@@ -6,6 +6,7 @@ import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
@@ -37,7 +38,7 @@ public class TiersDataLoader {
 	public List<Tiers> loadTiersFromJson(String fileName) {
 		List<Tiers> tiersList = new ArrayList<>();
 
-		try (InputStream is = new ClassPathResource("data/" + fileName).getInputStream();
+		try (InputStream is = new FileSystemResource("data/" + fileName).getInputStream();
 		     JsonReader reader = Json.createReader(is)) {
 
 			JsonArray jsonArray = reader.readArray();
