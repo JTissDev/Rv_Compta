@@ -1,5 +1,6 @@
 package com.jtissdev_API.engine.worker;
 
+import com.jtissdev_API.core.util.ExcelReader;
 import com.jtissdev_API.engine.loader.*;
 import com.jtissdev_API.features.compta.dto.OperationDTO;
 import com.jtissdev_API.features.core.dto.PcgCoreDTO;
@@ -21,7 +22,7 @@ import java.util.Scanner;
  *
  * @author jtiss
  * @since 0.4.0
- * @version 1.0.0
+ * @version 1.3.0
  */
 @Component
 public class CommandLineWorker {
@@ -34,6 +35,7 @@ public class CommandLineWorker {
 	private final TiersDataLoader tiersLoader;
 	private final DetailsDataLoader detailsLoader;
 	private final JournalLoader journalLoader;
+	private final ExcelReader excelReader;
 
 	// =========================================================
 	// == CONSTRUCTORS                                        ==
@@ -42,11 +44,12 @@ public class CommandLineWorker {
 	public CommandLineWorker(PcgDataLoader pcgLoader,
 	                         TiersDataLoader tiersLoader,
 	                         DetailsDataLoader detailsLoader,
-	                         JournalLoader journalLoader) {
+	                         JournalLoader journalLoader, ExcelReader excelReader) {
 		this.pcgLoader = pcgLoader;
 		this.tiersLoader = tiersLoader;
 		this.detailsLoader = detailsLoader;
 		this.journalLoader = journalLoader;
+		this.excelReader = excelReader;
 	}
 
 	// =========================================================
@@ -176,8 +179,20 @@ public class CommandLineWorker {
 	private void processExcelImport(Scanner scanner) {
 		File selectedFile = selectExcelFile(scanner);
 		if (selectedFile != null) {
-			System.out.println("> Lancement de l'import : " + selectedFile.getName());
-			// TODO: Appeler le futur ExcelReader logic ici
+			try {
+				List<List<String>> rows = excelReader.readExcel(selectedFile);
+				System.out.println("> Lecture terminée : " + (rows.size() - 1) + " lignes trouvées (hors entête).");
+
+				// On commence à la ligne 1 pour sauter l'entête
+				for (int i = 1; i < rows.size(); i++) {
+					List<String> row = rows.get(i);
+					// row.get(0) = Date, row.get(1) = Libellé, row.get(2) = Montant, etc.
+					processSingleExcelRow(row, scanner);
+				}
+
+			} catch (Exception e) {
+				System.err.println("❌ Erreur lors de la lecture Excel : " + e.getMessage());
+			}
 		}
 	}
 
@@ -223,5 +238,51 @@ public class CommandLineWorker {
 			System.out.println("⚠️ Entrée non valide.");
 		}
 		return null;
+	}
+
+	/**
+	 * Processes a single row from the Excel file.
+	 * <p>
+	 * For now, it simply displays the raw content of the row to validate
+	 * the mapping between Excel columns and accounting fields.
+	 * </p>
+	 *
+	 * @param row     the list of strings representing the cells of the current row
+	 * @param scanner the active scanner for user interaction
+	 * @since 0.4.0
+	 */
+	private void processSingleExcelRow(List<String> row, Scanner scanner) {
+		// 1. Extraction et Nettoyage RADICAL des données
+		// On enlève les retours à la ligne (\n, \r) pour ne pas casser le tableau console
+		String dateVal    = row.get(0).trim();
+		String dateBanque = row.get(1).trim();
+
+		// Nettoyage du libellé : on remplace les sauts de ligne par des espaces
+		String libelle    = row.get(2).replace("\n", " ").replace("\r", " ").trim();
+
+		// Nettoyage des montants
+		String debit      = row.get(3).replace("\u00a0", "").trim();
+		String credit     = row.get(4).replace("\u00a0", "").trim();
+
+		// 2. Formatage du tableau
+		String headerFormat = "| %-12s | %-12s | %-30s | %-10s | %-10s |";
+		String lineFormat   = "| %-12s | %-12s | %-30s | %-10s | %-10s |";
+		String separator    = "+--------------+--------------+--------------------------------+------------+------------+";
+
+		// Tronquer le libellé s'il est trop long (30 char max)
+		String displayLibelle = libelle.length() > 30 ? libelle.substring(0, 27) + "..." : libelle;
+
+		// 3. Affichage
+		System.out.println("\n" + separator);
+		System.out.println(String.format(headerFormat, "DATE", "DATE V.", "LIBELLE", "DEBIT", "CREDIT"));
+		System.out.println(separator);
+		System.out.println(String.format(lineFormat, dateVal, dateBanque, displayLibelle, debit, credit));
+		System.out.println(separator);
+
+		System.out.print("👉 [Entrée] Continuer | [Q] Quitter : ");
+		String input = scanner.nextLine();
+		if ("q".equalsIgnoreCase(input)) {
+			throw new RuntimeException("Importation interrompue.");
+		}
 	}
 }
