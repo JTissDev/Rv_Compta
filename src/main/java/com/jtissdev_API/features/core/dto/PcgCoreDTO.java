@@ -50,4 +50,19 @@ public class PcgCoreDTO {
 		}
 		this.accountingClasses.add(typeComptable);
 	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("PCG Core DTO:\n")
+				.append("====================\n")
+				.append("Accounting Classes:\n")
+				.append("====================\n");
+		for (Type_Comptable typeComptable : accountingClasses) {
+			sb.append(typeComptable.toString()).append("\n");
+		}
+		sb.append("\n");
+
+		return sb.toString();
+
+	}
 }

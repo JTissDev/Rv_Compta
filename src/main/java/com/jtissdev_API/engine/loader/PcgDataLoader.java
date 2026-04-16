@@ -125,7 +125,7 @@ public class PcgDataLoader {
 				typeObj.addSubType(subObj);
 			}
 
-			System.out.println(typeObj);
+			//System.out.println(typeObj);
 			core.addAccountingClass(typeObj);
 		}
 
