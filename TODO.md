@@ -1,6 +1,38 @@
 # 📝 TODO List - Rv_Compta
 
-## 🏗️ Infrastructure & Core
+## 1. Current Version 0.3-SNAPSHOT (Acounting Operation)
+###  Module COMPTA (Accounting Engine)
+- [ ] **Data Model Design**:
+  * Create `OperationDTO`: Transaction header (Date, Label, Reference, Global Amount).
+  * Create `MovementDTO`: Atomic accounting lines (Debit/Credit, Account link).
+- [ ] **Complex Data Model**: Define `Journal`, `Ecriture`, and `Mouvement`.
+- [ ] **Validation & Integrity Engine**:
+  * **Accounting Logic**: Enforce (Sum(Debit) == Sum(Credit)) balance.
+  * **VIRINT Automation**: Symmetrical entry generation for internal transfers.
+
+***
+## 2. ✅ COMPLETED
+
+---
+
+### Version 0.2
+#### 📊 Module PCG (General Accounting Plan)
+- [x] Define DTO structures (Core & Hierarchy).
+- [x] Develop `PcgDataLoader` (JSON/Jakarta JSON).
+
+#### 📊 Module PCP (Personal Accounting Plan)
+- [x] Define DTO structures (Tiers & Details_Comptable).
+- [x] Develop JSON Loaders.
+
+#### 📊 Module Referential (Core)
+- [x] Define `OperationStatus` and `PaymentMethod` DTOs.
+- [x] Implement `ReferentialDataLoader`.
+
+
+---
+
+## 3. Global Todo List
+### 🏗️ Infrastructure & Core
 - [ ] **Advanced Security Layer**:
     * Implement Spring Security with JWT or Session management.
     * Define Roles (ADMIN, USER, VIEWER) for accounting operations.
@@ -14,39 +46,40 @@
     * Integrate **Swagger/OpenAPI** to auto-generate the API documentation.
     * Create a "Developer Guide" module showing standard request examples.
 
-## 👤 User Management & Profiles
+### 👤 User Management & Profiles
 - [ ] **Multi-Profile System**:
     * Implement `UserProfile` entity with specific types: `INDIVIDUAL`, `ASSOCIATION`, and `PROFESSIONAL`.
     * Add logic to toggle business rules based on profile type (VAT, specific reports).
 
-## 📊 Module Referential (Core)
-- [x] Define `OperationStatus` and `PaymentMethod` DTOs.
-- [x] Implement `ReferentialDataLoader`.
+### 📊 Module Referential (Core)
 - [ ] **Metadata & Synchronization System**:
     * **Database side**: Create a `REF_METADATA_UPDATE` table (`table_name`, `last_sync_date`, `file_hash`).
     * **API side**: Implement pre-load check (Local JSON Hash vs. DB Metadata).
     * **Automated Sync**: Logic to push JSON updates to DB if metadata is obsolete.
 
-## 📊 Module PCG (General Accounting Plan)
-- [x] Define DTO structures (Core & Hierarchy).
-- [x] Develop `PcgDataLoader` (JSON/Jakarta JSON).
+### 📊 Module PCG (General Accounting Plan)
+
 - [ ] **Service & Cache**: Implement `PcgService` with `ConcurrentHashMap` for high-performance access.
 - [ ] **API Exposure**: Create `PcgController` for REST endpoints.
 - [ ] **Persistence**: Create JPA Entities and Repositories for PCG storage.
 
-## 📊 Module PCP (Personal Accounting Plan)
-- [x] Define DTO structures (Tiers & Details_Comptable).
-- [x] Develop JSON Loaders.
+### 📊 Module PCP (Personal Accounting Plan)
 - [ ] **PCP-PCG Bridge**: Implement Level 4 (PCP) to Level 3 (PCG) mapping validation.
 
-## 📒 Module COMPTA (Accounting Engine)
+### 📒 Module COMPTA (Accounting Engine)
 - [ ] **Complex Data Model**: Define `Journal`, `Ecriture`, and `Mouvement`.
 - [ ] **Validation & Integrity Engine**:
     * **Action Selector (Apps.java)**: Command router via `String[] args` (`--SERVER`, `--IMPORT`, `--SYNC`, `--CHECK`).
     * **Accounting Logic**: Enforce (Sum(Debit) == Sum(Credit)) balance.
     * **VIRINT Automation**: Symmetrical entry generation for internal transfers.
+- [ ] **Data Model Design**:
+  * Create `OperationDTO`: Transaction header (Date, Label, Reference, Global Amount).
+  * Create `MovementDTO`: Atomic accounting lines (Debit/Credit, Account link).
+- [ ] **Balance Calculator**:
+  * Implement real-time balance calculation engine by PCP account.
+  * Add period-based filtering (Monthly/Yearly balance).
 
-## ⚙️ Engine (Technical & Migration)
+### ⚙️ Engine (Technical & Migration)
 - [ ] **Semi-Automated Excel-to-JSON Tool**: Build generic mapper using Apache POI.
 - [ ] **Progressive DB Migration**: Build step-by-step migration worker and progress tracker.
 - [ ] **Smart Loading (AUTO Mode)**: Prioritize DB but fallback to Files with a "Warning" state.
