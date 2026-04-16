@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,7 +24,7 @@ import java.util.Scanner;
  *
  * @author jtiss
  * @since 0.4.0
- * @version 1.3.0
+ * @version 1.5.2
  */
 @Component
 public class CommandLineWorker {
@@ -41,6 +43,17 @@ public class CommandLineWorker {
 	// == CONSTRUCTORS                                        ==
 	// =========================================================
 
+	/**
+	 * Constructs an instance of CommandLineWorker with the necessary data loaders and Excel reader.
+	 *
+	 * @param pcgLoader      the data loader responsible for loading and parsing accounting plan data
+	 * @param tiersLoader    the data loader responsible for loading and parsing tiers data
+	 * @param detailsLoader  the data loader responsible for loading and parsing details data
+	 * @param journalLoader  the loader responsible for handling journal data
+	 * @param excelReader    the component responsible for reading and processing Excel files
+	 *
+	 * @since 0.4
+	 */
 	public CommandLineWorker(PcgDataLoader pcgLoader,
 	                         TiersDataLoader tiersLoader,
 	                         DetailsDataLoader detailsLoader,
@@ -58,6 +71,7 @@ public class CommandLineWorker {
 
 	/**
 	 * Starts the operational import workflow.
+	 * Initialize referentials and start interactiv menu.1
 	 *
 	 * @throws Exception if data loading or processing fails
 	 * @since 0.4.0
@@ -118,10 +132,10 @@ public class CommandLineWorker {
 
 			switch (input) {
 				case "1":
-					processExcelImport(scanner);
+					processExcelImport(scanner, currentJournal);
 					break;
 				case "2":
-					processManualEntry(scanner);
+					processManualEntry(scanner, currentJournal);
 					break;
 				case "0":
 					running = false;
@@ -176,7 +190,7 @@ public class CommandLineWorker {
 	 * @param scanner to get user input
 	 * @since 0.4.0
 	 */
-	private void processExcelImport(Scanner scanner) {
+	private void processExcelImport(Scanner scanner, JournalDTO journal) {
 		File selectedFile = selectExcelFile(scanner);
 		if (selectedFile != null) {
 			try {
@@ -186,8 +200,21 @@ public class CommandLineWorker {
 				// On commence à la ligne 1 pour sauter l'entête
 				for (int i = 1; i < rows.size(); i++) {
 					List<String> row = rows.get(i);
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yy");
+
 					// row.get(0) = Date, row.get(1) = Libellé, row.get(2) = Montant, etc.
 					processSingleExcelRow(row, scanner);
+					OperationDTO op = new OperationDTO();
+					op.setDateOperation(LocalDate.parse(row.get(0), formatter));
+					op.setDateComptable(LocalDate.parse(row.get(1), formatter));
+					op.setDescriptif(row.get(2).replace("\n", " ").trim());
+
+					double debit = parseAmount(row.get(3));
+					double credit = parseAmount(row.get(4));
+
+					//ventilateOperation(op, credit, debit, scanner);
+					journal.getOperations().add(op);
+
 				}
 
 			} catch (Exception e) {
@@ -197,11 +224,34 @@ public class CommandLineWorker {
 	}
 
 	/**
+	 * Parses a string representing a numeric value and converts it into a double.
+	 * It replaces non-breaking spaces and commas, trims the input, and handles
+	 * invalid or null input gracefully by returning 0.0.
+	 *
+	 * @param value the string to be parsed as a numeric value
+	 * @return the parsed double value; returns 0.0 if the input is null, empty, or invalid
+	 *
+	 * @since 0.4
+	 */
+	private double parseAmount(String value) {
+		if (value == null || value.trim().isEmpty()) return 0.0;
+		try {
+			return Double.parseDouble(value.replace("\u00a0", "").replace(",", ".").trim());
+		} catch (NumberFormatException e) {
+			return 0.0;
+		}
+	}
+
+
+	/**
 	 * Handles manual entry of a new operation.
-	 * @param scanner to get user input
+	 *
+	 * @param scanner
+	 * 		to get user input
+	 * @param currentJournal
 	 * @since 0.4.0
 	 */
-	private void processManualEntry(Scanner scanner) {
+	private void processManualEntry(Scanner scanner, JournalDTO currentJournal) {
 		System.out.println("\n--- [SAISIE MANUELLE] ---");
 		// TODO: Développer la logique de saisie assistée (Tiers -> Type -> Sous-Type)
 		System.out.println("Fonctionnalité en cours de développement...");
