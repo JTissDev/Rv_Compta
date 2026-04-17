@@ -295,346 +295,379 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
 
 --- MAPPING DES METHODES : RV_COMPTA ---
 
-📍 Classe : App.java
-------------------------------------------------
-public static void main(String[] args)
-public CommandLineRunner testDeVerite(
-
+📦 PACKAGE : com.jtissdev_API.core.util
+================================================
 📍 Classe : ExcelReader.java
-------------------------------------------------
-        public ExcelReader(String filePath)
-        public JsonArray reader(){
+----------------------------------------------
+    -   public List<List<String>> readExcel(File file) throws Exception
 
+📦 PACKAGE : com.jtissdev_API.engine.DbUpdater
+================================================
 📍 Classe : DbUpdater.java
-------------------------------------------------
-
+----------------------------------------------
 📍 Classe : package-info.java
-------------------------------------------------
+----------------------------------------------
 
-📍 Classe : ComptaDataLoader.java
-------------------------------------------------
-
+📦 PACKAGE : com.jtissdev_API.engine.loader
+================================================
 📍 Classe : DetailsDataLoader.java
-------------------------------------------------
-        public List<Details_Comptable> loadDetailsFromJson(String fileName)
-
+----------------------------------------------
+    -   public List<Details_Comptable> loadDetailsFromJson(String fileName)
 📍 Classe : JournalLoader.java
-------------------------------------------------
-        public JournalDTO loadJournal(InputStream is)
-        private JournalDTO mapToJournalDTO(JsonObject json)
-        private OperationDTO mapToOperationDTO(JsonObject json)
-        private MovementDTO mapToMovementDTO(JsonObject json)
-        private LocalDate parseDate(String dateStr)
-
-📍 Classe : package-info.java
-------------------------------------------------
-
+----------------------------------------------
+    -   public JournalDTO loadJournal(InputStream is)
+    -   private JournalDTO mapToJournalDTO(JsonObject json)
+    -   private OperationDTO mapToOperationDTO(JsonObject json)
+    -   private MovementDTO mapToMovementDTO(JsonObject json)
+    -   private LocalDate parseDate(String dateStr)
 📍 Classe : PcgDataLoader.java
-------------------------------------------------
-        public PcgCoreDTO loadFromJson(String fileName)
-        private PcgCoreDTO mapToDto(JsonObject json)
-        private PcgCoreDTO mapToDto(JsonArray json)
-
+----------------------------------------------
+    -   public PcgCoreDTO loadFromJson(String fileName)
+    -   private PcgCoreDTO mapToDto(JsonObject json)
+    -   private PcgCoreDTO mapToDto(JsonArray json)
 📍 Classe : ReferentialDataLoader.java
-------------------------------------------------
-        public void loadOperationStatuses(InputStream inputStream, ReferentialCoreDTO targetDTO) throws Exception
-        public void loadPaymentMethods(InputStream inputStream, ReferentialCoreDTO targetDTO) throws Exception
-
+----------------------------------------------
+    -   public void loadOperationStatuses(InputStream inputStream, ReferentialCoreDTO targetDTO) throws Exception
+    -   public void loadPaymentMethods(InputStream inputStream, ReferentialCoreDTO targetDTO) throws Exception
 📍 Classe : TiersDataLoader.java
-------------------------------------------------
-        public List<Tiers> loadTiersFromJson(String fileName)
-
+----------------------------------------------
+    -   public List<Tiers> loadTiersFromJson(String fileName)
 📍 Classe : package-info.java
-------------------------------------------------
+----------------------------------------------
 
-📍 Classe : JournalDTO.java
-------------------------------------------------
-        public JournalDTO()
-        public JournalDTO(String nom, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode)
-        public JournalDTO(Long id, String nom, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode)
-        public JournalDTO(Long id, String nom, LocalDate dateDebut, LocalDate dateFin,
-        public Long getId()
-        public JournalDTO setId(Long id)
-        public String getNom()
-        public JournalDTO setNom(String nom)
-        public LocalDate getDateDebut()
-        public JournalDTO setDateDebut(LocalDate dateDebut)
-        public LocalDate getDateFin()
-        public JournalDTO setDateFin(LocalDate dateFin)
-        public String getTypeJournalCode()
-        public JournalDTO setTypeJournalCode(String typeJournalCode)
-        public List<OperationDTO> getOperations()
-        public JournalDTO setOperations(List<OperationDTO> operations)
-        public JournalDTO addOperation(OperationDTO operation)
-
-📍 Classe : MovementDTO.java
-------------------------------------------------
-        public MovementDTO()
-        public MovementDTO(Long tiersId, String paiementCode, String codeDetailsComptable,
-        public MovementDTO(Long id, Long tiersId, String paiementCode, String codeDetailsComptable,
-        public MovementDTO(Long tiersId, String paiementCode, String codeDetailsComptable)
-        public Long getId()
-        public MovementDTO setId(Long id)
-        public Long getTiersId()
-        public MovementDTO setTiersId(Long tiersId)
-        public String getPaiementCode()
-        public MovementDTO setPaiementCode(String paiementCode)
-        public String getCodeDetailsComptable()
-        public MovementDTO setCodeDetailsComptable(String codeDetailsComptable)
-        public BigDecimal getMontantDebit()
-        public MovementDTO setMontantDebit(BigDecimal montantDebit)
-        public BigDecimal getMontantCredit()
-        public MovementDTO setMontantCredit(BigDecimal montantCredit)
-        public String getDescription()
-        public MovementDTO setDescription(String description)
-
-📍 Classe : OperationDTO.java
-------------------------------------------------
-        public OperationDTO()
-        public OperationDTO(LocalDate dateOperation, LocalDate dateComptable, String libelle,
-        public OperationDTO(Long id, LocalDate dateOperation, LocalDate dateComptable, String libelle,
-        public OperationDTO(Long id, LocalDate dateOperation, LocalDate dateComptable, String libelle,
-        public Long getId()
-        public OperationDTO setId(Long id)
-        public LocalDate getDateOperation()
-        public OperationDTO setDateOperation(LocalDate dateOperation)
-        public LocalDate getDateComptable()
-        public OperationDTO setDateComptable(LocalDate dateComptable)
-        public String getLibelle()
-        public OperationDTO setLibelle(String libelle)
-        public String getReferenceDocument()
-        public OperationDTO setReferenceDocument(String referenceDocument)
-        public String getDescriptif()
-        public OperationDTO setDescriptif(String descriptif)
-        public String getStatutCode()
-        public OperationDTO setStatutCode(String statutCode)
-        public List<MovementDTO> getMovements()
-        public OperationDTO setMovements(List<MovementDTO> movements)
-        public OperationDTO addMovement(MovementDTO movement)
-
+📦 PACKAGE : com.jtissdev_API.engine.worker
+================================================
+📍 Classe : CommandLineWorker.java
+----------------------------------------------
+    -   public CommandLineWorker(PcgDataLoader pcgLoader,
+    -   public void start() throws Exception
+    -   private void displayLastOperations(JournalDTO journal, int count)
+    -   private void processExcelImport(Scanner scanner, JournalDTO journal)
+    -   private void processManualEntry(Scanner scanner, JournalDTO journal)
+    -   private File selectExcelFile(Scanner scanner)
+    -   private void processSingleExcelRow(List<String> row, Scanner scanner)
+    -   private double parseAmount(String value)
 📍 Classe : package-info.java
-------------------------------------------------
+----------------------------------------------
 
-📍 Classe : package-info.java
-------------------------------------------------
-
-📍 Classe : package-info.java
-------------------------------------------------
-
-📍 Classe : package-info.java
-------------------------------------------------
-
-📍 Classe : package-info.java
-------------------------------------------------
-
-📍 Classe : PcgCoreDTO.java
-------------------------------------------------
-        public PcgCoreDTO()
-        public List<Type_Comptable> getAccountingClasses()
-        public void setAccountingClasses(List<Type_Comptable> accountingClasses)
-        public void addAccountingClass(Type_Comptable typeComptable)
-        public String toString()
-
-📍 Classe : PcpCoreDTO.java
-------------------------------------------------
-        public PcpCoreDTO()
-        public List<Tiers> getThirdParties()
-        public List<Details_Comptable> getDetails()
-        public void setThirdParties(List<Tiers> thirdParties)
-        public void setDetails(List<Details_Comptable> details)
-
-📍 Classe : OperationStatus.java
-------------------------------------------------
-        public OperationStatus()
-        public OperationStatus(String code, String nom, String color)
-        public String getCode()
-        public OperationStatus setCode(String code)
-        public String getNom()
-        public OperationStatus setNom(String nom)
-        public String getColor()
-        public OperationStatus setColor(String color)
-        public JsonObject toJson()
-
-📍 Classe : package-info.java
-------------------------------------------------
-
-📍 Classe : PaymentMethod.java
-------------------------------------------------
-        public PaymentMethod()
-        public PaymentMethod(String code, String nom, String description)
-        public String getCode()
-        public PaymentMethod setCode(String code)
-        public String getNom()
-        public PaymentMethod setNom(String nom)
-        public String getDescription()
-        public PaymentMethod setDescription(String description)
-        public JsonObject toJson()
-
-📍 Classe : ReferentialCoreDTO.java
-------------------------------------------------
-        public ReferentialCoreDTO()
-        public List<OperationStatus> getOperationStatuses()
-        public ReferentialCoreDTO setOperationStatuses(List<OperationStatus> operationStatuses)
-        public List<PaymentMethod> getPaymentMethods()
-        public ReferentialCoreDTO setPaymentMethods(List<List<PaymentMethod>> paymentMethods)
-        public ReferentialCoreDTO addOperationStatus(OperationStatus status)
-        public ReferentialCoreDTO addPaymentMethod(PaymentMethod method)
-        public JsonObject toJson()
-
-📍 Classe : package-info.java
-------------------------------------------------
-
-📍 Classe : package-info.java
-------------------------------------------------
-
+📦 PACKAGE : com.jtissdev_API.features.PCG.dto
+================================================
 📍 Classe : Sub_Type_Comptable.java
-------------------------------------------------
-public Sub_Type_Comptable()
-public Sub_Type_Comptable(Long id,
-public Sub_Type_Comptable(Long id,
-public Long getId()
-public String getName()
-public Integer getCodeComptable()
-public String getDescription()
-public String getParentCodeComptable()
-public String getFullCode()
-public List<Type_Comptable_Details> getDetailsList()
-public void setId(Long id)
-public void setName(String name)
-public void setCodeComptable(Integer codeComptable)
-public void setDescription(String description)
-public void setParentCodeComptable(String parentCodeComptable)
-public void setDetailsList(List<Type_Comptable_Details> detailsList)
-public void addDetails(Type_Comptable_Details details)
-public JsonObject toJson()
-public String toString()
-
+----------------------------------------------
+    - public Sub_Type_Comptable()
+    - public Sub_Type_Comptable(Long id,
+    - public Sub_Type_Comptable(Long id,
+    - public Long getId()
+    - public String getName()
+    - public Integer getCodeComptable()
+    - public String getDescription()
+    - public String getParentCodeComptable()
+    - public String getFullCode()
+    - public List<Type_Comptable_Details> getDetailsList()
+    - public void setId(Long id)
+    - public void setName(String name)
+    - public void setCodeComptable(Integer codeComptable)
+    - public void setDescription(String description)
+    - public void setParentCodeComptable(String parentCodeComptable)
+    - public void setDetailsList(List<Type_Comptable_Details> detailsList)
+    - public void addDetails(Type_Comptable_Details details)
+    - public JsonObject toJson()
+    - public String toString()
 📍 Classe : Type_Comptable.java
-------------------------------------------------
-        public Type_Comptable()
-        public Type_Comptable(Long id,
-        public Long getId()
-        public Type_Comptable setId(Long id)
-        public String getName()
-        public Type_Comptable setName(String name)
-        public Integer getCodeComptable()
-        public Type_Comptable setCodeComptable(Integer codeComptable)
-        public String getDescription()
-        public Type_Comptable setDescription(String description)
-        public List<Sub_Type_Comptable> getSubTypes()
-        public Type_Comptable setSubTypes(List<Sub_Type_Comptable> subTypes)
-        public Type_Comptable addSubType(Sub_Type_Comptable subType)
-        public String getFullCodeComptable()
-        public JsonObject toJson()
-        public String toString()
-
+----------------------------------------------
+    -   public Type_Comptable()
+    -   public Type_Comptable(Long id,
+    -   public Long getId()
+    -   public Type_Comptable setId(Long id)
+    -   public String getName()
+    -   public Type_Comptable setName(String name)
+    -   public Integer getCodeComptable()
+    -   public Type_Comptable setCodeComptable(Integer codeComptable)
+    -   public String getDescription()
+    -   public Type_Comptable setDescription(String description)
+    -   public List<Sub_Type_Comptable> getSubTypes()
+    -   public Type_Comptable setSubTypes(List<Sub_Type_Comptable> subTypes)
+    -   public Type_Comptable addSubType(Sub_Type_Comptable subType)
+    -   public String getFullCodeComptable()
+    -   public JsonObject toJson()
+    -   public String toString()
 📍 Classe : Type_Comptable_Details.java
-------------------------------------------------
-public Type_Comptable_Details()
-public Type_Comptable_Details(int id,
-public Type_Comptable_Details(int id,
-public Type_Comptable_Details(String name,
-public long getId()
-public String getName()
-public Integer getCodeComptable()
-public String getDescription()
-public String getParentCodeComptable()
-public String getFullCode()
-public void setId(int id)
-public void setName(String name)
-public void setCodeComptable(Integer codeComptable)
-public void setDescription(String description)
-public JsonObject toJson()
-public String toString()
-public void setParentCodeComptable(String fullCode)
-
+----------------------------------------------
+    - public Type_Comptable_Details()
+    - public Type_Comptable_Details(int id,
+    - public Type_Comptable_Details(int id,
+    - public Type_Comptable_Details(String name,
+    - public long getId()
+    - public String getName()
+    - public Integer getCodeComptable()
+    - public String getDescription()
+    - public String getParentCodeComptable()
+    - public String getFullCode()
+    - public void setId(int id)
+    - public void setName(String name)
+    - public void setCodeComptable(Integer codeComptable)
+    - public void setDescription(String description)
+    - public JsonObject toJson()
+    - public String toString()
+    - public void setParentCodeComptable(String fullCode)
 📍 Classe : package-info.java
-------------------------------------------------
+----------------------------------------------
 
-📍 Classe : package-info.java
-------------------------------------------------
-
-📍 Classe : package-info.java
-------------------------------------------------
-
-📍 Classe : package-info.java
-------------------------------------------------
-
+📦 PACKAGE : com.jtissdev_API.features.PCP.dto
+================================================
 📍 Classe : Contacts.java
-------------------------------------------------
-public Contacts()
-public Contacts(Long id,
-public Contacts(Long id,
-public Long getId()
-public void setId(Long id)
-public String getName()
-public void setName(String name)
-public String getEmail()
-public void setEmail(String email)
-public String getPhone()
-public void setPhone(String phone)
-public String getMobile()
-public void setMobile(String mobile)
-public String getCompany()
-public void setCompany(String company)
-public String getRole()
-public void setRole(String role)
-public String getAddress()
-public void setAddress(String address)
-public String getZipCode()
-public void setZipCode(String zipCode)
-public String getCity()
-public void setCity(String city)
-public String getCountry()
-public void setCountry(String country)
-public String getNotes()
-public void setNotes(String notes)
-public JsonObject toJson()
-public static Contacts fromJson(JsonObject json)
-public String toString()
-
+----------------------------------------------
+    - public Contacts()
+    - public Contacts(Long id,
+    - public Contacts(Long id,
+    - public Long getId()
+    - public void setId(Long id)
+    - public String getName()
+    - public void setName(String name)
+    - public String getEmail()
+    - public void setEmail(String email)
+    - public String getPhone()
+    - public void setPhone(String phone)
+    - public String getMobile()
+    - public void setMobile(String mobile)
+    - public String getCompany()
+    - public void setCompany(String company)
+    - public String getRole()
+    - public void setRole(String role)
+    - public String getAddress()
+    - public void setAddress(String address)
+    - public String getZipCode()
+    - public void setZipCode(String zipCode)
+    - public String getCity()
+    - public void setCity(String city)
+    - public String getCountry()
+    - public void setCountry(String country)
+    - public String getNotes()
+    - public void setNotes(String notes)
+    - public JsonObject toJson()
+    - public static Contacts fromJson(JsonObject json)
+    - public String toString()
 📍 Classe : Details_Comptable.java
-------------------------------------------------
-        public Details_Comptable()
-        public Details_Comptable(String code, String type, String nom)
-        public Details_Comptable(String code, String type, String nom, String description)
-        public String getCode()
-        public String getType()
-        public String getNom()
-        public String getDescription()
-        public void setCode(String code)
-        public void setType(String type)
-        public void setNom(String nom)
-        public void setDescription(String description)
-        public JsonObject toJson()
-        public String toString()
-
-📍 Classe : package-info.java
-------------------------------------------------
-
+----------------------------------------------
+    -   public Details_Comptable()
+    -   public Details_Comptable(String code, String type, String nom)
+    -   public Details_Comptable(String code, String type, String nom, String description)
+    -   public String getCode()
+    -   public String getType()
+    -   public String getNom()
+    -   public String getDescription()
+    -   public void setCode(String code)
+    -   public void setType(String type)
+    -   public void setNom(String nom)
+    -   public void setDescription(String description)
+    -   public JsonObject toJson()
+    -   public String toString()
 📍 Classe : Tiers.java
-------------------------------------------------
-        public Tiers()
-        public Tiers(String name, String thirdPartyType)
-        public Tiers(Long id, String name, String thirdPartyType)
-        public Long getId()
-        public void setId(Long id)
-        public String getName()
-        public void setName(String name)
-        public String getThirdPartyType()
-        public void setThirdPartyType(String thirdPartyType)
-        public String getDescription()
-        public void setDescription(String description)
-        public JsonObject toJson()
-        public String toString()
-
+----------------------------------------------
+    -   public Tiers()
+    -   public Tiers(String name, String thirdPartyType)
+    -   public Tiers(Long id, String name, String thirdPartyType)
+    -   public Long getId()
+    -   public void setId(Long id)
+    -   public String getName()
+    -   public void setName(String name)
+    -   public String getThirdPartyType()
+    -   public void setThirdPartyType(String thirdPartyType)
+    -   public String getDescription()
+    -   public void setDescription(String description)
+    -   public JsonObject toJson()
+    -   public String toString()
 📍 Classe : package-info.java
-------------------------------------------------
+----------------------------------------------
 
+📦 PACKAGE : com.jtissdev_API.features.compta.controller
+================================================
 📍 Classe : package-info.java
-------------------------------------------------
+----------------------------------------------
 
+📦 PACKAGE : com.jtissdev_API.features.compta.dto
+================================================
+📍 Classe : JournalDTO.java
+----------------------------------------------
+    -   public JournalDTO()
+    -   public JournalDTO(String nom, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode)
+    -   public JournalDTO(Long id, String nom, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode)
+    -   public JournalDTO(Long id, String nom, LocalDate dateDebut, LocalDate dateFin,
+    -   public Long getId()
+    -   public JournalDTO setId(Long id)
+    -   public String getNom()
+    -   public JournalDTO setNom(String nom)
+    -   public LocalDate getDateDebut()
+    -   public JournalDTO setDateDebut(LocalDate dateDebut)
+    -   public LocalDate getDateFin()
+    -   public JournalDTO setDateFin(LocalDate dateFin)
+    -   public String getTypeJournalCode()
+    -   public JournalDTO setTypeJournalCode(String typeJournalCode)
+    -   public List<OperationDTO> getOperations()
+    -   public JournalDTO setOperations(List<OperationDTO> operations)
+    -   public JournalDTO addOperation(OperationDTO operation)
+📍 Classe : MovementDTO.java
+----------------------------------------------
+    -   public MovementDTO()
+    -   public MovementDTO(Long tiersId, String paiementCode, String codeDetailsComptable,
+    -   public MovementDTO(Long id, Long tiersId, String paiementCode, String codeDetailsComptable,
+    -   public MovementDTO(Long tiersId, String paiementCode, String codeDetailsComptable)
+    -   public Long getId()
+    -   public MovementDTO setId(Long id)
+    -   public Long getTiersId()
+    -   public MovementDTO setTiersId(Long tiersId)
+    -   public String getPaiementCode()
+    -   public MovementDTO setPaiementCode(String paiementCode)
+    -   public String getCodeDetailsComptable()
+    -   public MovementDTO setCodeDetailsComptable(String codeDetailsComptable)
+    -   public BigDecimal getMontantDebit()
+    -   public MovementDTO setMontantDebit(BigDecimal montantDebit)
+    -   public BigDecimal getMontantCredit()
+    -   public MovementDTO setMontantCredit(BigDecimal montantCredit)
+    -   public String getDescription()
+    -   public MovementDTO setDescription(String description)
+📍 Classe : OperationDTO.java
+----------------------------------------------
+    -   public OperationDTO()
+    -   public OperationDTO(LocalDate dateOperation, LocalDate dateComptable, String libelle,
+    -   public OperationDTO(Long id, LocalDate dateOperation, LocalDate dateComptable, String libelle,
+    -   public OperationDTO(Long id, LocalDate dateOperation, LocalDate dateComptable, String libelle,
+    -   public Long getId()
+    -   public OperationDTO setId(Long id)
+    -   public LocalDate getDateOperation()
+    -   public OperationDTO setDateOperation(LocalDate dateOperation)
+    -   public LocalDate getDateComptable()
+    -   public OperationDTO setDateComptable(LocalDate dateComptable)
+    -   public String getLibelle()
+    -   public OperationDTO setLibelle(String libelle)
+    -   public String getReferenceDocument()
+    -   public OperationDTO setReferenceDocument(String referenceDocument)
+    -   public String getDescriptif()
+    -   public OperationDTO setDescriptif(String descriptif)
+    -   public String getStatutCode()
+    -   public OperationDTO setStatutCode(String statutCode)
+    -   public List<MovementDTO> getMovements()
+    -   public OperationDTO setMovements(List<MovementDTO> movements)
+    -   public OperationDTO addMovement(MovementDTO movement)
 📍 Classe : package-info.java
-------------------------------------------------
+----------------------------------------------
 
+📦 PACKAGE : com.jtissdev_API.features.compta.entity
+================================================
+📍 Classe : package-info.java
+----------------------------------------------
+
+📦 PACKAGE : com.jtissdev_API.features.compta.repository
+================================================
+📍 Classe : package-info.java
+----------------------------------------------
+
+📦 PACKAGE : com.jtissdev_API.features.compta.service
+================================================
+📍 Classe : package-info.java
+----------------------------------------------
+
+📦 PACKAGE : com.jtissdev_API.features.core.dto.referential
+================================================
+📍 Classe : OperationStatus.java
+----------------------------------------------
+    -   public OperationStatus()
+    -   public OperationStatus(String code, String nom, String color)
+    -   public String getCode()
+    -   public OperationStatus setCode(String code)
+    -   public String getNom()
+    -   public OperationStatus setNom(String nom)
+    -   public String getColor()
+    -   public OperationStatus setColor(String color)
+    -   public JsonObject toJson()
+📍 Classe : PaymentMethod.java
+----------------------------------------------
+    -   public PaymentMethod()
+    -   public PaymentMethod(String code, String nom, String description)
+    -   public String getCode()
+    -   public PaymentMethod setCode(String code)
+    -   public String getNom()
+    -   public PaymentMethod setNom(String nom)
+    -   public String getDescription()
+    -   public PaymentMethod setDescription(String description)
+    -   public JsonObject toJson()
+📍 Classe : package-info.java
+----------------------------------------------
+
+📦 PACKAGE : com.jtissdev_API.features.core.dto
+================================================
+📍 Classe : PcgCoreDTO.java
+----------------------------------------------
+    -   public PcgCoreDTO()
+    -   public List<Type_Comptable> getAccountingClasses()
+    -   public void setAccountingClasses(List<Type_Comptable> accountingClasses)
+    -   public void addAccountingClass(Type_Comptable typeComptable)
+    -   public String toString()
+📍 Classe : PcpCoreDTO.java
+----------------------------------------------
+    -   public PcpCoreDTO()
+    -   public List<Tiers> getThirdParties()
+    -   public List<Details_Comptable> getDetails()
+    -   public void setThirdParties(List<Tiers> thirdParties)
+    -   public void setDetails(List<Details_Comptable> details)
+📍 Classe : ReferentialCoreDTO.java
+----------------------------------------------
+    -   public ReferentialCoreDTO()
+    -   public List<OperationStatus> getOperationStatuses()
+    -   public ReferentialCoreDTO setOperationStatuses(List<OperationStatus> operationStatuses)
+    -   public List<PaymentMethod> getPaymentMethods()
+    -   public ReferentialCoreDTO setPaymentMethods(List<List<PaymentMethod>> paymentMethods)
+    -   public ReferentialCoreDTO addOperationStatus(OperationStatus status)
+    -   public ReferentialCoreDTO addPaymentMethod(PaymentMethod method)
+    -   public JsonObject toJson()
+📍 Classe : package-info.java
+----------------------------------------------
+
+📦 PACKAGE : com.jtissdev_API.features.pcg.controller
+================================================
+📍 Classe : package-info.java
+----------------------------------------------
+
+📦 PACKAGE : com.jtissdev_API.features.pcg.entity
+================================================
+📍 Classe : package-info.java
+----------------------------------------------
+
+📦 PACKAGE : com.jtissdev_API.features.pcg.repository
+================================================
+📍 Classe : package-info.java
+----------------------------------------------
+
+📦 PACKAGE : com.jtissdev_API.features.pcg.service
+================================================
+📍 Classe : package-info.java
+----------------------------------------------
+
+📦 PACKAGE : com.jtissdev_API.features.pcp.controller
+================================================
+📍 Classe : package-info.java
+----------------------------------------------
+
+📦 PACKAGE : com.jtissdev_API.features.pcp.entity
+================================================
+📍 Classe : package-info.java
+----------------------------------------------
+
+📦 PACKAGE : com.jtissdev_API.features.pcp.repository
+================================================
+📍 Classe : package-info.java
+----------------------------------------------
+
+📦 PACKAGE : com.jtissdev_API.features.pcp.service
+================================================
+📍 Classe : package-info.java
+----------------------------------------------
+
+📦 PACKAGE : com.jtissdev_API
+================================================
+📍 Classe : App.java
+----------------------------------------------
+    - public static void main(String[] args)
+    - public CommandLineRunner testDeVerite(
+    - public CommandLineRunner operationalRunner(CommandLineWorker worker)
 ----------------------------------------

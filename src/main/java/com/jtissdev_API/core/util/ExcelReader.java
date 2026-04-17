@@ -33,7 +33,7 @@ public class ExcelReader {
 	 * @param file the Excel file to read
 	 * @return a list containing each row as a list of cell values
 	 * @throws Exception if file is missing or format is invalid
-	 * @since 0.1
+	 * @since 0.4
 	 */
 	public List<List<String>> readExcel(File file) throws Exception {
 		List<List<String>> data = new ArrayList<>();

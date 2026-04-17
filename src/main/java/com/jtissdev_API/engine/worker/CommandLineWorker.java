@@ -24,7 +24,7 @@ import java.util.Scanner;
  *
  * @author jtiss
  * @since 0.4.0
- * @version 1.5.2
+ * @version 1.5.3
  */
 @Component
 public class CommandLineWorker {
@@ -171,17 +171,8 @@ public class CommandLineWorker {
 		for (int i = start; i < total; i++) {
 			OperationDTO op = ops.get(i);
 			// On utilise le toString() de ton OperationDTO
-			System.out.println(String.format("[%d] %s - %s",
-					i,
-					op.getDateOperation(),
-					op.getDescriptif()));
+			System.out.println(op.toString());
 
-			// Affichage rapide des mouvements pour vérifier l'équilibre
-			if (op.getMovements() != null) {
-				op.getMovements().forEach(m ->
-						                          System.out.println(m.toString())
-				);
-			}
 		}
 	}
 
@@ -223,39 +214,34 @@ public class CommandLineWorker {
 		}
 	}
 
+
+
+
 	/**
-	 * Parses a string representing a numeric value and converts it into a double.
-	 * It replaces non-breaking spaces and commas, trims the input, and handles
-	 * invalid or null input gracefully by returning 0.0.
+	 * Processes a manual entry operation by prompting the user for inputs via the provided scanner.
+	 * The operation details, such as the date and description, are collected interactively
+	 * and then added to the specified journal.
 	 *
-	 * @param value the string to be parsed as a numeric value
-	 * @return the parsed double value; returns 0.0 if the input is null, empty, or invalid
+	 * @param scanner the Scanner object to collect user input from the console
+	 * @param journal the JournalDTO object to which the new operation is added
 	 *
 	 * @since 0.4
 	 */
-	private double parseAmount(String value) {
-		if (value == null || value.trim().isEmpty()) return 0.0;
-		try {
-			return Double.parseDouble(value.replace("\u00a0", "").replace(",", ".").trim());
-		} catch (NumberFormatException e) {
-			return 0.0;
-		}
-	}
-
-
-	/**
-	 * Handles manual entry of a new operation.
-	 *
-	 * @param scanner
-	 * 		to get user input
-	 * @param currentJournal
-	 * @since 0.4.0
-	 */
-	private void processManualEntry(Scanner scanner, JournalDTO currentJournal) {
+	private void processManualEntry(Scanner scanner, JournalDTO journal) {
 		System.out.println("\n--- [SAISIE MANUELLE] ---");
-		// TODO: Développer la logique de saisie assistée (Tiers -> Type -> Sous-Type)
-		System.out.println("Fonctionnalité en cours de développement...");
+		OperationDTO op = new OperationDTO();
+
+		System.out.print("Date (JJ/MM/AAAA) : ");
+		String dateStr = scanner.nextLine();
+		op.setDateOperation(LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+		System.out.print("Libellé : ");
+		op.setDescriptif(scanner.nextLine());
+
+		//ventilateOperation(op, scanner);
+		journal.getOperations().add(op);
 	}
+
 
 	/**
 	 * Scans the data directory for Excel files and lets the user choose one.
@@ -333,6 +319,25 @@ public class CommandLineWorker {
 		String input = scanner.nextLine();
 		if ("q".equalsIgnoreCase(input)) {
 			throw new RuntimeException("Importation interrompue.");
+		}
+	}
+
+	/**
+	 * Parses a string representing a numeric value and converts it into a double.
+	 * It replaces non-breaking spaces and commas, trims the input, and handles
+	 * invalid or null input gracefully by returning 0.0.
+	 *
+	 * @param value the string to be parsed as a numeric value
+	 * @return the parsed double value; returns 0.0 if the input is null, empty, or invalid
+	 *
+	 * @since 0.4
+	 */
+	private double parseAmount(String value) {
+		if (value == null || value.trim().isEmpty()) return 0.0;
+		try {
+			return Double.parseDouble(value.replace("\u00a0", "").replace(",", ".").trim());
+		} catch (NumberFormatException e) {
+			return 0.0;
 		}
 	}
 }

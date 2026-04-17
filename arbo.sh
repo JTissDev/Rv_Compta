@@ -5,8 +5,8 @@
 # == Author: Gemini (for J.Tiss)                         ==
 # =========================================================
 
-# --- FONCTION 1 : Affichage de l'arborescence ---
-show_tree() {
+# --- FONCTION : Structure des fichiers (Arborescence) ---
+get_tree() {
     echo ""
     echo "--- PROJECT STRUCTURE: RV_COMPTA ---"
     find . -not -path '*/.*' \
@@ -17,37 +17,51 @@ show_tree() {
     echo "------------------------------------"
 }
 
-# --- FONCTION 2 : Mapping des méthodes Java ---
-show_methods() {
+# --- FONCTION : Mapping complet (Package > Classe > Champs > Méthodes) ---
+get_details() {
     echo ""
-    echo "--- MAPPING DES METHODES : RV_COMPTA ---"
-    find src/main/java -name "*.java" | while read -r file; do
-        echo ""
-        echo "📍 Classe : $(basename "$file")"
-        echo "------------------------------------------------"
-        # Extrait les signatures (public/private/protected/static)
-        grep -E '^\s*(public|private|protected|static).*\(' "$file" | \
-        grep -v ";" | \
-        sed 's/ {.*//' | \
-        sed 's/^ *//'
+    echo "--- FULL MAPPING (FIELDS & METHODS) : RV_COMPTA ---"
+
+    find src/main/java -name "*.java" -exec sh -c 'echo "$(grep -m 1 "^package " "$1" | sed "s/package //;s/;//")|$1"' _ {} \; | sort | while IFS="|" read -r package file; do
+
+        if [ "$package" != "$current_package" ]; then
+            echo ""
+            echo "📦 PACKAGE : $package"
+            echo "================================================================"
+            current_package=$package
+        fi
+
+        echo "  📍 Classe : $(basename "$file")"
+        echo "    🔹 Champs :"
+        grep -E '^\s*(private|public|protected)\s+[^()]+\s+\w+\s*;' "$file" | sed 's/^ */      - /'
+
+        echo "    🔸 Fonctions :"
+        grep -E '^\s*(public|private|protected|static).*\(' "$file" | grep -v ";" | sed 's/ {.*//' | sed 's/^ */      - /'
+
+        echo "  --------------------------------------------------------------"
     done
-    echo "----------------------------------------"
 }
 
-# --- LOGIQUE D'APPEL ---
-case "$1" in
-    tree)
-        show_tree
+# --- LOGIQUE DE TRAITEMENT ---
+ACTION=$1  # show | print
+TARGET=$2  # tree | details
+
+case "$ACTION" in
+    show)
+        if [ "$TARGET" == "tree" ]; then get_tree;
+        elif [ "$TARGET" == "details" ]; then get_details;
+        else echo "Cible inconnue. Usage: ./arbo.sh show {tree|details}"; fi
         ;;
-    methods)
-        show_methods
-        ;;
-    all)
-        show_tree
-        show_methods
+    print)
+        REPORT_FILE="report_${TARGET}.txt"
+        echo "📄 Génération du rapport dans $REPORT_FILE..."
+        if [ "$TARGET" == "tree" ]; then get_tree > "$REPORT_FILE";
+        elif [ "$TARGET" == "details" ]; then get_details > "$REPORT_FILE";
+        else echo "Cible inconnue. Usage: ./arbo.sh print {tree|details}"; exit 1; fi
+        echo "✅ Terminé."
         ;;
     *)
-        echo "Usage: ./rv_tools.sh {tree|methods|all}"
+        echo "Usage: ./arbo.sh {show|print} {tree|details}"
         exit 1
         ;;
 esac

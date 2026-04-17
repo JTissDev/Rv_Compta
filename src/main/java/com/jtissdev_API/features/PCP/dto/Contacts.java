@@ -149,6 +149,29 @@ public class Contacts {
     }
 
     /**
+     * Creates a {@code Contacts} instance with the specified name.
+     *
+     * @param name the contact's display name
+     * @since 0.4
+     */
+    public Contacts(String name) {
+        this.setName(name);
+    }
+
+    /**
+     * Creates a {@code Contacts} instance with the specified ID and name.
+     *
+     * @param Id   the technical identifier used by the database
+     * @param name the contact's display name
+     *
+     * @since 0.4
+     */
+    public Contacts(Long Id, String name) {
+        this(name);
+        this.setId(Id);
+    }
+
+    /**
      * Creates a {@code Contacts} instance with the most common
      * contact information.
      *
