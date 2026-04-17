@@ -7,12 +7,11 @@ import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
+import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Service responsible for loading accounting journal data from JSON sources.
@@ -25,6 +24,7 @@ import java.util.List;
  * @since 0.4.0
  * @version 1.0.0
  */
+@Component
 public class JournalLoader {
 
 	/**

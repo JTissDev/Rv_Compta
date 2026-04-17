@@ -1,0 +1,148 @@
+
+--- PROJECT STRUCTURE: RV_COMPTA ---
+.
+ |arbo.sh
+ |CHANGELOG.md
+ |data
+ |-- |Banque DATA 260414 .xlsx
+ |-- |compta.json
+ |-- |comptaCleaner.sh
+ |-- |dataConvertor
+ |-- | |compta_converter.sh
+ |-- | |converter.js
+ |-- | |sources
+ |-- | | |~$Banque DATA 260414 .xlsx
+ |-- |Details.json
+ |-- |PCG.json
+ |-- |Tiers.json
+ |docs
+ |-- |Bdd.md
+ |-- |SrcPdf.pdf
+ |IAHelper.md
+ |pom.xml
+ |README.md
+ |report_tree.txt
+ |src
+ |-- |main
+ |-- | |java
+ |-- | | |com
+ |-- | | | |jtissdev_API
+ |-- | | | | |App.java
+ |-- | | | | |core
+ |-- | | | | | |config
+ |-- | | | | | |exception
+ |-- | | | | | |util
+ |-- | | | | | | |ExcelReader.java
+ |-- | | | | |engine
+ |-- | | | | | |DbUpdater
+ |-- | | | | | | |DbUpdater.java
+ |-- | | | | | | |package-info.java
+ |-- | | | | | |loader
+ |-- | | | | | | |DetailsDataLoader.java
+ |-- | | | | | | |JournalLoader.java
+ |-- | | | | | | |package-info.java
+ |-- | | | | | | |PcgDataLoader.java
+ |-- | | | | | | |ReferentialDataLoader.java
+ |-- | | | | | | |TiersDataLoader.java
+ |-- | | | | | |worker
+ |-- | | | | | | |CommandLineWorker.java
+ |-- | | | | | | |package-info.java
+ |-- | | | | |features
+ |-- | | | | | |compta
+ |-- | | | | | | |controller
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | | |dto
+ |-- | | | | | | | |JournalDTO.java
+ |-- | | | | | | | |MovementDTO.java
+ |-- | | | | | | | |OperationDTO.java
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | | |entity
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | | |repository
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | | |service
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | |core
+ |-- | | | | | | |dto
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | | | |PcgCoreDTO.java
+ |-- | | | | | | | |PcpCoreDTO.java
+ |-- | | | | | | | |referential
+ |-- | | | | | | | | |OperationStatus.java
+ |-- | | | | | | | | |package-info.java
+ |-- | | | | | | | | |PaymentMethod.java
+ |-- | | | | | | | |ReferentialCoreDTO.java
+ |-- | | | | | |PCG
+ |-- | | | | | | |controller
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | | |dto
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | | | |Sub_Type_Comptable.java
+ |-- | | | | | | | |Type_Comptable.java
+ |-- | | | | | | | |Type_Comptable_Details.java
+ |-- | | | | | | |entity
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | | |repository
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | | |service
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | |PCP
+ |-- | | | | | | |controller
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | | |dto
+ |-- | | | | | | | |Contacts.java
+ |-- | | | | | | | |Details_Comptable.java
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | | | |Tiers.java
+ |-- | | | | | | |entity
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | | |repository
+ |-- | | | | | | | |package-info.java
+ |-- | | | | | | |service
+ |-- | | | | | | | |package-info.java
+ |-- | |resources
+ |-- | | |data
+ |-- | | | |OperationStatuts.json
+ |-- | | | |PaymentMethod.json
+ |-- | | | |PCG.json
+ |-- |test
+ |-- | |java
+ |-- | | |com
+ |-- | | | |jtissdev_API
+ |-- | | | | |AppTest.java
+ |-- | | | | |core
+ |-- | | | | | |dto
+ |-- | | | | |engine
+ |-- | | | | | |DbUpdater
+ |-- | | | | | |loader
+ |-- | | | | | | |DetailsDataLoaderTest.java
+ |-- | | | | | | |JournalLoaderTest.java
+ |-- | | | | | | |PcgDataLoaderTest.java
+ |-- | | | | | | |ReferentialDataLoaderTest.java
+ |-- | | | | | | |TiersDataLoaderTest.java
+ |-- | | | | |features
+ |-- | | | | | |compta
+ |-- | | | | | | |controller
+ |-- | | | | | | |dto
+ |-- | | | | | | | |JournalDTOTest.java
+ |-- | | | | | | | |MovementDTOTest.java
+ |-- | | | | | | | |OperationDTOTest.java
+ |-- | | | | | |core
+ |-- | | | | | | |dto
+ |-- | | | | | | | |PcgCoreDTOTest.java
+ |-- | | | | | | | |PcpCoreDTOTest.java
+ |-- | | | | | | | |referential
+ |-- | | | | | | | | |OperationStatusTest.java
+ |-- | | | | | | | | |PaymentMethodTest.java
+ |-- | | | | | | | |ReferentialCoreDTOTest.java
+ |-- | | | | | |PCG
+ |-- | | | | | | |dto
+ |-- | | | | | | | |Sub_Type_Comptable_Test.java
+ |-- | | | | | | | |Type_Comptable_Details_Test.java
+ |-- | | | | | | | |Type_Comptable_Test.java
+ |-- | | | | | |PCP
+ |-- | | | | | | |dto
+ |-- | | | | | | | |Details_ComptableTest.java
+ |-- | | | | | | | |TiersTest.java
+ |TODO.md
+------------------------------------

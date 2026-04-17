@@ -39,6 +39,20 @@ public class MovementDTO {
 	private String paiementCode;
 
 	/**
+	 * Represents the general accounting code associated with a movement.
+	 * Used to categorize the financial transaction for bookkeeping purposes.
+	 * @since 0.4
+	 */
+	private String accountingCode;
+
+	/**
+	 * Represents an optional complementary accounting code associated with a movement.
+	 * This field may be used to specify additional accounting details beyond the primary code.
+	 * @since 0.4
+	 */
+	private String complementaryAccountingCode;
+
+	/**
 	 * Technical code linking to the specific accounting detail in the PCP.
 	 * References 'tab_detail_comptable'.
 	 * @since 0.3.0
@@ -93,8 +107,8 @@ public class MovementDTO {
 	public MovementDTO(Long tiersId, String paiementCode, String codeDetailsComptable,
 	                   BigDecimal montantDebit, BigDecimal montantCredit, String description) {
 		this();
-		this.tiersId = tiersId;
-		this.paiementCode = paiementCode;
+		this.setTiersId( tiersId );
+		this.setPaiementCode(paiementCode) ;
 		this.codeDetailsComptable = codeDetailsComptable;
 		this.montantDebit = montantDebit;
 		this.montantCredit = montantCredit;
@@ -264,5 +278,17 @@ public class MovementDTO {
 	public MovementDTO setDescription(String description) {
 		this.description = description;
 		return this;
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("MovementDTO [id=").append(id)
+				.append(", tiersId=").append(tiersId)
+				.append(", paiementCode=").append(paiementCode)
+				.append(", codeDetailsComptable=").append(codeDetailsComptable)
+				.append(", montantDebit=").append(montantDebit)
+				.append(", montantCredit=").append(montantCredit)
+				.append(", description=").append(description).append("]");
+		return sb.toString();
 	}
 }

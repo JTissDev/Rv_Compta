@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author J.Tiss
  * @since 0.3.0
- * @version 1.1.0
+ * @version 1.2.0
  */
 public class OperationDTO {
 
@@ -312,5 +312,31 @@ public class OperationDTO {
 			this.movements.add(movement);
 		}
 		return this;
+	}
+
+	/**
+	 * Returns a string representation of the OperationDTO object.
+	 * The representation includes the operation's ID, dates, label, document reference, description, status code,
+	 * and a detailed list of associated movements.
+	 *
+	 * @return a formatted string representing the current state of the OperationDTO instance.
+	 *
+	 * @since 0.4
+	 */
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Operation [id=").append(id).
+				append(", dateOperation = ").append(dateOperation)
+				.append(", dateComptable = ").append(dateComptable)
+				.append(", libelle = '").append(libelle).append('\'').
+				append(", referenceDocument = '").append(referenceDocument).append('\'')
+				.append(", descriptif = '").append(descriptif).append('\'').
+				append(", statutCode = '").append(statutCode).append('\'')
+				.append(", movements : ").append("\n");
+		for (MovementDTO movement : movements) {
+			sb.append(movement.toString()).append("\n");
+		}
+		return sb.toString();
 	}
 }

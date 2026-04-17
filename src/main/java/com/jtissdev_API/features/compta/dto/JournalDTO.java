@@ -1,5 +1,7 @@
 package com.jtissdev_API.features.compta.dto;
 
+import jakarta.json.JsonObject;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
  *
  * @author J.Tiss
  * @since 0.3.0
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class JournalDTO {
 
@@ -246,4 +248,30 @@ public class JournalDTO {
 		}
 		return this;
 	}
+
+	/**
+	 * Returns a string representation of the current {@code JournalDTO} instance.
+	 * The string includes detailed information about the journal such as its ID, name,
+	 * period start and end dates, type code, and associated operations.
+	 *
+	 * @return a string representation of this {@code JournalDTO} instance.
+	 *
+	 * @since 0.4
+	 */
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Journal DTO :\n");
+			sb.append("ID : ").append(this.id).append("\n");
+			sb.append("Nom : ").append(this.nom).append("\n");
+			sb.append("Date debut : ").append(this.dateDebut).append("\n");
+			sb.append("Date fin : ").append(this.dateFin).append("\n");
+			sb.append("Type journal : ").append(this.typeJournalCode).append("\n");
+			sb.append("Operations : ").append("\n");
+			for(OperationDTO op : this.operations) {
+				sb.append("Operation : ").append(op.toString()).append("\n");
+			}
+
+		return sb.toString();
+	}
+
 }
