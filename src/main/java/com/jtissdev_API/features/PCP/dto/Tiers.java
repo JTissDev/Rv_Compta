@@ -14,7 +14,7 @@ import jakarta.json.JsonObjectBuilder;
  *
  * @author J.Tiss
  * @version 1.0.2
- * @since v1.0
+ * @since v0.1
  */
 public class Tiers {
 
@@ -23,22 +23,22 @@ public class Tiers {
 	// =========================================================
 
 	/** * Technical unique identifier.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	private Long id;
 
 	/** * Legal name or display name of the third party.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	private String name;
 
 	/** * Category of the third party (e.g., VENDOR, EMPLOYER, FRIEND).
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	private String thirdPartyType;
 
 	/** * Additional notes or information.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	private String description;
 
@@ -48,9 +48,19 @@ public class Tiers {
 
 	/**
 	 * Default constructor.
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
 	public Tiers() {
+	}
+
+	/**
+	 * Constructs a new {@code Tiers} instance with the specified name.
+	 *
+	 * @param name the display name of the third party
+	 * @since 0.4
+	 */
+	public Tiers(String name) {
+		this.setName(name);
 	}
 
 	/**
@@ -63,23 +73,65 @@ public class Tiers {
 	 * @since 1.0.2
 	 */
 	public Tiers(String name, String thirdPartyType) {
-		this.setName(name);
+		this(name);
 		this.setThirdPartyType(thirdPartyType);
 	}
 
 	/**
-	 * Complete constructor for quick initialization.
-	 * Uses setters to ensure data integrity and security logic.
+	 * Constructs a new {@code Tiers} instance with the specified name, third party type, and description.
+	 * This constructor builds upon another functional constructor and uses setters to ensure data integrity.
 	 *
-	 * @param id Technical identifier
-	 * @param name Name of the entity
-	 * @param thirdPartyType Category of the entity
-	 * @since 1.0.0
+	 * @param name the name of the entity
+	 * @param thirdPartyType the category or type of the third party
+	 * @param description additional descriptive information about the third party
+	 * @since 0.4
+	 */
+	public Tiers(String name, String thirdPartyType, String description) {
+		this(name, thirdPartyType);
+		 this.setDescription(description);
+	}
+
+	/**
+	 * Constructs a new {@code Tiers} instance with the specified ID and name.
+	 * Uses setters to assign the ID and name properties.
+	 *
+	 * @param Id the unique technical identifier of the entity
+	 * @param name the display name of the third party
+	 * @since 0.4
+	 */
+	public Tiers(Long Id, String name){
+		this.setName(name);
+		this.setId(Id);
+	}
+
+	/**
+	 * Constructs a new {@code Tiers} instance with the specified ID, name, and third party type.
+	 * This constructor builds upon another functional constructor and uses a setter to assign the ID.
+	 *
+	 * @param id the unique technical identifier of the entity
+	 * @param name the name of the entity
+	 * @param thirdPartyType the category or type of the third party
+	 * @since 0.1
+	 * @version 1.1
 	 */
 	public Tiers(Long id, String name, String thirdPartyType) {
+		this(name, thirdPartyType);
 		this.setId(id);
-		this.setName(name);
-		this.setThirdPartyType(thirdPartyType);
+	}
+
+	/**
+	 * Constructs a new {@code Tiers} instance with the specified ID, name, third party type, and description.
+	 * This constructor builds upon another functional constructor and uses setters to assign properties, ensuring data integrity.
+	 *
+	 * @param id the unique technical identifier of the entity
+	 * @param name the name of the entity
+	 * @param thirdPartyType the category or type of the third party
+	 * @param description additional descriptive information about the third party
+	 * @since 0.4
+	 */
+	public Tiers(Long id, String name, String thirdPartyType, String description) {
+		this(id, name, thirdPartyType);
+		 this.setDescription(description);
 	}
 
 	// =========================================================
@@ -172,12 +224,46 @@ public class Tiers {
 		return builder.build();
 	}
 
+
+	/**
+	 * Creates a {@code Tiers} object from a JSON object by mapping its properties.
+	 *
+	 * @param json the JSON object containing the data to populate the {@code Tiers} object
+	 * @return an instance of {@code Tiers} populated with data from the provided JSON object
+	 *
+	 * @since 0.4
+	 */
+	public static Tiers fromJson(JsonObject json) {
+		Tiers tier = new Tiers();
+
+		if (json.containsKey("Id")) {
+			tier.setId(json.getJsonNumber("id").longValue());
+		}
+		if (json.containsKey("Name")) {
+			tier.setName(json.getString("name"));
+		}
+		if (json.containsKey("ThirdPartyType")) {
+			tier.setThirdPartyType(json.getString("thirdPartyType"));
+		}
+		if (json.containsKey("Description")) {
+			tier.setDescription(json.getString("description"));
+		}
+
+		return tier;
+	}
+
 	/** * Provides a summary of the Third Party for logging and debugging.
 	 * @return a formatted string.
-	 * @since 1.0.0
+	 * @since 0.4
+	 * @version 1.1
 	 */
 	@Override
 	public String toString() {
-		return String.format("[%d] %s (%s)", id, name, thirdPartyType);
+		StringBuilder builder = new StringBuilder();
+		builder.append("Tiers [id=").append(id)
+				.append(", name=").append(name)
+				.append(", thirdPartyType=").append(thirdPartyType)
+				.append(", description=").append(description).append("]");
+		return builder.toString();
 	}
 }
