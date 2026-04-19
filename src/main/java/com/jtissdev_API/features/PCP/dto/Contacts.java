@@ -27,8 +27,8 @@ import jakarta.json.JsonObjectBuilder;
  * All fields are optional; callers can choose which attributes to set.
  *
  * @author jtiss
- * @since 1.1.0
- * @version 1.0.0
+ * @since 0.3
+ * @version 1.2.0
  */
 public class Contacts {
 
@@ -41,7 +41,7 @@ public class Contacts {
      * <p>
      * This field is not serialized in the JSON representation.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private Long id;
 
@@ -51,14 +51,14 @@ public class Contacts {
      * This can be a person name (e.g. "Jane Doe") or an entity name
      * (e.g. "ACME Corp. - Sales Department").
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String name;
 
     /**
      * Primary email address of the contact.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String email;
 
@@ -68,21 +68,21 @@ public class Contacts {
      * It is recommended to store the number in international
      * format when possible (e.g. {@code +1 555 123 4567}).
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String phone;
 
     /**
      * Optional mobile (cell) phone number of the contact.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String mobile;
 
     /**
      * Optional company or organization name the contact belongs to.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String company;
 
@@ -91,35 +91,35 @@ public class Contacts {
      * <p>
      * For example: {@code "Accountant"}, {@code "Sales Manager"}, etc.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String role;
 
     /**
      * Optional street address line of the contact.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String address;
 
     /**
      * Optional ZIP or postal code of the contact.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String zipCode;
 
     /**
      * Optional city name for the contact's address.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String city;
 
     /**
      * Optional country name or ISO country code for the contact.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String country;
 
@@ -129,7 +129,7 @@ public class Contacts {
      * This field can be used to store any additional information that
      * does not fit other structured fields.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String notes;
 
@@ -142,10 +142,25 @@ public class Contacts {
      * <p>
      * All fields are initialized to {@code null}.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public Contacts() {
         // Default constructor
+    }
+
+    /**
+     * Constructs a new {@code Contacts} instance using the provided {@code JsonObject}.
+     * <p>
+     * This constructor initializes an empty {@code Contacts} instance and populates
+     * its fields from the given JSON object using the {@code fromJson} method.
+     *
+     * @param json the JSON object containing the contact data; must not be {@code null}
+     *
+     * @since 0.4
+     */
+    public Contacts( JsonObject json ) {
+        this();
+        this.fromJson( json );
     }
 
     /**
@@ -181,7 +196,7 @@ public class Contacts {
      * @param phone   primary phone number
      * @param company company or organization name
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public Contacts(Long id,
                     String name,
@@ -211,7 +226,7 @@ public class Contacts {
      * @param country  country name or ISO code
      * @param notes    free-text notes
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public Contacts(Long id,
                     String name,
@@ -248,7 +263,7 @@ public class Contacts {
      *
      * @return the technical identifier, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public Long getId() {
         return id;
@@ -259,7 +274,7 @@ public class Contacts {
      *
      * @param id new technical identifier
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public void setId(Long id) {
         this.id = id;
@@ -270,7 +285,7 @@ public class Contacts {
      *
      * @return the display name, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getName() {
         return name;
@@ -281,7 +296,7 @@ public class Contacts {
      *
      * @param name new display name
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public void setName(String name) {
         this.name = name;
@@ -292,7 +307,7 @@ public class Contacts {
      *
      * @return the email address, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getEmail() {
         return email;
@@ -303,7 +318,7 @@ public class Contacts {
      *
      * @param email new email address
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public void setEmail(String email) {
         this.email = email;
@@ -314,7 +329,7 @@ public class Contacts {
      *
      * @return the phone number, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getPhone() {
         return phone;
@@ -325,7 +340,7 @@ public class Contacts {
      *
      * @param phone new phone number
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public void setPhone(String phone) {
         this.phone = phone;
@@ -336,7 +351,7 @@ public class Contacts {
      *
      * @return the mobile phone number, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getMobile() {
         return mobile;
@@ -347,7 +362,7 @@ public class Contacts {
      *
      * @param mobile new mobile phone number
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public void setMobile(String mobile) {
         this.mobile = mobile;
@@ -358,7 +373,7 @@ public class Contacts {
      *
      * @return the company name, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getCompany() {
         return company;
@@ -369,7 +384,7 @@ public class Contacts {
      *
      * @param company new company name
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public void setCompany(String company) {
         this.company = company;
@@ -380,7 +395,7 @@ public class Contacts {
      *
      * @return the role, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getRole() {
         return role;
@@ -391,7 +406,7 @@ public class Contacts {
      *
      * @param role new role or job title
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public void setRole(String role) {
         this.role = role;
@@ -402,7 +417,7 @@ public class Contacts {
      *
      * @return the street address, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getAddress() {
         return address;
@@ -413,7 +428,7 @@ public class Contacts {
      *
      * @param address new street address
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public void setAddress(String address) {
         this.address = address;
@@ -424,7 +439,7 @@ public class Contacts {
      *
      * @return the ZIP/postal code, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getZipCode() {
         return zipCode;
@@ -435,7 +450,7 @@ public class Contacts {
      *
      * @param zipCode new ZIP/postal code
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
@@ -446,7 +461,7 @@ public class Contacts {
      *
      * @return the city name, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getCity() {
         return city;
@@ -457,7 +472,7 @@ public class Contacts {
      *
      * @param city new city name
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public void setCity(String city) {
         this.city = city;
@@ -468,7 +483,7 @@ public class Contacts {
      *
      * @return the country name or code, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getCountry() {
         return country;
@@ -479,7 +494,7 @@ public class Contacts {
      *
      * @param country new country name or code
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public void setCountry(String country) {
         this.country = country;
@@ -490,7 +505,7 @@ public class Contacts {
      *
      * @return the notes, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getNotes() {
         return notes;
@@ -501,7 +516,7 @@ public class Contacts {
      *
      * @param notes new notes
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public void setNotes(String notes) {
         this.notes = notes;
@@ -519,7 +534,7 @@ public class Contacts {
      *
      * @return a {@link JsonObject} representing this instance
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public JsonObject toJson() {
         JsonObjectBuilder builder = Json.createObjectBuilder();
@@ -571,7 +586,7 @@ public class Contacts {
      * @param json the JSON object to convert; must not be {@code null}
      * @return a new {@code Contacts} instance populated from the JSON object
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public static Contacts fromJson(JsonObject json) {
         Contacts contact = new Contacts();
@@ -623,7 +638,7 @@ public class Contacts {
      *
      * @return a string representing this {@code Contacts}
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     @Override
     public String toString() {
