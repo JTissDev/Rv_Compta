@@ -450,15 +450,15 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
 📍 Classe : Details_Comptable.java
 ----------------------------------------------
     -   public Details_Comptable()
-    -   public Details_Comptable(String code, String type, String nom)
-    -   public Details_Comptable(String code, String type, String nom, String description)
+    -   public Details_Comptable(String code, String type, String name)
+    -   public Details_Comptable(String code, String type, String name, String description)
     -   public String getCode()
     -   public String getType()
     -   public String getNom()
     -   public String getDescription()
     -   public void setCode(String code)
     -   public void setType(String type)
-    -   public void setNom(String nom)
+    -   public void setNom(String name)
     -   public void setDescription(String description)
     -   public JsonObject toJson()
     -   public String toString()
@@ -490,13 +490,13 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
 📍 Classe : JournalDTO.java
 ----------------------------------------------
     -   public JournalDTO()
-    -   public JournalDTO(String nom, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode)
-    -   public JournalDTO(Long id, String nom, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode)
-    -   public JournalDTO(Long id, String nom, LocalDate dateDebut, LocalDate dateFin,
+    -   public JournalDTO(String name, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode)
+    -   public JournalDTO(Long id, String name, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode)
+    -   public JournalDTO(Long id, String name, LocalDate dateDebut, LocalDate dateFin,
     -   public Long getId()
     -   public JournalDTO setId(Long id)
     -   public String getNom()
-    -   public JournalDTO setNom(String nom)
+    -   public JournalDTO setNom(String name)
     -   public LocalDate getDateDebut()
     -   public JournalDTO setDateDebut(LocalDate dateDebut)
     -   public LocalDate getDateFin()
@@ -572,22 +572,22 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
 📍 Classe : OperationStatus.java
 ----------------------------------------------
     -   public OperationStatus()
-    -   public OperationStatus(String code, String nom, String color)
+    -   public OperationStatus(String code, String name, String color)
     -   public String getCode()
     -   public OperationStatus setCode(String code)
     -   public String getNom()
-    -   public OperationStatus setNom(String nom)
+    -   public OperationStatus setNom(String name)
     -   public String getColor()
     -   public OperationStatus setColor(String color)
     -   public JsonObject toJson()
 📍 Classe : PaymentMethod.java
 ----------------------------------------------
     -   public PaymentMethod()
-    -   public PaymentMethod(String code, String nom, String description)
+    -   public PaymentMethod(String code, String name, String description)
     -   public String getCode()
     -   public PaymentMethod setCode(String code)
     -   public String getNom()
-    -   public PaymentMethod setNom(String nom)
+    -   public PaymentMethod setNom(String name)
     -   public String getDescription()
     -   public PaymentMethod setDescription(String description)
     -   public JsonObject toJson()

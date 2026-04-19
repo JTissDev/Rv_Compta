@@ -22,9 +22,9 @@
 > ***
 > 
 > **public Contacts()** Constructeur vide \
-> **public Contacts (String name)** Associe un nom au contact \
+> **public Contacts (String name)** Associe un name au contact \
 > ``` this.setName(name)``` \
-> **public Contacts (Long id, String name)** associe un id et un nom au contact 
+> **public Contacts (Long id, String name)** associe un id et un name au contact 
 > ``` 
 > this (name)
 > this.setId(id)
@@ -126,3 +126,7 @@
 > return builder
 > ```
 >
+
+### classe : *Tiers*
+
+> #### Fields

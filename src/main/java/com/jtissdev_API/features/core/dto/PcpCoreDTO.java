@@ -1,6 +1,6 @@
 package com.jtissdev_API.features.core.dto;
 
-import com.jtissdev_API.features.PCP.dto.Details_Comptable;
+import com.jtissdev_API.features.PCP.dto.AnalyticDetail;
 import com.jtissdev_API.features.PCP.dto.Tiers;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
  * Main container for the Personal Accounting Plan (PCP).
  * <p>
  * This DTO centralizes personalized data including Third Parties (Tiers)
- * and Level 4 accounting details (Details_Comptable).
+ * and Level 4 accounting details (AnalyticDetail).
  * </p>
  *
  * @author J.Tiss
@@ -32,7 +32,7 @@ public class PcpCoreDTO {
 	 * List of specific Level 4 accounting objects (Accounts, Vehicles, etc.).
 	 * @since 0.1
 	 */
-	private List<Details_Comptable> details;
+	private List<AnalyticDetail> details;
 
 	// =========================================================
 	// == CONSTRUCTORS                                        ==
@@ -62,10 +62,10 @@ public class PcpCoreDTO {
 
 	/**
 	 * Gets the list of Level 4 accounting details.
-	 * @return the list of {@link Details_Comptable}.
+	 * @return the list of {@link AnalyticDetail}.
 	 * @since 0.1
 	 */
-	public List<Details_Comptable> getDetails() {
+	public List<AnalyticDetail> getDetails() {
 		return details;
 	}
 
@@ -87,7 +87,7 @@ public class PcpCoreDTO {
 	 * @param details the list to assign.
 	 * @since 0.1
 	 */
-	public void setDetails(List<Details_Comptable> details) {
+	public void setDetails(List<AnalyticDetail> details) {
 		this.details = details;
 	}
 }

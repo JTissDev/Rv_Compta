@@ -1,6 +1,6 @@
 package com.jtissdev_API.features.core.dto;
 
-import com.jtissdev_API.features.PCP.dto.Details_Comptable;
+import com.jtissdev_API.features.PCP.dto.AnalyticDetail;
 import com.jtissdev_API.features.PCP.dto.Tiers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -74,7 +74,7 @@ class PcpCoreDTOTest {
 	void details_ShouldWorkCorrectly() {
 		// Given
 		PcpCoreDTO pcpCore = new PcpCoreDTO();
-		Details_Comptable car = new Details_Comptable(".P106", "Vehicule", "Peugeot 106");
+		AnalyticDetail car = new AnalyticDetail(".P106", "Vehicule", "Peugeot 106");
 
 		// When
 		pcpCore.getDetails().add(car);

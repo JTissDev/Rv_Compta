@@ -1,6 +1,6 @@
 package com.jtissdev_API.engine.loader;
 
-import com.jtissdev_API.features.PCP.dto.Details_Comptable;
+import com.jtissdev_API.features.PCP.dto.AnalyticDetail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Unit tests for {@link DetailsDataLoader}.
- * Verifies parsing logic from the filesystem and mapping to Details_Comptable DTO.
+ * Verifies parsing logic from the filesystem and mapping to AnalyticDetail DTO.
  *
  * @author J.Tiss
  * @version 1.0.0
@@ -59,16 +59,16 @@ class DetailsDataLoaderTest {
 		String testFile = "Details.json";
 
 		// When
-		List<Details_Comptable> result = loader.loadDetailsFromJson(testFile);
+		List<AnalyticDetail> result = loader.loadDetailsFromJson(testFile);
 
 		// Then
 		assertThat(result).isNotEmpty();
 
 		// Testing the first element (.229 based on your file)
-		Details_Comptable firstDetail = result.get(0);
+		AnalyticDetail firstDetail = result.get(0);
 		assertThat(firstDetail.getCode()).isEqualTo(".229");
 		assertThat(firstDetail.getType()).isEqualTo("Banque");
-		assertThat(firstDetail.getNom()).isEqualTo("Compte courant .229");
+		assertThat(firstDetail.getName()).isEqualTo("Compte courant .229");
 		assertThat(firstDetail.getDescription()).isEqualTo("Compte joint leslie à supprimer");
 	}
 
@@ -83,11 +83,11 @@ class DetailsDataLoaderTest {
 		String testFile = "Details.json";
 
 		// When
-		List<Details_Comptable> result = loader.loadDetailsFromJson(testFile);
+		List<AnalyticDetail> result = loader.loadDetailsFromJson(testFile);
 
 		// Then
 		// .Chas has an empty description "" in your JSON
-		Details_Comptable emptyDescDetail = result.stream()
+		AnalyticDetail emptyDescDetail = result.stream()
 				                                    .filter(d -> d.getCode().equals(".Chas"))
 				                                    .findFirst()
 				                                    .orElseThrow();

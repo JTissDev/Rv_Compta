@@ -12,10 +12,10 @@ import jakarta.json.JsonObjectBuilder;
  * </p>
  *
  * @author J.Tiss
- * @version 1.0.2
+ * @version 1.0.3
  * @since 0.1
  */
-public class Details_Comptable {
+public class AnalyticDetail {
 
 	// =========================================================
 	// == FIELDS                                              ==
@@ -37,7 +37,7 @@ public class Details_Comptable {
 	 * Display name or label for the specific object.
 	 * @since 0.1
 	 */
-	private String nom;
+	private String name;
 
 	/**
 	 * Additional notes or technical description of the object.
@@ -53,7 +53,7 @@ public class Details_Comptable {
 	 * Default constructor.
 	 * @since 0.1
 	 */
-	public Details_Comptable() {
+	public AnalyticDetail() {
 	}
 
 	/**
@@ -61,13 +61,13 @@ public class Details_Comptable {
 	 *
 	 * @param code Unique code of the detail
 	 * @param type Category of the detail
-	 * @param nom Display name of the detail
+	 * @param name Display name of the detail
 	 * @since 0.1
 	 */
-	public Details_Comptable(String code, String type, String nom) {
+	public AnalyticDetail(String code, String type, String name) {
 		this.setCode(code);
 		this.setType(type);
-		this.setNom(nom);
+		this.setName(name);
 	}
 
 	/**
@@ -75,14 +75,14 @@ public class Details_Comptable {
 	 *
 	 * @param code Unique code of the detail
 	 * @param type Category of the detail
-	 * @param nom Display name of the detail
+	 * @param name Display name of the detail
 	 * @param description Technical description of the object
 	 * @since 0.1
 	 */
-	public Details_Comptable(String code, String type, String nom, String description) {
+	public AnalyticDetail(String code, String type, String name, String description) {
 		this.setCode(code);
 		this.setType(type);
-		this.setNom(nom);
+		this.setName(name);
 		this.setDescription(description);
 	}
 
@@ -113,8 +113,8 @@ public class Details_Comptable {
 	 * @return the name/label.
 	 * @since 0.1
 	 */
-	public String getNom() {
-		return nom;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -150,11 +150,11 @@ public class Details_Comptable {
 
 	/**
 	 * Sets the display name of the detail.
-	 * @param nom the label to assign.
+	 * @param name the label to assign.
 	 * @since 0.1
 	 */
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class Details_Comptable {
 
 		builder.add("code", code != null ? code : "");
 		builder.add("type", type != null ? type : "");
-		builder.add("nom", nom != null ? nom : "");
+		builder.add("name", name != null ? name : "");
 		builder.add("description", description != null ? description : "");
 
 		return builder.build();
@@ -194,6 +194,6 @@ public class Details_Comptable {
 	 */
 	@Override
 	public String toString() {
-		return String.format("[%s] %s (%s)", code, nom, type);
+		return String.format("[%s] %s (%s)", code, name, type);
 	}
 }

@@ -7,30 +7,30 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Unit tests for {@link Details_Comptable}.
+ * Unit tests for {@link AnalyticDetail}.
  * Verifies constructors, accessors grouping, and JSON serialization.
  *
  * @author J.Tiss
  * @version 1.0.0
  * @since 1.0.0
  */
-class Details_ComptableTest {
+class AnalyticDetailTest {
 
 	@Test
 	@DisplayName("Constructors - Should initialize fields correctly using different constructors")
 	void constructors_ShouldInitializeFields() {
 		// Test Default Constructor
-		Details_Comptable empty = new Details_Comptable();
+		AnalyticDetail empty = new AnalyticDetail();
 		assertThat(empty.getCode()).isNull();
 
 		// Test Functional Constructor (1.0.1)
-		Details_Comptable functional = new Details_Comptable(".442", "Banque", "Main Account");
+		AnalyticDetail functional = new AnalyticDetail(".442", "Banque", "Main Account");
 		assertThat(functional.getCode()).isEqualTo(".442");
 		assertThat(functional.getType()).isEqualTo("Banque");
-		assertThat(functional.getNom()).isEqualTo("Main Account");
+		assertThat(functional.getName()).isEqualTo("Main Account");
 
 		// Test Complete Constructor (1.0.2)
-		Details_Comptable complete = new Details_Comptable(".Net", "Streaming", "Netflix", "Monthly sub");
+		AnalyticDetail complete = new AnalyticDetail(".Net", "Streaming", "Netflix", "Monthly sub");
 		assertThat(complete.getCode()).isEqualTo(".Net");
 		assertThat(complete.getDescription()).isEqualTo("Monthly sub");
 	}
@@ -39,7 +39,7 @@ class Details_ComptableTest {
 	@DisplayName("Accessors - Should respect Getters/Setters grouping and data integrity")
 	void accessors_ShouldHandleDataCorrectly() {
 		// Given
-		Details_Comptable detail = new Details_Comptable();
+		AnalyticDetail detail = new AnalyticDetail();
 		String code = ".P106";
 		String type = "Vehicule";
 		String nom = "Peugeot 106";
@@ -48,13 +48,13 @@ class Details_ComptableTest {
 		// When (Testing Setters)
 		detail.setCode(code);
 		detail.setType(type);
-		detail.setNom(nom);
+		detail.setName(nom);
 		detail.setDescription(desc);
 
 		// Then (Testing Getters)
 		assertThat(detail.getCode()).isEqualTo(code);
 		assertThat(detail.getType()).isEqualTo(type);
-		assertThat(detail.getNom()).isEqualTo(nom);
+		assertThat(detail.getName()).isEqualTo(nom);
 		assertThat(detail.getDescription()).isEqualTo(desc);
 	}
 
@@ -62,7 +62,7 @@ class Details_ComptableTest {
 	@DisplayName("Serialization - Should convert object to valid JsonObject")
 	void serialization_ShouldProduceCorrectJson() {
 		// Given
-		Details_Comptable detail = new Details_Comptable(".229", "Banque", "Compte Leslie", "To delete");
+		AnalyticDetail detail = new AnalyticDetail(".229", "Banque", "Compte Leslie", "To delete");
 
 		// When
 		JsonObject json = detail.toJson();
@@ -78,7 +78,7 @@ class Details_ComptableTest {
 	@DisplayName("ToString - Should return formatted string for logging")
 	void toString_ShouldReturnFormattedString() {
 		// Given
-		Details_Comptable detail = new Details_Comptable(".Rou", "Immo", "Bois Rouvres");
+		AnalyticDetail detail = new AnalyticDetail(".Rou", "Immo", "Bois Rouvres");
 
 		// When & Then
 		assertThat(detail.toString()).isEqualTo("[.Rou] Bois Rouvres (Immo)");
