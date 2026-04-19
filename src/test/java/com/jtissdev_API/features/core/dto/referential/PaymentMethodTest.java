@@ -31,7 +31,7 @@ class PaymentMethodTest {
 
 		// Then
 		assertEquals(code, method.getCode());
-		assertEquals(nom, method.getNom());
+		assertEquals(nom, method.getName());
 		assertEquals(desc, method.getDescription());
 	}
 
@@ -42,11 +42,11 @@ class PaymentMethodTest {
 		PaymentMethod method = new PaymentMethod();
 
 		// When
-		method.setCode("CB").setNom("Carte").setDescription("Carte bleue");
+		method.setCode("CB").setName("Carte").setDescription("Carte bleue");
 
 		// Then
 		assertEquals("CB", method.getCode());
-		assertEquals("Carte", method.getNom());
+		assertEquals("Carte", method.getName());
 	}
 
 	@Test

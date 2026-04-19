@@ -36,7 +36,7 @@ class OperationStatusTest {
 
 		// Then
 		assertEquals(code, status.getCode(), "Code should match constructor input");
-		assertEquals(nom, status.getNom(), "Name should match constructor input");
+		assertEquals(nom, status.getName(), "Name should match constructor input");
 		assertEquals(color, status.getColor(), "Color should match constructor input");
 	}
 
@@ -53,12 +53,12 @@ class OperationStatusTest {
 
 		// When
 		status.setCode("REEL")
-				.setNom("Réel")
+				.setName("Réel")
 				.setColor("#2ecc71");
 
 		// Then
 		assertEquals("REEL", status.getCode());
-		assertEquals("Réel", status.getNom());
+		assertEquals("Réel", status.getName());
 		assertEquals("#2ecc71", status.getColor());
 	}
 

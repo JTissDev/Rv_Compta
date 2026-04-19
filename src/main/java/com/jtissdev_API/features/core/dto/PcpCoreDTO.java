@@ -2,6 +2,8 @@ package com.jtissdev_API.features.core.dto;
 
 import com.jtissdev_API.features.PCP.dto.AnalyticDetail;
 import com.jtissdev_API.features.PCP.dto.Tiers;
+import jakarta.json.JsonObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +47,20 @@ public class PcpCoreDTO {
 	public PcpCoreDTO() {
 		this.thirdParties = new ArrayList<>();
 		this.details = new ArrayList<>();
+	}
+
+	public PcpCoreDTO(JsonObject json) {
+		this();
+		if(json.containsKey("thirdParties")) {
+			for(JsonObject obj : json.getJsonArray("thirdParties").getValuesAs(JsonObject.class)) {
+				this.thirdParties.add(new Tiers(obj));
+			}
+		}
+		if(json.containsKey("details")) {
+			for(JsonObject obj : json.getJsonArray("details").getValuesAs(JsonObject.class)) {
+				this.details.add(new AnalyticDetail(obj));
+			}
+		}
 	}
 
 	// =========================================================

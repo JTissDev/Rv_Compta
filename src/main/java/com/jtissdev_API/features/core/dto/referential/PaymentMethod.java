@@ -12,7 +12,7 @@ import jakarta.json.JsonObjectBuilder;
  *
  * @author J.Tiss
  * @since 0.2.0
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class PaymentMethod {
 
@@ -32,7 +32,7 @@ public class PaymentMethod {
 	 *
 	 * @since 0.2.0
 	 */
-	private String nom;
+	private String name;
 
 	/**
 	 * Detailed description of the payment method and its usage.
@@ -54,17 +54,37 @@ public class PaymentMethod {
 	}
 
 	/**
+	 * Constructs a {@code PaymentMethod} instance by initializing its fields using the provided JSON object.
+	 *
+	 * @param json the JSON object containing the payment method data. Keys "code", "name", and "description"
+	 *             are expected to initialize the corresponding fields of the {@code PaymentMethod}.
+	 * @since 0.4
+	 */
+	public PaymentMethod(JsonObject json) {
+		this();
+		 if(json.containsKey("code")) {
+			 this.setCode(json.getString("code"));
+		 }
+		 if(json.containsKey("name")) {
+			 this.setName(json.getString("name"));
+		 }
+		 if(json.containsKey("description")) {
+			 this.setDescription(json.getString("description"));
+		 }
+	}
+
+	/**
 	 * Creates a {@code PaymentMethod} instance with all fields initialized.
 	 *
 	 * @param code        unique technical code
-	 * @param nom         human-readable name
+	 * @param name         human-readable name
 	 * @param description usage description
 	 *
 	 * @since 0.2.0
 	 */
-	public PaymentMethod(String code, String nom, String description) {
+	public PaymentMethod(String code, String name, String description) {
 		this.setCode(code);
-		this.setNom(nom);
+		this.setName(name);
 		this.setDescription(description);
 	}
 
@@ -103,20 +123,20 @@ public class PaymentMethod {
 	 *
 	 * @since 0.2.0
 	 */
-	public String getNom() {
-		return nom;
+	public String getName() {
+		return name;
 	}
 
 	/**
 	 * Sets the human-readable name of the payment method.
 	 *
-	 * @param nom name to set
+	 * @param name name to set
 	 * @return {@code this} instance for fluent chaining
 	 *
 	 * @since 0.2.0
 	 */
-	public PaymentMethod setNom(String nom) {
-		this.nom = nom;
+	public PaymentMethod setName(String name) {
+		this.name = name;
 		return this;
 	}
 
@@ -161,8 +181,8 @@ public class PaymentMethod {
 		if (code != null) {
 			builder.add("code", code);
 		}
-		if (nom != null) {
-			builder.add("nom", nom);
+		if (name != null) {
+			builder.add("name", name);
 		}
 		if (description != null) {
 			builder.add("description", description);

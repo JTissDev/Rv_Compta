@@ -1,6 +1,8 @@
 package com.jtissdev_API.features.core.dto;
 
 import com.jtissdev_API.features.PCG.dto.AccountingType;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,33 @@ public class PcgCoreDTO {
 	 */
 	public PcgCoreDTO() {
 		this.accountingClasses = new ArrayList<>();
+	}
+
+	/**
+	 * Constructs a new PcgCoreDTO object with the specified list of accounting classes.
+	 *
+	 * @param accountingClasses The list of accounting classes to initialize the DTO with.
+	 * @since 0.4
+	 */
+	public PcgCoreDTO(List<AccountingType> accountingClasses) {
+		this();
+		this.setAccountingClasses(accountingClasses);
+	}
+
+	/**
+	 * Constructs a new PcgCoreDTO object by initializing it with the provided JSON array.
+	 * Each element of the JSON array represents an accounting class and is converted into
+	 * an {@link AccountingType} object and added to the PcgCoreDTO instance.
+	 *
+	 * @param jsonArray The JSON array containing accounting class data, where each element
+	 *                  is expected to be a {@link JsonObject}.
+	 * @since 0.4
+	 */
+	public PcgCoreDTO(JsonArray jsonArray) {
+		this();
+		for (JsonObject obj : jsonArray.getValuesAs(JsonObject.class)) {
+			this.addAccountingClass(new AccountingType(obj));
+		}
 	}
 
 	/**
