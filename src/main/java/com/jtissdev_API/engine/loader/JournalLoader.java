@@ -116,9 +116,9 @@ public class JournalLoader {
 				       .setId(json.containsKey("id") ? (long) json.getInt("id") : null)
 				       .setTiersId(json.containsKey("tiersId") ? (long) json.getInt("tiersId") : null)
 				       .setPaiementCode(json.getString("paiementCode", null))
-				       .setCodeDetailsComptable(json.getString("codeDetailsComptable", null))
-				       .setMontantDebit(new BigDecimal(json.getString("montantDebit", "0")))
-				       .setMontantCredit(new BigDecimal(json.getString("montantCredit", "0")))
+				       .setAccountDetailCode(json.getString("codeDetailsComptable", null))
+				       .setDebitAmount(new BigDecimal(json.getString("montantDebit", "0")))
+				       .setCreditAmount(new BigDecimal(json.getString("montantCredit", "0")))
 				       .setDescription(json.getString("description", null));
 	}
 

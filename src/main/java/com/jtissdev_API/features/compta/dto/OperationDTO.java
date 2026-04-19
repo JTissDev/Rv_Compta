@@ -1,5 +1,7 @@
 package com.jtissdev_API.features.compta.dto;
 
+import jakarta.json.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ import java.util.List;
  *
  * @author J.Tiss
  * @since 0.3.0
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class OperationDTO {
 
@@ -89,6 +91,56 @@ public class OperationDTO {
 	 */
 	public OperationDTO() {
 		this.movements = new ArrayList<>();
+	}
+
+	/**
+	 * Constructs an {@code OperationDTO} object by parsing the provided {@code JsonObject}.
+	 * Populates the fields of the object based on the keys and values present in the JSON data.
+	 *
+	 * @param jsonObject the JSON object containing the data to initialize the {@code OperationDTO}.
+	 *                   The following keys may be present in the JSON:
+	 *                   <ul>
+	 *                   <li>"id" (optional): A JSON number representing the technical ID.</li>
+	 *                   <li>"dateOperation" (optional): A string representing the operation date in ISO-8601 format.</li>
+	 *                   <li>"dateComptable" (optional): A string representing the accounting record date in ISO-8601 format.</li>
+	 *                   <li>"libelle" (optional): A string representing the label or short description.</li>
+	 *                   <li>"referenceDocument" (optional): A string with the document reference.</li>
+	 *                   <li>"descriptif" (optional): A detailed string description of the operation.</li>
+	 *                   <li>"statutCode" (optional): A string representing the status code.</li>
+	 *                   <li>"movements" (optional): An array of JSON objects representing movement data, which will be converted into {@code MovementDTO} objects and added to the list
+	 *  of movements.</li>
+	 *                   </ul>
+	 * @since 0.4
+	 */
+	public OperationDTO(JsonObject jsonObject) {
+		this();
+		if (jsonObject.containsKey("id")) {
+			this.id = jsonObject.getJsonNumber("id").longValue();
+		}
+		if (jsonObject.containsKey("dateOperation")) {
+			this.dateOperation = LocalDate.parse(jsonObject.getString("dateOperation"));
+		}
+		if (jsonObject.containsKey("dateComptable")) {
+			this.dateComptable = LocalDate.parse(jsonObject.getString("dateComptable"));
+		}
+		if (jsonObject.containsKey("libelle")) {
+			this.libelle = jsonObject.getString("libelle");
+		}
+		if (jsonObject.containsKey("referenceDocument")) {
+			this.referenceDocument = jsonObject.getString("referenceDocument");
+		}
+		if (jsonObject.containsKey("descriptif")) {
+			this.descriptif = jsonObject.getString("descriptif");
+		}
+		if (jsonObject.containsKey("statutCode")) {
+			this.statutCode = jsonObject.getString("statutCode");
+		}
+		if (jsonObject.containsKey("movements")) {
+			for (JsonObject movement : jsonObject.getJsonArray("movements").getValuesAs(JsonObject.class)) {
+				MovementDTO movementDTO = new MovementDTO(movement);
+					this.movements.add(movementDTO);
+			}
+		}
 	}
 
 	/**
@@ -338,5 +390,47 @@ public class OperationDTO {
 			sb.append(movement.toString()).append("\n");
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * Converts the current instance of {@code OperationDTO} to a JSON representation.
+	 * Constructs a {@code JsonObject} where the fields of the object are serialized into key-value pairs.
+	 * If a field is {@code null}, it is not included in the resulting JSON object.
+	 *
+	 * @return a {@code JsonObject} representation of the {@code OperationDTO} instance, containing serialized key-value pairs
+	 * for non-null fields including the ID, dates, label, document reference, description, status code, and associated movements.
+	 * @since 0.4
+	 */
+	public JsonObject toJson() {
+		JsonObjectBuilder builder = Json.createObjectBuilder();
+		if (id != null) {
+			builder.add("id", id);
+		}
+		if (dateOperation != null) {
+			builder.add("dateOperation", dateOperation.toString());
+		}
+		if (dateComptable != null) {
+			builder.add("dateComptable", dateComptable.toString());
+		}
+		if (libelle != null) {
+			builder.add("libelle", libelle);
+		}
+		if (referenceDocument != null) {
+			builder.add("referenceDocument", referenceDocument);
+		}
+		if (descriptif != null) {
+			builder.add("descriptif", descriptif);
+		}
+		if (statutCode != null) {
+			builder.add("statutCode", statutCode);
+		}
+		if (movements != null) {
+			JsonArrayBuilder movementsBuilder = Json.createArrayBuilder();
+				for (MovementDTO movement : movements) {
+					movementsBuilder.add(movement.toJson());
+				}
+				builder.add("movements", movementsBuilder);
+		}
+		return builder.build();
 	}
 }

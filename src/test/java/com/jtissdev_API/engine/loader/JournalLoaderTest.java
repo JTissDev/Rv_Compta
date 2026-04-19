@@ -1,6 +1,5 @@
 package com.jtissdev_API.engine.loader;
 
-import com.jtissdev_API.engine.loader.JournalLoader;
 import com.jtissdev_API.features.compta.dto.JournalDTO;
 import com.jtissdev_API.features.compta.dto.OperationDTO;
 import org.junit.jupiter.api.BeforeEach;
@@ -74,7 +73,7 @@ class JournalLoaderTest {
 		OperationDTO op = journal.getOperations().get(0);
 		assertEquals("Test Operation", op.getLibelle());
 		assertEquals(1, op.getMovements().size());
-		assertEquals(new BigDecimal("150.00"), op.getMovements().get(0).getMontantDebit());
+		assertEquals(new BigDecimal("150.00"), op.getMovements().get(0).getDebitAmount());
 		assertEquals("CB", op.getMovements().get(0).getPaiementCode());
 	}
 

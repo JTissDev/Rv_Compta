@@ -103,9 +103,9 @@ Cible : Compte Banque (Code 512, Détail .442).
 
 Logique de montant :
 
-Si Débit Excel > 0 alors Ligne1.montantCredit = Débit Excel.
+Si Débit Excel > 0 alors Ligne1.creditAmount = Débit Excel.
 
-Si Crédit Excel > 0 alors Ligne1.montantDebit = Crédit Excel.
+Si Crédit Excel > 0 alors Ligne1.debitAmount = Crédit Excel.
 
 Ajout : L'opération reçoit son premier MovementDTO.
 
@@ -509,9 +509,9 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
 📍 Classe : MovementDTO.java
 ----------------------------------------------
     -   public MovementDTO()
-    -   public MovementDTO(Long tiersId, String paiementCode, String codeDetailsComptable,
-    -   public MovementDTO(Long id, Long tiersId, String paiementCode, String codeDetailsComptable,
-    -   public MovementDTO(Long tiersId, String paiementCode, String codeDetailsComptable)
+    -   public MovementDTO(Long tiersId, String paiementCode, String accountDetailCode,
+    -   public MovementDTO(Long id, Long tiersId, String paiementCode, String accountDetailCode,
+    -   public MovementDTO(Long tiersId, String paiementCode, String accountDetailCode)
     -   public Long getId()
     -   public MovementDTO setId(Long id)
     -   public Long getTiersId()
@@ -519,11 +519,11 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
     -   public String getPaiementCode()
     -   public MovementDTO setPaiementCode(String paiementCode)
     -   public String getCodeDetailsComptable()
-    -   public MovementDTO setCodeDetailsComptable(String codeDetailsComptable)
+    -   public MovementDTO setCodeDetailsComptable(String accountDetailCode)
     -   public BigDecimal getMontantDebit()
-    -   public MovementDTO setMontantDebit(BigDecimal montantDebit)
+    -   public MovementDTO setMontantDebit(BigDecimal debitAmount)
     -   public BigDecimal getMontantCredit()
-    -   public MovementDTO setMontantCredit(BigDecimal montantCredit)
+    -   public MovementDTO setMontantCredit(BigDecimal creditAmount)
     -   public String getDescription()
     -   public MovementDTO setDescription(String description)
 📍 Classe : OperationDTO.java
