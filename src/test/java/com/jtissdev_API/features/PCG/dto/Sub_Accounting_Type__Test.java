@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Unit tests for {@link Sub_Type_Comptable}.
+ * Unit tests for {@link SubAccountingType}.
  * * @author jtiss
  * @since 1.1.0
  */
-public class Sub_Type_Comptable_Test {
+public class Sub_Accounting_Type__Test {
 
 	// =========================================================
 	// == CONSTRUCTOR TESTS                                   ==
@@ -23,11 +23,11 @@ public class Sub_Type_Comptable_Test {
 	@Test
 	@DisplayName("Default constructor - should initialize with nulls and empty list")
 	void defaultConstructor_shouldInitializeDefaults() {
-		Sub_Type_Comptable subType = new Sub_Type_Comptable();
+		SubAccountingType subType = new SubAccountingType();
 
 		assertNull(subType.getId(), "id should be null");
 		assertNull(subType.getName(), "name should be null");
-		assertNull(subType.getCodeComptable(), "codeComptable should be null");
+		assertNull(subType.getAccountingCode(), "codeComptable should be null");
 		assertNotNull(subType.getDetailsList(), "detailsList should be initialized (not null)");
 		assertTrue(subType.getDetailsList().isEmpty(), "detailsList should be empty");
 	}
@@ -39,9 +39,9 @@ public class Sub_Type_Comptable_Test {
 	@Test
 	@DisplayName("getFullCode - should concatenate parent and local code")
 	void getFullCode_shouldConcatenateCorrectly() {
-		Sub_Type_Comptable subType = new Sub_Type_Comptable();
+		SubAccountingType subType = new SubAccountingType();
 		subType.setParentCodeComptable("61");
-		subType.setCodeComptable(3); // Result should be "613"
+		subType.setAccountingCode(3); // Result should be "613"
 
 		assertEquals("613", subType.getFullCode());
 	}
@@ -49,9 +49,9 @@ public class Sub_Type_Comptable_Test {
 	@Test
 	@DisplayName("getFullCode - should return local code if parent is null")
 	void getFullCode_shouldHandleNullParent() {
-		Sub_Type_Comptable subType = new Sub_Type_Comptable();
+		SubAccountingType subType = new SubAccountingType();
 		subType.setParentCodeComptable(null);
-		subType.setCodeComptable(70);
+		subType.setAccountingCode(70);
 
 		assertEquals("70", subType.getFullCode());
 	}
@@ -64,17 +64,17 @@ public class Sub_Type_Comptable_Test {
 	@DisplayName("toJson - should contain all functional fields and nested details")
 	void toJson_shouldExposeExpectedStructure() {
 		// Setup SubType
-		Sub_Type_Comptable subType = new Sub_Type_Comptable();
+		SubAccountingType subType = new SubAccountingType();
 		subType.setName("Services");
-		subType.setCodeComptable(61);
+		subType.setAccountingCode(61);
 		subType.setParentCodeComptable(null);
 
 		// Add a Detail
-		Type_Comptable_Details detail = new Type_Comptable_Details();
+		AccountingTypeDetails detail = new AccountingTypeDetails();
 		detail.setName("Rental");
-		detail.setCodeComptable(3);
+		detail.setAccountingCode(3);
 
-		List<Type_Comptable_Details> details = new ArrayList<>();
+		List<AccountingTypeDetails> details = new ArrayList<>();
 		details.add(detail);
 		subType.setDetailsList(details);
 
@@ -98,7 +98,7 @@ public class Sub_Type_Comptable_Test {
 	@Test
 	@DisplayName("setId - should allow null but enforce Integer limits via int parameter")
 	void setId_shouldWorkWithIntParameter() {
-		Sub_Type_Comptable subType = new Sub_Type_Comptable();
+		SubAccountingType subType = new SubAccountingType();
 
 		// Initial state
 		assertNull(subType.getId());

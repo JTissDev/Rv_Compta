@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Tests unitaires pour {@link Type_Comptable_Details}.
+ * Tests unitaires pour {@link AccountingTypeDetails}.
  */
-class Type_Comptable_Details_Test {
+class AccountingType__Details_Test {
 
     // ================================================================================================================
     // Constructors Tests
@@ -17,11 +17,11 @@ class Type_Comptable_Details_Test {
     @Test
     @DisplayName("Constructeur vide - tous les champs doivent être null")
     void defaultConstructor_shouldInitializeAllFieldsToNull() {
-        Type_Comptable_Details details = new Type_Comptable_Details();
+        AccountingTypeDetails details = new AccountingTypeDetails();
 
         assertEquals(0, details.getId(), "id doit être null");
         assertNull(details.getName(), "name doit être null");
-        assertNull(details.getCodeComptable(), "codeComptable doit être null");
+        assertNull(details.getAccountingCode(), "codeComptable doit être null");
         assertNull(details.getDescription(), "description doit être null");
         assertNull(details.getParentCodeComptable(), "parentCodeComptable doit être null");
     }
@@ -34,12 +34,12 @@ class Type_Comptable_Details_Test {
         Integer code = 101;
         String description = "Compte d'actif";
 
-        Type_Comptable_Details details =
-                new Type_Comptable_Details(id, name, code, description);
+        AccountingTypeDetails details =
+                new AccountingTypeDetails(id, name, code, description);
 
         assertEquals(id, details.getId());
         assertEquals(name, details.getName());
-        assertEquals(code, details.getCodeComptable());
+        assertEquals(code, details.getAccountingCode());
         assertEquals(description, details.getDescription());
         assertNull(details.getParentCodeComptable(), "parentCodeComptable doit être null");
     }
@@ -53,12 +53,12 @@ class Type_Comptable_Details_Test {
         String description = "Compte d'actif circulant";
         String parentCode = "20";
 
-        Type_Comptable_Details details =
-                new Type_Comptable_Details(id, name, code, description, parentCode);
+        AccountingTypeDetails details =
+                new AccountingTypeDetails(id, name, code, description, parentCode);
 
         assertEquals(id, details.getId());
         assertEquals(name, details.getName());
-        assertEquals(code, details.getCodeComptable());
+        assertEquals(code, details.getAccountingCode());
         assertEquals(description, details.getDescription());
         assertEquals(parentCode, details.getParentCodeComptable());
     }
@@ -76,8 +76,8 @@ class Type_Comptable_Details_Test {
         String const_description = "Compte de passif";
         String const_parentCode = "30";
 
-        Type_Comptable_Details details =
-                new Type_Comptable_Details(const_id, const_name, const_code, const_description, const_parentCode);
+        AccountingTypeDetails details =
+                new AccountingTypeDetails(const_id, const_name, const_code, const_description, const_parentCode);
 
         int id = 5 ;
         String name = "Passif";
@@ -88,12 +88,12 @@ class Type_Comptable_Details_Test {
 
         details.setId(id);
         details.setName(name);
-        details.setCodeComptable(code);
+        details.setAccountingCode(code);
         details.setDescription(description);
 
         assertEquals(id, details.getId());
         assertEquals(name, details.getName());
-        assertEquals(code, details.getCodeComptable());
+        assertEquals(code, details.getAccountingCode());
         assertEquals(description, details.getDescription());
         assertEquals(parentCode, details.getParentCodeComptable());
         assertEquals(FullCode,details.getFullCode(),"Code complet est une concatenation de parent + code");
@@ -105,8 +105,8 @@ class Type_Comptable_Details_Test {
     /* @Test
     @DisplayName("getFullCodeComptable - sans parent")
     void getFullCodeComptable_withoutParent_shouldReturnLocalCodeOnly() {
-        Type_Comptable_Details details =
-                new Type_Comptable_Details(1L, "Actif", 101, "Compte d'actif");
+        AccountingTypeDetails details =
+                new AccountingTypeDetails(1L, "Actif", 101, "Compte d'actif");
 
         String fullCode = details.getFullCodeComptable();
 
@@ -116,8 +116,8 @@ class Type_Comptable_Details_Test {
       @Test
     @DisplayName("toJson - doit exposer les champs fonctionnels")
     void toJson_shouldExposeExpectedFields() {
-        Type_Comptable_Details details =
-                new Type_Comptable_Details(11, "Actif", 1, "Compte d'actif", "10");
+        AccountingTypeDetails details =
+                new AccountingTypeDetails(11, "Actif", 1, "Compte d'actif", "10");
 
         JsonObject json = details.toJson();
 System.out.println(json);
@@ -134,16 +134,16 @@ System.out.println(json);
     @DisplayName("fromJson - doit reconstruire l'objet attendu")
     void fromJson_shouldRebuildObjectCorrectly() {
         // Construire un JSON conforme à ce que la méthode attend
-        Type_Comptable_Details source =
-                new Type_Comptable_Details(null, "Actif", 101, "Compte d'actif", "10");
+        AccountingTypeDetails source =
+                new AccountingTypeDetails(null, "Actif", 101, "Compte d'actif", "10");
 
         JsonObject json = source.toJson();
 
-        Type_Comptable_Details rebuilt = Type_Comptable_Details.fromJson(json);
+        AccountingTypeDetails rebuilt = AccountingTypeDetails.fromJson(json);
 
         assertNull(rebuilt.getId(), "id ne devrait pas être renseigné par fromJson (en général)");
         assertEquals("Actif", rebuilt.getName());
-        assertEquals(101, rebuilt.getCodeComptable());
+        assertEquals(101, rebuilt.getAccountCode());
         assertEquals("Compte d'actif", rebuilt.getDescription());
         assertEquals("10", rebuilt.getParentCodeComptable());
     } */

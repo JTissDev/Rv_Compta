@@ -1,6 +1,6 @@
 package com.jtissdev_API.features.core.dto;
 
-import com.jtissdev_API.features.PCG.dto.Type_Comptable;
+import com.jtissdev_API.features.PCG.dto.AccountingType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +38,7 @@ class PcgCoreDTOTest {
 	void shouldAddAccountingClass() {
 		// Given
 		PcgCoreDTO core = new PcgCoreDTO();
-		Type_Comptable mockClass = new Type_Comptable(); // Assuming default constructor exists
+		AccountingType mockClass = new AccountingType(); // Assuming default constructor exists
 
 		// When
 		core.addAccountingClass(mockClass);

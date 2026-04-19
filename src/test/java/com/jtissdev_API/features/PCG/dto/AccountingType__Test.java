@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for {@link Type_Comptable}.
+ * Unit tests for {@link AccountingType}.
  *
  * @author jtiss
  * @since 1.1.0
  */
 
-public class Type_Comptable_Test {
+public class AccountingType__Test {
 // =========================================================
 	// == CONSTRUCTOR TESTS                                   ==
 	// =========================================================
@@ -21,11 +21,11 @@ public class Type_Comptable_Test {
 	@Test
 	@DisplayName("Default constructor - should initialize with nulls and empty sub-types list")
 	void defaultConstructor_shouldInitializeDefaults() {
-		Type_Comptable type = new Type_Comptable();
+		AccountingType type = new AccountingType();
 
 		assertNull(type.getId(), "id should be null");
 		assertNull(type.getName(), "name should be null");
-		assertNull(type.getCodeComptable(), "codeComptable should be null");
+		assertNull(type.getAccountCode(), "codeComptable should be null");
 		assertNotNull(type.getSubTypes(), "subTypes list should be initialized (not null)");
 		assertTrue(type.getSubTypes().isEmpty(), "subTypes list should be empty");
 	}
@@ -37,8 +37,8 @@ public class Type_Comptable_Test {
 	@Test
 	@DisplayName("getFullCodeComptable - should return local code as string (no parent at root)")
 	void getFullCodeComptable_shouldReturnLocalCodeOnly() {
-		Type_Comptable type = new Type_Comptable();
-		type.setCodeComptable(6);
+		AccountingType type = new AccountingType();
+		type.setAccountCode(6);
 
 		assertEquals("6", type.getFullCodeComptable());
 	}
@@ -46,8 +46,8 @@ public class Type_Comptable_Test {
 	@Test
 	@DisplayName("getFullCodeComptable - should return null if codeComptable is null")
 	void getFullCodeComptable_shouldReturnNullIfCodeIsNull() {
-		Type_Comptable type = new Type_Comptable();
-		type.setCodeComptable(null);
+		AccountingType type = new AccountingType();
+		type.setAccountCode(null);
 
 		assertNull(type.getFullCodeComptable());
 	}
@@ -60,20 +60,20 @@ public class Type_Comptable_Test {
 	@DisplayName("toJson - should reflect full deep hierarchy (Type -> SubType -> Details)")
 	void toJson_shouldExposeDeepHierarchy() {
 		// 1. Setup Root Type (Level 1)
-		Type_Comptable type = new Type_Comptable();
+		AccountingType type = new AccountingType();
 		type.setName("Charges");
-		type.setCodeComptable(6);
+		type.setAccountCode(6);
 
 		// 2. Setup SubType (Level 2)
-		Sub_Type_Comptable subType = new Sub_Type_Comptable();
+		SubAccountingType subType = new SubAccountingType();
 		subType.setName("Services Extérieurs");
-		subType.setCodeComptable(1);
+		subType.setAccountingCode(1);
 		subType.setParentCodeComptable(type.getFullCodeComptable()); // "6"
 
 		// 3. Setup Detail (Level 3)
-		Type_Comptable_Details detail = new Type_Comptable_Details();
+		AccountingTypeDetails detail = new AccountingTypeDetails();
 		detail.setName("Sous-traitance");
-		detail.setCodeComptable(1);
+		detail.setAccountingCode(1);
 		detail.setParentCodeComptable(subType.getFullCode()); // "61"
 
 		// Linking
@@ -106,7 +106,7 @@ public class Type_Comptable_Test {
 	@Test
 	@DisplayName("setId - should verify long-to-int safety for database compatibility")
 	void setId_shouldEnforceIntLimits() {
-		Type_Comptable type = new Type_Comptable();
+		AccountingType type = new AccountingType();
 
 		// Testing standard int assignment to Long field
 		type.setId(42L);

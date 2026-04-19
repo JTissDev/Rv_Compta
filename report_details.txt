@@ -89,7 +89,7 @@
     🔹 Champs :
       - private Long id;
       - private String name;
-      - private Integer codeComptable;
+      - private Integer accountCode;
       - private String description;
       - private String parentCodeComptable;
       - private List<Type_Comptable_Details> detailsList;
@@ -106,7 +106,7 @@
       - public List<Type_Comptable_Details> getDetailsList()
       - public void setId(Long id)
       - public void setName(String name)
-      - public void setCodeComptable(Integer codeComptable)
+      - public void setCodeComptable(Integer accountCode)
       - public void setDescription(String description)
       - public void setParentCodeComptable(String parentCodeComptable)
       - public void setDetailsList(List<Type_Comptable_Details> detailsList)
@@ -118,7 +118,7 @@
     🔹 Champs :
       - 	private Long id;
       - 	private String name;
-      - 	private Integer codeComptable;
+      - 	private Integer accountCode;
       - 	private String description;
       - 	private List<Sub_Type_Comptable> subTypes;
     🔸 Fonctions :
@@ -129,7 +129,7 @@
       - 	public String getName()
       - 	public Type_Comptable setName(String name)
       - 	public Integer getCodeComptable()
-      - 	public Type_Comptable setCodeComptable(Integer codeComptable)
+      - 	public Type_Comptable setCodeComptable(Integer accountCode)
       - 	public String getDescription()
       - 	public Type_Comptable setDescription(String description)
       - 	public List<Sub_Type_Comptable> getSubTypes()
@@ -143,7 +143,7 @@
     🔹 Champs :
       - private long id;
       - private String name;
-      - private Integer codeComptable;
+      - private Integer accountCode;
       - private String description;
       - private String parentCodeComptable;
     🔸 Fonctions :
@@ -159,7 +159,7 @@
       - public String getFullCode()
       - public void setId(int id)
       - public void setName(String name)
-      - public void setCodeComptable(Integer codeComptable)
+      - public void setCodeComptable(Integer accountCode)
       - public void setDescription(String description)
       - public JsonObject toJson()
       - public String toString()

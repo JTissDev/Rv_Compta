@@ -1,8 +1,8 @@
 package com.jtissdev_API.engine.loader;
 
-import com.jtissdev_API.features.PCG.dto.Sub_Type_Comptable;
-import com.jtissdev_API.features.PCG.dto.Type_Comptable;
-import com.jtissdev_API.features.PCG.dto.Type_Comptable_Details;
+import com.jtissdev_API.features.PCG.dto.AccountingType;
+import com.jtissdev_API.features.PCG.dto.AccountingTypeDetails;
+import com.jtissdev_API.features.PCG.dto.SubAccountingType;
 import com.jtissdev_API.features.core.dto.PcgCoreDTO;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
@@ -85,9 +85,9 @@ public class PcgDataLoader {
 		for (JsonObject typeJson : json.getValuesAs(JsonObject.class)) {
 			System.out.println("=============================================");
 
-			Type_Comptable typeObj = new Type_Comptable();
+			AccountingType typeObj = new AccountingType();
 			typeObj.setName(typeJson.getString("type", "Unnamed"));
-			typeObj.setCodeComptable(typeJson.getInt("parent_code"));
+			typeObj.setAccountCode(typeJson.getInt("parent_code"));
 			typeObj.setDescription(typeJson.getString("parent_desc", ""));
 
 			// Handling Long ID from JSON
@@ -99,9 +99,9 @@ public class PcgDataLoader {
 			JsonArray subTypesJson = typeJson.getJsonArray("subTypes");
 			for (JsonObject subJson : subTypesJson.getValuesAs(JsonObject.class)) {
 
-				Sub_Type_Comptable subObj = new Sub_Type_Comptable();
+				SubAccountingType subObj = new SubAccountingType();
 				subObj.setName(subJson.getString("name", ""));
-				subObj.setCodeComptable(subJson.getInt("subType_Num"));
+				subObj.setAccountingCode(subJson.getInt("subType_Num"));
 				subObj.setDescription(subJson.getString("subType_desc", ""));
 
 				subObj.setParentCodeComptable(typeObj.getFullCodeComptable());
@@ -113,10 +113,10 @@ public class PcgDataLoader {
 				JsonArray detailsJson = subJson.getJsonArray("details");
 				for (JsonObject detJson : detailsJson.getValuesAs(JsonObject.class)) {
 
-					Type_Comptable_Details detObj = new Type_Comptable_Details();
+					AccountingTypeDetails detObj = new AccountingTypeDetails();
 					detObj.setName(detJson.getString("name", ""));
 					detObj.setDescription(detJson.getString("desc_detail", ""));
-					detObj.setCodeComptable(detJson.getInt("no_detail"));
+					detObj.setAccountingCode(detJson.getInt("no_detail"));
 
 					detObj.setParentCodeComptable(subObj.getFullCode());
 
