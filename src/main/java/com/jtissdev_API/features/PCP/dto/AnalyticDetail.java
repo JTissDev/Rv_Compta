@@ -77,12 +77,10 @@ public class AnalyticDetail {
 	 * @param type Category of the detail
 	 * @param name Display name of the detail
 	 * @param description Technical description of the object
-	 * @since 0.1
+	 * @since 0.2
 	 */
 	public AnalyticDetail(String code, String type, String name, String description) {
-		this.setCode(code);
-		this.setType(type);
-		this.setName(name);
+		this(code, type, name);
 		this.setDescription(description);
 	}
 
@@ -185,6 +183,33 @@ public class AnalyticDetail {
 		builder.add("description", description != null ? description : "");
 
 		return builder.build();
+	}
+
+	/**
+	 * Converts a {@link JsonObject} into an instance of {@code AnalyticDetail}.
+	 * Populates the fields of the object based on the corresponding keys in the JSON object.
+	 *
+	 * @param json the {@code JsonObject} containing the data to initialize the {@code AnalyticDetail}.
+	 *             The keys expected include "Code", "Type", "Name", and "Description".
+	 * @return an instance of {@code AnalyticDetail} populated with the values from the JSON object.
+	 *
+	 * @since 0.4
+	 */
+	public static AnalyticDetail fromJson(JsonObject json) {
+		AnalyticDetail detail = new AnalyticDetail();
+		if (json.containsKey("Code")) {
+			detail.setCode(json.getString("code"));
+		}
+		if (json.containsKey("Type")) {
+			detail.setType(json.getString("type"));
+		}
+		if (json.containsKey("Name")) {
+			detail.setName(json.getString("name"));
+		}
+		if (json.containsKey("Description")) {
+			detail.setDescription(json.getString("description"));
+		}
+		return detail;
 	}
 
 	/**
