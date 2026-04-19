@@ -490,19 +490,19 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
 📍 Classe : JournalDTO.java
 ----------------------------------------------
     -   public JournalDTO()
-    -   public JournalDTO(String name, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode)
-    -   public JournalDTO(Long id, String name, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode)
-    -   public JournalDTO(Long id, String name, LocalDate dateDebut, LocalDate dateFin,
+    -   public JournalDTO(String name, LocalDate startDate, LocalDate endDate, String journalTypeCode)
+    -   public JournalDTO(Long id, String name, LocalDate startDate, LocalDate endDate, String journalTypeCode)
+    -   public JournalDTO(Long id, String name, LocalDate startDate, LocalDate endDate,
     -   public Long getId()
     -   public JournalDTO setId(Long id)
     -   public String getNom()
     -   public JournalDTO setNom(String name)
     -   public LocalDate getDateDebut()
-    -   public JournalDTO setDateDebut(LocalDate dateDebut)
+    -   public JournalDTO setDateDebut(LocalDate startDate)
     -   public LocalDate getDateFin()
-    -   public JournalDTO setDateFin(LocalDate dateFin)
+    -   public JournalDTO setDateFin(LocalDate endDate)
     -   public String getTypeJournalCode()
-    -   public JournalDTO setTypeJournalCode(String typeJournalCode)
+    -   public JournalDTO setTypeJournalCode(String journalTypeCode)
     -   public List<OperationDTO> getOperations()
     -   public JournalDTO setOperations(List<OperationDTO> operations)
     -   public JournalDTO addOperation(OperationDTO operation)

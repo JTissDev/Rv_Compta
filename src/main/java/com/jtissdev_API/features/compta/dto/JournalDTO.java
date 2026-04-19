@@ -1,6 +1,9 @@
 package com.jtissdev_API.features.compta.dto;
 
+import jakarta.json.Json;
+import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
+import jakarta.json.JsonObjectBuilder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,44 +19,50 @@ import java.util.List;
  * </p>
  *
  * @author J.Tiss
+ * @version 1.2.0
  * @since 0.3.0
- * @version 1.1.0
  */
 public class JournalDTO {
 
 	/**
 	 * Unique technical identifier for the journal instance.
+	 *
 	 * @since 0.3.0
 	 */
 	private Long id;
 
 	/**
 	 * Human-readable name or title of the journal (e.g., "General Journal 2024").
+	 *
 	 * @since 0.3.0
 	 */
-	private String nom;
+	private String name;
 
 	/**
 	 * The start date of the period covered by this journal.
+	 *
 	 * @since 0.3.0
 	 */
-	private LocalDate dateDebut;
+	private LocalDate startDate;
 
 	/**
 	 * The end date of the period covered by this journal.
+	 *
 	 * @since 0.3.0
 	 */
-	private LocalDate dateFin;
+	private LocalDate endDate;
 
 	/**
 	 * Technical code representing the type of journal (e.g., 'ACHAT', 'VENTE', 'BANQUE').
+	 *
 	 * @since 0.3.0
 	 */
-	private String typeJournalCode;
+	private String journalTypeCode;
 
 	/**
 	 * List of operations contained within this journal.
 	 * Each operation represents a transaction imported or manually entered.
+	 *
 	 * @since 0.3.0
 	 */
 	private List<OperationDTO> operations;
@@ -65,6 +74,7 @@ public class JournalDTO {
 	/**
 	 * Default constructor.
 	 * Initializes the operations list to an empty {@link ArrayList}.
+	 *
 	 * @since 0.3.0
 	 */
 	public JournalDTO() {
@@ -72,52 +82,99 @@ public class JournalDTO {
 	}
 
 	/**
+	 * Constructs a new {@code JournalDTO} instance by populating its fields
+	 * from the given {@link JsonObject}.
+	 *
+	 * @param json
+	 *        the {@link JsonObject} containing data to initialize this {@code JournalDTO}.
+	 * @since 0.4
+	 */
+	public JournalDTO(JsonObject json) {
+		this();
+		if (json.containsKey("id")) {
+			this.setId(json.getJsonNumber("id").longValue());
+		}
+		if (json.containsKey("name")) {
+			this.setName(json.getString("name"));
+		}
+		if (json.containsKey("startDate")) {
+			this.setStartDate(json.getJsonNumber("startDate").toString().equals("null") ? null : LocalDate.parse(json.getJsonNumber("startDate").toString()));
+		}
+		if (json.containsKey("endDate")) {
+			this.setEndDate(json.getJsonNumber("endDate").toString().equals("null") ? null : LocalDate.parse(json.getJsonNumber("endDate").toString()));
+		}
+		if (json.containsKey("journalTypeCode")) {
+			this.setJournalTypeCode(json.getString("journalTypeCode"));
+		}
+		if (json.containsKey("operations")) {
+			for(JsonObject operation : json.getJsonArray("operations").getValuesAs(JsonObject.class)) {
+				operations.add(new OperationDTO(operation));
+			}
+		}
+	}
+
+	/**
 	 * Constructor for creating a new journal (without ID).
 	 * Useful for the Excel import preparation phase.
 	 *
-	 * @param nom             the journal name
-	 * @param dateDebut       the period start date
-	 * @param dateFin         the period end date
-	 * @param typeJournalCode the technical type code
+	 * @param name
+	 * 		the journal name
+	 * @param startDate
+	 * 		the period start date
+	 * @param endDate
+	 * 		the period end date
+	 * @param journalTypeCode
+	 * 		the technical type code
 	 * @since 0.3.0
 	 */
-	public JournalDTO(String nom, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode) {
+	public JournalDTO(String name, LocalDate startDate, LocalDate endDate, String journalTypeCode) {
 		this();
-		this.nom = nom;
-		this.dateDebut = dateDebut;
-		this.dateFin = dateFin;
-		this.typeJournalCode = typeJournalCode;
+		this.name = name;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.journalTypeCode = journalTypeCode;
 	}
 
 	/**
 	 * Constructor for existing journal updates or persistence.
 	 *
-	 * @param id              the technical ID
-	 * @param nom             the journal name
-	 * @param dateDebut       the period start date
-	 * @param dateFin         the period end date
-	 * @param typeJournalCode the technical type code
+	 * @param id
+	 * 		the technical ID
+	 * @param name
+	 * 		the journal name
+	 * @param startDate
+	 * 		the period start date
+	 * @param endDate
+	 * 		the period end date
+	 * @param journalTypeCode
+	 * 		the technical type code
 	 * @since 0.3.0
 	 */
-	public JournalDTO(Long id, String nom, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode) {
-		this(nom, dateDebut, dateFin, typeJournalCode);
+	public JournalDTO(Long id, String name, LocalDate startDate, LocalDate endDate, String journalTypeCode) {
+		this(name, startDate, endDate, journalTypeCode);
 		this.id = id;
 	}
 
 	/**
 	 * Full constructor for retrieving a journal with all its operations.
 	 *
-	 * @param id              the technical ID
-	 * @param nom             the journal name
-	 * @param dateDebut       the period start date
-	 * @param dateFin         the period end date
-	 * @param typeJournalCode the technical type code
-	 * @param operations      the list of associated operations
+	 * @param id
+	 * 		the technical ID
+	 * @param name
+	 * 		the journal name
+	 * @param startDate
+	 * 		the period start date
+	 * @param endDate
+	 * 		the period end date
+	 * @param journalTypeCode
+	 * 		the technical type code
+	 * @param operations
+	 * 		the list of associated operations
 	 * @since 0.3.0
 	 */
-	public JournalDTO(Long id, String nom, LocalDate dateDebut, LocalDate dateFin,
-	                  String typeJournalCode, List<OperationDTO> operations) {
-		this(id, nom, dateDebut, dateFin, typeJournalCode);
+	public JournalDTO(Long id, String name, LocalDate startDate, LocalDate endDate,
+	                  String journalTypeCode, List<OperationDTO> operations) {
+		this(id, name, startDate, endDate, journalTypeCode);
 		this.setOperations(operations);
 	}
 
@@ -127,6 +184,7 @@ public class JournalDTO {
 
 	/**
 	 * @return the unique technical identifier.
+	 *
 	 * @since 0.3.0
 	 */
 	public Long getId() {
@@ -134,8 +192,10 @@ public class JournalDTO {
 	}
 
 	/**
-	 * @param id the technical ID to set.
+	 * @param id
+	 * 		the technical ID to set.
 	 * @return this {@link JournalDTO} instance for chaining.
+	 *
 	 * @since 0.3.0
 	 */
 	public JournalDTO setId(Long id) {
@@ -145,78 +205,91 @@ public class JournalDTO {
 
 	/**
 	 * @return the name of the journal.
+	 *
 	 * @since 0.3.0
 	 */
-	public String getNom() {
-		return nom;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * @param nom the name to set.
+	 * @param name
+	 * 		the name to set.
 	 * @return this {@link JournalDTO} instance for chaining.
+	 *
 	 * @since 0.3.0
 	 */
-	public JournalDTO setNom(String nom) {
-		this.nom = nom;
+	public JournalDTO setName(String name) {
+		this.name = name;
 		return this;
 	}
 
 	/**
 	 * @return the start date of the journal's period.
+	 *
 	 * @since 0.3.0
 	 */
-	public LocalDate getDateDebut() {
-		return dateDebut;
+	public LocalDate getStartDate() {
+		return startDate;
 	}
 
 	/**
-	 * @param dateDebut the start date to set.
+	 * @param startDate
+	 * 		the start date to set.
 	 * @return this {@link JournalDTO} instance for chaining.
+	 *
 	 * @since 0.3.0
 	 */
-	public JournalDTO setDateDebut(LocalDate dateDebut) {
-		this.dateDebut = dateDebut;
+	public JournalDTO setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
 		return this;
 	}
 
 	/**
 	 * @return the end date of the journal's period.
+	 *
 	 * @since 0.3.0
 	 */
-	public LocalDate getDateFin() {
-		return dateFin;
+	public LocalDate getEndDate() {
+		return endDate;
 	}
 
 	/**
-	 * @param dateFin the end date to set.
+	 * @param endDate
+	 * 		the end date to set.
 	 * @return this {@link JournalDTO} instance for chaining.
+	 *
 	 * @since 0.3.0
 	 */
-	public JournalDTO setDateFin(LocalDate dateFin) {
-		this.dateFin = dateFin;
+	public JournalDTO setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
 		return this;
 	}
 
 	/**
 	 * @return the technical type code of the journal.
+	 *
 	 * @since 0.3.0
 	 */
-	public String getTypeJournalCode() {
-		return typeJournalCode;
+	public String getJournalTypeCode() {
+		return journalTypeCode;
 	}
 
 	/**
-	 * @param typeJournalCode the type code to set.
+	 * @param journalTypeCode
+	 * 		the type code to set.
 	 * @return this {@link JournalDTO} instance for chaining.
+	 *
 	 * @since 0.3.0
 	 */
-	public JournalDTO setTypeJournalCode(String typeJournalCode) {
-		this.typeJournalCode = typeJournalCode;
+	public JournalDTO setJournalTypeCode(String journalTypeCode) {
+		this.journalTypeCode = journalTypeCode;
 		return this;
 	}
 
 	/**
 	 * @return the list of operations within this journal.
+	 *
 	 * @since 0.3.0
 	 */
 	public List<OperationDTO> getOperations() {
@@ -226,8 +299,10 @@ public class JournalDTO {
 	/**
 	 * Sets the list of operations. Initializes an empty list if null is provided.
 	 *
-	 * @param operations the list of {@link OperationDTO} to set.
+	 * @param operations
+	 * 		the list of {@link OperationDTO} to set.
 	 * @return this {@link JournalDTO} instance for chaining.
+	 *
 	 * @since 0.3.0
 	 */
 	public JournalDTO setOperations(List<OperationDTO> operations) {
@@ -238,8 +313,10 @@ public class JournalDTO {
 	/**
 	 * Adds a single operation to the journal.
 	 *
-	 * @param operation the {@link OperationDTO} to add.
+	 * @param operation
+	 * 		the {@link OperationDTO} to add.
 	 * @return this {@link JournalDTO} instance for chaining.
+	 *
 	 * @since 0.3.0
 	 */
 	public JournalDTO addOperation(OperationDTO operation) {
@@ -261,17 +338,53 @@ public class JournalDTO {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Journal DTO :\n");
-			sb.append("ID : ").append(this.id).append("\n");
-			sb.append("Nom : ").append(this.nom).append("\n");
-			sb.append("Date debut : ").append(this.dateDebut).append("\n");
-			sb.append("Date fin : ").append(this.dateFin).append("\n");
-			sb.append("Type journal : ").append(this.typeJournalCode).append("\n");
-			sb.append("Operations : ").append("\n");
-			for(OperationDTO op : this.operations) {
-				sb.append("Operation : ").append(op.toString()).append("\n");
-			}
+		sb.append("ID : ").append(this.id).append("\n");
+		sb.append("Nom : ").append(this.name).append("\n");
+		sb.append("Date debut : ").append(this.startDate).append("\n");
+		sb.append("Date fin : ").append(this.endDate).append("\n");
+		sb.append("Type journal : ").append(this.journalTypeCode).append("\n");
+		sb.append("Operations : ").append("\n");
+		for (OperationDTO op : this.operations) {
+			sb.append("Operation : ").append(op.toString()).append("\n");
+		}
 
 		return sb.toString();
+	}
+
+	/**
+	 * Converts the current {@code JournalDTO} instance into a {@link JsonObject}.
+	 * The resulting JSON object contains key-value pairs representing the fields
+	 * of the journal, including its ID, name, start and end dates, type code,
+	 * and associated operations (if any).
+	 *
+	 * @return a {@link JsonObject} representation of this {@code JournalDTO} instance.
+	 * @since 0.4
+	 */
+	public JsonObject toJson() {
+		JsonObjectBuilder builder = Json.createObjectBuilder();
+		if (this.id != null) {
+			builder.add("id", this.id);
+		}
+		if (this.name != null) {
+			builder.add("name", this.name);
+		}
+		if (this.startDate != null) {
+			builder.add("startDate", this.startDate.toString());
+		}
+		if (this.endDate != null) {
+				builder.add("endDate", this.endDate.toString());
+		}
+		if (this.journalTypeCode != null) {
+			builder.add("journalTypeCode", this.journalTypeCode);
+		}
+		if (this.operations != null) {
+			JsonArrayBuilder operationsBuilder = Json.createArrayBuilder();
+			for (OperationDTO op : this.operations) {
+				operationsBuilder.add(op.toJson());
+			}
+			builder.add("operations", operationsBuilder);
+		}
+		return builder.build();
 	}
 
 }

@@ -49,10 +49,10 @@ class JournalDTOTest {
 		JournalDTO journal = new JournalDTO("Journal de test", start, end, "GEN");
 
 		assertNull(journal.getId());
-		assertEquals("Journal de test", journal.getNom());
-		assertEquals(start, journal.getDateDebut());
-		assertEquals(end, journal.getDateFin());
-		assertEquals("GEN", journal.getTypeJournalCode());
+		assertEquals("Journal de test", journal.getName());
+		assertEquals(start, journal.getStartDate());
+		assertEquals(end, journal.getEndDate());
+		assertEquals("GEN", journal.getJournalTypeCode());
 	}
 
 	/**
@@ -66,7 +66,7 @@ class JournalDTOTest {
 		JournalDTO journal = new JournalDTO(500L, "Journal 2023", LocalDate.MIN, LocalDate.MAX, "OLD");
 
 		assertEquals(500L, journal.getId());
-		assertEquals("OLD", journal.getTypeJournalCode());
+		assertEquals("OLD", journal.getJournalTypeCode());
 		assertTrue(journal.getOperations().isEmpty());
 	}
 
@@ -99,13 +99,13 @@ class JournalDTOTest {
 
 		JournalDTO journal = new JournalDTO()
 				                     .setId(10L)
-				                     .setNom("Fluent Journal")
+				                     .setName("Fluent Journal")
 				                     .addOperation(op1)
 				                     .addOperation(new OperationDTO().setId(101L));
 
 		assertAll("Fluent verification",
 				() -> assertEquals(10L, journal.getId()),
-				() -> assertEquals("Fluent Journal", journal.getNom()),
+				() -> assertEquals("Fluent Journal", journal.getName()),
 				() -> assertEquals(2, journal.getOperations().size()),
 				() -> assertEquals(100L, journal.getOperations().get(0).getId())
 		);

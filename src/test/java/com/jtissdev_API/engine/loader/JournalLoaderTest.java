@@ -67,7 +67,7 @@ class JournalLoaderTest {
 
 		assertNotNull(journal);
 		assertEquals(1L, journal.getId());
-		assertEquals("General Journal 2024", journal.getNom());
+		assertEquals("General Journal 2024", journal.getName());
 		assertEquals(1, journal.getOperations().size());
 
 		OperationDTO op = journal.getOperations().get(0);
@@ -90,7 +90,7 @@ class JournalLoaderTest {
 		JournalDTO journal = journalLoader.loadJournal(is);
 
 		assertNotNull(journal);
-		assertNull(journal.getNom());
+		assertNull(journal.getName());
 		assertTrue(journal.getOperations().isEmpty());
 	}
 
@@ -118,9 +118,9 @@ class JournalLoaderTest {
 		InputStream is = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		JournalDTO journal = journalLoader.loadJournal(is);
 
-		assertNotNull(journal.getDateDebut());
-		assertEquals(2024, journal.getDateDebut().getYear());
-		assertEquals(12, journal.getDateDebut().getMonthValue());
-		assertEquals(31, journal.getDateDebut().getDayOfMonth());
+		assertNotNull(journal.getStartDate());
+		assertEquals(2024, journal.getStartDate().getYear());
+		assertEquals(12, journal.getStartDate().getMonthValue());
+		assertEquals(31, journal.getStartDate().getDayOfMonth());
 	}
 }

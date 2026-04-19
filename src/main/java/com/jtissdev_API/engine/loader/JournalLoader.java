@@ -58,10 +58,10 @@ public class JournalLoader {
 	private JournalDTO mapToJournalDTO(JsonObject json) {
 		JournalDTO journal = new JournalDTO()
 				                     .setId(json.containsKey("id") ? (long) json.getInt("id") : null)
-				                     .setNom(json.getString("nom", null))
-				                     .setDateDebut(parseDate(json.getString("dateDebut", null)))
-				                     .setDateFin(parseDate(json.getString("dateFin", null)))
-				                     .setTypeJournalCode(json.getString("typeJournalCode", null));
+				                     .setName(json.getString("nom", null))
+				                     .setStartDate(parseDate(json.getString("dateDebut", null)))
+				                     .setEndDate(parseDate(json.getString("dateFin", null)))
+				                     .setJournalTypeCode(json.getString("typeJournalCode", null));
 
 		if (json.containsKey("operations")) {
 			JsonArray opsArray = json.getJsonArray("operations");
