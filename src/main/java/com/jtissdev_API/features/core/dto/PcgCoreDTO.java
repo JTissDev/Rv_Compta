@@ -12,7 +12,8 @@ import java.util.List;
  * General Chart of Accounts (PCG).
  * * This class centralizes the accounting hierarchy to be shared across
  * different features of the application.
- * * @author JtissDev
+ * @see AccountingType
+ * @author JtissDev
  * @version 1.1
  * @since 0.1
  */

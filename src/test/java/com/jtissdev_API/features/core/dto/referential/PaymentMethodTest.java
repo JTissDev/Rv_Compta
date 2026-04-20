@@ -50,6 +50,20 @@ class PaymentMethodTest {
 	}
 
 	@Test
+	@DisplayName("Constructor Test with JsonObject as parameter")
+	void testConstructorFromJsonObject() {
+		JsonObject json = jakarta.json.Json.createObjectBuilder()
+				                  .add("code","VIR")
+				                  .add("name","Virement")
+				                  .add("description","Virement SEPA")
+				                  .build();
+		PaymentMethod method = new PaymentMethod(json);
+		assertEquals("VIR", method.getCode());
+		 assertEquals("Virement", method.getName());
+		 assertEquals("Virement SEPA", method.getDescription());
+	}
+
+	@Test
 	@DisplayName("Should convert to valid JsonObject")
 	void testToJson() {
 		// Given
@@ -61,7 +75,7 @@ class PaymentMethodTest {
 		// Then
 		assertNotNull(json);
 		assertEquals("VIR", json.getString("code"));
-		assertEquals("Virement", json.getString("nom"));
+		assertEquals("Virement", json.getString("name"));
 		assertEquals("Virement SEPA", json.getString("description"));
 	}
 }

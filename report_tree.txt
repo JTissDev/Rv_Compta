@@ -17,10 +17,12 @@
  |-- |Tiers.json
  |docs
  |-- |Bdd.md
+ |-- |PackageAlgo.md
  |-- |SrcPdf.pdf
  |IAHelper.md
  |pom.xml
  |README.md
+ |report_details.txt
  |report_tree.txt
  |src
  |-- |main
@@ -76,10 +78,10 @@
  |-- | | | | | | |controller
  |-- | | | | | | | |package-info.java
  |-- | | | | | | |dto
+ |-- | | | | | | | |AccountingType.java
+ |-- | | | | | | | |AccountingTypeDetails.java
  |-- | | | | | | | |package-info.java
- |-- | | | | | | | |Sub_Type_Comptable.java
- |-- | | | | | | | |Type_Comptable.java
- |-- | | | | | | | |Type_Comptable_Details.java
+ |-- | | | | | | | |SubAccountingType.java
  |-- | | | | | | |entity
  |-- | | | | | | | |package-info.java
  |-- | | | | | | |repository
@@ -90,8 +92,8 @@
  |-- | | | | | | |controller
  |-- | | | | | | | |package-info.java
  |-- | | | | | | |dto
+ |-- | | | | | | | |AnalyticDetail.java
  |-- | | | | | | | |Contacts.java
- |-- | | | | | | | |Details_Comptable.java
  |-- | | | | | | | |package-info.java
  |-- | | | | | | | |Tiers.java
  |-- | | | | | | |entity
@@ -111,7 +113,8 @@
  |-- | | | |jtissdev_API
  |-- | | | | |AppTest.java
  |-- | | | | |core
- |-- | | | | | |dto
+ |-- | | | | | |util
+ |-- | | | | | | |ExcelReaderTest.java
  |-- | | | | |engine
  |-- | | | | | |DbUpdater
  |-- | | | | | |loader
@@ -137,12 +140,13 @@
  |-- | | | | | | | |ReferentialCoreDTOTest.java
  |-- | | | | | |PCG
  |-- | | | | | | |dto
- |-- | | | | | | | |Sub_Type_Comptable_Test.java
- |-- | | | | | | | |Type_Comptable_Details_Test.java
- |-- | | | | | | | |Type_Comptable_Test.java
+ |-- | | | | | | | |AccountingType__Details_Test.java
+ |-- | | | | | | | |AccountingType__Test.java
+ |-- | | | | | | | |Sub_Accounting_Type__Test.java
  |-- | | | | | |PCP
  |-- | | | | | | |dto
- |-- | | | | | | | |Details_ComptableTest.java
+ |-- | | | | | | | |AnalyticDetailTest.java
  |-- | | | | | | | |TiersTest.java
  |TODO.md
+ |validTestFile.xlsx
 ------------------------------------

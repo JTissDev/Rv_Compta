@@ -160,7 +160,39 @@ public class Contacts {
      */
     public Contacts( JsonObject json ) {
         this();
-        this.fromJson( json );
+        if (json.containsKey("name")) {
+            this.setName(json.getString("name", null));
+        }
+        if (json.containsKey("email")) {
+            this.setEmail(json.getString("email", null));
+        }
+        if (json.containsKey("phone")) {
+            this.setPhone(json.getString("phone", null));
+        }
+        if (json.containsKey("mobile")) {
+            this.setMobile(json.getString("mobile", null));
+        }
+        if (json.containsKey("company")) {
+            this.setCompany(json.getString("company", null));
+        }
+        if (json.containsKey("role")) {
+            this.setRole(json.getString("role", null));
+        }
+        if (json.containsKey("address")) {
+            this.setAddress(json.getString("address", null));
+        }
+        if (json.containsKey("zipCode")) {
+            this.setZipCode(json.getString("zipCode", null));
+        }
+        if (json.containsKey("city")) {
+            this.setCity(json.getString("city", null));
+        }
+        if (json.containsKey("country")) {
+            this.setCountry(json.getString("country", null));
+        }
+        if (json.containsKey("notes")) {
+            this.setNotes(json.getString("notes", null));
+        }
     }
 
     /**

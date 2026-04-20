@@ -124,4 +124,34 @@ class JournalDTOTest {
 
 		assertNotNull(journal.getOperations(), "SetOperations(null) should initialize an empty list");
 	}
+
+	/**
+	 * Tests the toJson method.
+	 * Verified: The JSON representation matches the expected structure and values.
+	 *
+	 * @since 0.3.0
+	 */
+	@Test
+	@DisplayName("Should convert to JSON correctly")
+	void shouldConvertToJsonCorrectly() {
+		List<OperationDTO> operations = new ArrayList<>();
+		operations.add(new OperationDTO().setId(100L));
+		operations.add(new OperationDTO().setId(101L));
+
+		JournalDTO journal = new JournalDTO(1L, "Journal Test", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 12, 31),
+				"GEN", operations);
+
+		var json = journal.toJson();
+
+		assertAll("JSON Verification",
+				() -> assertEquals(1L, json.getJsonNumber("id").longValue()),
+				() -> assertEquals("Journal Test", json.getString("name")),
+				() -> assertEquals("2024-01-01", json.getString("startDate")),
+				() -> assertEquals("2024-12-31", json.getString("endDate")),
+				() -> assertEquals("GEN", json.getString("journalTypeCode")),
+				() -> assertEquals(2, json.getJsonArray("operations").size()),
+				() -> assertEquals(100L, json.getJsonArray("operations").getJsonObject(0).getJsonNumber("id").longValue()),
+				() -> assertEquals(101L, json.getJsonArray("operations").getJsonObject(1).getJsonNumber("id").longValue())
+		);
+	}
 }

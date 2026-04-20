@@ -93,7 +93,7 @@ public class PcgDataLoader {
 			// Handling Long ID from JSON
 			if (typeJson.containsKey("id") && !typeJson.isNull("id")) {
 				// Using longValue() or a cast depending on your JSON library version
-				typeObj.setId((long) typeJson.getJsonNumber("id").longValue());
+				typeObj.setId((Integer) typeJson.getJsonNumber("id").intValue());
 			}
 
 			JsonArray subTypesJson = typeJson.getJsonArray("subTypes");

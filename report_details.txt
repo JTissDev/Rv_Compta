@@ -25,7 +25,7 @@
   📍 Classe : DetailsDataLoader.java
     🔹 Champs :
     🔸 Fonctions :
-      - 	public List<Details_Comptable> loadDetailsFromJson(String fileName)
+      - 	public List<AnalyticDetail> loadDetailsFromJson(String fileName)
   --------------------------------------------------------------
   📍 Classe : JournalLoader.java
     🔹 Champs :
@@ -85,85 +85,88 @@
 
 📦 PACKAGE : com.jtissdev_API.features.PCG.dto
 ================================================================
-  📍 Classe : Sub_Type_Comptable.java
+  📍 Classe : AccountingType.java
     🔹 Champs :
-      - private Long id;
-      - private String name;
-      - private Integer accountCode;
-      - private String description;
-      - private String parentCodeComptable;
-      - private List<Type_Comptable_Details> detailsList;
-    🔸 Fonctions :
-      - public Sub_Type_Comptable()
-      - public Sub_Type_Comptable(Long id,
-      - public Sub_Type_Comptable(Long id,
-      - public Long getId()
-      - public String getName()
-      - public Integer getCodeComptable()
-      - public String getDescription()
-      - public String getParentCodeComptable()
-      - public String getFullCode()
-      - public List<Type_Comptable_Details> getDetailsList()
-      - public void setId(Long id)
-      - public void setName(String name)
-      - public void setCodeComptable(Integer accountCode)
-      - public void setDescription(String description)
-      - public void setParentCodeComptable(String parentCodeComptable)
-      - public void setDetailsList(List<Type_Comptable_Details> detailsList)
-      - public void addDetails(Type_Comptable_Details details)
-      - public JsonObject toJson()
-      - public String toString()
-  --------------------------------------------------------------
-  📍 Classe : Type_Comptable.java
-    🔹 Champs :
-      - 	private Long id;
+      - 	private Integer id;
       - 	private String name;
       - 	private Integer accountCode;
       - 	private String description;
-      - 	private List<Sub_Type_Comptable> subTypes;
+      - 	private List<SubAccountingType> subTypes;
     🔸 Fonctions :
-      - 	public Type_Comptable()
-      - 	public Type_Comptable(Long id,
-      - 	public Long getId()
-      - 	public Type_Comptable setId(Long id)
+      - 	public AccountingType()
+      - 	public AccountingType(JsonObject json)
+      - 	public AccountingType(Integer id,
+      - 	public Integer getId()
+      - 	public AccountingType setId(Integer id)
       - 	public String getName()
-      - 	public Type_Comptable setName(String name)
-      - 	public Integer getCodeComptable()
-      - 	public Type_Comptable setCodeComptable(Integer accountCode)
+      - 	public AccountingType setName(String name)
+      - 	public Integer getAccountCode()
+      - 	public AccountingType setAccountCode(Integer accountCode)
       - 	public String getDescription()
-      - 	public Type_Comptable setDescription(String description)
-      - 	public List<Sub_Type_Comptable> getSubTypes()
-      - 	public Type_Comptable setSubTypes(List<Sub_Type_Comptable> subTypes)
-      - 	public Type_Comptable addSubType(Sub_Type_Comptable subType)
+      - 	public AccountingType setDescription(String description)
+      - 	public List<SubAccountingType> getSubTypes()
+      - 	public AccountingType setSubTypes(List<SubAccountingType> subTypes)
+      - 	public AccountingType addSubType(SubAccountingType subType)
       - 	public String getFullCodeComptable()
       - 	public JsonObject toJson()
       - 	public String toString()
   --------------------------------------------------------------
-  📍 Classe : Type_Comptable_Details.java
+  📍 Classe : AccountingTypeDetails.java
     🔹 Champs :
-      - private long id;
-      - private String name;
-      - private Integer accountCode;
-      - private String description;
-      - private String parentCodeComptable;
+      - 	private Integer id;
+      - 	private String name;
+      - 	private Integer accountingCode;
+      - 	private String description;
+      - 	private String parentCodeComptable;
     🔸 Fonctions :
-      - public Type_Comptable_Details()
-      - public Type_Comptable_Details(int id,
-      - public Type_Comptable_Details(int id,
-      - public Type_Comptable_Details(String name,
-      - public long getId()
-      - public String getName()
-      - public Integer getCodeComptable()
-      - public String getDescription()
-      - public String getParentCodeComptable()
-      - public String getFullCode()
-      - public void setId(int id)
-      - public void setName(String name)
-      - public void setCodeComptable(Integer accountCode)
-      - public void setDescription(String description)
-      - public JsonObject toJson()
-      - public String toString()
-      - public void setParentCodeComptable(String fullCode)
+      - 	public AccountingTypeDetails()
+      - 	public AccountingTypeDetails(JsonObject json)
+      - 	public AccountingTypeDetails(int id,
+      - 	public AccountingTypeDetails(int id,
+      - 	public AccountingTypeDetails(String name,
+      - 	public Integer getId()
+      - 	public void setId(Integer id)
+      - 	public String getName()
+      - 	public void setName(String name)
+      - 	public Integer getAccountingCode()
+      - 	public void setAccountingCode(Integer accountingCode)
+      - 	public String getDescription()
+      - 	public void setDescription(String description)
+      - 	public String getParentCodeComptable()
+      - 	public void setParentCodeComptable(String fullCode)
+      - 	public String getFullCode()
+      - 	public JsonObject toJson()
+      - 	public String toString()
+  --------------------------------------------------------------
+  📍 Classe : SubAccountingType.java
+    🔹 Champs :
+      - 	private Long id;
+      - 	private String name;
+      - 	private Integer accountingCode;
+      - 	private String description;
+      - 	private String parentCodeComptable;
+      - 	private List<AccountingTypeDetails> detailsList;
+    🔸 Fonctions :
+      - 	public SubAccountingType()
+      - 	public SubAccountingType(JsonObject json)
+      - 	public SubAccountingType(Long id,
+      - 	public SubAccountingType(Long id,
+      - 	public Long getId()
+      - 	public void setId(Long id)
+      - 	public String getName()
+      - 	public void setName(String name)
+      - 	public Integer getAccountingCode()
+      - 	public void setAccountingCode(Integer accountingCode)
+      - 	public String getDescription()
+      - 	public void setDescription(String description)
+      - 	public String getParentCodeComptable()
+      - 	public void setParentCodeComptable(String parentCodeComptable)
+      - 	public String getFullCode()
+      - 	public List<AccountingTypeDetails> getDetailsList()
+      - 	public void setDetailsList(List<AccountingTypeDetails> detailsList)
+      - 	public void addDetails(AccountingTypeDetails details)
+      - 	public JsonObject toJson()
+      - 	public String toString()
   --------------------------------------------------------------
   📍 Classe : package-info.java
     🔹 Champs :
@@ -172,6 +175,29 @@
 
 📦 PACKAGE : com.jtissdev_API.features.PCP.dto
 ================================================================
+  📍 Classe : AnalyticDetail.java
+    🔹 Champs :
+      - 	private String code;
+      - 	private String type;
+      - 	private String name;
+      - 	private String description;
+    🔸 Fonctions :
+      - 	public AnalyticDetail()
+      - 	public AnalyticDetail(JsonObject json)
+      - 	public AnalyticDetail(String code, String type, String name)
+      - 	public AnalyticDetail(String code, String type, String name, String description)
+      - 	public static AnalyticDetail fromJson(JsonObject json)
+      - 	public String getCode()
+      - 	public void setCode(String code)
+      - 	public String getType()
+      - 	public void setType(String type)
+      - 	public String getName()
+      - 	public void setName(String name)
+      - 	public String getDescription()
+      - 	public void setDescription(String description)
+      - 	public JsonObject toJson()
+      - 	public String toString()
+  --------------------------------------------------------------
   📍 Classe : Contacts.java
     🔹 Champs :
       - private Long id;
@@ -188,6 +214,9 @@
       - private String notes;
     🔸 Fonctions :
       - public Contacts()
+      - public Contacts( JsonObject json )
+      - public Contacts(String name)
+      - public Contacts(Long Id, String name)
       - public Contacts(Long id,
       - public Contacts(Long id,
       - public Long getId()
@@ -218,27 +247,6 @@
       - public static Contacts fromJson(JsonObject json)
       - public String toString()
   --------------------------------------------------------------
-  📍 Classe : Details_Comptable.java
-    🔹 Champs :
-      - 	private String code;
-      - 	private String type;
-      - 	private String name;
-      - 	private String description;
-    🔸 Fonctions :
-      - 	public Details_Comptable()
-      - 	public Details_Comptable(String code, String type, String name)
-      - 	public Details_Comptable(String code, String type, String name, String description)
-      - 	public String getCode()
-      - 	public String getType()
-      - 	public String getNom()
-      - 	public String getDescription()
-      - 	public void setCode(String code)
-      - 	public void setType(String type)
-      - 	public void setNom(String name)
-      - 	public void setDescription(String description)
-      - 	public JsonObject toJson()
-      - 	public String toString()
-  --------------------------------------------------------------
   📍 Classe : Tiers.java
     🔹 Champs :
       - 	private Long id;
@@ -247,8 +255,14 @@
       - 	private String description;
     🔸 Fonctions :
       - 	public Tiers()
+      - 	public Tiers(JsonObject json)
+      - 	public Tiers(String name)
       - 	public Tiers(String name, String thirdPartyType)
+      - 	public Tiers(String name, String thirdPartyType, String description)
+      - 	public Tiers(Long Id, String name)
       - 	public Tiers(Long id, String name, String thirdPartyType)
+      - 	public Tiers(Long id, String name, String thirdPartyType, String description)
+      - 	public static Tiers fromJson(JsonObject json)
       - 	public Long getId()
       - 	public void setId(Long id)
       - 	public String getName()
@@ -284,55 +298,63 @@
       - 	private List<OperationDTO> operations;
     🔸 Fonctions :
       - 	public JournalDTO()
+      - 	public JournalDTO(JsonObject json)
       - 	public JournalDTO(String name, LocalDate startDate, LocalDate endDate, String journalTypeCode)
       - 	public JournalDTO(Long id, String name, LocalDate startDate, LocalDate endDate, String journalTypeCode)
       - 	public JournalDTO(Long id, String name, LocalDate startDate, LocalDate endDate,
       - 	public Long getId()
       - 	public JournalDTO setId(Long id)
-      - 	public String getNom()
-      - 	public JournalDTO setNom(String name)
-      - 	public LocalDate getDateDebut()
-      - 	public JournalDTO setDateDebut(LocalDate startDate)
-      - 	public LocalDate getDateFin()
-      - 	public JournalDTO setDateFin(LocalDate endDate)
-      - 	public String getTypeJournalCode()
-      - 	public JournalDTO setTypeJournalCode(String journalTypeCode)
+      - 	public String getName()
+      - 	public JournalDTO setName(String name)
+      - 	public LocalDate getStartDate()
+      - 	public JournalDTO setStartDate(LocalDate startDate)
+      - 	public LocalDate getEndDate()
+      - 	public JournalDTO setEndDate(LocalDate endDate)
+      - 	public String getJournalTypeCode()
+      - 	public JournalDTO setJournalTypeCode(String journalTypeCode)
       - 	public List<OperationDTO> getOperations()
       - 	public JournalDTO setOperations(List<OperationDTO> operations)
       - 	public JournalDTO addOperation(OperationDTO operation)
       - 	public String toString()
+      - 	public JsonObject toJson()
   --------------------------------------------------------------
   📍 Classe : MovementDTO.java
     🔹 Champs :
       - 	private Long id;
-      - 	private Long tiersId;
-      - 	private String paiementCode;
       - 	private String accountingCode;
       - 	private String complementaryAccountingCode;
       - 	private String accountDetailCode;
+      - 	private Long tiersId;
+      - 	private String paiementCode;
       - 	private BigDecimal debitAmount;
       - 	private BigDecimal creditAmount;
       - 	private String description;
     🔸 Fonctions :
       - 	public MovementDTO()
+      - 	public MovementDTO(JsonObject json)
       - 	public MovementDTO(Long tiersId, String paiementCode, String accountDetailCode,
       - 	public MovementDTO(Long id, Long tiersId, String paiementCode, String accountDetailCode,
       - 	public MovementDTO(Long tiersId, String paiementCode, String accountDetailCode)
       - 	public Long getId()
-      - 	public MovementDTO setId(Long id)
+      - 	public String getAccountingCode()
+      - 	public String getComplementaryAccountingCode()
+      - 	public String getAccountDetailCode()
       - 	public Long getTiersId()
-      - 	public MovementDTO setTiersId(Long tiersId)
       - 	public String getPaiementCode()
-      - 	public MovementDTO setPaiementCode(String paiementCode)
-      - 	public String getCodeDetailsComptable()
-      - 	public MovementDTO setCodeDetailsComptable(String accountDetailCode)
-      - 	public BigDecimal getMontantDebit()
-      - 	public MovementDTO setMontantDebit(BigDecimal debitAmount)
-      - 	public BigDecimal getMontantCredit()
-      - 	public MovementDTO setMontantCredit(BigDecimal creditAmount)
+      - 	public BigDecimal getDebitAmount()
+      - 	public BigDecimal getCreditAmount()
       - 	public String getDescription()
+      - 	public MovementDTO setId(Long id)
+      - 	public void setAccountingCode(String accountingCode)
+      - 	public void setComplementaryAccountingCode(String complementaryAccountingCode)
+      - 	public MovementDTO setAccountDetailCode(String accountDetailCode)
+      - 	public MovementDTO setTiersId(Long tiersId)
+      - 	public MovementDTO setPaiementCode(String paiementCode)
+      - 	public MovementDTO setDebitAmount(BigDecimal debitAmount)
+      - 	public MovementDTO setCreditAmount(BigDecimal creditAmount)
       - 	public MovementDTO setDescription(String description)
       - 	public String toString()
+      - 	public JsonObject toJson()
   --------------------------------------------------------------
   📍 Classe : OperationDTO.java
     🔹 Champs :
@@ -346,6 +368,7 @@
       - 	private List<MovementDTO> movements;
     🔸 Fonctions :
       - 	public OperationDTO()
+      - 	public OperationDTO(JsonObject jsonObject)
       - 	public OperationDTO(LocalDate dateOperation, LocalDate dateComptable, String libelle,
       - 	public OperationDTO(Long id, LocalDate dateOperation, LocalDate dateComptable, String libelle,
       - 	public OperationDTO(Long id, LocalDate dateOperation, LocalDate dateComptable, String libelle,
@@ -367,6 +390,7 @@
       - 	public OperationDTO setMovements(List<MovementDTO> movements)
       - 	public OperationDTO addMovement(MovementDTO movement)
       - 	public String toString()
+      - 	public JsonObject toJson()
   --------------------------------------------------------------
   📍 Classe : package-info.java
     🔹 Champs :
@@ -403,14 +427,16 @@
       - 	private String color;
     🔸 Fonctions :
       - 	public OperationStatus()
+      - 	public OperationStatus(JsonObject json)
       - 	public OperationStatus(String code, String name, String color)
       - 	public String getCode()
       - 	public OperationStatus setCode(String code)
-      - 	public String getNom()
-      - 	public OperationStatus setNom(String name)
+      - 	public String getName()
+      - 	public OperationStatus setName(String name)
       - 	public String getColor()
       - 	public OperationStatus setColor(String color)
       - 	public JsonObject toJson()
+      - 	public String toString()
   --------------------------------------------------------------
   📍 Classe : PaymentMethod.java
     🔹 Champs :
@@ -419,11 +445,12 @@
       - 	private String description;
     🔸 Fonctions :
       - 	public PaymentMethod()
+      - 	public PaymentMethod(JsonObject json)
       - 	public PaymentMethod(String code, String name, String description)
       - 	public String getCode()
       - 	public PaymentMethod setCode(String code)
-      - 	public String getNom()
-      - 	public PaymentMethod setNom(String name)
+      - 	public String getName()
+      - 	public PaymentMethod setName(String name)
       - 	public String getDescription()
       - 	public PaymentMethod setDescription(String description)
       - 	public JsonObject toJson()
@@ -437,24 +464,27 @@
 ================================================================
   📍 Classe : PcgCoreDTO.java
     🔹 Champs :
-      - 	private List<Type_Comptable> accountingClasses;
+      - 	private List<AccountingType> accountingClasses;
     🔸 Fonctions :
       - 	public PcgCoreDTO()
-      - 	public List<Type_Comptable> getAccountingClasses()
-      - 	public void setAccountingClasses(List<Type_Comptable> accountingClasses)
-      - 	public void addAccountingClass(Type_Comptable typeComptable)
+      - 	public PcgCoreDTO(List<AccountingType> accountingClasses)
+      - 	public PcgCoreDTO(JsonArray jsonArray)
+      - 	public List<AccountingType> getAccountingClasses()
+      - 	public void setAccountingClasses(List<AccountingType> accountingClasses)
+      - 	public void addAccountingClass(AccountingType typeComptable)
       - 	public String toString()
   --------------------------------------------------------------
   📍 Classe : PcpCoreDTO.java
     🔹 Champs :
       - 	private List<Tiers> thirdParties;
-      - 	private List<Details_Comptable> details;
+      - 	private List<AnalyticDetail> details;
     🔸 Fonctions :
       - 	public PcpCoreDTO()
+      - 	public PcpCoreDTO(JsonObject json)
       - 	public List<Tiers> getThirdParties()
-      - 	public List<Details_Comptable> getDetails()
+      - 	public List<AnalyticDetail> getDetails()
       - 	public void setThirdParties(List<Tiers> thirdParties)
-      - 	public void setDetails(List<Details_Comptable> details)
+      - 	public void setDetails(List<AnalyticDetail> details)
   --------------------------------------------------------------
   📍 Classe : ReferentialCoreDTO.java
     🔹 Champs :
@@ -462,10 +492,12 @@
       - 	private List<PaymentMethod> paymentMethods;
     🔸 Fonctions :
       - 	public ReferentialCoreDTO()
+      - 	public ReferentialCoreDTO(List<OperationStatus> operationStatuses, List<PaymentMethod> paymentMethods)
+      - 	public ReferentialCoreDTO(JsonObject json)
       - 	public List<OperationStatus> getOperationStatuses()
       - 	public ReferentialCoreDTO setOperationStatuses(List<OperationStatus> operationStatuses)
       - 	public List<PaymentMethod> getPaymentMethods()
-      - 	public ReferentialCoreDTO setPaymentMethods(List<List<PaymentMethod>> paymentMethods)
+      - 	public ReferentialCoreDTO setPaymentMethods(List<PaymentMethod> paymentMethods)
       - 	public ReferentialCoreDTO addOperationStatus(OperationStatus status)
       - 	public ReferentialCoreDTO addPaymentMethod(PaymentMethod method)
       - 	public JsonObject toJson()

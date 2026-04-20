@@ -73,17 +73,17 @@ public class AnalyticDetail {
 	 */
 	public AnalyticDetail(JsonObject json) {
 		this();
-		if (json.containsKey("Code")) {
-			json.getString("code",null);
+		if (json.containsKey("code")) {
+			this.setCode(json.getString("code", null));
 		}
-		if (json.containsKey("Type")) {
-			json.getString("type",null);
+		if (json.containsKey("type")) {
+			this.setType(json.getString("type",null));
 		}
-		if (json.containsKey("Name")) {
-			json.getString("name",null);
+		if (json.containsKey("name")) {
+			this.setName(json.getString("name",null));
 		}
-		if (json.containsKey("Description")) {
-			json.getString("description",null);
+		if (json.containsKey("description")) {
+			this.setDescription(json.getString("description",null));
 		}
 	}
 
@@ -136,7 +136,9 @@ public class AnalyticDetail {
 	 * @return an instance of {@code AnalyticDetail} populated with the values from the JSON object.
 	 *
 	 * @since 0.4
+	 * @deprecated since 0.4.0, use {@link #AnalyticDetail(JsonObject)} instead.
 	 */
+	@Deprecated (since = "1.1.0", forRemoval = true)
 	public static AnalyticDetail fromJson(JsonObject json) {
 		AnalyticDetail detail = new AnalyticDetail();
 		if (json.containsKey("Code")) {
@@ -162,7 +164,7 @@ public class AnalyticDetail {
 	 * @since 0.1
 	 */
 	public String getCode() {
-		return code;
+		return this.code;
 	}
 
 	/**
@@ -184,7 +186,7 @@ public class AnalyticDetail {
 	 * @since 0.1
 	 */
 	public String getType() {
-		return type;
+		return this.type;
 	}
 
 	// =========================================================

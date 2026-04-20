@@ -13,7 +13,7 @@ import jakarta.json.JsonObjectBuilder;
  * </p>
  *
  * @author J.Tiss
- * @version 1.0.2
+ * @version 1.1.0
  * @since v0.1
  */
 public class Tiers {
@@ -73,16 +73,16 @@ public class Tiers {
 	 */
 	public Tiers(JsonObject json) {
 		this();
-		if (json.containsKey("Id")) {
+		if (json.containsKey("id")) {
 			this.setId(json.getJsonNumber("id").longValue());
 		}
-		if (json.containsKey("Name")) {
+		if (json.containsKey("name")) {
 			this.setName(json.getString("name"));
 		}
-		if (json.containsKey("ThirdPartyType")) {
+		if (json.containsKey("thirdPartyType")) {
 			this.setThirdPartyType(json.getString("thirdPartyType"));
 		}
-		if (json.containsKey("Description")) {
+		if (json.containsKey("description")) {
 			this.setDescription(json.getString("description"));
 		}
 	}
@@ -195,20 +195,22 @@ public class Tiers {
 	 * @return an instance of {@code Tiers} populated with data from the provided JSON object
 	 *
 	 * @since 0.4
+	 * @deprecated since 0.4 use {@link #Tiers(JsonObject)} instead.
 	 */
+	@Deprecated (since = "1.1.0", forRemoval = true)
 	public static Tiers fromJson(JsonObject json) {
 		Tiers tier = new Tiers();
 
-		if (json.containsKey("Id")) {
+		if (json.containsKey("id")) {
 			tier.setId(json.getJsonNumber("id").longValue());
 		}
-		if (json.containsKey("Name")) {
+		if (json.containsKey("name")) {
 			tier.setName(json.getString("name"));
 		}
-		if (json.containsKey("ThirdPartyType")) {
+		if (json.containsKey("thirdPartyType")) {
 			tier.setThirdPartyType(json.getString("thirdPartyType"));
 		}
-		if (json.containsKey("Description")) {
+		if (json.containsKey("description")) {
 			tier.setDescription(json.getString("description"));
 		}
 

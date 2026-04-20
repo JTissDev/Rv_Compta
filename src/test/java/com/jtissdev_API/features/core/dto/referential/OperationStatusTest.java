@@ -1,6 +1,7 @@
 package com.jtissdev_API.features.core.dto.referential;
 
 import jakarta.json.JsonObject;
+import jakarta.json.JsonObjectBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class OperationStatusTest {
 
 	// =========================================================
-	// == TEST CASES                                          ==
+	// == CONSTRUCTOR TEST                                    ==
 	// =========================================================
 
 	/**
@@ -40,7 +41,28 @@ class OperationStatusTest {
 		assertEquals(color, status.getColor(), "Color should match constructor input");
 	}
 
+	@Test
+	@DisplayName("Test Constructor from JsonObject")
+	void testConstructorFromJsonObject() {
+		JsonObject json = jakarta.json.Json.createObjectBuilder()
+				                  .add("code","CHECK")
+				                  .add("name","validate")
+				                  .add("color","#3498db")
+				                  .build();
+
+		OperationStatus status = new OperationStatus(json);
+
+		assertEquals("CHECK", status.getCode());
+		assertEquals("validate", status.getName());
+		assertEquals("#3498db", status.getColor());
+	}
+
+	// =========================================================
+	// == METHODS TEST                                        ==
+	// =========================================================
+
 	/**
+	 *
 	 * Tests the fluent setters and basic getters.
 	 *
 	 * @since 0.2.0
@@ -79,7 +101,7 @@ class OperationStatusTest {
 		// Then
 		assertNotNull(json, "JSON output should not be null");
 		assertEquals("WAIT", json.getString("code"));
-		assertEquals("En attente", json.getString("nom"));
+		assertEquals("En attente", json.getString("name"));
 		assertEquals("#f1c40f", json.getString("color"));
 	}
 

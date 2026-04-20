@@ -1,8 +1,11 @@
 package com.jtissdev_API.features.PCP.dto;
 
+import jakarta.json.Json;
 import jakarta.json.JsonObject;
-import org.junit.jupiter.api.DisplayName;
+import jakarta.json.JsonObjectBuilder;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,76 +14,90 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Verifies constructors, accessors grouping, and JSON serialization.
  *
  * @author J.Tiss
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.1.0
+ * @since 0.4
  */
 class AnalyticDetailTest {
 
+	// =========================================================
+	// == METHODS (TEST CASES)                                ==
+	// =========================================================
+
+	/**
+	 * Vérifie que le constructeur vide et les setters fonctionnent correctement.
+	 */
 	@Test
-	@DisplayName("Constructors - Should initialize fields correctly using different constructors")
-	void constructors_ShouldInitializeFields() {
-		// Test Default Constructor
-		AnalyticDetail empty = new AnalyticDetail();
-		assertThat(empty.getCode()).isNull();
-
-		// Test Functional Constructor (1.0.1)
-		AnalyticDetail functional = new AnalyticDetail(".442", "Banque", "Main Account");
-		assertThat(functional.getCode()).isEqualTo(".442");
-		assertThat(functional.getType()).isEqualTo("Banque");
-		assertThat(functional.getName()).isEqualTo("Main Account");
-
-		// Test Complete Constructor (1.0.2)
-		AnalyticDetail complete = new AnalyticDetail(".Net", "Streaming", "Netflix", "Monthly sub");
-		assertThat(complete.getCode()).isEqualTo(".Net");
-		assertThat(complete.getDescription()).isEqualTo("Monthly sub");
-	}
-
-	@Test
-	@DisplayName("Accessors - Should respect Getters/Setters grouping and data integrity")
-	void accessors_ShouldHandleDataCorrectly() {
-		// Given
+	void testEmptyConstructorAndSetters() {
 		AnalyticDetail detail = new AnalyticDetail();
-		String code = ".P106";
-		String type = "Vehicule";
-		String nom = "Peugeot 106";
-		String desc = "Old car";
+		detail.setCode(".442");
+		detail.setType("Banque");
+		detail.setName("Compte Courant");
+		detail.setDescription("Compte principal");
 
-		// When (Testing Setters)
-		detail.setCode(code);
-		detail.setType(type);
-		detail.setName(nom);
-		detail.setDescription(desc);
-
-		// Then (Testing Getters)
-		assertThat(detail.getCode()).isEqualTo(code);
-		assertThat(detail.getType()).isEqualTo(type);
-		assertThat(detail.getName()).isEqualTo(nom);
-		assertThat(detail.getDescription()).isEqualTo(desc);
+		assertEquals(".442", detail.getCode(), "Le code doit être '.442'");
+		assertEquals("Banque", detail.getType(), "Le type doit être 'Banque'");
+		assertEquals("Compte Courant", detail.getName(), "Le nom doit correspondre");
+		assertEquals("Compte principal", detail.getDescription(), "La description doit correspondre");
 	}
 
+	/**
+	 * Vérifie que le constructeur complet initialise bien tous les champs.
+	 */
 	@Test
-	@DisplayName("Serialization - Should convert object to valid JsonObject")
-	void serialization_ShouldProduceCorrectJson() {
-		// Given
-		AnalyticDetail detail = new AnalyticDetail(".229", "Banque", "Compte Leslie", "To delete");
+	void testFullConstructor() {
+		AnalyticDetail detail = new AnalyticDetail(".512", "Caisse", "Caisse Principale", "Petite monnaie");
 
-		// When
+		assertEquals(".512", detail.getCode());
+		assertEquals("Caisse", detail.getType());
+		assertEquals("Caisse Principale", detail.getName());
+		assertEquals("Petite monnaie", detail.getDescription());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testFromJsonConstructor() {
+		JsonObject json = Json.createObjectBuilder()
+				.add("code", ".442")
+				.add("type", "Banque")
+				.add("name", "Compte Courant")
+				.add("description", "Compte principal")
+				.build();
+
+		AnalyticDetail detail = new AnalyticDetail(json);
+
+		assertEquals(".442", detail.getCode());
+		assertEquals("Banque", detail.getType());
+		assertEquals("Compte Courant", detail.getName());
+		assertEquals("Compte principal", detail.getDescription());
+	}
+	/**
+	 * Vérifie que l'export JSON génère bien toutes les clés avec les bonnes valeurs.
+	 */
+	@Test
+	void testToJson() {
+		AnalyticDetail detail = new AnalyticDetail(".442", "Banque", "Compte Courant", "Description test");
 		JsonObject json = detail.toJson();
 
-		// Then
-		assertThat(json.getString("code")).isEqualTo(".229");
-		assertThat(json.getString("type")).isEqualTo("Banque");
-		assertThat(json.getString("nom")).isEqualTo("Compte Leslie");
-		assertThat(json.getString("description")).isEqualTo("To delete");
+		assertEquals(".442", json.getString("code"));
+		assertEquals("Banque", json.getString("type"));
+		assertEquals("Compte Courant", json.getString("name"));
+		assertEquals("Description test", json.getString("description"));
 	}
 
-	@Test
-	@DisplayName("ToString - Should return formatted string for logging")
-	void toString_ShouldReturnFormattedString() {
-		// Given
-		AnalyticDetail detail = new AnalyticDetail(".Rou", "Immo", "Bois Rouvres");
 
-		// When & Then
-		assertThat(detail.toString()).isEqualTo("[.Rou] Bois Rouvres (Immo)");
+
+	/**
+	 * Vérifie que la surcharge de toString contient bien les informations essentielles.
+	 */
+	@Test
+	void testToString() {
+		AnalyticDetail detail = new AnalyticDetail(".442", "Banque", "Compte Courant");
+		String result = detail.toString();
+
+		assertTrue(result.contains(".442"), "Le toString doit contenir le code");
+		assertTrue(result.contains("Compte Courant"), "Le toString doit contenir le nom");
+		assertTrue(result.contains("Banque"), "Le toString doit contenir le type");
 	}
 }

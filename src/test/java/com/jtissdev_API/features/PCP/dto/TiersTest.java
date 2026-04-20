@@ -1,5 +1,6 @@
 package com.jtissdev_API.features.PCP.dto;
 
+import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -66,9 +67,63 @@ class TiersTest {
 		assertThat(tiers.getThirdPartyType()).isEqualTo(type);
 	}
 
+	@Test
+	@DisplayName("Constructor with jsonObject as parameter")
+	void constructor_withJsonObject_shouldInitializeFields() {
+		JsonObject json = Json.createObjectBuilder()
+				                  .add("id", 15)
+				                  .add("name", "Green Solutions")
+				                  .add("thirdPartyType", "PARTNER")
+				                  .add("description", "Eco-friendly consultancy")
+				                  .build();
+		Tiers tiers = new Tiers(json);
+
+		assertThat(tiers.getId()).isEqualTo(15L);
+		assertThat(tiers.getName()).isEqualTo("Green Solutions");
+		assertThat(tiers.getThirdPartyType()).isEqualTo("PARTNER");
+		assertThat(tiers.getDescription()).isEqualTo("Eco-friendly consultancy");
+	}
+
 	// =========================================================
 	// == LOGIC & SERIALIZATION TESTS                         ==
 	// =========================================================
+
+	@Test
+	@DisplayName("fromJson - should populate all fields correctly from valid JSON")
+	void fromJson_shouldPopulateFieldsCorrectly() {
+		// Given
+		JsonObject json = Json.createObjectBuilder()
+				                  .add("id", 15)
+				                  .add("name", "Green Solutions")
+				                  .add("thirdPartyType", "PARTNER")
+				                  .add("description", "Eco-friendly consultancy")
+				                  .build();
+
+		// When
+		Tiers tiers = Tiers.fromJson(json);
+
+		// Then
+		assertThat(tiers.getId()).isEqualTo(15L);
+		assertThat(tiers.getName()).isEqualTo("Green Solutions");
+		assertThat(tiers.getThirdPartyType()).isEqualTo("PARTNER");
+		assertThat(tiers.getDescription()).isEqualTo("Eco-friendly consultancy");
+	}
+
+	@Test
+	@DisplayName("fromJson - should handle missing or null JSON fields gracefully")
+	void fromJson_shouldHandleNullFields() {
+		// Given
+		JsonObject json = Json.createObjectBuilder().build(); // Empty JSON
+
+		// When
+		Tiers tiers = Tiers.fromJson(json);
+
+		// Then
+		assertThat(tiers.getId()).isNull();
+		assertThat(tiers.getName()).isNull();
+		assertThat(tiers.getThirdPartyType()).isNull();
+		assertThat(tiers.getDescription()).isNull();
+	}
 
 	@Test
 	@DisplayName("toJson - should produce valid JsonObject with expected values")
