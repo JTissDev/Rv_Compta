@@ -134,8 +134,8 @@ public class PaymentMethodTest {
 		// Then
 		assertAll("toString content validation",
 				() -> assertThat(result).contains("PaymentMethod"),
-				() -> assertThat(result).contains("code='" + CODE),
-				() -> assertThat(result).contains("name='" + NAME)
+				() -> assertThat(result).contains("code=" + CODE),
+				() -> assertThat(result).contains("name=" + NAME)
 		);
 	}
 }

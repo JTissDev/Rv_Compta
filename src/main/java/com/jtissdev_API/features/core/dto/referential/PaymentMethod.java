@@ -200,9 +200,9 @@ public class PaymentMethod {
 	@Override
 	public String toString() {
 		return "PaymentMethod{" +
-				       "code='" + code + '\'' +
-				       ", name='" + name + '\'' +
-				       ", description='" + description + '\'' +
+				       "code=" + code +
+				       ", name=" + name +
+				       ", description=" + description +
 				       '}';
 	}
 }

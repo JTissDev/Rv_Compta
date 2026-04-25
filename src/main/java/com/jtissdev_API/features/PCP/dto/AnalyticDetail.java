@@ -123,8 +123,149 @@ public class AnalyticDetail {
 	}
 
 	// =========================================================
-	// == ACCESSORS (GETTERS)                                 ==
+	// == GETTERS / SETTERS (FLUENT API)                      ==
 	// =========================================================
+
+	/**
+	 * Gets the unique alphanumeric code.
+	 *
+	 * @return the detail code.
+	 *
+	 * @since 0.1
+	 */
+	public String getCode() {
+		return this.code;
+	}
+
+	/**
+	 * Sets the unique alphanumeric code.
+	 *
+	 * @param code
+	 * 		the code to assign.
+	 * @since 0.1
+	 */
+	public AnalyticDetail setCode(String code) {
+		this.code = code;
+		return this;
+	}
+
+	/**
+	 * Gets the category/type of the detail.
+	 *
+	 * @return the type string.
+	 *
+	 * @since 0.1
+	 */
+	public String getType() {
+		return this.type;
+	}
+
+	/**
+	 * Sets the category/type of the detail.
+	 *
+	 * @param type
+	 * 		the type label to assign.
+	 * @since 0.1
+	 */
+	public AnalyticDetail setType(String type) {
+		this.type = type;
+		return this;
+	}
+
+	/**
+	 * Gets the display name of the detail.
+	 *
+	 * @return the name/label.
+	 *
+	 * @since 0.1
+	 */
+	public String getName() {
+		return this.name;
+	}
+
+	/**
+	 * Sets the display name of the detail.
+	 *
+	 * @param name
+	 * 		the label to assign.
+	 * @since 0.1
+	 */
+	public AnalyticDetail setName(String name) {
+		this.name = name;
+		return this;
+	}
+
+	/**
+	 * Gets the additional notes for this detail.
+	 *
+	 * @return the description text.
+	 *
+	 * @since 0.1
+	 */
+	public String getDescription() {
+		return this.description;
+	}
+
+	/**
+	 * Sets the additional notes for this detail.
+	 *
+	 * @param description
+	 * 		the information to store.
+	 * @since 0.1
+	 */
+	public AnalyticDetail setDescription(String description) {
+		this.description = description;
+		return this;
+	}
+
+	// =========================================================
+	// == SERIALIZATION LOGIC                                 ==
+	// =========================================================
+
+	/**
+	 * Converts the object into a JSON format for persistence.
+	 *
+	 * @return A {@link JsonObject} representing the detail.
+	 *
+	 * @since 0.1
+	 * @version 1.1
+	 */
+	public JsonObject toJson() {
+		JsonObjectBuilder builder = Json.createObjectBuilder();
+
+		if (this.code != null) {
+			builder.add("code", code);
+		}
+		if (this.type != null) {
+			builder.add("type", type);
+		}
+		if (this.name != null) {
+			builder.add("name", name);
+		}
+		if (this.description != null) {
+			builder.add("description", description);
+		}
+
+		return builder.build();
+	}
+
+	/**
+	 * Provides a summary of the detail for logging and debugging.
+	 *
+	 * @return a formatted string.
+	 *
+	 * @since 0.1
+	 */
+	@Override
+	public String toString() {
+		return "Analytic Detail [" +
+				       "code=" + code +
+				       ", type=" + type +
+				       ", name=" + name +
+				       ", description=" + description +
+				       "]";
+	}
+
 
 	/**
 	 * Converts a {@link JsonObject} into an instance of {@code AnalyticDetail}.
@@ -156,129 +297,4 @@ public class AnalyticDetail {
 		return detail;
 	}
 
-	/**
-	 * Gets the unique alphanumeric code.
-	 *
-	 * @return the detail code.
-	 *
-	 * @since 0.1
-	 */
-	public String getCode() {
-		return this.code;
-	}
-
-	/**
-	 * Sets the unique alphanumeric code.
-	 *
-	 * @param code
-	 * 		the code to assign.
-	 * @since 0.1
-	 */
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	/**
-	 * Gets the category/type of the detail.
-	 *
-	 * @return the type string.
-	 *
-	 * @since 0.1
-	 */
-	public String getType() {
-		return this.type;
-	}
-
-	// =========================================================
-	// == ACCESSORS (SETTERS)                                 ==
-	// =========================================================
-
-	/**
-	 * Sets the category/type of the detail.
-	 *
-	 * @param type
-	 * 		the type label to assign.
-	 * @since 0.1
-	 */
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	/**
-	 * Gets the display name of the detail.
-	 *
-	 * @return the name/label.
-	 *
-	 * @since 0.1
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Sets the display name of the detail.
-	 *
-	 * @param name
-	 * 		the label to assign.
-	 * @since 0.1
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * Gets the additional notes for this detail.
-	 *
-	 * @return the description text.
-	 *
-	 * @since 0.1
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	// =========================================================
-	// == SERIALIZATION LOGIC                                 ==
-	// =========================================================
-
-	/**
-	 * Sets the additional notes for this detail.
-	 *
-	 * @param description
-	 * 		the information to store.
-	 * @since 0.1
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
-	 * Converts the object into a JSON format for persistence.
-	 *
-	 * @return A {@link JsonObject} representing the detail.
-	 *
-	 * @since 0.1
-	 */
-	public JsonObject toJson() {
-		JsonObjectBuilder builder = Json.createObjectBuilder();
-
-		builder.add("code", code != null ? code : "");
-		builder.add("type", type != null ? type : "");
-		builder.add("name", name != null ? name : "");
-		builder.add("description", description != null ? description : "");
-
-		return builder.build();
-	}
-
-	/**
-	 * Provides a summary of the detail for logging and debugging.
-	 *
-	 * @return a formatted string.
-	 *
-	 * @since 0.1
-	 */
-	@Override
-	public String toString() {
-		return String.format("[%s] %s (%s)", code, name, type);
-	}
 }

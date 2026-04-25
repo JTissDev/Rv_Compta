@@ -63,9 +63,9 @@ public class OperationStatusTest {
 
 		// Then
 		assertAll("Empty constructor state validation",
-				() -> assertNull(status.getCode()),
-				() -> assertNull(status.getName()),
-				() -> assertNull(status.getColor())
+				() -> assertNull(status.getCode(), "Code should be null"),
+				() -> assertNull(status.getName(), "Name should be null"),
+				() -> assertNull(status.getColor(), "Color should be null")
 		);
 	}
 
@@ -97,9 +97,9 @@ public class OperationStatusTest {
 		// Then
 		assertAll("Fluent API validation",
 				() -> assertSame(status, result, "Setter must return the same instance"),
-				() -> assertEquals(CODE, status.getCode()),
-				() -> assertEquals(NAME, status.getName()),
-				() -> assertEquals(COLOR, status.getColor())
+				() -> assertEquals(CODE, status.getCode(), "Code should be set"),
+				() -> assertEquals(NAME, status.getName(), "Name should be set"),
+				() -> assertEquals(COLOR, status.getColor(), "Color should be set")
 		);
 	}
 
