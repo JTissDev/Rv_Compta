@@ -202,6 +202,6 @@ public class OperationStatus {
 	 * @since 0.4
 	 */
 	public String toString() {
-		return "OperationStatus [code=" + code + ", name=" + name + ", color=" + color + "]";
+		return "OperationStatus [code=" + code + '\'' + ", name=" + name +  '\'' +", color=" + color + "]";
 	}
 }

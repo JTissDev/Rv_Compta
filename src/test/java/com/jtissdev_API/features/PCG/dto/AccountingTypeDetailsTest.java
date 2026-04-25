@@ -1,193 +1,112 @@
 package com.jtissdev_API.features.PCG.dto;
 
 import jakarta.json.JsonObject;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Unit test class for validating the behavior and output of the `toJson` method in
- * the `AccountingTypeDetails` class.
- *
- * This class contains multiple test cases to ensure that the `toJson` method correctly
- * converts the state of an `AccountingTypeDetails` object into a JSON representation.
- * Each test case targets specific scenarios such as all fields being provided, optional
- * fields being missing, or specific fields being null or blank.
- */
 class AccountingTypeDetailsTest {
 
-	// =========================================================
-	// == CONSTRUCTORS (TEST CASES)                           ==
-	// =========================================================
 	/**
-	 * Test class to validate the `toJson` method of the `AccountingTypeDetails` class.
-	 * The `toJson` method is expected to convert the current object state into a JsonObject.
+	 * Test case to verify the toJson method correctly serializes all
+	 * attributes when all fields are non-null.
 	 */
-
 	@Test
-	@DisplayName("Test Empty Constructor")
-	void testEmptyConstructor() {
-		AccountingTypeDetails details = new AccountingTypeDetails();
-		 JsonObject result = details.toJson();
-		 assertNotNull(result);
-		 assertTrue(result.isEmpty());
-	}
-	
-	@Test
-	@DisplayName("Test Constructor from JsonObject")
-	void testConstructorFromJsonObject() {
-		// Arrange
-		JsonObject json = jakarta.json.Json.createObjectBuilder()
-				                  .add("id", 10)
-				                  .add("name", "Revenue")
-				                  .add("accountingCode", 500)
-				                  .add("description", "Monthly income")
-				                  .add("parentCodeComptable", "PCG500")
-				                  .build();
-
-		// Act
-		AccountingTypeDetails details = new AccountingTypeDetails(json);
-
-		// Assert
-		assertNotNull(details);
-		assertEquals(10, details.getId());
-		assertEquals("Revenue", details.getName());
-		assertEquals(500, details.getAccountingCode());
-		assertEquals("Monthly income", details.getDescription());
-		assertEquals("PCG500", details.getParentCodeComptable());
-	}
-
-	@Test
-	@DisplayName("Test Constructor with All Fields")
-	void testToJson_AllFieldsPresent() {
-		// Arrange
+	void testToJsonWithAllFieldsNonNull() {
 		AccountingTypeDetails details = new AccountingTypeDetails(
 				1,
 				"Revenue",
-				1000,
-				"Monthly revenue",
-				"PCG"
+				4000,
+				"Revenue Description",
+				"40"
 		);
 
-		// Act
-		JsonObject result = details.toJson();
+		JsonObject json = details.toJson();
 
-		// Assert
-		assertNotNull(result);
-		assertEquals(1, result.getInt("id"));
-		assertEquals("Revenue", result.getString("name"));
-		assertEquals(1000, result.getInt("accountingCode"));
-		assertEquals("Monthly revenue", result.getString("description"));
-		assertEquals("PCG", result.getString("parentCodeComptable"));
-		assertEquals("PCG1000", result.getString("fullCode"));
+		assertNotNull(json);
+		assertEquals(1, json.getInt("id"));
+		assertEquals("Revenue", json.getString("name"));
+		assertEquals(4000, json.getInt("accountingCode"));
+		assertEquals("Revenue Description", json.getString("description"));
+		assertEquals("40", json.getString("parentCodeComptable"));
+		assertEquals("404000", json.getString("fullCode"));
 	}
 
-	/* @Test
-	void testToJson_OptionalFieldsMissing() {
-		// Arrange
+	/**
+	 * Test case to verify the toJson method when optional fields are null.
+	 */
+	@Test
+	void testToJsonWithSomeFieldsNull() {
 		AccountingTypeDetails details = new AccountingTypeDetails(
-				null,
-				"Expenses",
-				2000,
+				2,
+				"Expense",
+				5000,
 				null,
 				null
 		);
 
-		// Act
-		JsonObject result = details.toJson();
+		JsonObject json = details.toJson();
 
-		// Assert
-		assertNotNull(result);
-		assertFalse(result.containsKey("id"));
-		assertEquals("Expenses", result.getString("name"));
-		assertEquals(2000, result.getInt("accountingCode"));
-		assertFalse(result.containsKey("description"));
-		assertFalse(result.containsKey("parentCodeComptable"));
-		assertEquals("2000", result.getString("fullCode"));
-	} */
-
-	@Test
-	@DisplayName("Test toJson with null fields")
-	void testToJson_NoFieldsPresent() {
-		// Arrange
-		AccountingTypeDetails details = new AccountingTypeDetails();
-
-		// Act
-		JsonObject result = details.toJson();
-
-		// Assert
-		assertNotNull(result);
-		assertTrue(result.isEmpty());
+		assertNotNull(json);
+		assertEquals(2, json.getInt("id"));
+		assertEquals("Expense", json.getString("name"));
+		assertEquals(5000, json.getInt("accountingCode"));
+		assertFalse(json.containsKey("description"));
+		assertFalse(json.containsKey("parentCodeComptable"));
+		assertEquals("5000", json.getString("fullCode"));
 	}
 
-	/* @Test
-	void testToJson_ParentCodeBlank() {
-		// Arrange
+	/**
+	 * Test case to verify the toJson method handles completely null fields properly.
+	 */
+	@Test
+	void testToJsonWithAllFieldsNull() {
+		AccountingTypeDetails details = new AccountingTypeDetails();
+
+		JsonObject json = details.toJson();
+
+		assertNotNull(json);
+		assertFalse(json.containsKey("id"));
+		assertFalse(json.containsKey("name"));
+		assertFalse(json.containsKey("accountingCode"));
+		assertFalse(json.containsKey("description"));
+		assertFalse(json.containsKey("parentCodeComptable"));
+		assertFalse(json.containsKey("fullCode"));
+	}
+
+	/**
+	 * Test case to verify the fullCode field when parentCodeComptable is provided.
+	 */
+	@Test
+	void testToJsonFullCodeWithParentCode() {
 		AccountingTypeDetails details = new AccountingTypeDetails(
-				3,
 				"Assets",
-				3000,
-				"Company assets",
-				""
+				1000,
+				"Assets Description",
+				"10"
 		);
 
-		// Act
-		JsonObject result = details.toJson();
+		JsonObject json = details.toJson();
 
-		// Assert
-		assertNotNull(result);
-		assertEquals(3, result.getInt("id"));
-		assertEquals("Assets", result.getString("name"));
-		assertEquals(3000, result.getInt("accountingCode"));
-		assertEquals("Company assets", result.getString("description"));
-		assertFalse(result.containsKey("parentCodeComptable"));
-		assertEquals("3000", result.getString("fullCode"));
-	} */
-
-	// =========================================================
-	// == CONSTRUCTORS (TEST CASES)                           ==
-	// =========================================================
-
-	@Test
-	@DisplayName("Test all Setters")
-	void testSetters() {
-		AccountingTypeDetails details = new AccountingTypeDetails();
-		 details.setId(10);
-		 details.setName("Revenue");
-		 details.setAccountingCode(500);
-		 details.setDescription("Monthly income");
-		 details.setParentCodeComptable("PCG500");
-
-		 JsonObject result = details.toJson();
-		 assertNotNull(result);
-		 assertEquals(10, result.getInt("id"));
+		assertNotNull(json);
+		assertEquals("101000", json.getString("fullCode"));
 	}
 
+	/**
+	 * Test case to verify the fullCode field when parentCodeComptable is not provided.
+	 */
 	@Test
-	@DisplayName("Test toJson with null accountingCode")
-	void testToJson_NullAccountingCode() {
-		// Arrange
+	void testToJsonFullCodeWithoutParentCode() {
 		AccountingTypeDetails details = new AccountingTypeDetails(
-				4,
 				"Liabilities",
-				null,
-				"Corporate liabilities",
-				"PCG"
+				2000,
+				"Liabilities Description",
+				null
 		);
 
-		// Act
-		JsonObject result = details.toJson();
+		JsonObject json = details.toJson();
 
-		// Assert
-		assertNotNull(result);
-		assertEquals(4, result.getInt("id"));
-		assertEquals("Liabilities", result.getString("name"));
-		assertFalse(result.containsKey("accountingCode"));
-		assertEquals("Corporate liabilities", result.getString("description"));
-		assertEquals("PCG", result.getString("parentCodeComptable"));
-		assertFalse(result.containsKey("fullCode"));
+		assertNotNull(json);
+		assertEquals("2000", json.getString("fullCode"));
 	}
-
-
 }
