@@ -190,4 +190,19 @@ public class PaymentMethod {
 
 		return builder.build();
 	}
+
+	/**
+	 * Returns a string representation of this instance.
+	 *
+	 * @return a formatted string containing the field values.
+	 * @since 0.2.0
+	 */
+	@Override
+	public String toString() {
+		return "PaymentMethod{" +
+				       "code='" + code + '\'' +
+				       ", name='" + name + '\'' +
+				       ", description='" + description + '\'' +
+				       '}';
+	}
 }

@@ -3,7 +3,6 @@ package com.jtissdev_API.features.core.dto.referential;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +19,10 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class OperationStatusTest {
 
+	private static final String CODE = "REAL";
+	private static final String NAME = "réalisé";
+	private static final String COLOR = "#00FF00";
+
 	private static JsonObject statusJson;
 
 	/**
@@ -30,30 +33,26 @@ public class OperationStatusTest {
 	@DisplayName("Setup JSON Objects for OperationStatusTest")
 	static void setUpTest() {
 		statusJson = Json.createObjectBuilder()
-				                  .add("fields", Json.createObjectBuilder()
-				                                        .add("code", "REAL")
-						                                 .add("name","réalisé")
-						                                 .add("color", "#00FF00").build())
-				                  .add("codeOnly", Json.createObjectBuilder()
-						                                   .add("code", "REAL").build())
-				                  .add("nameOnly", Json.createObjectBuilder()
-						                                   .add("name", "réalisé").build())
-				                  .add("colorOnly", Json.createObjectBuilder()
-						                                    .add("color", "#00FF00").build())
-				                  .add("codeAndName", Json.createObjectBuilder()
-						                                      .add("code", "REAL")
-						                                      .add("name", "réalisé").build())
-				                  .add("codeAndColor", Json.createObjectBuilder()
-						                                       .add("code", "REAL")
-						                                       .add("color", "#00FF00").build())
-				                  .add("nameAndColor", Json.createObjectBuilder()
-						                                       .add("name", "réalisé")
-						                                       .add("color", "#00FF00").build())
-				                  .add("allFields", Json.createObjectBuilder()
-						                                    .add("code", "REAL")
-						                                    .add("name", "réalisé")
-						                                    .add("color", "#00FF00").build())
-				                  .build();
+				             .add("codeOnly", Json.createObjectBuilder()
+						                              .add("code", CODE).build())
+				             .add("nameOnly", Json.createObjectBuilder()
+						                              .add("name", NAME).build())
+				             .add("colorOnly", Json.createObjectBuilder()
+						                               .add("color", COLOR).build())
+				             .add("codeAndName", Json.createObjectBuilder()
+						                                 .add("code", CODE)
+						                                 .add("name", NAME).build())
+				             .add("codeAndColor", Json.createObjectBuilder()
+						                                  .add("code", CODE)
+						                                  .add("color", COLOR).build())
+				             .add("nameAndColor", Json.createObjectBuilder()
+						                                  .add("name", NAME)
+						                                  .add("color", COLOR).build())
+				             .add("allFields", Json.createObjectBuilder()
+						                               .add("code", CODE)
+						                               .add("name", NAME)
+						                               .add("color", COLOR).build())
+				             .build();
 	}
 
 	@Test
@@ -78,9 +77,9 @@ public class OperationStatusTest {
 
 		// Then
 		assertAll("JSON constructor mapping validation",
-				() -> assertEquals(statusJson.getJsonObject("fields").getString("code"), status.getCode()),
-				() -> assertEquals(statusJson.getJsonObject("fields").getString("name"), status.getName()),
-				() -> assertEquals(statusJson.getJsonObject("fields").getString("color"), status.getColor())
+				() -> assertEquals(CODE, status.getCode()),
+				() -> assertEquals(NAME, status.getName()),
+				() -> assertEquals(COLOR, status.getColor())
 		);
 	}
 
@@ -88,14 +87,19 @@ public class OperationStatusTest {
 	@DisplayName("Fluent API: setters should return this instance")
 	void testFluentSetters() {
 		// Given
-		OperationStatus status = new OperationStatus(statusJson.getJsonObject("allFields"));
+		OperationStatus status = new OperationStatus();
+
+		OperationStatus result = status
+				                         .setCode(CODE)
+				                         .setName(NAME)
+				                         .setColor(COLOR);
 
 		// Then
 		assertAll("Fluent API validation",
-		//		() -> assertSame(status, statusJson.getJsonObject("allFields")),
-				() -> assertEquals(statusJson.getJsonObject("fields").getString("code"), status.getCode()),
-				() -> assertEquals(statusJson.getJsonObject("fields").getString("name"), status.getName()),
-				() -> assertEquals(statusJson.getJsonObject("fields").getString("color"), status.getColor())
+				() -> assertSame(status, result, "Setter must return the same instance"),
+				() -> assertEquals(CODE, status.getCode()),
+				() -> assertEquals(NAME, status.getName()),
+				() -> assertEquals(COLOR, status.getColor())
 		);
 	}
 
@@ -112,8 +116,8 @@ public class OperationStatusTest {
 
 		// Then
 		assertAll("JSON serialization validation",
-				() -> assertEquals(statusJson.getJsonObject("fields").getString("code"), json.getString("code")),
-				() -> assertEquals(statusJson.getJsonObject("fields").getString("name"), json.getString("name")),
+				() -> assertEquals(CODE, json.getString("code")),
+				() -> assertEquals(NAME, json.getString("name")),
 				() -> assertFalse(json.containsKey("color"), "Null color should be omitted"),
 				() -> assertEquals(2, json.size())
 		);
@@ -132,8 +136,8 @@ public class OperationStatusTest {
 		// Then
 		assertAll("toString content validation",
 				() -> assertThat(result).contains("OperationStatus"),
-				() -> assertThat(result).contains("code="+statusJson.getJsonObject("fields").getString("code")+"'"),
-				() -> assertThat(result).contains("name="+statusJson.getJsonObject("fields").getString("name")+"'")
+				() -> assertThat(result).contains("code=" + CODE ),
+				() -> assertThat(result).contains("name=" + NAME )
 		);
 	}
 }
