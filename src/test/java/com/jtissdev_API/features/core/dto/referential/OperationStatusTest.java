@@ -25,7 +25,7 @@ public class OperationStatusTest {
 	/**
 	 * Sets up a standard JsonObject for OperationStatus before each test.
 	 */
-	
+
 	@BeforeAll
 	@DisplayName("Setup JSON Objects for OperationStatusTest")
 	static void setUpTest() {
