@@ -77,9 +77,9 @@ public class OperationStatusTest {
 
 		// Then
 		assertAll("JSON constructor mapping validation",
-				() -> assertEquals(CODE, status.getCode()),
-				() -> assertEquals(NAME, status.getName()),
-				() -> assertEquals(COLOR, status.getColor())
+				() -> assertEquals(CODE, status.getCode(), "Code mapping failed"),
+				() -> assertEquals(NAME, status.getName(), "Name mapping failed"),
+				() -> assertEquals(COLOR, status.getColor(), "Color mapping failed")
 		);
 	}
 
@@ -119,7 +119,7 @@ public class OperationStatusTest {
 				() -> assertEquals(CODE, json.getString("code")),
 				() -> assertEquals(NAME, json.getString("name")),
 				() -> assertFalse(json.containsKey("color"), "Null color should be omitted"),
-				() -> assertEquals(2, json.size())
+				() -> assertEquals(2, json.size(), "JSON should contain exactly 2 keys")
 		);
 	}
 

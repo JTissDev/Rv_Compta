@@ -97,9 +97,9 @@ public class PaymentMethodTest {
 		// Then
 		assertAll("Fluent API validation",
 				() -> assertSame(method, result, "Setter must return the same instance"),
-				() -> assertEquals(CODE, method.getCode()),
-				() -> assertEquals(NAME, method.getName()),
-				() -> assertEquals(DESCRIPTION, method.getDescription())
+				() -> assertEquals(CODE, method.getCode(), "Code should be set"),
+				() -> assertEquals(NAME, method.getName(), "Name should be set"),
+				() -> assertEquals(DESCRIPTION, method.getDescription(), "Description should be set")
 		);
 	}
 
@@ -115,8 +115,8 @@ public class PaymentMethodTest {
 
 		// Then
 		assertAll("JSON serialization validation",
-				() -> assertEquals(CODE, json.getString("code")),
-				() -> assertEquals(NAME, json.getString("name")),
+				() -> assertEquals(CODE, json.getString("code"), "Code should be serialized"),
+				() -> assertEquals(NAME, json.getString("name"), "Name should be serialized"),
 				() -> assertFalse(json.containsKey("description"), "Null description should not be in JSON"),
 				() -> assertEquals(2, json.size(), "JSON should contain exactly 2 keys")
 		);
