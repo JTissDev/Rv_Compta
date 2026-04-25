@@ -48,7 +48,7 @@ public class TiersDataLoader {
 				Tiers tiers = new Tiers();
 
 				// Mapping: N_id (int) -> id (Long)
-				tiers.setId((long) obj.getInt("N_id"));
+				tiers.setId((Integer) obj.getInt("N_id"));
 
 				// Mapping: Nom_RaisonSociale -> name
 				tiers.setName(obj.getString("Nom_RaisonSociale", "Unknown"));

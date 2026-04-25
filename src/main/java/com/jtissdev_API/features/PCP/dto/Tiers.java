@@ -13,7 +13,7 @@ import jakarta.json.JsonObjectBuilder;
  * </p>
  *
  * @author J.Tiss
- * @version 1.1.0
+ * @version 1.1.1
  * @since v0.1
  */
 public class Tiers {
@@ -27,7 +27,7 @@ public class Tiers {
 	 *
 	 * @since 0.1
 	 */
-	private Long id;
+	private Integer id;
 
 	/**
 	 * Legal name or display name of the third party.
@@ -67,14 +67,13 @@ public class Tiers {
 	 * to the corresponding fields of the class.
 	 *
 	 * @param json
-	 *        the JSON object containing the data to populate the {@code Tiers} object
-	 *
+	 * 		the JSON object containing the data to populate the {@code Tiers} object
 	 * @since 0.4
 	 */
 	public Tiers(JsonObject json) {
 		this();
-		if (json.containsKey("id")) {
-			this.setId(json.getJsonNumber("id").longValue());
+		if (json.containsKey("id") && !json.isNull("id")) {
+			this.setId(json.getInt("id"));
 		}
 		if (json.containsKey("name")) {
 			this.setName(json.getString("name"));
@@ -141,7 +140,7 @@ public class Tiers {
 	 * 		the display name of the third party
 	 * @since 0.4
 	 */
-	public Tiers(Long Id, String name) {
+	public Tiers(Integer Id, String name) {
 		this.setName(name);
 		this.setId(Id);
 	}
@@ -159,7 +158,7 @@ public class Tiers {
 	 * @version 1.1
 	 * @since 0.1
 	 */
-	public Tiers(Long id, String name, String thirdPartyType) {
+	public Tiers(Integer id, String name, String thirdPartyType) {
 		this(name, thirdPartyType);
 		this.setId(id);
 	}
@@ -178,7 +177,7 @@ public class Tiers {
 	 * 		additional descriptive information about the third party
 	 * @since 0.4
 	 */
-	public Tiers(Long id, String name, String thirdPartyType, String description) {
+	public Tiers(Integer id, String name, String thirdPartyType, String description) {
 		this(id, name, thirdPartyType);
 		this.setDescription(description);
 	}
@@ -188,44 +187,14 @@ public class Tiers {
 	// =========================================================
 
 	/**
-	 * Creates a {@code Tiers} object from a JSON object by mapping its properties.
-	 *
-	 * @param json
-	 * 		the JSON object containing the data to populate the {@code Tiers} object
-	 * @return an instance of {@code Tiers} populated with data from the provided JSON object
-	 *
-	 * @since 0.4
-	 * @deprecated since 0.4 use {@link #Tiers(JsonObject)} instead.
-	 */
-	@Deprecated (since = "1.1.0", forRemoval = true)
-	public static Tiers fromJson(JsonObject json) {
-		Tiers tier = new Tiers();
-
-		if (json.containsKey("id")) {
-			tier.setId(json.getJsonNumber("id").longValue());
-		}
-		if (json.containsKey("name")) {
-			tier.setName(json.getString("name"));
-		}
-		if (json.containsKey("thirdPartyType")) {
-			tier.setThirdPartyType(json.getString("thirdPartyType"));
-		}
-		if (json.containsKey("description")) {
-			tier.setDescription(json.getString("description"));
-		}
-
-		return tier;
-	}
-
-	/**
 	 * Gets the technical unique identifier.
 	 *
 	 * @return the unique ID assigned by the database.
 	 *
-	 * @since 1.0.0
+	 * @since 0.1
 	 */
-	public Long getId() {
-		return id;
+	public Integer getId() {
+		return this.id;
 	}
 
 	/**
@@ -233,10 +202,14 @@ public class Tiers {
 	 *
 	 * @param id
 	 * 		the unique ID to set.
-	 * @since 1.0.0
+	 * @return the current {@code Tiers} instance for method chaining.
+	 *
+	 * @version 1.1
+	 * @since 0.1
 	 */
-	public void setId(Long id) {
+	public Tiers setId(Integer id) {
 		this.id = id;
+		return this;
 	}
 
 	/**
@@ -244,10 +217,11 @@ public class Tiers {
 	 *
 	 * @return the name used for reports and UI.
 	 *
-	 * @since 1.0.0
+	 * @version 1.0.1
+	 * @since 0.1
 	 */
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	/**
@@ -255,10 +229,14 @@ public class Tiers {
 	 *
 	 * @param name
 	 * 		the label to assign.
-	 * @since 1.0.0
+	 * @return the current {@code Tiers} instance for method chaining.
+	 *
+	 * @version 1.1.0
+	 * @since 0.1
 	 */
-	public void setName(String name) {
+	public Tiers setName(String name) {
 		this.name = name;
+		return this;
 	}
 
 	/**
@@ -266,10 +244,11 @@ public class Tiers {
 	 *
 	 * @return a string defining the entity role (e.g. VENDOR).
 	 *
-	 * @since 1.0.0
+	 * @version 1.0.1
+	 * @since 0.1
 	 */
 	public String getThirdPartyType() {
-		return thirdPartyType;
+		return this.thirdPartyType;
 	}
 
 	/**
@@ -277,10 +256,14 @@ public class Tiers {
 	 *
 	 * @param thirdPartyType
 	 * 		the category string.
-	 * @since 1.0.0
+	 * @return the current {@code Tiers} instance for method chaining.
+	 *
+	 * @version 1.1.0
+	 * @since 0.1
 	 */
-	public void setThirdPartyType(String thirdPartyType) {
+	public Tiers setThirdPartyType(String thirdPartyType) {
 		this.thirdPartyType = thirdPartyType;
+		return this;
 	}
 
 	/**
@@ -288,10 +271,11 @@ public class Tiers {
 	 *
 	 * @return a free text description or null.
 	 *
-	 * @since 1.0.0
+	 * @version 1.0.1
+	 * @since 0.1
 	 */
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	// =========================================================
@@ -303,10 +287,14 @@ public class Tiers {
 	 *
 	 * @param description
 	 * 		the information to store.
-	 * @since 1.0.0
+	 * @return the current {@code Tiers} instance for method chaining.
+	 *
+	 * @version 1.1.0
+	 * @since 0.1
 	 */
-	public void setDescription(String description) {
+	public Tiers setDescription(String description) {
 		this.description = description;
+		return this;
 	}
 
 	/**
@@ -314,17 +302,23 @@ public class Tiers {
 	 *
 	 * @return A {@link JsonObject} representing the third party.
 	 *
-	 * @version 1.0.0
-	 * @since 1.0.0
+	 * @version 1.1.0
+	 * @since 0.1
 	 */
 	public JsonObject toJson() {
 		JsonObjectBuilder builder = Json.createObjectBuilder();
-
-		builder.add("id", id != null ? id : -1);
-		builder.add("name", name != null ? name : "Unknown");
-		builder.add("thirdPartyType", thirdPartyType != null ? thirdPartyType : "MISC");
-		builder.add("description", description != null ? description : "");
-
+		if (this.getId() != null) {
+			builder.add("id", this.getId());
+		}
+		if (this.getName() != null) {
+			builder.add("name", this.getName());
+		}
+		if (this.getThirdPartyType() != null) {
+			builder.add("thirdPartyType", this.getThirdPartyType());
+		}
+		if (this.getDescription() != null) {
+			builder.add("description", this.getDescription());
+		}
 		return builder.build();
 	}
 
@@ -339,10 +333,42 @@ public class Tiers {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Tiers [id=").append(id)
-				.append(", name=").append(name)
-				.append(", thirdPartyType=").append(thirdPartyType)
-				.append(", description=").append(description).append("]");
+		builder.append("Tiers {id=").append(this.id)
+				.append(", name=").append(this.name)
+				.append(", thirdPartyType=").append(this.thirdPartyType)
+				.append(", description=").append(this.description).append("}");
 		return builder.toString();
 	}
+
+
+	/**
+	 * Creates a {@code Tiers} object from a JSON object by mapping its properties.
+	 *
+	 * @param json
+	 * 		the JSON object containing the data to populate the {@code Tiers} object
+	 * @return an instance of {@code Tiers} populated with data from the provided JSON object
+	 *
+	 * @since 0.4
+	 * @deprecated since 0.4 use {@link #Tiers(JsonObject)} instead.
+	 */
+	@Deprecated(since = "1.1.0", forRemoval = true)
+	public static Tiers fromJson(JsonObject json) {
+		Tiers tier = new Tiers();
+
+		if (json.containsKey("id") && !json.isNull("id")) {
+			tier.setId(json.getInt("id"));
+		}
+		if (json.containsKey("name")) {
+			tier.setName(json.getString("name"));
+		}
+		if (json.containsKey("thirdPartyType")) {
+			tier.setThirdPartyType(json.getString("thirdPartyType"));
+		}
+		if (json.containsKey("description")) {
+			tier.setDescription(json.getString("description"));
+		}
+
+		return tier;
+	}
+
 }

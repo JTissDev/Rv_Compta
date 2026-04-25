@@ -28,7 +28,7 @@ import jakarta.json.JsonObjectBuilder;
  *
  * @author jtiss
  * @since 0.3
- * @version 1.2.0
+ * @version 1.2.1
  */
 public class Contacts {
 
