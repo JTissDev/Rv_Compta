@@ -202,7 +202,7 @@ Ce projet est distribué sous licence **MIT**. Vous êtes libre de l'utiliser, d
 Les contributions sont les bienvenues ! Pour maintenir la qualité du code :
 
 1. **Forkez** le projet.
-2. Créez une **branche** dédiée (`git checkout -b feature/nom-de-la-feature`).
+2. Créez une **branche** dédiée (`git checkout -b feature/name-de-la-feature`).
 3. Effectuez vos modifications en respectant la structure **Hybride Domaine**.
 4. Assurez-vous que les **tests unitaires** passent (`mvn test`).
 5. Ouvrez une **Pull Request** détaillée.

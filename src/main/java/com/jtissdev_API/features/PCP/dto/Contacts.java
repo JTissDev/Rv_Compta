@@ -27,8 +27,8 @@ import jakarta.json.JsonObjectBuilder;
  * All fields are optional; callers can choose which attributes to set.
  *
  * @author jtiss
- * @since 1.1.0
- * @version 1.0.0
+ * @since 0.3
+ * @version 1.2.1
  */
 public class Contacts {
 
@@ -41,9 +41,9 @@ public class Contacts {
      * <p>
      * This field is not serialized in the JSON representation.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
-    private Long id;
+    private Integer id;
 
     /**
      * Contact's display name.
@@ -51,14 +51,14 @@ public class Contacts {
      * This can be a person name (e.g. "Jane Doe") or an entity name
      * (e.g. "ACME Corp. - Sales Department").
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String name;
 
     /**
      * Primary email address of the contact.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String email;
 
@@ -68,21 +68,21 @@ public class Contacts {
      * It is recommended to store the number in international
      * format when possible (e.g. {@code +1 555 123 4567}).
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String phone;
 
     /**
      * Optional mobile (cell) phone number of the contact.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String mobile;
 
     /**
      * Optional company or organization name the contact belongs to.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String company;
 
@@ -91,35 +91,35 @@ public class Contacts {
      * <p>
      * For example: {@code "Accountant"}, {@code "Sales Manager"}, etc.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String role;
 
     /**
      * Optional street address line of the contact.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String address;
 
     /**
      * Optional ZIP or postal code of the contact.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String zipCode;
 
     /**
      * Optional city name for the contact's address.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String city;
 
     /**
      * Optional country name or ISO country code for the contact.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String country;
 
@@ -129,7 +129,7 @@ public class Contacts {
      * This field can be used to store any additional information that
      * does not fit other structured fields.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     private String notes;
 
@@ -142,10 +142,60 @@ public class Contacts {
      * <p>
      * All fields are initialized to {@code null}.
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public Contacts() {
         // Default constructor
+    }
+
+    /**
+     * Constructs a new {@code Contacts} instance using the provided {@code JsonObject}.
+     * <p>
+     * This constructor initializes an empty {@code Contacts} instance and populates
+     * its fields from the given JSON object using the {@code fromJson} method.
+     *
+     * @param json the JSON object containing the contact data; must not be {@code null}
+     *
+     * @since 0.4
+     */
+    public Contacts( JsonObject json ) {
+        this();
+        if (json.containsKey("id") && !json.isNull("id")) {
+            this.setId(json.getInt("id"));
+        }
+        if (json.containsKey("name")) {
+            this.setName(json.getString("name", null));
+        }
+        if (json.containsKey("email")) {
+            this.setEmail(json.getString("email", null));
+        }
+        if (json.containsKey("phone")) {
+            this.setPhone(json.getString("phone", null));
+        }
+        if (json.containsKey("mobile")) {
+            this.setMobile(json.getString("mobile", null));
+        }
+        if (json.containsKey("company")) {
+            this.setCompany(json.getString("company", null));
+        }
+        if (json.containsKey("role")) {
+            this.setRole(json.getString("role", null));
+        }
+        if (json.containsKey("address")) {
+            this.setAddress(json.getString("address", null));
+        }
+        if (json.containsKey("zipCode")) {
+            this.setZipCode(json.getString("zipCode", null));
+        }
+        if (json.containsKey("city")) {
+            this.setCity(json.getString("city", null));
+        }
+        if (json.containsKey("country")) {
+            this.setCountry(json.getString("country", null));
+        }
+        if (json.containsKey("notes")) {
+            this.setNotes(json.getString("notes", null));
+        }
     }
 
     /**
@@ -166,7 +216,7 @@ public class Contacts {
      *
      * @since 0.4
      */
-    public Contacts(Long Id, String name) {
+    public Contacts(Integer Id, String name) {
         this(name);
         this.setId(Id);
     }
@@ -181,9 +231,9 @@ public class Contacts {
      * @param phone   primary phone number
      * @param company company or organization name
      *
-     * @since 1.1.0
+     * @since 0.3
      */
-    public Contacts(Long id,
+    public Contacts(Integer id,
                     String name,
                     String email,
                     String phone,
@@ -211,9 +261,9 @@ public class Contacts {
      * @param country  country name or ISO code
      * @param notes    free-text notes
      *
-     * @since 1.1.0
+     * @since 0.3
      */
-    public Contacts(Long id,
+    public Contacts(Integer id,
                     String name,
                     String email,
                     String phone,
@@ -240,7 +290,7 @@ public class Contacts {
     }
 
     // =========================================================
-    // == ACCESSORS & MUTATORS                                ==
+    // == ACCESSORS & MUTATORS (FLUENT API)                   ==
     // =========================================================
 
     /**
@@ -248,21 +298,24 @@ public class Contacts {
      *
      * @return the technical identifier, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
-    public Long getId() {
-        return id;
+    public Integer getId() {
+        return this.id;
     }
 
     /**
-     * Sets the technical identifier.
+     * Sets the technical identifier for the contact.
      *
-     * @param id new technical identifier
-     *
-     * @since 1.1.0
+     * @param id the new technical identifier to set; may be {@code null}
+     * @return the updated {@code Contacts} instance
+     * 
+     * @since 0.3
+     * @version 1.1
      */
-    public void setId(Long id) {
+    public Contacts setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     /**
@@ -270,21 +323,25 @@ public class Contacts {
      *
      * @return the display name, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
      * Sets the contact's display name.
+     * This method updates the display name of the contact. 
+     * Use this to modify or set the name of a contact entity.
      *
-     * @param name new display name
+     * @param name the new display name for the contact; must not be null or empty
      *
-     * @since 1.1.0
+     * @since 0.3
+     * @version 1.1
      */
-    public void setName(String name) {
+    public Contacts setName(String name) {
         this.name = name;
+        return this;
     }
 
     /**
@@ -292,21 +349,25 @@ public class Contacts {
      *
      * @return the email address, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     /**
      * Sets the primary email address of the contact.
+     * This method allows you to assign or update the email address for a contact.
+     * It ensures the email is stored correctly, enabling future retrieval or communication needs.
      *
      * @param email new email address
      *
-     * @since 1.1.0
+     * @since 0.3
+     * @version 1.1
      */
-    public void setEmail(String email) {
+    public Contacts setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     /**
@@ -314,21 +375,26 @@ public class Contacts {
      *
      * @return the phone number, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     /**
      * Sets the primary phone number of the contact.
+     * <p>
+     * This method allows setting or updating the primary phone number
+     * for the contact instance.
      *
      * @param phone new phone number
      *
-     * @since 1.1.0
+     * @since 0.3
+     * @version 1.1
      */
-    public void setPhone(String phone) {
+    public Contacts setPhone(String phone) {
         this.phone = phone;
+        return this;
     }
 
     /**
@@ -336,21 +402,26 @@ public class Contacts {
      *
      * @return the mobile phone number, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getMobile() {
-        return mobile;
+        return this.mobile;
     }
 
     /**
      * Sets the mobile phone number of the contact.
+     * <p>
+     * This method updates or sets the mobile phone number for a contact entity.
+     * Version {@code 1.1} ensures consistent storage of the mobile phone number.
      *
      * @param mobile new mobile phone number
      *
-     * @since 1.1.0
+     * @since 0.3
+     * @version 1.1
      */
-    public void setMobile(String mobile) {
+    public Contacts setMobile(String mobile) {
         this.mobile = mobile;
+        return this;
     }
 
     /**
@@ -358,21 +429,26 @@ public class Contacts {
      *
      * @return the company name, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getCompany() {
-        return company;
+        return this.company;
     }
 
     /**
      * Sets the company or organization name.
      *
+     * This method updates or assigns the company/organization name associated with a contact.
+     * Use this to modify or set the company details for the contact entity.
+     *
      * @param company new company name
      *
-     * @since 1.1.0
+     * @since 0.3
+     * @version 1.1
      */
-    public void setCompany(String company) {
+    public Contacts setCompany(String company) {
         this.company = company;
+        return this;
     }
 
     /**
@@ -380,21 +456,24 @@ public class Contacts {
      *
      * @return the role, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getRole() {
-        return role;
+        return this.role;
     }
 
     /**
      * Sets the role or job title of the contact.
+     * This method updates the role or job title of a contact and reflects version 1.1 of the function.
      *
      * @param role new role or job title
      *
-     * @since 1.1.0
+     * @since 0.3
+     * @version 1.1
      */
-    public void setRole(String role) {
+    public Contacts setRole(String role) {
         this.role = role;
+        return this;
     }
 
     /**
@@ -402,21 +481,26 @@ public class Contacts {
      *
      * @return the street address, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     /**
      * Sets the street address of the contact.
+     * This method updates the address of the contact and ensures
+     * proper storage for the contact's street address.
+     * It reflects version 1.1 of the function, providing better clarity.
      *
      * @param address new street address
      *
-     * @since 1.1.0
+     * @since 0.3
+     * @version 1.1
      */
-    public void setAddress(String address) {
+    public Contacts setAddress(String address) {
         this.address = address;
+        return this;
     }
 
     /**
@@ -424,21 +508,26 @@ public class Contacts {
      *
      * @return the ZIP/postal code, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getZipCode() {
-        return zipCode;
+        return this.zipCode;
     }
 
     /**
      * Sets the ZIP or postal code of the contact.
      *
+     * This method updates the ZIP or postal code for the contact entity.
+     * It ensures consistent storage and enables effective retrieval of the postal information.
+     *
      * @param zipCode new ZIP/postal code
      *
-     * @since 1.1.0
+     * @since 0.3
+     * @version 1.1
      */
-    public void setZipCode(String zipCode) {
+    public Contacts setZipCode(String zipCode) {
         this.zipCode = zipCode;
+        return this;
     }
 
     /**
@@ -446,21 +535,26 @@ public class Contacts {
      *
      * @return the city name, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getCity() {
-        return city;
+        return this.city;
     }
 
     /**
      * Sets the city of the contact.
+     * This method updates the city name for the contact entity. 
+     * It reflects version 1.1 of the function, ensuring proper handling and 
+     * storage of city information, consistent with other contact details.
      *
      * @param city new city name
      *
-     * @since 1.1.0
+     * @since 0.3
+     * @version 1.1
      */
-    public void setCity(String city) {
+    public Contacts setCity(String city) {
         this.city = city;
+        return this;
     }
 
     /**
@@ -468,21 +562,26 @@ public class Contacts {
      *
      * @return the country name or code, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getCountry() {
-        return country;
+        return this.country;
     }
 
     /**
      * Sets the country of the contact.
+     * This method updates the country field of the contact instance.
+     * It allows for specifying the country name or ISO code associated with the contact.
+     * Version 1.1 improves the documentation for better clarity and usability.
      *
      * @param country new country name or code
      *
-     * @since 1.1.0
+     * @since 0.3
+     * @version 1.1
      */
-    public void setCountry(String country) {
+    public Contacts setCountry(String country) {
         this.country = country;
+        return this;
     }
 
     /**
@@ -490,21 +589,26 @@ public class Contacts {
      *
      * @return the notes, or {@code null} if not set
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public String getNotes() {
-        return notes;
+        return this.notes;
     }
 
     /**
      * Sets the free-text notes associated with the contact.
+     * <p>
+     * This method assigns or updates the notes for a contact entity.
+     * Version 1.1 ensures better clarity and explanation for this functionality.
      *
      * @param notes new notes
      *
-     * @since 1.1.0
+     * @since 0.3
+     * @version 1.1
      */
-    public void setNotes(String notes) {
+    public Contacts setNotes(String notes) {
         this.notes = notes;
+        return this;
     }
 
     // =========================================================
@@ -519,7 +623,7 @@ public class Contacts {
      *
      * @return a {@link JsonObject} representing this instance
      *
-     * @since 1.1.0
+     * @since 0.3
      */
     public JsonObject toJson() {
         JsonObjectBuilder builder = Json.createObjectBuilder();
@@ -563,6 +667,34 @@ public class Contacts {
     }
 
     /**
+     * Returns a string representation of this instance,
+     * mainly intended for debugging and logging purposes.
+     *
+     * @return a string representing this {@code Contacts}
+     *
+     * @since 0.3
+     * @version 1.4
+     */
+    @Override
+    public String toString() {
+        return "Contacts{" +
+                "id=" + this.id +
+                ", name=" + this.name +
+                ", email=" + this.email +
+                ", phone=" + this.phone +
+                ", mobile=" + this.mobile +
+                ", company=" + this.company +
+                ", role=" + this.role +
+                ", address=" + this.address +
+                ", zipCode=" + this.zipCode +
+                ", city=" + this.city +
+                ", country=" + this.country +
+                ", notes=" + this.notes +
+                '}';
+    }
+
+
+    /**
      * Creates a new {@code Contacts} instance from the given JSON object.
      * <p>
      * This method expects the same JSON structure as produced by {@link #toJson()}.
@@ -571,8 +703,10 @@ public class Contacts {
      * @param json the JSON object to convert; must not be {@code null}
      * @return a new {@code Contacts} instance populated from the JSON object
      *
-     * @since 1.1.0
+     * @since 0.3
+     * @deprecated since 1.3
      */
+    @Deprecated ( since = "1.4" , forRemoval = true)
     public static Contacts fromJson(JsonObject json) {
         Contacts contact = new Contacts();
 
@@ -613,33 +747,4 @@ public class Contacts {
         return contact;
     }
 
-    // =========================================================
-    // == UTILITY METHODS                                     ==
-    // =========================================================
-
-    /**
-     * Returns a string representation of this instance,
-     * mainly intended for debugging and logging purposes.
-     *
-     * @return a string representing this {@code Contacts}
-     *
-     * @since 1.1.0
-     */
-    @Override
-    public String toString() {
-        return "Contacts{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", company='" + company + '\'' +
-                ", role='" + role + '\'' +
-                ", address='" + address + '\'' +
-                ", zipCode='" + zipCode + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                ", notes='" + notes + '\'' +
-                '}';
-    }
 }

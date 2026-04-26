@@ -2,10 +2,7 @@ package com.jtissdev_API.features.core.dto;
 
 import com.jtissdev_API.features.core.dto.referential.OperationStatus;
 import com.jtissdev_API.features.core.dto.referential.PaymentMethod;
-import jakarta.json.Json;
-import jakarta.json.JsonArrayBuilder;
-import jakarta.json.JsonObject;
-import jakarta.json.JsonObjectBuilder;
+import jakarta.json.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +53,40 @@ public class ReferentialCoreDTO {
 		this.paymentMethods = new ArrayList<>();
 	}
 
+	/**
+	 * Constructs a {@code ReferentialCoreDTO} instance with the specified lists of
+	 * operation statuses and payment methods.
+	 *
+	 * @param operationStatuses the list of operation statuses to initialize the instance with
+	 * @param paymentMethods the list of payment methods to initialize the instance with
+	 *
+	 * @since 0.4
+	 */
+	public ReferentialCoreDTO(List<OperationStatus> operationStatuses, List<PaymentMethod> paymentMethods) {
+		this();
+		this.setOperationStatuses(operationStatuses);
+		this.setPaymentMethods(paymentMethods);
+
+	}
+
+	public ReferentialCoreDTO(JsonObject json) {
+		this();
+		if(json.containsKey("operationStatuses")) {
+			JsonArray statusArray = json.getJsonArray("operationStatuses");
+				for (JsonObject statusJson : statusArray.getValuesAs(JsonObject.class)) {
+					OperationStatus status = new OperationStatus(statusJson);
+						this.addOperationStatus(status);
+				}
+		}
+		if(json.containsKey("paymentMethods")) {
+			JsonArray paymentArray = json.getJsonArray("paymentMethods");
+				for (JsonObject paymentJson : paymentArray.getValuesAs(JsonObject.class)) {
+					PaymentMethod payment = new PaymentMethod(paymentJson);
+						this.addPaymentMethod(payment);
+				}
+		}
+	}
+
 	// =========================================================
 	// == GETTERS / SETTERS                                   ==
 	// =========================================================
@@ -103,7 +134,7 @@ public class ReferentialCoreDTO {
 	 *
 	 * @since 0.2.0
 	 */
-	public ReferentialCoreDTO setPaymentMethods(List<List<PaymentMethod>> paymentMethods) {
+	public ReferentialCoreDTO setPaymentMethods(List<PaymentMethod> paymentMethods) {
 		// Note: correction logique pour correspondre au type du champ
 		this.paymentMethods = paymentMethods != null ? (List) paymentMethods : new ArrayList<>();
 		return this;

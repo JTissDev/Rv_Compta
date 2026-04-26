@@ -1,67 +1,141 @@
 package com.jtissdev_API.features.core.dto.referential;
 
+import jakarta.json.Json;
 import jakarta.json.JsonObject;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for the {@link PaymentMethod} DTO.
+ * Verifies the fluent API, JSON serialization and data integrity.
  *
- * @author J.Tiss
- * @since 0.2.0
+ * @author jtiss
+ * @version 1.0.0
+ * @since 0.4
  */
-class PaymentMethodTest {
+public class PaymentMethodTest {
 
-	// =========================================================
-	// == TEST CASES                                          ==
-	// =========================================================
+	private static final String CODE = "CB";
+	private static final String NAME = "Carte Bancaire";
+	private static final String DESCRIPTION = "Payement par Carte Bancaire";
+	
+	private static JsonObject paymentMethodJson;
 
-	@Test
-	@DisplayName("Should correctly initialize fields via constructor")
-	void testConstructorAndGetters() {
-		// Given
-		String code = "CHQ";
-		String nom = "Chèque";
-		String desc = "Paiement par chèque bancaire";
-
-		// When
-		PaymentMethod method = new PaymentMethod(code, nom, desc);
-
-		// Then
-		assertEquals(code, method.getCode());
-		assertEquals(nom, method.getNom());
-		assertEquals(desc, method.getDescription());
+	/**
+	 * Sets up a standard JsonObject for PaymentMethod before each test.
+	 */
+	@BeforeAll
+	@DisplayName("Setup JSON Object for PaymentMethod")
+	static void setUpTest() {
+		paymentMethodJson = Json.createObjectBuilder()
+				                         
+				                         .add("codeOnly", Json.createObjectBuilder()
+						                                          .add("code", CODE).build())
+				                         .add("nameOnly", Json.createObjectBuilder()
+						                                          .add("name", NAME).build())
+				                         .add("descriptionOnly", Json.createObjectBuilder()
+						                                                 .add("description", DESCRIPTION).build())
+										 .add("codeAndName", Json.createObjectBuilder()
+												                     .add("code", CODE)
+												                     .add("name", NAME).build())
+										 .add("codeAndDescription", Json.createObjectBuilder()
+												                            .add("code", CODE)
+												                            .add("description", DESCRIPTION).build())
+										 .add("nameAndDescription", Json.createObjectBuilder()
+												                            .add("name", NAME)
+												                            .add("description", DESCRIPTION).build())
+				                         .add("allFields", Json.createObjectBuilder()
+						                                           .add("code", CODE)
+						                                           .add("name", NAME)
+						                                           .add("description", DESCRIPTION).build())
+				                         .build();
 	}
 
 	@Test
-	@DisplayName("Should support fluent chaining")
+	@DisplayName("Test Empty Constructor")
+	void testEmptyConstructor() {
+		// Given & When
+		PaymentMethod method = new PaymentMethod();
+
+		// Then
+		assertAll("Empty constructor state validation",
+				() -> assertNull(method.getCode(), "Code should be null"),
+				() -> assertNull(method.getName(), "Name should be null"),
+				() -> assertNull(method.getDescription(), "Description should be null")
+		);
+	}
+
+	@Test
+	@DisplayName("Test JSON Constructor")
+	void testJsonConstructor() {
+		// Given & When
+		PaymentMethod method = new PaymentMethod(paymentMethodJson.getJsonObject("allFields"));
+
+		// Then
+		assertAll("JSON constructor mapping validation",
+				() -> assertEquals(CODE, method.getCode(), "Code mapping failed"),
+				() -> assertEquals(NAME, method.getName(), "Name mapping failed"),
+				() -> assertEquals(DESCRIPTION, method.getDescription(), "Description mapping failed")
+		);
+	}
+
+	@Test
+	@DisplayName("Fluent API: setters should update fields and return this instance")
 	void testFluentSetters() {
 		// Given
 		PaymentMethod method = new PaymentMethod();
 
-		// When
-		method.setCode("CB").setNom("Carte").setDescription("Carte bleue");
+		PaymentMethod result = method
+				                       .setCode(CODE)
+				                       .setName(NAME)
+				                       .setDescription(DESCRIPTION);
 
 		// Then
-		assertEquals("CB", method.getCode());
-		assertEquals("Carte", method.getNom());
+		assertAll("Fluent API validation",
+				() -> assertSame(method, result, "Setter must return the same instance"),
+				() -> assertEquals(CODE, method.getCode(), "Code should be set"),
+				() -> assertEquals(NAME, method.getName(), "Name should be set"),
+				() -> assertEquals(DESCRIPTION, method.getDescription(), "Description should be set")
+		);
 	}
 
 	@Test
-	@DisplayName("Should convert to valid JsonObject")
-	void testToJson() {
+	@DisplayName("toJson: should serialize all non-null fields")
+	void testToJsonSerialization() {
 		// Given
-		PaymentMethod method = new PaymentMethod("VIR", "Virement", "Virement SEPA");
+		PaymentMethod method = new PaymentMethod(paymentMethodJson.getJsonObject("codeAndName"));
+		// description is left null
 
 		// When
 		JsonObject json = method.toJson();
 
 		// Then
-		assertNotNull(json);
-		assertEquals("VIR", json.getString("code"));
-		assertEquals("Virement", json.getString("nom"));
-		assertEquals("Virement SEPA", json.getString("description"));
+		assertAll("JSON serialization validation",
+				() -> assertEquals(CODE, json.getString("code"), "Code should be serialized"),
+				() -> assertEquals(NAME, json.getString("name"), "Name should be serialized"),
+				() -> assertFalse(json.containsKey("description"), "Null description should not be in JSON"),
+				() -> assertEquals(2, json.size(), "JSON should contain exactly 2 keys")
+		);
+	}
+
+	@Test
+	@DisplayName("toString: should contain class name and field values")
+	void testToString() {
+		// Given
+		PaymentMethod method = new PaymentMethod(paymentMethodJson.getJsonObject("codeAndName"));
+
+		// When
+		String result = method.toString();
+
+		// Then
+		assertAll("toString content validation",
+				() -> assertThat(result).contains("PaymentMethod"),
+				() -> assertThat(result).contains("code=" + CODE),
+				() -> assertThat(result).contains("name=" + NAME)
+		);
 	}
 }

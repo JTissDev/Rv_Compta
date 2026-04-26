@@ -1,5 +1,9 @@
 package com.jtissdev_API.features.compta.dto;
 
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonObjectBuilder;
+
 import java.math.BigDecimal;
 
 /**
@@ -13,7 +17,7 @@ import java.math.BigDecimal;
  *
  * @author J.Tiss
  * @since 0.3.0
- * @version 1.1.0
+ * @version 1.2.0
  */
 public class MovementDTO {
 
@@ -23,20 +27,6 @@ public class MovementDTO {
 	 * @since 0.3.0
 	 */
 	private Long id;
-
-	/**
-	 * Identifier of the Tiers involved in this specific movement.
-	 * References the 'N_id' in 'tab_tiers'.
-	 * @since 0.3.0
-	 */
-	private Long tiersId;
-
-	/**
-	 * Technical code of the payment method used for this specific line.
-	 * References 'ref_moyen_paiement'.
-	 * @since 0.3.0
-	 */
-	private String paiementCode;
 
 	/**
 	 * Represents the general accounting code associated with a movement.
@@ -57,19 +47,33 @@ public class MovementDTO {
 	 * References 'tab_detail_comptable'.
 	 * @since 0.3.0
 	 */
-	private String codeDetailsComptable;
+	private String accountDetailCode;
+
+	/**
+	 * Identifier of the Tiers involved in this specific movement.
+	 * References the 'N_id' in 'tab_tiers'.
+	 * @since 0.3.0
+	 */
+	private Long tiersId;
+
+	/**
+	 * Technical code of the payment method used for this specific line.
+	 * References 'ref_moyen_paiement'.
+	 * @since 0.3.0
+	 */
+	private String paiementCode;
 
 	/**
 	 * The amount to be debited. Initialized to Zero.
 	 * @since 0.3.0
 	 */
-	private BigDecimal montantDebit;
+	private BigDecimal debitAmount;
 
 	/**
 	 * The amount to be credited. Initialized to Zero.
 	 * @since 0.3.0
 	 */
-	private BigDecimal montantCredit;
+	private BigDecimal creditAmount;
 
 	/**
 	 * Specific commentary or description for this individual movement line.
@@ -88,8 +92,28 @@ public class MovementDTO {
 	 * @since 0.3.0
 	 */
 	public MovementDTO() {
-		this.montantDebit = BigDecimal.ZERO;
-		this.montantCredit = BigDecimal.ZERO;
+		this.debitAmount = BigDecimal.ZERO;
+		this.creditAmount = BigDecimal.ZERO;
+	}
+
+	public MovementDTO(JsonObject json) {
+		this();
+		if (json.containsKey("id")) {
+			this.setId(json.getJsonNumber("id").longValue());
+		}
+		if (json.containsKey("tiersId")) {
+			this.setTiersId(json.getJsonNumber("tiersId").longValue());
+		}
+		if (json.containsKey("paiementCode")) {
+			this.setPaiementCode(json.getString("paiementCode"));
+		}
+
+		if (json.containsKey("accountDetailCode")) {
+			this.setAccountDetailCode(json.getString("accountDetailCode"));
+		}
+		if (json.containsKey("debitAmount")) {
+			this.setDebitAmount(json.getJsonNumber("debitAmount").bigDecimalValue());
+		}
 	}
 
 	/**
@@ -98,20 +122,20 @@ public class MovementDTO {
 	 *
 	 * @param tiersId              the ID of the associated tiers
 	 * @param paiementCode         the payment method code
-	 * @param codeDetailsComptable the PCP detail code
-	 * @param montantDebit         the debit amount
-	 * @param montantCredit        the credit amount
+	 * @param accountDetailCode the PCP detail code
+	 * @param debitAmount         the debit amount
+	 * @param creditAmount        the credit amount
 	 * @param description          the line description
 	 * @since 0.3.0
 	 */
-	public MovementDTO(Long tiersId, String paiementCode, String codeDetailsComptable,
-	                   BigDecimal montantDebit, BigDecimal montantCredit, String description) {
+	public MovementDTO(Long tiersId, String paiementCode, String accountDetailCode,
+	                   BigDecimal debitAmount, BigDecimal creditAmount, String description) {
 		this();
 		this.setTiersId( tiersId );
 		this.setPaiementCode(paiementCode) ;
-		this.codeDetailsComptable = codeDetailsComptable;
-		this.montantDebit = montantDebit;
-		this.montantCredit = montantCredit;
+		this.accountDetailCode = accountDetailCode;
+		this.debitAmount = debitAmount;
+		this.creditAmount = creditAmount;
 		this.description = description;
 	}
 
@@ -122,15 +146,15 @@ public class MovementDTO {
 	 * @param id                   the technical identifier
 	 * @param tiersId              the ID of the associated tiers
 	 * @param paiementCode         the payment method code
-	 * @param codeDetailsComptable the PCP detail code
-	 * @param montantDebit         the debit amount
-	 * @param montantCredit        the credit amount
+	 * @param accountDetailCode the PCP detail code
+	 * @param debitAmount         the debit amount
+	 * @param creditAmount        the credit amount
 	 * @param description          the line description
 	 * @since 0.3.0
 	 */
-	public MovementDTO(Long id, Long tiersId, String paiementCode, String codeDetailsComptable,
-	                   BigDecimal montantDebit, BigDecimal montantCredit, String description) {
-		this(tiersId, paiementCode, codeDetailsComptable, montantDebit, montantCredit, description);
+	public MovementDTO(Long id, Long tiersId, String paiementCode, String accountDetailCode,
+	                   BigDecimal debitAmount, BigDecimal creditAmount, String description) {
+		this(tiersId, paiementCode, accountDetailCode, debitAmount, creditAmount, description);
 		this.id = id;
 	}
 
@@ -140,18 +164,18 @@ public class MovementDTO {
 	 *
 	 * @param tiersId              the ID of the associated tiers
 	 * @param paiementCode         the payment method code
-	 * @param codeDetailsComptable the PCP detail code
+	 * @param accountDetailCode the PCP detail code
 	 * @since 0.3.0
 	 */
-	public MovementDTO(Long tiersId, String paiementCode, String codeDetailsComptable) {
+	public MovementDTO(Long tiersId, String paiementCode, String accountDetailCode) {
 		this();
 		this.tiersId = tiersId;
 		this.paiementCode = paiementCode;
-		this.codeDetailsComptable = codeDetailsComptable;
+		this.accountDetailCode = accountDetailCode;
 	}
 
 	// =========================================================
-	// == GETTERS / SETTERS (Fluent API)                      ==
+	// == GETTERS  (Fluent API)                      ==
 	// =========================================================
 
 	/**
@@ -159,8 +183,80 @@ public class MovementDTO {
 	 * @since 0.3.0
 	 */
 	public Long getId() {
-		return id;
+		return this.id;
 	}
+
+	/**
+	 * Retrieves the accounting code associated with this instance.
+	 *
+	 * @return the accounting code as a string.
+	 * @since 0.4
+	 */
+	public String getAccountingCode() {
+		return this.accountingCode;
+	}
+
+	/**
+	 * Retrieves the complementary accounting code associated with this instance.
+	 *
+	 * @return the complementary accounting code as a string.
+	 * @since 0.4
+	 */
+	public String getComplementaryAccountingCode() {
+		return this.complementaryAccountingCode;
+	}
+
+	/**
+	 * @return the PCP detail code.
+	 * @since 0.3.0
+	 */
+	public String getAccountDetailCode() {
+		return accountDetailCode;
+	}
+
+	/**
+	 * @return the associated Tiers ID.
+	 * @since 0.3.0
+	 */
+	public Long getTiersId() {
+		return tiersId;
+	}
+
+	/**
+	 * @return the payment method code.
+	 * @since 0.3.0
+	 */
+	public String getPaiementCode() {
+		return paiementCode;
+	}
+
+	/**
+	 * @return the debit amount as {@link BigDecimal}.
+	 * @since 0.3.0
+	 */
+	public BigDecimal getDebitAmount() {
+		return debitAmount;
+	}
+
+	/**
+	 * @return the credit amount as {@link BigDecimal}.
+	 * @since 0.3.0
+	 */
+	public BigDecimal getCreditAmount() {
+		return creditAmount;
+	}
+
+	/**
+	 * @return the line description.
+	 * @since 0.3.0
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	// =========================================================
+	// == SETTERS  (Fluent API)                      ==
+	// =========================================================
 
 	/**
 	 * @param id the technical ID to set.
@@ -173,11 +269,33 @@ public class MovementDTO {
 	}
 
 	/**
-	 * @return the associated Tiers ID.
+	 * Sets the accounting code associated with this instance.
+	 *
+	 * @param accountingCode the accounting code to be assigned
+	 * @since 0.4
+	 */
+	public void setAccountingCode(String accountingCode) {
+		this.accountingCode = accountingCode;
+	}
+
+	/**
+	 * Assigns a complementary accounting code to this instance.
+	 *
+	 * @param complementaryAccountingCode the complementary accounting code to set
+	 * @since 0.4
+	 */
+	public void setComplementaryAccountingCode(String complementaryAccountingCode) {
+		this.complementaryAccountingCode = complementaryAccountingCode;
+	}
+
+	/**
+	 * @param accountDetailCode the code from tab_detail_comptable.
+	 * @return this instance for chaining.
 	 * @since 0.3.0
 	 */
-	public Long getTiersId() {
-		return tiersId;
+	public MovementDTO setAccountDetailCode(String accountDetailCode) {
+		this.accountDetailCode = accountDetailCode;
+		return this;
 	}
 
 	/**
@@ -191,14 +309,6 @@ public class MovementDTO {
 	}
 
 	/**
-	 * @return the payment method code.
-	 * @since 0.3.0
-	 */
-	public String getPaiementCode() {
-		return paiementCode;
-	}
-
-	/**
 	 * @param paiementCode the code (e.g., 'CB') to set.
 	 * @return this instance for chaining.
 	 * @since 0.3.0
@@ -209,65 +319,23 @@ public class MovementDTO {
 	}
 
 	/**
-	 * @return the PCP detail code.
-	 * @since 0.3.0
-	 */
-	public String getCodeDetailsComptable() {
-		return codeDetailsComptable;
-	}
-
-	/**
-	 * @param codeDetailsComptable the code from tab_detail_comptable.
+	 * @param debitAmount the amount to debit.
 	 * @return this instance for chaining.
 	 * @since 0.3.0
 	 */
-	public MovementDTO setCodeDetailsComptable(String codeDetailsComptable) {
-		this.codeDetailsComptable = codeDetailsComptable;
+	public MovementDTO setDebitAmount(BigDecimal debitAmount) {
+		this.debitAmount = debitAmount;
 		return this;
 	}
 
 	/**
-	 * @return the debit amount as {@link BigDecimal}.
-	 * @since 0.3.0
-	 */
-	public BigDecimal getMontantDebit() {
-		return montantDebit;
-	}
-
-	/**
-	 * @param montantDebit the amount to debit.
+	 * @param creditAmount the amount to credit.
 	 * @return this instance for chaining.
 	 * @since 0.3.0
 	 */
-	public MovementDTO setMontantDebit(BigDecimal montantDebit) {
-		this.montantDebit = montantDebit;
+	public MovementDTO setCreditAmount(BigDecimal creditAmount) {
+		this.creditAmount = creditAmount;
 		return this;
-	}
-
-	/**
-	 * @return the credit amount as {@link BigDecimal}.
-	 * @since 0.3.0
-	 */
-	public BigDecimal getMontantCredit() {
-		return montantCredit;
-	}
-
-	/**
-	 * @param montantCredit the amount to credit.
-	 * @return this instance for chaining.
-	 * @since 0.3.0
-	 */
-	public MovementDTO setMontantCredit(BigDecimal montantCredit) {
-		this.montantCredit = montantCredit;
-		return this;
-	}
-
-	/**
-	 * @return the line description.
-	 * @since 0.3.0
-	 */
-	public String getDescription() {
-		return description;
 	}
 
 	/**
@@ -280,15 +348,69 @@ public class MovementDTO {
 		return this;
 	}
 
+	// =========================================================
+	// == OTHERS METHODS                                      ==
+	// =========================================================
+
+	/**
+	 * Returns a string representation of the MovementDTO object.
+	 * The string includes the values of its fields, such as id, tiersId, paiementCode,
+	 * accountDetailCode, debitAmount, creditAmount, and description.
+	 *
+	 * @return a string representation of the MovementDTO object.
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("MovementDTO [id=").append(id)
+				.append(", accountingCode=").append(accountingCode)
+				.append(", complementaryAccountingCode=").append(complementaryAccountingCode)
+				.append(", accountDetailCode=").append(accountDetailCode)
 				.append(", tiersId=").append(tiersId)
 				.append(", paiementCode=").append(paiementCode)
-				.append(", codeDetailsComptable=").append(codeDetailsComptable)
-				.append(", montantDebit=").append(montantDebit)
-				.append(", montantCredit=").append(montantCredit)
+				.append(", debitAmount=").append(debitAmount)
+				.append(", creditAmount=").append(creditAmount)
 				.append(", description=").append(description).append("]");
 		return sb.toString();
+	}
+
+	/**
+	 * Converts the current instance of MovementDTO to a JSON representation.
+	 * The JSON will include non-null fields such as id, accountingCode,
+	 * complementaryAccountingCode, accountDetailCode, tiersId, paiementCode,
+	 * debitAmount, creditAmount, and description.
+	 *
+	 * @return a JsonObject representing the current MovementDTO instance.
+	 * @since 0.4
+	 */
+	public JsonObject toJson() {
+		JsonObjectBuilder builder = Json.createObjectBuilder();
+		if (this.id != null) {
+			builder.add("id", this.id);
+		}
+		if (this.accountingCode != null) {
+			builder.add("accountingCode", this.accountingCode);
+		}
+		if (this.complementaryAccountingCode != null) {
+				builder.add("complementaryAccountingCode", this.complementaryAccountingCode);
+		}
+		if (this.accountDetailCode != null) {
+			builder.add("accountDetailCode", this.accountDetailCode);
+		}
+		if (this.tiersId != null) {
+				builder.add("tiersId", this.tiersId);
+		}
+		if (this.paiementCode != null) {
+				builder.add("paiementCode", this.paiementCode);
+		}
+		if (this.debitAmount != null) {
+			builder.add("debitAmount", this.debitAmount);
+		}
+		if (this.creditAmount != null) {
+			builder.add("creditAmount", this.creditAmount);
+		}
+		if (this.description != null) {
+			builder.add("description", this.description);
+		}
+		return builder.build();
 	}
 }

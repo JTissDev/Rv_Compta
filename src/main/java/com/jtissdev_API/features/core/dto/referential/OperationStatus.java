@@ -11,8 +11,8 @@ import jakarta.json.JsonObjectBuilder;
  * including a display name and a color code for UI representation.
  *
  * @author J.Tiss
+ * @version 1.1.0
  * @since 0.2.0
- * @version 1.0.0
  */
 public class OperationStatus {
 
@@ -32,7 +32,7 @@ public class OperationStatus {
 	 *
 	 * @since 0.2.0
 	 */
-	private String nom;
+	private String name;
 
 	/**
 	 * Hexadecimal color code used for UI display.
@@ -54,17 +54,41 @@ public class OperationStatus {
 	}
 
 	/**
+	 * Initializes an {@code OperationStatus} instance based on the provided JSON object.
+	 * If the JSON contains any of the keys "code", "name", or "color", their respective values
+	 * will be used to set the corresponding fields of this instance.
+	 *
+	 * @param json
+	 * 		the JSON object containing the initial values for the instance fields
+	 * @since 0.4
+	 */
+	public OperationStatus(JsonObject json) {
+		this();
+		if (json.containsKey("code")) {
+			this.setCode(json.getString("code"));
+		}
+		if (json.containsKey("name")) {
+			this.setName(json.getString("name"));
+		}
+		if (json.containsKey("color")) {
+			this.setColor(json.getString("color"));
+		}
+	}
+
+	/**
 	 * Creates an {@code OperationStatus} instance with all fields initialized.
 	 *
-	 * @param code  unique technical code
-	 * @param nom   human-readable name
-	 * @param color hexadecimal color code
-	 *
+	 * @param code
+	 * 		unique technical code
+	 * @param name
+	 * 		human-readable name
+	 * @param color
+	 * 		hexadecimal color code
 	 * @since 0.2.0
 	 */
-	public OperationStatus(String code, String nom, String color) {
+	public OperationStatus(String code, String name, String color) {
 		this.setCode(code);
-		this.setNom(nom);
+		this.setName(name);
 		this.setColor(color);
 	}
 
@@ -80,13 +104,14 @@ public class OperationStatus {
 	 * @since 0.2.0
 	 */
 	public String getCode() {
-		return code;
+		return this.code;
 	}
 
 	/**
 	 * Sets the unique technical code.
 	 *
-	 * @param code code to set
+	 * @param code
+	 * 		code to set
 	 * @return {@code this} instance for fluent chaining
 	 *
 	 * @since 0.2.0
@@ -103,20 +128,19 @@ public class OperationStatus {
 	 *
 	 * @since 0.2.0
 	 */
-	public String getNom() {
-		return nom;
-	}
+	public String getName() {return this.name;}
 
 	/**
 	 * Sets the human-readable name of the status.
 	 *
-	 * @param nom name to set
+	 * @param name
+	 * 		name to set
 	 * @return {@code this} instance for fluent chaining
 	 *
 	 * @since 0.2.0
 	 */
-	public OperationStatus setNom(String nom) {
-		this.nom = nom;
+	public OperationStatus setName(String name) {
+		this.name = name;
 		return this;
 	}
 
@@ -128,13 +152,14 @@ public class OperationStatus {
 	 * @since 0.2.0
 	 */
 	public String getColor() {
-		return color;
+		return this.color;
 	}
 
 	/**
 	 * Sets the hexadecimal color code for UI.
 	 *
-	 * @param color color to set
+	 * @param color
+	 * 		color to set
 	 * @return {@code this} instance for fluent chaining
 	 *
 	 * @since 0.2.0
@@ -161,13 +186,26 @@ public class OperationStatus {
 		if (code != null) {
 			builder.add("code", code);
 		}
-		if (nom != null) {
-			builder.add("nom", nom);
+		if (name != null) {
+			builder.add("name", name);
 		}
 		if (color != null) {
 			builder.add("color", color);
 		}
 
 		return builder.build();
+	}
+
+	/**
+	 * Returns a string representation of the {@code OperationStatus} object.
+	 * The format includes the values of the {@code code}, {@code name},
+	 * and {@code color} fields.
+	 *
+	 * @return a string representation of this {@code OperationStatus} instance
+	 *
+	 * @since 0.4
+	 */
+	public String toString() {
+		return "OperationStatus {code=" + code + ", name=" + name + ", color=" + color + "}";
 	}
 }

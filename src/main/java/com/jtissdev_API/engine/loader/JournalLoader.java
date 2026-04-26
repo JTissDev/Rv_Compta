@@ -58,10 +58,10 @@ public class JournalLoader {
 	private JournalDTO mapToJournalDTO(JsonObject json) {
 		JournalDTO journal = new JournalDTO()
 				                     .setId(json.containsKey("id") ? (long) json.getInt("id") : null)
-				                     .setNom(json.getString("nom", null))
-				                     .setDateDebut(parseDate(json.getString("dateDebut", null)))
-				                     .setDateFin(parseDate(json.getString("dateFin", null)))
-				                     .setTypeJournalCode(json.getString("typeJournalCode", null));
+				                     .setName(json.getString("nom", null))
+				                     .setStartDate(parseDate(json.getString("dateDebut", null)))
+				                     .setEndDate(parseDate(json.getString("dateFin", null)))
+				                     .setJournalTypeCode(json.getString("typeJournalCode", null));
 
 		if (json.containsKey("operations")) {
 			JsonArray opsArray = json.getJsonArray("operations");
@@ -116,9 +116,9 @@ public class JournalLoader {
 				       .setId(json.containsKey("id") ? (long) json.getInt("id") : null)
 				       .setTiersId(json.containsKey("tiersId") ? (long) json.getInt("tiersId") : null)
 				       .setPaiementCode(json.getString("paiementCode", null))
-				       .setCodeDetailsComptable(json.getString("codeDetailsComptable", null))
-				       .setMontantDebit(new BigDecimal(json.getString("montantDebit", "0")))
-				       .setMontantCredit(new BigDecimal(json.getString("montantCredit", "0")))
+				       .setAccountDetailCode(json.getString("codeDetailsComptable", null))
+				       .setDebitAmount(new BigDecimal(json.getString("montantDebit", "0")))
+				       .setCreditAmount(new BigDecimal(json.getString("montantCredit", "0")))
 				       .setDescription(json.getString("description", null));
 	}
 

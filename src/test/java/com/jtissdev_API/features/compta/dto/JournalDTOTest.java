@@ -49,10 +49,10 @@ class JournalDTOTest {
 		JournalDTO journal = new JournalDTO("Journal de test", start, end, "GEN");
 
 		assertNull(journal.getId());
-		assertEquals("Journal de test", journal.getNom());
-		assertEquals(start, journal.getDateDebut());
-		assertEquals(end, journal.getDateFin());
-		assertEquals("GEN", journal.getTypeJournalCode());
+		assertEquals("Journal de test", journal.getName());
+		assertEquals(start, journal.getStartDate());
+		assertEquals(end, journal.getEndDate());
+		assertEquals("GEN", journal.getJournalTypeCode());
 	}
 
 	/**
@@ -66,7 +66,7 @@ class JournalDTOTest {
 		JournalDTO journal = new JournalDTO(500L, "Journal 2023", LocalDate.MIN, LocalDate.MAX, "OLD");
 
 		assertEquals(500L, journal.getId());
-		assertEquals("OLD", journal.getTypeJournalCode());
+		assertEquals("OLD", journal.getJournalTypeCode());
 		assertTrue(journal.getOperations().isEmpty());
 	}
 
@@ -99,13 +99,13 @@ class JournalDTOTest {
 
 		JournalDTO journal = new JournalDTO()
 				                     .setId(10L)
-				                     .setNom("Fluent Journal")
+				                     .setName("Fluent Journal")
 				                     .addOperation(op1)
 				                     .addOperation(new OperationDTO().setId(101L));
 
 		assertAll("Fluent verification",
 				() -> assertEquals(10L, journal.getId()),
-				() -> assertEquals("Fluent Journal", journal.getNom()),
+				() -> assertEquals("Fluent Journal", journal.getName()),
 				() -> assertEquals(2, journal.getOperations().size()),
 				() -> assertEquals(100L, journal.getOperations().get(0).getId())
 		);
@@ -123,5 +123,35 @@ class JournalDTOTest {
 		journal.setOperations(null);
 
 		assertNotNull(journal.getOperations(), "SetOperations(null) should initialize an empty list");
+	}
+
+	/**
+	 * Tests the toJson method.
+	 * Verified: The JSON representation matches the expected structure and values.
+	 *
+	 * @since 0.3.0
+	 */
+	@Test
+	@DisplayName("Should convert to JSON correctly")
+	void shouldConvertToJsonCorrectly() {
+		List<OperationDTO> operations = new ArrayList<>();
+		operations.add(new OperationDTO().setId(100L));
+		operations.add(new OperationDTO().setId(101L));
+
+		JournalDTO journal = new JournalDTO(1L, "Journal Test", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 12, 31),
+				"GEN", operations);
+
+		var json = journal.toJson();
+
+		assertAll("JSON Verification",
+				() -> assertEquals(1L, json.getJsonNumber("id").longValue()),
+				() -> assertEquals("Journal Test", json.getString("name")),
+				() -> assertEquals("2024-01-01", json.getString("startDate")),
+				() -> assertEquals("2024-12-31", json.getString("endDate")),
+				() -> assertEquals("GEN", json.getString("journalTypeCode")),
+				() -> assertEquals(2, json.getJsonArray("operations").size()),
+				() -> assertEquals(100L, json.getJsonArray("operations").getJsonObject(0).getJsonNumber("id").longValue()),
+				() -> assertEquals(101L, json.getJsonArray("operations").getJsonObject(1).getJsonNumber("id").longValue())
+		);
 	}
 }

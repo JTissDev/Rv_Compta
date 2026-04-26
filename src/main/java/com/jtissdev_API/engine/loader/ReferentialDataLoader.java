@@ -48,7 +48,7 @@ public class ReferentialDataLoader {
 
 				OperationStatus status = new OperationStatus()
 						                         .setCode(obj.getString("code", null))
-						                         .setNom(obj.getString("nom", null))
+						                         .setName(obj.getString("nom", null))
 						                         .setColor(obj.getString("color", null));
 
 				targetDTO.addOperationStatus(status);
@@ -78,7 +78,7 @@ public class ReferentialDataLoader {
 
 				PaymentMethod method = new PaymentMethod()
 						                       .setCode(obj.getString("code", null))
-						                       .setNom(obj.getString("nom", null))
+						                       .setName(obj.getString("nom", null))
 						                       .setDescription(obj.getString("description", null));
 
 				targetDTO.addPaymentMethod(method);

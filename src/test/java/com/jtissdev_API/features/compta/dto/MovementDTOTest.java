@@ -30,8 +30,8 @@ class MovementDTOTest {
 		MovementDTO movement = new MovementDTO();
 
 		assertNull(movement.getId(), "ID should be null by default");
-		assertEquals(BigDecimal.ZERO, movement.getMontantDebit(), "Debit should be initialized to ZERO");
-		assertEquals(BigDecimal.ZERO, movement.getMontantCredit(), "Credit should be initialized to ZERO");
+		assertEquals(BigDecimal.ZERO, movement.getDebitAmount(), "Debit should be initialized to ZERO");
+		assertEquals(BigDecimal.ZERO, movement.getCreditAmount(), "Credit should be initialized to ZERO");
 	}
 
 	/**
@@ -46,8 +46,8 @@ class MovementDTOTest {
 
 		assertEquals(10L, movement.getTiersId());
 		assertEquals("CB", movement.getPaiementCode());
-		assertEquals("707000", movement.getCodeDetailsComptable());
-		assertEquals(BigDecimal.ZERO, movement.getMontantDebit());
+		assertEquals("707000", movement.getAccountDetailCode());
+		assertEquals(BigDecimal.ZERO, movement.getDebitAmount());
 	}
 
 	/**
@@ -62,7 +62,7 @@ class MovementDTOTest {
 		MovementDTO movement = new MovementDTO(1L, "VIR", "607000", debit, BigDecimal.ZERO, "Achat marchandises");
 
 		assertNull(movement.getId());
-		assertEquals(debit, movement.getMontantDebit());
+		assertEquals(debit, movement.getDebitAmount());
 		assertEquals("Achat marchandises", movement.getDescription());
 	}
 
@@ -78,7 +78,7 @@ class MovementDTOTest {
 		MovementDTO movement = new MovementDTO(500L, 2L, "CHQ", "512000", BigDecimal.ZERO, credit, "Salaire");
 
 		assertEquals(500L, movement.getId());
-		assertEquals(credit, movement.getMontantCredit());
+		assertEquals(credit, movement.getCreditAmount());
 		assertEquals("CHQ", movement.getPaiementCode());
 	}
 
@@ -94,14 +94,14 @@ class MovementDTOTest {
 				                       .setId(1L)
 				                       .setTiersId(5L)
 				                       .setPaiementCode("ESPECES")
-				                       .setMontantDebit(new BigDecimal("10.00"))
+				                       .setDebitAmount(new BigDecimal("10.00"))
 				                       .setDescription("Test Fluent");
 
 		assertAll("Fluent setter verification",
 				() -> assertEquals(1L, movement.getId()),
 				() -> assertEquals(5L, movement.getTiersId()),
 				() -> assertEquals("ESPECES", movement.getPaiementCode()),
-				() -> assertEquals(new BigDecimal("10.00"), movement.getMontantDebit()),
+				() -> assertEquals(new BigDecimal("10.00"), movement.getDebitAmount()),
 				() -> assertEquals("Test Fluent", movement.getDescription())
 		);
 	}
@@ -115,8 +115,8 @@ class MovementDTOTest {
 	@DisplayName("Should maintain BigDecimal precision")
 	void shouldMaintainBigDecimalPrecision() {
 		BigDecimal preciseValue = new BigDecimal("1234.5678");
-		MovementDTO movement = new MovementDTO().setMontantCredit(preciseValue);
+		MovementDTO movement = new MovementDTO().setCreditAmount(preciseValue);
 
-		assertEquals(0, preciseValue.compareTo(movement.getMontantCredit()), "Amounts should be identical in value");
+		assertEquals(0, preciseValue.compareTo(movement.getCreditAmount()), "Amounts should be identical in value");
 	}
 }

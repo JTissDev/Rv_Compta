@@ -1,6 +1,9 @@
 package com.jtissdev_API.features.core.dto;
 
-import com.jtissdev_API.features.PCG.dto.Type_Comptable;
+import com.jtissdev_API.features.PCG.dto.AccountingType;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +12,8 @@ import java.util.List;
  * General Chart of Accounts (PCG).
  * * This class centralizes the accounting hierarchy to be shared across
  * different features of the application.
- * * @author JtissDev
+ * @see AccountingType
+ * @author JtissDev
  * @version 1.1
  * @since 0.1
  */
@@ -19,7 +23,7 @@ public class PcgCoreDTO {
 	 * List of main accounting classes (e.g., Class 1, Class 2, etc.)
 	 * @since 0.1
 	 */
-	private List<Type_Comptable> accountingClasses;
+	private List<AccountingType> accountingClasses;
 
 	/**
 	 * Default constructor initializing an empty collection of accounting classes.
@@ -30,11 +34,38 @@ public class PcgCoreDTO {
 	}
 
 	/**
+	 * Constructs a new PcgCoreDTO object with the specified list of accounting classes.
+	 *
+	 * @param accountingClasses The list of accounting classes to initialize the DTO with.
+	 * @since 0.4
+	 */
+	public PcgCoreDTO(List<AccountingType> accountingClasses) {
+		this();
+		this.setAccountingClasses(accountingClasses);
+	}
+
+	/**
+	 * Constructs a new PcgCoreDTO object by initializing it with the provided JSON array.
+	 * Each element of the JSON array represents an accounting class and is converted into
+	 * an {@link AccountingType} object and added to the PcgCoreDTO instance.
+	 *
+	 * @param jsonArray The JSON array containing accounting class data, where each element
+	 *                  is expected to be a {@link JsonObject}.
+	 * @since 0.4
+	 */
+	public PcgCoreDTO(JsonArray jsonArray) {
+		this();
+		for (JsonObject obj : jsonArray.getValuesAs(JsonObject.class)) {
+			this.addAccountingClass(new AccountingType(obj));
+		}
+	}
+
+	/**
 	 * Gets the list of all top-level accounting classes.
-	 * * @return A list of {@link Type_Comptable} objects
+	 * * @return A list of {@link AccountingType} objects
 	 * @since 0.1
 	 */
-	public List<Type_Comptable> getAccountingClasses() {
+	public List<AccountingType> getAccountingClasses() {
 		return accountingClasses;
 	}
 
@@ -43,7 +74,7 @@ public class PcgCoreDTO {
 	 * * @param accountingClasses The list of classes to set
 	 * @since 0.1
 	 */
-	public void setAccountingClasses(List<Type_Comptable> accountingClasses) {
+	public void setAccountingClasses(List<AccountingType> accountingClasses) {
 		this.accountingClasses = accountingClasses;
 	}
 
@@ -52,7 +83,7 @@ public class PcgCoreDTO {
 	 * * @param typeComptable The class to add
 	 * @since 0.1
 	 */
-	public void addAccountingClass(Type_Comptable typeComptable) {
+	public void addAccountingClass(AccountingType typeComptable) {
 		if (this.accountingClasses == null) {
 			this.accountingClasses = new ArrayList<>();
 		}
@@ -73,7 +104,7 @@ public class PcgCoreDTO {
 				.append("====================\n")
 				.append("Accounting Classes:\n")
 				.append("====================\n");
-		for (Type_Comptable typeComptable : accountingClasses) {
+		for (AccountingType typeComptable : accountingClasses) {
 			sb.append(typeComptable.toString()).append("\n");
 		}
 		sb.append("\n");

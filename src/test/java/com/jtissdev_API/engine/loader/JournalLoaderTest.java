@@ -1,6 +1,5 @@
 package com.jtissdev_API.engine.loader;
 
-import com.jtissdev_API.engine.loader.JournalLoader;
 import com.jtissdev_API.features.compta.dto.JournalDTO;
 import com.jtissdev_API.features.compta.dto.OperationDTO;
 import org.junit.jupiter.api.BeforeEach;
@@ -68,13 +67,13 @@ class JournalLoaderTest {
 
 		assertNotNull(journal);
 		assertEquals(1L, journal.getId());
-		assertEquals("General Journal 2024", journal.getNom());
+		assertEquals("General Journal 2024", journal.getName());
 		assertEquals(1, journal.getOperations().size());
 
 		OperationDTO op = journal.getOperations().get(0);
 		assertEquals("Test Operation", op.getLibelle());
 		assertEquals(1, op.getMovements().size());
-		assertEquals(new BigDecimal("150.00"), op.getMovements().get(0).getMontantDebit());
+		assertEquals(new BigDecimal("150.00"), op.getMovements().get(0).getDebitAmount());
 		assertEquals("CB", op.getMovements().get(0).getPaiementCode());
 	}
 
@@ -91,7 +90,7 @@ class JournalLoaderTest {
 		JournalDTO journal = journalLoader.loadJournal(is);
 
 		assertNotNull(journal);
-		assertNull(journal.getNom());
+		assertNull(journal.getName());
 		assertTrue(journal.getOperations().isEmpty());
 	}
 
@@ -119,9 +118,9 @@ class JournalLoaderTest {
 		InputStream is = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		JournalDTO journal = journalLoader.loadJournal(is);
 
-		assertNotNull(journal.getDateDebut());
-		assertEquals(2024, journal.getDateDebut().getYear());
-		assertEquals(12, journal.getDateDebut().getMonthValue());
-		assertEquals(31, journal.getDateDebut().getDayOfMonth());
+		assertNotNull(journal.getStartDate());
+		assertEquals(2024, journal.getStartDate().getYear());
+		assertEquals(12, journal.getStartDate().getMonthValue());
+		assertEquals(31, journal.getStartDate().getDayOfMonth());
 	}
 }

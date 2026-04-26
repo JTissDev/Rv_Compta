@@ -1,106 +1,143 @@
 package com.jtissdev_API.features.core.dto.referential;
 
+import jakarta.json.Json;
 import jakarta.json.JsonObject;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for the {@link OperationStatus} DTO.
+ * Verifies fluent API chaining, JSON mapping and serialization.
  *
- * @author J.Tiss
- * @since 0.2.0
+ * @author jtiss
+ * @version 1.0.0
+ * @since 0.4
  */
-class OperationStatusTest {
+public class OperationStatusTest {
 
-	// =========================================================
-	// == TEST CASES                                          ==
-	// =========================================================
+	private static final String CODE = "REAL";
+	private static final String NAME = "réalisé";
+	private static final String COLOR = "#00FF00";
+
+	private static JsonObject statusJson;
 
 	/**
-	 * Tests the full constructor and getters.
-	 *
-	 * @since 0.2.0
+	 * Sets up a standard JsonObject for OperationStatus before each test.
 	 */
-	@Test
-	@DisplayName("Should correctly initialize fields via constructor")
-	void testFullConstructorAndGetters() {
-		// Given
-		String code = "PREV";
-		String nom = "Prévisionnel";
-		String color = "#3498db";
 
-		// When
-		OperationStatus status = new OperationStatus(code, nom, color);
-
-		// Then
-		assertEquals(code, status.getCode(), "Code should match constructor input");
-		assertEquals(nom, status.getNom(), "Name should match constructor input");
-		assertEquals(color, status.getColor(), "Color should match constructor input");
+	@BeforeAll
+	@DisplayName("Setup JSON Objects for OperationStatusTest")
+	static void setUpTest() {
+		statusJson = Json.createObjectBuilder()
+				             .add("codeOnly", Json.createObjectBuilder()
+						                              .add("code", CODE).build())
+				             .add("nameOnly", Json.createObjectBuilder()
+						                              .add("name", NAME).build())
+				             .add("colorOnly", Json.createObjectBuilder()
+						                               .add("color", COLOR).build())
+				             .add("codeAndName", Json.createObjectBuilder()
+						                                 .add("code", CODE)
+						                                 .add("name", NAME).build())
+				             .add("codeAndColor", Json.createObjectBuilder()
+						                                  .add("code", CODE)
+						                                  .add("color", COLOR).build())
+				             .add("nameAndColor", Json.createObjectBuilder()
+						                                  .add("name", NAME)
+						                                  .add("color", COLOR).build())
+				             .add("allFields", Json.createObjectBuilder()
+						                               .add("code", CODE)
+						                               .add("name", NAME)
+						                               .add("color", COLOR).build())
+				             .build();
 	}
 
-	/**
-	 * Tests the fluent setters and basic getters.
-	 *
-	 * @since 0.2.0
-	 */
 	@Test
-	@DisplayName("Should support fluent chaining and update fields")
-	void testSettersAndFluentChaining() {
+	@DisplayName("Test Empty Constructor")
+	void testEmptyConstructor() {
+		// Given & When
+		OperationStatus status = new OperationStatus();
+
+		// Then
+		assertAll("Empty constructor state validation",
+				() -> assertNull(status.getCode(), "Code should be null"),
+				() -> assertNull(status.getName(), "Name should be null"),
+				() -> assertNull(status.getColor(), "Color should be null")
+		);
+	}
+
+	@Test
+	@DisplayName("Test JSON Constructor")
+	void testJsonConstructor() {
+		// Given & When
+		OperationStatus status = new OperationStatus(statusJson.getJsonObject("allFields"));
+
+		// Then
+		assertAll("JSON constructor mapping validation",
+				() -> assertEquals(CODE, status.getCode(), "Code mapping failed"),
+				() -> assertEquals(NAME, status.getName(), "Name mapping failed"),
+				() -> assertEquals(COLOR, status.getColor(), "Color mapping failed")
+		);
+	}
+
+	@Test
+	@DisplayName("Fluent API: setters should return this instance")
+	void testFluentSetters() {
 		// Given
 		OperationStatus status = new OperationStatus();
 
-		// When
-		status.setCode("REEL")
-				.setNom("Réel")
-				.setColor("#2ecc71");
+		OperationStatus result = status
+				                         .setCode(CODE)
+				                         .setName(NAME)
+				                         .setColor(COLOR);
 
 		// Then
-		assertEquals("REEL", status.getCode());
-		assertEquals("Réel", status.getNom());
-		assertEquals("#2ecc71", status.getColor());
+		assertAll("Fluent API validation",
+				() -> assertSame(status, result, "Setter must return the same instance"),
+				() -> assertEquals(CODE, status.getCode(), "Code should be set"),
+				() -> assertEquals(NAME, status.getName(), "Name should be set"),
+				() -> assertEquals(COLOR, status.getColor(), "Color should be set")
+		);
 	}
 
-	/**
-	 * Tests the JSON serialization.
-	 *
-	 * @since 0.2.0
-	 */
 	@Test
-	@DisplayName("Should convert instance to a valid JsonObject")
-	void testToJson() {
+	@DisplayName("toJson: should only include non-null fields")
+	void testToJsonSerialization() {
 		// Given
-		OperationStatus status = new OperationStatus("WAIT", "En attente", "#f1c40f");
+		OperationStatus status = new OperationStatus(statusJson.getJsonObject("codeAndName"));
+
+		// color is null
 
 		// When
 		JsonObject json = status.toJson();
 
 		// Then
-		assertNotNull(json, "JSON output should not be null");
-		assertEquals("WAIT", json.getString("code"));
-		assertEquals("En attente", json.getString("nom"));
-		assertEquals("#f1c40f", json.getString("color"));
+		assertAll("JSON serialization validation",
+				() -> assertEquals(CODE, json.getString("code")),
+				() -> assertEquals(NAME, json.getString("name")),
+				() -> assertFalse(json.containsKey("color"), "Null color should be omitted"),
+				() -> assertEquals(2, json.size(), "JSON should contain exactly 2 keys")
+		);
 	}
 
-	/**
-	 * Tests JSON serialization with null fields to ensure no crash.
-	 *
-	 * @since 0.2.0
-	 */
 	@Test
-	@DisplayName("Should handle null fields during JSON serialization")
-	void testToJsonWithNullFields() {
+	@DisplayName("toString: should contain class name and field values")
+	void testToString() {
 		// Given
-		OperationStatus status = new OperationStatus();
+		OperationStatus status = new OperationStatus(statusJson.getJsonObject("codeAndName"));
 
 		// When
-		JsonObject json = status.toJson();
+		String result = status.toString();
+		System.out.println(result);
 
 		// Then
-		assertNotNull(json);
-		assertFalse(json.containsKey("code"), "Null code should not be in JSON");
-		assertFalse(json.containsKey("nom"), "Null name should not be in JSON");
-		assertFalse(json.containsKey("color"), "Null color should not be in JSON");
+		assertAll("toString content validation",
+				() -> assertThat(result).contains("OperationStatus"),
+				() -> assertThat(result).contains("code=" + CODE ),
+				() -> assertThat(result).contains("name=" + NAME )
+		);
 	}
 }

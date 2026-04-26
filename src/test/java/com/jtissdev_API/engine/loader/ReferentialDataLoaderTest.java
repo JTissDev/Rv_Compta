@@ -37,7 +37,7 @@ class ReferentialDataLoaderTest {
 		// Then
 		assertEquals(1, dto.getOperationStatuses().size());
 		assertEquals("TEST", dto.getOperationStatuses().get(0).getCode());
-		assertEquals("Test Status", dto.getOperationStatuses().get(0).getNom());
+		assertEquals("Test Status", dto.getOperationStatuses().get(0).getName());
 	}
 
 	/**

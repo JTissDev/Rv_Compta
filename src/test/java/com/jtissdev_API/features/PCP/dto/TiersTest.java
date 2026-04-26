@@ -1,118 +1,132 @@
 package com.jtissdev_API.features.PCP.dto;
 
+import jakarta.json.Json;
 import jakarta.json.JsonObject;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for {@link Tiers} DTO.
- * Verifies constructor integrity, setter logic, and JSON serialization.
+ * Unit tests for the {@link Tiers} DTO.
+ * Verifies constructor mapping, data integrity via getters/setters,
+ * and JSON serialization logic.
  *
- * @author J.Tiss
+ * @author jtiss
  * @version 1.0.0
- * @since 1.0.0
+ * @since 0.4
  */
-class TiersTest {
+public class TiersTest {
 
-	// =========================================================
-	// == CONSTRUCTOR TESTS                                   ==
-	// =========================================================
+	private static final Integer ID = 1;
+	private static final String NAME = "Tier 1";
+	private static final String THIRD_PARTY_CODE = "TP1";
+	private static final String DESCRIPTION = "Tier 1 description";
 
-	@Test
-	@DisplayName("Default constructor - should initialize with nulls")
-	void defaultConstructor_shouldInitializeWithNulls() {
-		// When
-		Tiers tiers = new Tiers();
+	private static JsonObject tierJson;
 
-		// Then
-		assertThat(tiers.getId()).isNull();
-		assertThat(tiers.getName()).isNull();
-		assertThat(tiers.getThirdPartyType()).isNull();
-		assertThat(tiers.getDescription()).isNull();
+	@BeforeAll
+	@DisplayName("Setup JSON Objects for Tiers")
+	static void setUpTest() {
+
+		tierJson = Json.createObjectBuilder()
+				           .add("idOnly", Json.createObjectBuilder()
+						                          .add("id", ID).build())
+				           .add("nameOnly", Json.createObjectBuilder()
+						                            .add("name", NAME).build())
+				           .add("thirdPartyOnly", Json.createObjectBuilder()
+						                                  .add("thirdPartyType", THIRD_PARTY_CODE).build())
+				           .add("descriptionOnly", Json.createObjectBuilder()
+						                                   .add("description", DESCRIPTION).build())
+				           .add("idAndName", Json.createObjectBuilder()
+						                             .add("id", ID)
+						                             .add("name", NAME).build())
+				           .add("nameAndThirdParty", Json.createObjectBuilder()
+						                                     .add("name", NAME)
+						                                     .add("thirdPartyType", THIRD_PARTY_CODE).build())
+				           .add("allFields", Json.createObjectBuilder()
+						                             .add("id", ID)
+						                             .add("name", NAME)
+						                             .add("thirdPartyType", THIRD_PARTY_CODE)
+						                             .add("description", DESCRIPTION)
+						                             .build())
+				           .build();
 	}
 
 	@Test
-	@DisplayName("Functional constructor (No ID) - should initialize fields via setters")
-	void functionalConstructor_shouldInitializeFields() {
-		// Given
-		String name = "EDF";
-		String type = "VENDOR";
+	@DisplayName("Test Empty Constructor")
+	void testEmptyConstructor() {
+		Tiers tier = new Tiers();
 
-		// When
-		Tiers tiers = new Tiers(name, type);
-
-		// Then
-		assertThat(tiers.getName()).isEqualTo(name);
-		assertThat(tiers.getThirdPartyType()).isEqualTo(type);
-		assertThat(tiers.getId()).isNull();
+		assertAll("Empty constructor state validation",
+				() -> assertNull(tier.getId(), "Id should be null"),
+				() -> assertNull(tier.getName(), "Name should be null"),
+				() -> assertNull(tier.getThirdPartyType(), "ThirdPartyType should be null"),
+				() -> assertNull(tier.getDescription(), "Description should be null")
+		);
 	}
 
 	@Test
-	@DisplayName("Complete constructor - should initialize all fields including ID")
-	void completeConstructor_shouldInitializeAllFields() {
-		// Given
-		Long id = 42L;
-		String name = "Employer Corp";
-		String type = "EMPLOYER";
+	@DisplayName("Test Json Constructor")
+	void testJsonConstructor() {
+		Tiers tier = new Tiers(tierJson.getJsonObject("allFields"));
 
-		// When
-		Tiers tiers = new Tiers(id, name, type);
-
-		// Then
-		assertThat(tiers.getId()).isEqualTo(id);
-		assertThat(tiers.getName()).isEqualTo(name);
-		assertThat(tiers.getThirdPartyType()).isEqualTo(type);
+		assertAll("JSON constructor mapping validation",
+				() -> assertEquals(ID, tier.getId(), "Id mapping failed"),
+				() -> assertEquals(NAME, tier.getName(), "Name mapping failed"),
+				() -> assertEquals(THIRD_PARTY_CODE, tier.getThirdPartyType(), "Third Party Code mapping failed"),
+				() -> assertEquals(DESCRIPTION, tier.getDescription(), "Description mapping failed")
+		);
 	}
 
-	// =========================================================
-	// == LOGIC & SERIALIZATION TESTS                         ==
-	// =========================================================
+	@Test
+	@DisplayName("Test Fluent Setters")
+	void testFluentSetters() {
+		Tiers tier = new Tiers();
+
+		Tiers result = tier.setId(ID)
+				               .setName(NAME)
+				               .setThirdPartyType(THIRD_PARTY_CODE)
+				               .setDescription(DESCRIPTION);
+
+		assertAll("Fluent API validation",
+				() -> assertSame(tier, result, "Setter must return the same instance"),
+				() -> assertEquals(ID, tier.getId(), "Id should be set"),
+				() -> assertEquals(NAME, tier.getName(), "Name should be set"),
+				() -> assertEquals(THIRD_PARTY_CODE, tier.getThirdPartyType(), "Third Party Code should be set"),
+				() -> assertEquals(DESCRIPTION, tier.getDescription(), "Description should be set")
+		);
+	}
 
 	@Test
-	@DisplayName("toJson - should produce valid JsonObject with expected values")
-	void toJson_shouldProduceCorrectJson() {
-		// Given
-		Tiers tiers = new Tiers(10L, "Water Co", "VENDOR");
-		tiers.setDescription("Monthly subscription");
+	@DisplayName("toJson: should only include non-null fields")
+	void testToJsonSerialization() {
+		Tiers tiers = new Tiers(tierJson.getJsonObject("nameAndThirdParty"));
 
-		// When
 		JsonObject json = tiers.toJson();
 
-		// Then
-		assertThat(json.getInt("id")).isEqualTo(10);
-		assertThat(json.getString("name")).isEqualTo("Water Co");
-		assertThat(json.getString("thirdPartyType")).isEqualTo("VENDOR");
-		assertThat(json.getString("description")).isEqualTo("Monthly subscription");
+		assertAll("JSON serialization validation",
+				() -> assertFalse(json.containsKey("id"), "Null id should be omitted"),
+				() -> assertEquals(NAME, json.getString("name"), "Name should be serialized"),
+				() -> assertEquals(THIRD_PARTY_CODE, json.getString("thirdPartyType"), "Third Party Code should be serialized"),
+				() -> assertFalse(json.containsKey("description"), "Null description should be omitted"),
+				() -> assertEquals(2, json.size(), "JSON should contain exactly 2 keys")
+		);
 	}
 
 	@Test
-	@DisplayName("toJson - should handle null fields with default fallback values")
-	void toJson_shouldHandleNulls() {
-		// Given
-		Tiers tiers = new Tiers(); // All null
+	@DisplayName("toString: should contain class name and field values")
+	void testToString() {
+		Tiers tiers = new Tiers(tierJson.getJsonObject("nameAndThirdParty"));
 
-		// When
-		JsonObject json = tiers.toJson();
-
-		// Then
-		assertThat(json.getInt("id")).isEqualTo(-1);
-		assertThat(json.getString("name")).isEqualTo("Unknown");
-		assertThat(json.getString("thirdPartyType")).isEqualTo("MISC");
-		assertThat(json.getString("description")).isEmpty();
-	}
-
-	@Test
-	@DisplayName("toString - should return formatted string for logs")
-	void toString_shouldReturnFormattedString() {
-		// Given
-		Tiers tiers = new Tiers(1L, "TestName", "TEST_TYPE");
-
-		// When
 		String result = tiers.toString();
 
-		// Then
-		assertThat(result).contains("[1]", "TestName", "TEST_TYPE");
+		assertAll("toString content validation",
+				() -> assertThat(result).contains("Tiers"),
+				() -> assertThat(result).contains("name=" + NAME),
+				() -> assertThat(result).contains("thirdPartyType=" + THIRD_PARTY_CODE)
+		);
 	}
 }

@@ -11,9 +11,9 @@ import java.util.List;
 /**
  * Represents a root accounting type (top-level in the hierarchy).
  * <p>
- * A {@code Type_Comptable} has its own identifier, name,
+ * A {@code AccountingType} has its own identifier, name,
  * local accounting code and description.
- * It also contains a list of {@link Sub_Type_Comptable} that belong
+ * It also contains a list of {@link SubAccountingType} that belong
  * to this root accounting type.
  * <p>
  * Unlike other levels, this type cannot have a parent accounting code:
@@ -21,9 +21,9 @@ import java.util.List;
  *
  * @author jtiss
  * @since 0.1
- * @version 1.0.0
+ * @version 1.1.0
  */
-public class Type_Comptable {
+public class AccountingType {
 
 	// =========================================================
 	// == FIELDS                                              ==
@@ -34,7 +34,7 @@ public class Type_Comptable {
 	 *
 	 * @since 0.1
 	 */
-	private Long id;
+	private Integer id;
 
 	/**
 	 * Human-readable name of the root accounting type.
@@ -50,7 +50,7 @@ public class Type_Comptable {
 	 *
 	 * @since 0.1
 	 */
-	private Integer codeComptable;
+	private Integer accountCode;
 
 	/**
 	 * Human-readable description of the root accounting type.
@@ -64,41 +64,54 @@ public class Type_Comptable {
 	 *
 	 * @since 0.1
 	 */
-	private List<Sub_Type_Comptable> subTypes;
+	private List<SubAccountingType> subTypes;
 
 	// =========================================================
 	// == CONSTRUCTORS                                        ==
 	// =========================================================
 
 	/**
-	 * Creates an empty {@code Type_Comptable} instance.
+	 * Creates an empty {@code AccountingType} instance.
 	 * All fields are initialized to {@code null}, and the list
 	 * of sub types is initialized to an empty {@link ArrayList}.
 	 *
 	 * @since 0.1
 	 */
-	public Type_Comptable() {
+	public AccountingType() {
 		this.subTypes = new ArrayList<>();
 	}
 
+	public AccountingType(JsonObject json) {
+		this();
+		if(json.containsKey("id")) {this.setId(Integer.valueOf(json.getString("id")));}
+		if(json.containsKey("name")) {this.setName(json.getString("name"));}
+		if(json.containsKey("accountCode")) {this.setAccountCode(Integer.valueOf(json.getString("accountCode")));}
+		if(json.containsKey("description")) {this.setDescription(json.getString("description"));}
+		if(json.containsKey("subTypes")) {
+			for(JsonObject subType : json.getJsonArray("subTypes").getValuesAs(JsonObject.class)) {
+				this.addSubType(new SubAccountingType(subType));
+			}
+		}
+	}
+
 	/**
-	 * Creates a {@code Type_Comptable} instance with main fields initialized.
+	 * Creates a {@code AccountingType} instance with main fields initialized.
 	 * The list of sub types is initialized to an empty {@link ArrayList}.
 	 *
 	 * @param id            technical identifier used by the database
 	 * @param name          human-readable name of the root accounting type
-	 * @param codeComptable local accounting code (numeric value)
+	 * @param accountCode local accounting code (numeric value)
 	 * @param description   human-readable description of the root accounting type
 	 *
 	 * @since 0.1
 	 */
-	public Type_Comptable(Long id,
+	public AccountingType(Integer id,
 	                      String name,
-	                      Integer codeComptable,
+	                      Integer accountCode,
 	                      String description) {
 		this.setId( id ) ;
 		this.setName( name ) ;
-		this.setCodeComptable( codeComptable ) ;
+		this.setAccountCode(accountCode) ;
 		this.setDescription( description ) ;
 		this.subTypes = new ArrayList<>();
 	}
@@ -114,7 +127,7 @@ public class Type_Comptable {
 	 *
 	 * @since 0.1
 	 */
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -126,7 +139,7 @@ public class Type_Comptable {
 	 *
 	 * @since 0.1
 	 */
-	public Type_Comptable setId(Long id) {
+	public AccountingType setId(Integer id) {
 		this.id = id;
 		return this;
 	}
@@ -150,7 +163,7 @@ public class Type_Comptable {
 	 *
 	 * @since 0.1
 	 */
-	public Type_Comptable setName(String name) {
+	public AccountingType setName(String name) {
 		this.name = name;
 		return this;
 	}
@@ -162,20 +175,20 @@ public class Type_Comptable {
 	 *
 	 * @since 0.1
 	 */
-	public Integer getCodeComptable() {
-		return codeComptable;
+	public Integer getAccountCode() {
+		return accountCode;
 	}
 
 	/**
 	 * Sets the local accounting code (numeric value).
 	 *
-	 * @param codeComptable code to set
+	 * @param accountCode code to set
 	 * @return {@code this} instance for fluent chaining
 	 *
 	 * @since 0.1
 	 */
-	public Type_Comptable setCodeComptable(Integer codeComptable) {
-		this.codeComptable = codeComptable;
+	public AccountingType setAccountCode(Integer accountCode) {
+		this.accountCode = accountCode;
 		return this;
 	}
 
@@ -198,7 +211,7 @@ public class Type_Comptable {
 	 *
 	 * @since 0.1
 	 */
-	public Type_Comptable setDescription(String description) {
+	public AccountingType setDescription(String description) {
 		this.description = description;
 		return this;
 	}
@@ -210,7 +223,7 @@ public class Type_Comptable {
 	 *
 	 * @since 0.1
 	 */
-	public List<Sub_Type_Comptable> getSubTypes() {
+	public List<SubAccountingType> getSubTypes() {
 		return subTypes;
 	}
 
@@ -224,7 +237,7 @@ public class Type_Comptable {
 	 *
 	 * @since 0.1
 	 */
-	public Type_Comptable setSubTypes(List<Sub_Type_Comptable> subTypes) {
+	public AccountingType setSubTypes(List<SubAccountingType> subTypes) {
 		this.subTypes = subTypes != null ? subTypes : new ArrayList<>();
 		return this;
 	}
@@ -242,7 +255,7 @@ public class Type_Comptable {
 	 *
 	 * @since 0.1
 	 */
-	public Type_Comptable addSubType(Sub_Type_Comptable subType) {
+	public AccountingType addSubType(SubAccountingType subType) {
 		if (subType != null) {
 			if (this.subTypes == null) {
 				this.subTypes = new ArrayList<>();
@@ -264,7 +277,7 @@ public class Type_Comptable {
 	 * @since 0.1
 	 */
 	public String getFullCodeComptable() {
-		return codeComptable != null ? codeComptable.toString() : null;
+		return accountCode != null ? accountCode.toString() : null;
 	}
 
 	// =========================================================
@@ -290,8 +303,8 @@ public class Type_Comptable {
 		if (name != null) {
 			builder.add("name", name);
 		}
-		if (codeComptable != null) {
-			builder.add("codeComptable", codeComptable);
+		if (accountCode != null) {
+			builder.add("accountCode", accountCode);
 		}
 		if (description != null) {
 			builder.add("description", description);
@@ -304,7 +317,7 @@ public class Type_Comptable {
 
 		JsonArrayBuilder subTypesArray = Json.createArrayBuilder();
 		if (subTypes != null) {
-			for (Sub_Type_Comptable subType : subTypes) {
+			for (SubAccountingType subType : subTypes) {
 				if (subType != null) {
 					JsonObject jsonSubType = subType.toJson();
 					subTypesArray.add(jsonSubType);
@@ -327,10 +340,10 @@ public class Type_Comptable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Type_Comptable {")
+		sb.append("AccountingType {")
 				.append("\n  id=").append(id)
 				.append(",\n  name='").append(name).append('\'')
-				.append(",\n  codeComptable=").append(codeComptable)
+				.append(",\n  accountCode=").append(accountCode)
 				.append(",\n  description='").append(description).append('\'');
 
 		if (subTypes != null && !subTypes.isEmpty()) {

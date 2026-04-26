@@ -103,9 +103,9 @@ Cible : Compte Banque (Code 512, Détail .442).
 
 Logique de montant :
 
-Si Débit Excel > 0 alors Ligne1.montantCredit = Débit Excel.
+Si Débit Excel > 0 alors Ligne1.creditAmount = Débit Excel.
 
-Si Crédit Excel > 0 alors Ligne1.montantDebit = Crédit Excel.
+Si Crédit Excel > 0 alors Ligne1.debitAmount = Crédit Excel.
 
 Ajout : L'opération reçoit son premier MovementDTO.
 
@@ -366,7 +366,7 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
     - public List<Type_Comptable_Details> getDetailsList()
     - public void setId(Long id)
     - public void setName(String name)
-    - public void setCodeComptable(Integer codeComptable)
+    - public void setCodeComptable(Integer accountCode)
     - public void setDescription(String description)
     - public void setParentCodeComptable(String parentCodeComptable)
     - public void setDetailsList(List<Type_Comptable_Details> detailsList)
@@ -382,7 +382,7 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
     -   public String getName()
     -   public Type_Comptable setName(String name)
     -   public Integer getCodeComptable()
-    -   public Type_Comptable setCodeComptable(Integer codeComptable)
+    -   public Type_Comptable setCodeComptable(Integer accountCode)
     -   public String getDescription()
     -   public Type_Comptable setDescription(String description)
     -   public List<Sub_Type_Comptable> getSubTypes()
@@ -405,7 +405,7 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
     - public String getFullCode()
     - public void setId(int id)
     - public void setName(String name)
-    - public void setCodeComptable(Integer codeComptable)
+    - public void setCodeComptable(Integer accountCode)
     - public void setDescription(String description)
     - public JsonObject toJson()
     - public String toString()
@@ -450,15 +450,15 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
 📍 Classe : Details_Comptable.java
 ----------------------------------------------
     -   public Details_Comptable()
-    -   public Details_Comptable(String code, String type, String nom)
-    -   public Details_Comptable(String code, String type, String nom, String description)
+    -   public Details_Comptable(String code, String type, String name)
+    -   public Details_Comptable(String code, String type, String name, String description)
     -   public String getCode()
     -   public String getType()
     -   public String getNom()
     -   public String getDescription()
     -   public void setCode(String code)
     -   public void setType(String type)
-    -   public void setNom(String nom)
+    -   public void setNom(String name)
     -   public void setDescription(String description)
     -   public JsonObject toJson()
     -   public String toString()
@@ -490,28 +490,28 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
 📍 Classe : JournalDTO.java
 ----------------------------------------------
     -   public JournalDTO()
-    -   public JournalDTO(String nom, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode)
-    -   public JournalDTO(Long id, String nom, LocalDate dateDebut, LocalDate dateFin, String typeJournalCode)
-    -   public JournalDTO(Long id, String nom, LocalDate dateDebut, LocalDate dateFin,
+    -   public JournalDTO(String name, LocalDate startDate, LocalDate endDate, String journalTypeCode)
+    -   public JournalDTO(Long id, String name, LocalDate startDate, LocalDate endDate, String journalTypeCode)
+    -   public JournalDTO(Long id, String name, LocalDate startDate, LocalDate endDate,
     -   public Long getId()
     -   public JournalDTO setId(Long id)
     -   public String getNom()
-    -   public JournalDTO setNom(String nom)
+    -   public JournalDTO setNom(String name)
     -   public LocalDate getDateDebut()
-    -   public JournalDTO setDateDebut(LocalDate dateDebut)
+    -   public JournalDTO setDateDebut(LocalDate startDate)
     -   public LocalDate getDateFin()
-    -   public JournalDTO setDateFin(LocalDate dateFin)
+    -   public JournalDTO setDateFin(LocalDate endDate)
     -   public String getTypeJournalCode()
-    -   public JournalDTO setTypeJournalCode(String typeJournalCode)
+    -   public JournalDTO setTypeJournalCode(String journalTypeCode)
     -   public List<OperationDTO> getOperations()
     -   public JournalDTO setOperations(List<OperationDTO> operations)
     -   public JournalDTO addOperation(OperationDTO operation)
 📍 Classe : MovementDTO.java
 ----------------------------------------------
     -   public MovementDTO()
-    -   public MovementDTO(Long tiersId, String paiementCode, String codeDetailsComptable,
-    -   public MovementDTO(Long id, Long tiersId, String paiementCode, String codeDetailsComptable,
-    -   public MovementDTO(Long tiersId, String paiementCode, String codeDetailsComptable)
+    -   public MovementDTO(Long tiersId, String paiementCode, String accountDetailCode,
+    -   public MovementDTO(Long id, Long tiersId, String paiementCode, String accountDetailCode,
+    -   public MovementDTO(Long tiersId, String paiementCode, String accountDetailCode)
     -   public Long getId()
     -   public MovementDTO setId(Long id)
     -   public Long getTiersId()
@@ -519,11 +519,11 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
     -   public String getPaiementCode()
     -   public MovementDTO setPaiementCode(String paiementCode)
     -   public String getCodeDetailsComptable()
-    -   public MovementDTO setCodeDetailsComptable(String codeDetailsComptable)
+    -   public MovementDTO setCodeDetailsComptable(String accountDetailCode)
     -   public BigDecimal getMontantDebit()
-    -   public MovementDTO setMontantDebit(BigDecimal montantDebit)
+    -   public MovementDTO setMontantDebit(BigDecimal debitAmount)
     -   public BigDecimal getMontantCredit()
-    -   public MovementDTO setMontantCredit(BigDecimal montantCredit)
+    -   public MovementDTO setMontantCredit(BigDecimal creditAmount)
     -   public String getDescription()
     -   public MovementDTO setDescription(String description)
 📍 Classe : OperationDTO.java
@@ -572,22 +572,22 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
 📍 Classe : OperationStatus.java
 ----------------------------------------------
     -   public OperationStatus()
-    -   public OperationStatus(String code, String nom, String color)
+    -   public OperationStatus(String code, String name, String color)
     -   public String getCode()
     -   public OperationStatus setCode(String code)
     -   public String getNom()
-    -   public OperationStatus setNom(String nom)
+    -   public OperationStatus setNom(String name)
     -   public String getColor()
     -   public OperationStatus setColor(String color)
     -   public JsonObject toJson()
 📍 Classe : PaymentMethod.java
 ----------------------------------------------
     -   public PaymentMethod()
-    -   public PaymentMethod(String code, String nom, String description)
+    -   public PaymentMethod(String code, String name, String description)
     -   public String getCode()
     -   public PaymentMethod setCode(String code)
     -   public String getNom()
-    -   public PaymentMethod setNom(String nom)
+    -   public PaymentMethod setNom(String name)
     -   public String getDescription()
     -   public PaymentMethod setDescription(String description)
     -   public JsonObject toJson()
