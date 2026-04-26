@@ -1,10 +1,14 @@
 package com.jtissdev_API.features.PCP.dto;
 
+import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +22,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * @version 1.0.0
  * @since 0.4
  */
+@DisplayName("Tiers Test Suite")
+@ExtendWith(TestResultLogger.class)
 public class TiersTest {
+
+	private static final Logger logger = LoggerFactory.getLogger(TiersTest.class);
 
 	private static final Integer ID = 1;
 	private static final String NAME = "Tier 1";
