@@ -1,10 +1,15 @@
 package com.jtissdev_API.features.PCP.dto;
 
+import com.jtissdev_API.features.core.dto.referential.OperationStatusTest;
+import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,20 +20,49 @@ import static org.junit.jupiter.api.Assertions.*;
  * and the specific toString formatting.
  *
  * @author jtiss
- * @version 1.0.0
+ * @version 1.1.0
  * @since 0.4
  */
+@ExtendWith(TestResultLogger.class)
+@DisplayName("AnalyticDetail Test Suite")
 public class AnalyticDetailTest {
 
+
+	private static final Logger logger = LoggerFactory.getLogger(AnalyticDetailTest.class);
+
+	/**
+	 * Represents a predefined code used in testing or data validation scenarios
+	 * within the {@code AnalyticDetailTest} class.
+	 * This constant is used to ensure a consistent and reusable value for
+	 * specific test cases or logic validations.
+	 *
+	 * The value ".123" is predefined and cannot be modified, providing a
+	 * reliable and static reference throughout the application or testing framework.
+	 */
 	private static final String CODE = ".123";
 	private static final String TYPE = "Compte";
 	private static final String NAME = "Compte Courant";
 	private static final String DESCRIPTION = "Compte principal professionnel";
 
+	/**
+	 * A static JSON object used for storing detail-related data in testing scenarios.
+	 * This JSON object is populated during the setup phase and serves as a shared resource
+	 * for multiple test methods within the {@code AnalyticDetailTest} class.
+	 * It typically encapsulates serialized data structures necessary for validating the functionality
+	 * of the {@code AnalyticDetail} class, including appropriate serialization and deserialization
+	 * logic under varying test conditions.
+	 */
 	private static JsonObject detailJson;
 
 	/**
+	 * Sets up a JSON object containing various combinations of fields for testing
+	 * the `AnalyticDetail` class.
 	 *
+	 * This method is annotated with `@BeforeAll` to ensure it is executed once
+	 * before all test methods in the `AnalyticDetailTest` class. It creates a JSON
+	 * structure with different scenarios by including various permutations of the
+	 * fields `code`, `type`, `name`, and `description`. These JSON objects will be
+	 * utilized in subsequent test methods to validate expected behavior.
 	 */
 	@BeforeAll
 	@DisplayName("Setup JSON Object for AnalyticDetail")

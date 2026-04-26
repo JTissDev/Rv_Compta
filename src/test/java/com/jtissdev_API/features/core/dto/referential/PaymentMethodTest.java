@@ -1,10 +1,14 @@
 package com.jtissdev_API.features.core.dto.referential;
 
+import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,12 +21,34 @@ import static org.junit.jupiter.api.Assertions.*;
  * @version 1.0.0
  * @since 0.4
  */
+@ExtendWith(TestResultLogger.class)
+@DisplayName("PaymentMethod Test Suite")
 public class PaymentMethodTest {
 
+	/**
+	 * A logger instance used for logging messages and debugging information within the test class.
+	 * It adheres to the SLF4J logging facade and is initialized to capture logs specific to the
+	 * behavior and execution of tests in the OperationStatusTest class.
+	 */
+	private static final Logger logger = LoggerFactory.getLogger(PaymentMethodTest.class);
+
+	/**
+	 * A constant that represents a predefined code used in payment method tests.
+	 * This code is utilized as a standard identifier across test scenarios
+	 * to validate behavior and ensure consistency during JSON mapping, serialization,
+	 * and other test-related operations in the `PaymentMethodTest` class.
+	 */
 	private static final String CODE = "CB";
 	private static final String NAME = "Carte Bancaire";
 	private static final String DESCRIPTION = "Payement par Carte Bancaire";
-	
+
+	/**
+	 * A static JSON object used to represent predefined payment method data required in unit tests.
+	 *
+	 * This object is initialized during the test setup phase and provides a structured JSON representation
+	 * of various payment method attributes. It is primarily utilized for validating the behavior of the
+	 * PaymentMethod class in test cases involving JSON parsing, serialization, and field mapping.
+	 */
 	private static JsonObject paymentMethodJson;
 
 	/**

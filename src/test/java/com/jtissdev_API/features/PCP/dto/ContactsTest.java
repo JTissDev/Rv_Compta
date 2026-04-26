@@ -1,10 +1,16 @@
 package com.jtissdev_API.features.PCP.dto;
 
+import com.jtissdev_API.features.core.dto.referential.OperationStatusTest;
+import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,11 +25,15 @@ import static org.junit.jupiter.api.Assertions.*;
  * that the Contacts feature behaves as expected under various conditions.
  *
  * @author jtiss
- * @version 1.0
+ * @version 1.1
  * @see Contacts
  * @since 0.4
  */
+@DisplayName("Contacts Test")
+@ExtendWith(TestResultLogger.class)
 public class ContactsTest {
+
+	private static final Logger logger = LoggerFactory.getLogger(ContactsTest.class);
 
 	private static final Integer ID = 100;
 	private static final String NAME = "John Doe";
