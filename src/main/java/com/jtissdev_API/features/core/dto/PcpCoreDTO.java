@@ -112,4 +112,6 @@ public class PcpCoreDTO {
 		this.details = details;
 		return this;
 	}
+
+
 }
