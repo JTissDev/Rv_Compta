@@ -1,11 +1,14 @@
 package com.jtissdev_API.features.PCG.dto;
 
 import jakarta.json.JsonObject;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountingTypeDetailsTest {
+
+
 
 	/**
 	 * Test case to verify the toJson method correctly serializes all
@@ -93,6 +96,40 @@ class AccountingTypeDetailsTest {
 	}
 
 	/**
+	 * Test case to verify the toJson method with null id and name but non-null accountingCode.
+	 */
+	@Test
+	void testToJsonWithNullIdAndName() {
+		AccountingTypeDetails details = new AccountingTypeDetails();
+		details.setAccountingCode(7000);
+
+		JsonObject json = details.toJson();
+
+		assertNotNull(json);
+		assertFalse(json.containsKey("id"));
+		assertFalse(json.containsKey("name"));
+		assertEquals(7000, json.getInt("accountingCode"));
+		assertEquals("7000", json.getString("fullCode"));
+	}
+
+	/**
+	 * Test case to verify the toJson method when only name is set.
+	 */
+	@Test
+	void testToJsonWithOnlyNameSet() {
+		AccountingTypeDetails details = new AccountingTypeDetails();
+		details.setName("Equity");
+
+		JsonObject json = details.toJson();
+
+		assertNotNull(json);
+		assertFalse(json.containsKey("id"));
+		assertEquals("Equity", json.getString("name"));
+		assertFalse(json.containsKey("accountingCode"));
+		assertFalse(json.containsKey("fullCode"));
+	}
+
+	/**
 	 * Test case to verify the fullCode field when parentCodeComptable is not provided.
 	 */
 	@Test
@@ -108,5 +145,46 @@ class AccountingTypeDetailsTest {
 
 		assertNotNull(json);
 		assertEquals("2000", json.getString("fullCode"));
+	}
+
+	/**
+	 * Test case to verify the toJson method when accountingCode is null but other fields are set.
+	 */
+	@Test
+	void testToJsonWithNullAccountingCode() {
+		AccountingTypeDetails details = new AccountingTypeDetails();
+		details.setId(3);
+		details.setName("No Code");
+		details.setDescription("No accounting code available");
+
+		JsonObject json = details.toJson();
+
+		assertNotNull(json);
+		assertEquals(3, json.getInt("id"));
+		assertEquals("No Code", json.getString("name"));
+		assertEquals("No accounting code available", json.getString("description"));
+		assertFalse(json.containsKey("accountingCode"));
+		assertFalse(json.containsKey("fullCode"));
+	}
+
+	/**
+	 * Test case to verify the toJson method when description contains special characters.
+	 */
+	@Test
+	void testToJsonWithSpecialCharactersInDescription() {
+		AccountingTypeDetails details = new AccountingTypeDetails();
+		details.setId(4);
+		details.setName("Special Desc");
+		details.setAccountingCode(12345);
+		details.setDescription("Description with special characters: <>!@#$%^&*()");
+
+		JsonObject json = details.toJson();
+
+		assertNotNull(json);
+		assertEquals(4, json.getInt("id"));
+		assertEquals("Special Desc", json.getString("name"));
+		assertEquals(12345, json.getInt("accountingCode"));
+		assertEquals("Description with special characters: <>!@#$%^&*()", json.getString("description"));
+		assertEquals("12345", json.getString("fullCode"));
 	}
 }

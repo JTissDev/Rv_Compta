@@ -15,7 +15,7 @@ import java.util.List;
  * </p>
  *
  * @author J.Tiss
- * @version 1.1.0
+ * @version 1.2.0
  * @since 0.1
  */
 public class PcpCoreDTO {
@@ -92,18 +92,24 @@ public class PcpCoreDTO {
 	/**
 	 * Sets the list of third parties.
 	 * @param thirdParties the list to assign.
+	 * @return    {@code this} instance for fluent chaining
 	 * @since 0.1
+	 * @version 1.1
 	 */
-	public void setThirdParties(List<Tiers> thirdParties) {
+	public PcpCoreDTO setThirdParties(List<Tiers> thirdParties) {
 		this.thirdParties = thirdParties;
+		return this;
 	}
 
 	/**
 	 * Sets the list of Level 4 accounting details.
 	 * @param details the list to assign.
+	 * @return {@code this} instance for fluent chaining
 	 * @since 0.1
+	 * @version 1.1
 	 */
-	public void setDetails(List<AnalyticDetail> details) {
+	public PcpCoreDTO setDetails(List<AnalyticDetail> details) {
 		this.details = details;
+		return this;
 	}
 }
