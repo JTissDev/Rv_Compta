@@ -368,7 +368,7 @@ Marquage Excel : ExcelService écrit "VENTILE" sur la ligne traitée dans le fic
     - public void setName(String name)
     - public void setCodeComptable(Integer accountCode)
     - public void setDescription(String description)
-    - public void setParentCodeComptable(String parentCodeComptable)
+    - public void setParentCodeComptable(String parentAccountingCode)
     - public void setDetailsList(List<Type_Comptable_Details> detailsList)
     - public void addDetails(Type_Comptable_Details details)
     - public JsonObject toJson()

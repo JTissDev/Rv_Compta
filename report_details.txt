@@ -117,7 +117,7 @@
       - 	private String name;
       - 	private Integer accountingCode;
       - 	private String description;
-      - 	private String parentCodeComptable;
+      - 	private String parentAccountingCode;
     🔸 Fonctions :
       - 	public AccountingTypeDetails()
       - 	public AccountingTypeDetails(JsonObject json)
@@ -144,7 +144,7 @@
       - 	private String name;
       - 	private Integer accountingCode;
       - 	private String description;
-      - 	private String parentCodeComptable;
+      - 	private String parentAccountingCode;
       - 	private List<AccountingTypeDetails> detailsList;
     🔸 Fonctions :
       - 	public SubAccountingType()
@@ -160,7 +160,7 @@
       - 	public String getDescription()
       - 	public void setDescription(String description)
       - 	public String getParentCodeComptable()
-      - 	public void setParentCodeComptable(String parentCodeComptable)
+      - 	public void setParentCodeComptable(String parentAccountingCode)
       - 	public String getFullCode()
       - 	public List<AccountingTypeDetails> getDetailsList()
       - 	public void setDetailsList(List<AccountingTypeDetails> detailsList)

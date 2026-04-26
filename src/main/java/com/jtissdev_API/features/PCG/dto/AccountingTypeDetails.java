@@ -43,7 +43,7 @@ public class AccountingTypeDetails {
 	 *
 	 * @since 0.1
 	 */
-	private Integer accountingCode;
+	private String accountingCode;
 
 	/**
 	 * Human-readable description of the accounting type.
@@ -59,7 +59,7 @@ public class AccountingTypeDetails {
 	 *
 	 * @since 0.1
 	 */
-	private String parentCodeComptable;
+	private String parentAccountingCode;
 
 	// =========================================================
 	// == CONSTRUCTORS                                        ==
@@ -93,13 +93,13 @@ public class AccountingTypeDetails {
 			this.setName(json.getString("name"));
 		}
 		if (json.containsKey("accountingCode")) {
-			this.setAccountingCode(json.getInt("accountingCode"));
+			this.setAccountingCode(json.getString("accountingCode"));
 		}
 		if (json.containsKey("description")) {
 			this.setDescription(json.getString("description"));
 		}
-		if (json.containsKey("parentCodeComptable")) {
-			this.setParentCodeComptable(json.getString("parentCodeComptable"));
+		if (json.containsKey("parentAccountingCode")) {
+			this.setParentAccountingCode(json.getString("parentAccountingCode"));
 		}
 	}
 
@@ -119,7 +119,7 @@ public class AccountingTypeDetails {
 	 */
 	public AccountingTypeDetails(int id,
 	                             String name,
-	                             Integer accountingCode,
+	                             String accountingCode,
 	                             String description) {
 		this.id = id;
 		this.name = name;
@@ -139,20 +139,20 @@ public class AccountingTypeDetails {
 	 * 		local accounting numeric code
 	 * @param description
 	 * 		human-readable description
-	 * @param parentCodeComptable
+	 * @param parentAccountingCode
 	 * 		parent accounting code used as prefix
 	 * @since 0.1
 	 */
 	public AccountingTypeDetails(int id,
 	                             String name,
-	                             Integer accountingCode,
+	                             String accountingCode,
 	                             String description,
-	                             String parentCodeComptable) {
+	                             String parentAccountingCode) {
 		this.id = id;
 		this.name = name;
 		this.accountingCode = accountingCode;
 		this.description = description;
-		this.parentCodeComptable = parentCodeComptable;
+		this.parentAccountingCode = parentAccountingCode;
 	}
 
 	/**
@@ -165,18 +165,18 @@ public class AccountingTypeDetails {
 	 * 		the local accounting numeric code
 	 * @param description
 	 * 		the human-readable description of the accounting type
-	 * @param parentCodeComptable
+	 * @param parentAccountingCode
 	 * 		the parent accounting code that acts as a prefix
 	 * @since 0.1
 	 */
 	public AccountingTypeDetails(String name,
-	                             Integer accountingCode,
+	                             String accountingCode,
 	                             String description,
-	                             String parentCodeComptable) {
+	                             String parentAccountingCode) {
 		this.name = name;
 		this.accountingCode = accountingCode;
 		this.description = description;
-		this.parentCodeComptable = parentCodeComptable;
+		this.parentAccountingCode = parentAccountingCode;
 	}
 
 	// =========================================================
@@ -191,7 +191,7 @@ public class AccountingTypeDetails {
 	 * @since 0.1
 	 */
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 
 	/**
@@ -199,10 +199,12 @@ public class AccountingTypeDetails {
 	 *
 	 * @param id
 	 * 		the new identifier
+	 * @return
 	 * @since 0.1
 	 */
-	public void setId(Integer id) {
+	public AccountingTypeDetails setId(Integer id) {
 		this.id = id;
+		return this;
 	}
 
 	/**
@@ -213,7 +215,7 @@ public class AccountingTypeDetails {
 	 * @since 0.1
 	 */
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	/**
@@ -223,8 +225,9 @@ public class AccountingTypeDetails {
 	 * 		the new accounting type name
 	 * @since 0.1
 	 */
-	public void setName(String name) {
+	public AccountingTypeDetails setName(String name) {
 		this.name = name;
+		return this;
 	}
 
 	/**
@@ -234,8 +237,8 @@ public class AccountingTypeDetails {
 	 *
 	 * @since 0.1
 	 */
-	public Integer getAccountingCode() {
-		return accountingCode;
+	public String getAccountingCode() {
+		return this.accountingCode;
 	}
 
 	/**
@@ -245,8 +248,9 @@ public class AccountingTypeDetails {
 	 * 		the new local accounting code
 	 * @since 0.1
 	 */
-	public void setAccountingCode(Integer accountingCode) {
+	public AccountingTypeDetails setAccountingCode(String accountingCode) {
 		this.accountingCode = accountingCode;
+		return this;
 	}
 
 	// =========================================================
@@ -261,7 +265,7 @@ public class AccountingTypeDetails {
 	 * @since 0.1
 	 */
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	/**
@@ -271,8 +275,9 @@ public class AccountingTypeDetails {
 	 * 		the new description
 	 * @since 0.1
 	 */
-	public void setDescription(String description) {
+	public AccountingTypeDetails setDescription(String description) {
 		this.description = description;
+		return this;
 	}
 
 	/**
@@ -282,12 +287,13 @@ public class AccountingTypeDetails {
 	 *
 	 * @since 0.1
 	 */
-	public String getParentCodeComptable() {
-		return parentCodeComptable;
+	public String getParentAccountingCode() {
+		return this.parentAccountingCode;
 	}
 
-	public void setParentCodeComptable(String fullCode) {
-		this.parentCodeComptable = fullCode;
+	public AccountingTypeDetails setParentAccountingCode(String fullCode) {
+		this.parentAccountingCode = fullCode;
+		return this;
 	}
 
 	// =========================================================
@@ -304,8 +310,8 @@ public class AccountingTypeDetails {
 	 * <p>
 	 * Examples (assuming accountingCode = 101):
 	 * <ul>
-	 *   <li>parentCodeComptable = "60"  → "60101"</li>
-	 *   <li>parentCodeComptable = null → "101"</li>
+	 *   <li>parentAccountingCode = "60"  → "60101"</li>
+	 *   <li>parentAccountingCode = null → "101"</li>
 	 * </ul>
 	 *
 	 * @return the full accounting code, or {@code null} if
@@ -318,10 +324,10 @@ public class AccountingTypeDetails {
 			return null;
 		}
 		String local = accountingCode.toString();
-		if (parentCodeComptable == null || parentCodeComptable.isBlank()) {
+		if (parentAccountingCode == null || parentAccountingCode.isBlank()) {
 			return local;
 		}
-		return parentCodeComptable + local;
+		return parentAccountingCode + local;
 	}
 
 	/**
@@ -342,7 +348,7 @@ public class AccountingTypeDetails {
 		if (name != null) builder.add("name", name);
 		if (accountingCode != null) builder.add("accountingCode", accountingCode);
 		if (description != null) builder.add("description", description);
-		if (parentCodeComptable != null) builder.add("parentCodeComptable", parentCodeComptable);
+		if (parentAccountingCode != null) builder.add("parentAccountingCode", parentAccountingCode);
 
 		String fullCode = getFullCode();
 		if (fullCode != null) builder.add("fullCode", fullCode);
@@ -365,7 +371,7 @@ public class AccountingTypeDetails {
 				       ", name='" + name + '\'' +
 				       ", accountingCode=" + accountingCode +
 				       ", description='" + description + '\'' +
-				       ", parentCodeComptable='" + parentCodeComptable + '\'' +
+				       ", parentAccountingCode='" + parentAccountingCode + '\'' +
 				       '}';
 	}
 }

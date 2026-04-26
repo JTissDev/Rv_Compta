@@ -116,9 +116,9 @@ public class PcgDataLoader {
 					AccountingTypeDetails detObj = new AccountingTypeDetails();
 					detObj.setName(detJson.getString("name", ""));
 					detObj.setDescription(detJson.getString("desc_detail", ""));
-					detObj.setAccountingCode(detJson.getInt("no_detail"));
+					detObj.setAccountingCode(detJson.getString("no_detail"));
 
-					detObj.setParentCodeComptable(subObj.getFullCode());
+					detObj.setParentAccountingCode(subObj.getFullCode());
 
 					if (detJson.containsKey("id") && !detJson.isNull("id")) {
 						detObj.setId(detJson.getJsonNumber("id").intValue());
