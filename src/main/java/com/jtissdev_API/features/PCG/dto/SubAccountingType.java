@@ -17,7 +17,7 @@ import java.util.List;
  * parent accounting code with the local accounting code.
  *
  * @author jtiss
- * @version 1.1.0
+ * @version 1.2.0
  * @since 0.1
  */
 public class SubAccountingType {
@@ -45,7 +45,7 @@ public class SubAccountingType {
 	 *
 	 * @since 0.1
 	 */
-	private Integer accountingCode;
+	private String accountingCode;
 
 	/**
 	 * Human-readable description of the sub accounting type.
@@ -79,11 +79,27 @@ public class SubAccountingType {
 	 * is initialized as an empty {@link ArrayList}.
 	 *
 	 * @since 0.1
+	 *
 	 */
 	public SubAccountingType() {
 		this.detailsList = new ArrayList<>();
 	}
 
+	/**
+	 * Constructs a new {@code SubAccountingType} instance from a JSON object.
+	 *
+	 * @param json
+	 *        the JSON object containing the data to populate this instance
+	 *        - "id": a numeric identifier for the accounting type
+	 *        - "name": a human-readable name
+	 *        - "accountingCode": a numeric accounting code
+	 *        - "description": a textual description
+	 *        - "parentCod": a parent accounting code
+	 *        - "detailsList": a list of details, where each detail is represented
+	 *          as a JSON object
+	 *
+	 * @since 0.1
+	 */
 	public SubAccountingType(JsonObject json) {
 		this();
 		if (json.containsKey("id")) {
@@ -93,7 +109,7 @@ public class SubAccountingType {
 			this.setName(json.getString("name"));
 		}
 		if (json.containsKey("accountingCode")) {
-			this.setAccountingCode(json.getInt("accountingCode"));
+			this.setAccountingCode(json.getString("accountingCode"));
 		}
 		if (json.containsKey("description")) {
 			this.setDescription(json.getString("description"));
@@ -122,10 +138,13 @@ public class SubAccountingType {
 	 * @param description
 	 * 		human-readable description
 	 * @since 0.1
+	 * @deprecated {@since 0.4} Manual field initialization is discouraged.
+	 * Use {@link SubAccountingType(JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated(forRemoval = true, since = "0.4")
 	public SubAccountingType(Long id,
 	                         String name,
-	                         Integer accountingCode,
+	                         String accountingCode,
 	                         String description) {
 		this.id = id;
 		this.name = name;
@@ -151,10 +170,14 @@ public class SubAccountingType {
 	 * @param detailsList
 	 * 		list of details; if {@code null}, an empty list will be used
 	 * @since 0.1
+	 *
+	 * @deprecated {@since 0.4} Manual field initialization is discouraged.
+	 * Use {@link SubAccountingType(JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated(forRemoval = true, since = "0.4")
 	public SubAccountingType(Long id,
 	                         String name,
-	                         Integer accountingCode,
+	                         String accountingCode,
 	                         String description,
 	                         String parentCodeComptable,
 	                         List<AccountingTypeDetails> detailsList) {
@@ -178,7 +201,7 @@ public class SubAccountingType {
 	 * @since 0.1
 	 */
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	/**
@@ -187,9 +210,11 @@ public class SubAccountingType {
 	 * @param id
 	 * 		the new identifier
 	 * @since 0.1
+	 * @return {this}
 	 */
-	public void setId(Long id) {
+	public SubAccountingType setId(Long id) {
 		this.id = id;
+		return this;
 	}
 
 	/**
@@ -200,7 +225,7 @@ public class SubAccountingType {
 	 * @since 0.1
 	 */
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	/**
@@ -210,8 +235,9 @@ public class SubAccountingType {
 	 * 		the new name
 	 * @since 0.1
 	 */
-	public void setName(String name) {
+	public SubAccountingType setName(String name) {
 		this.name = name;
+		return this;
 	}
 
 	/**
@@ -221,8 +247,8 @@ public class SubAccountingType {
 	 *
 	 * @since 0.1
 	 */
-	public Integer getAccountingCode() {
-		return accountingCode;
+	public String getAccountingCode() {
+		return this.accountingCode;
 	}
 
 	/**
@@ -232,8 +258,9 @@ public class SubAccountingType {
 	 * 		the new local accounting code
 	 * @since 0.1
 	 */
-	public void setAccountingCode(Integer accountingCode) {
+	public SubAccountingType setAccountingCode(String accountingCode) {
 		this.accountingCode = accountingCode;
+		return this;
 	}
 
 	/**
@@ -244,7 +271,7 @@ public class SubAccountingType {
 	 * @since 0.1
 	 */
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	// =========================================================
@@ -258,8 +285,9 @@ public class SubAccountingType {
 	 * 		the new description
 	 * @since 0.1
 	 */
-	public void setDescription(String description) {
+	public SubAccountingType setDescription(String description) {
 		this.description = description;
+		return this;
 	}
 
 	/**
@@ -270,7 +298,7 @@ public class SubAccountingType {
 	 * @since 0.1
 	 */
 	public String getParentCodeComptable() {
-		return parentCodeComptable;
+		return this.parentCodeComptable;
 	}
 
 	/**
@@ -280,8 +308,9 @@ public class SubAccountingType {
 	 * 		the new parent accounting code
 	 * @since 0.1
 	 */
-	public void setParentCodeComptable(String parentCodeComptable) {
+	public SubAccountingType setParentCodeComptable(String parentCodeComptable) {
 		this.parentCodeComptable = parentCodeComptable;
+		return this;
 	}
 
 	/**

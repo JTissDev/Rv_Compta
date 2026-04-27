@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author jtiss
  * @since 0.1
- * @version 1.1.0
+ * @version 1.2.0
  */
 public class AccountingType {
 
@@ -50,7 +50,7 @@ public class AccountingType {
 	 *
 	 * @since 0.1
 	 */
-	private Integer accountCode;
+	private String accountCode;
 
 	/**
 	 * Human-readable description of the root accounting type.
@@ -85,7 +85,7 @@ public class AccountingType {
 		this();
 		if(json.containsKey("id")) {this.setId(Integer.valueOf(json.getString("id")));}
 		if(json.containsKey("name")) {this.setName(json.getString("name"));}
-		if(json.containsKey("accountCode")) {this.setAccountCode(Integer.valueOf(json.getString("accountCode")));}
+		if(json.containsKey("accountCode")) {this.setAccountCode(json.getString("accountCode"));}
 		if(json.containsKey("description")) {this.setDescription(json.getString("description"));}
 		if(json.containsKey("subTypes")) {
 			for(JsonObject subType : json.getJsonArray("subTypes").getValuesAs(JsonObject.class)) {
@@ -104,10 +104,13 @@ public class AccountingType {
 	 * @param description   human-readable description of the root accounting type
 	 *
 	 * @since 0.1
+	 * @deprecated Manual field initialization is discouraged.
+	 * Use {@link AccountingType(JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4", forRemoval = true)
 	public AccountingType(Integer id,
 	                      String name,
-	                      Integer accountCode,
+	                      String accountCode,
 	                      String description) {
 		this.setId( id ) ;
 		this.setName( name ) ;
@@ -128,7 +131,7 @@ public class AccountingType {
 	 * @since 0.1
 	 */
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 
 	/**
@@ -152,7 +155,7 @@ public class AccountingType {
 	 * @since 0.1
 	 */
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	/**
@@ -175,8 +178,8 @@ public class AccountingType {
 	 *
 	 * @since 0.1
 	 */
-	public Integer getAccountCode() {
-		return accountCode;
+	public String getAccountCode() {
+		return this.accountCode;
 	}
 
 	/**
@@ -187,7 +190,7 @@ public class AccountingType {
 	 *
 	 * @since 0.1
 	 */
-	public AccountingType setAccountCode(Integer accountCode) {
+	public AccountingType setAccountCode(String accountCode) {
 		this.accountCode = accountCode;
 		return this;
 	}
@@ -200,7 +203,7 @@ public class AccountingType {
 	 * @since 0.1
 	 */
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	/**
@@ -224,7 +227,7 @@ public class AccountingType {
 	 * @since 0.1
 	 */
 	public List<SubAccountingType> getSubTypes() {
-		return subTypes;
+		return this.subTypes;
 	}
 
 	/**

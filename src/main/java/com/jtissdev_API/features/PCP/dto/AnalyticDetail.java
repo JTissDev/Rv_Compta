@@ -1,5 +1,6 @@
 package com.jtissdev_API.features.PCP.dto;
 
+import com.jtissdev_API.features.PCG.dto.SubAccountingType;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
@@ -12,7 +13,7 @@ import jakarta.json.JsonObjectBuilder;
  * </p>
  *
  * @author J.Tiss
- * @version 1.1.0
+ * @version 1.2.0
  * @since 0.1
  */
 public class AnalyticDetail {
@@ -97,7 +98,10 @@ public class AnalyticDetail {
 	 * @param name
 	 * 		Display name of the detail
 	 * @since 0.1
+	 * @deprecated {@since 0.4} Manual field initialization is discouraged.
+	 * Use {@link AnalyticDetail (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4",forRemoval = true)
 	public AnalyticDetail(String code, String type, String name) {
 		this.setCode(code);
 		this.setType(type);
@@ -116,7 +120,10 @@ public class AnalyticDetail {
 	 * @param description
 	 * 		Technical description of the object
 	 * @since 0.2
+	 * @deprecated {@since 0.4} Manual field initialization is discouraged.
+	 * Use {@link AnalyticDetail (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4",forRemoval = true)
 	public AnalyticDetail(String code, String type, String name, String description) {
 		this(code, type, name);
 		this.setDescription(description);

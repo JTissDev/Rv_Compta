@@ -11,7 +11,7 @@ import jakarta.json.JsonObjectBuilder;
  * including a display name and a color code for UI representation.
  *
  * @author J.Tiss
- * @version 1.1.0
+ * @version 1.2.0
  * @since 0.2.0
  */
 public class OperationStatus {
@@ -85,7 +85,10 @@ public class OperationStatus {
 	 * @param color
 	 * 		hexadecimal color code
 	 * @since 0.2.0
+	 * @deprecated {@since 0.4} Manual field initialization is discouraged.
+	 * Use {@]link #OperationStatus(JsonObject)} instead for mapping from JSON data.
 	 */
+	@Deprecated (since = "0.4", forRemoval = true)
 	public OperationStatus(String code, String name, String color) {
 		this.setCode(code);
 		this.setName(name);

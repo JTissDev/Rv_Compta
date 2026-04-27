@@ -87,7 +87,7 @@ public class PcgDataLoader {
 
 			AccountingType typeObj = new AccountingType();
 			typeObj.setName(typeJson.getString("type", "Unnamed"));
-			typeObj.setAccountCode(typeJson.getInt("parent_code"));
+			typeObj.setAccountCode(typeJson.getString("parent_code"));
 			typeObj.setDescription(typeJson.getString("parent_desc", ""));
 
 			// Handling Long ID from JSON
@@ -101,7 +101,7 @@ public class PcgDataLoader {
 
 				SubAccountingType subObj = new SubAccountingType();
 				subObj.setName(subJson.getString("name", ""));
-				subObj.setAccountingCode(subJson.getInt("subType_Num"));
+				subObj.setAccountingCode(subJson.getString("subType_Num"));
 				subObj.setDescription(subJson.getString("subType_desc", ""));
 
 				subObj.setParentCodeComptable(typeObj.getFullCodeComptable());

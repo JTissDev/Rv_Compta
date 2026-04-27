@@ -28,7 +28,7 @@ import jakarta.json.JsonObjectBuilder;
  *
  * @author jtiss
  * @since 0.3
- * @version 1.2.1
+ * @version 1.3.0
  */
 public class Contacts {
 
@@ -196,97 +196,6 @@ public class Contacts {
         if (json.containsKey("notes")) {
             this.setNotes(json.getString("notes", null));
         }
-    }
-
-    /**
-     * Creates a {@code Contacts} instance with the specified name.
-     *
-     * @param name the contact's display name
-     * @since 0.4
-     */
-    public Contacts(String name) {
-        this.setName(name);
-    }
-
-    /**
-     * Creates a {@code Contacts} instance with the specified ID and name.
-     *
-     * @param Id   the technical identifier used by the database
-     * @param name the contact's display name
-     *
-     * @since 0.4
-     */
-    public Contacts(Integer Id, String name) {
-        this(name);
-        this.setId(Id);
-    }
-
-    /**
-     * Creates a {@code Contacts} instance with the most common
-     * contact information.
-     *
-     * @param id      technical identifier used by the database
-     * @param name    contact's display name
-     * @param email   primary email address
-     * @param phone   primary phone number
-     * @param company company or organization name
-     *
-     * @since 0.3
-     */
-    public Contacts(Integer id,
-                    String name,
-                    String email,
-                    String phone,
-                    String company) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.company = company;
-    }
-
-    /**
-     * Creates a fully initialized {@code Contacts} instance.
-     *
-     * @param id       technical identifier used by the database
-     * @param name     contact's display name
-     * @param email    primary email address
-     * @param phone    primary phone number
-     * @param mobile   mobile phone number
-     * @param company  company or organization name
-     * @param role     role or job title
-     * @param address  street address line
-     * @param zipCode  ZIP or postal code
-     * @param city     city name
-     * @param country  country name or ISO code
-     * @param notes    free-text notes
-     *
-     * @since 0.3
-     */
-    public Contacts(Integer id,
-                    String name,
-                    String email,
-                    String phone,
-                    String mobile,
-                    String company,
-                    String role,
-                    String address,
-                    String zipCode,
-                    String city,
-                    String country,
-                    String notes) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.mobile = mobile;
-        this.company = company;
-        this.role = role;
-        this.address = address;
-        this.zipCode = zipCode;
-        this.city = city;
-        this.country = country;
-        this.notes = notes;
     }
 
     // =========================================================
