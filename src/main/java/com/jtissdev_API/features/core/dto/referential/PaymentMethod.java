@@ -1,5 +1,6 @@
 package com.jtissdev_API.features.core.dto.referential;
 
+import com.jtissdev_API.features.PCP.dto.AnalyticDetail;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
@@ -12,7 +13,7 @@ import jakarta.json.JsonObjectBuilder;
  *
  * @author J.Tiss
  * @since 0.2.0
- * @version 1.1.0
+ * @version 1.2.0
  */
 public class PaymentMethod {
 
@@ -81,7 +82,11 @@ public class PaymentMethod {
 	 * @param description usage description
 	 *
 	 * @since 0.2.0
+	 *
+	 * @deprecated {@since 0.4} Manual field initialization is discouraged.
+	 * Use {@link PaymentMethod (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4",forRemoval = true)
 	public PaymentMethod(String code, String name, String description) {
 		this.setCode(code);
 		this.setName(name);

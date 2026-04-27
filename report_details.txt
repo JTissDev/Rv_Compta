@@ -115,9 +115,9 @@
     🔹 Champs :
       - 	private Integer id;
       - 	private String name;
-      - 	private Integer accountingCode;
+      - 	private String accountingCode;
       - 	private String description;
-      - 	private String parentCodeComptable;
+      - 	private String parentAccountingCode;
     🔸 Fonctions :
       - 	public AccountingTypeDetails()
       - 	public AccountingTypeDetails(JsonObject json)
@@ -125,15 +125,15 @@
       - 	public AccountingTypeDetails(int id,
       - 	public AccountingTypeDetails(String name,
       - 	public Integer getId()
-      - 	public void setId(Integer id)
+      - 	public AccountingTypeDetails setId(Integer id)
       - 	public String getName()
-      - 	public void setName(String name)
-      - 	public Integer getAccountingCode()
-      - 	public void setAccountingCode(Integer accountingCode)
+      - 	public AccountingTypeDetails setName(String name)
+      - 	public String getAccountingCode()
+      - 	public AccountingTypeDetails setAccountingCode(String accountingCode)
       - 	public String getDescription()
-      - 	public void setDescription(String description)
-      - 	public String getParentCodeComptable()
-      - 	public void setParentCodeComptable(String fullCode)
+      - 	public AccountingTypeDetails setDescription(String description)
+      - 	public String getParentAccountingCode()
+      - 	public AccountingTypeDetails setParentAccountingCode(String fullCode)
       - 	public String getFullCode()
       - 	public JsonObject toJson()
       - 	public String toString()
@@ -186,21 +186,21 @@
       - 	public AnalyticDetail(JsonObject json)
       - 	public AnalyticDetail(String code, String type, String name)
       - 	public AnalyticDetail(String code, String type, String name, String description)
-      - 	public static AnalyticDetail fromJson(JsonObject json)
       - 	public String getCode()
-      - 	public void setCode(String code)
+      - 	public AnalyticDetail setCode(String code)
       - 	public String getType()
-      - 	public void setType(String type)
+      - 	public AnalyticDetail setType(String type)
       - 	public String getName()
-      - 	public void setName(String name)
+      - 	public AnalyticDetail setName(String name)
       - 	public String getDescription()
-      - 	public void setDescription(String description)
+      - 	public AnalyticDetail setDescription(String description)
       - 	public JsonObject toJson()
       - 	public String toString()
+      - 	public static AnalyticDetail fromJson(JsonObject json)
   --------------------------------------------------------------
   📍 Classe : Contacts.java
     🔹 Champs :
-      - private Long id;
+      - private Integer id;
       - private String name;
       - private String email;
       - private String phone;
@@ -216,40 +216,40 @@
       - public Contacts()
       - public Contacts( JsonObject json )
       - public Contacts(String name)
-      - public Contacts(Long Id, String name)
-      - public Contacts(Long id,
-      - public Contacts(Long id,
-      - public Long getId()
-      - public void setId(Long id)
+      - public Contacts(Integer Id, String name)
+      - public Contacts(Integer id,
+      - public Contacts(Integer id,
+      - public Integer getId()
+      - public Contacts setId(Integer id)
       - public String getName()
-      - public void setName(String name)
+      - public Contacts setName(String name)
       - public String getEmail()
-      - public void setEmail(String email)
+      - public Contacts setEmail(String email)
       - public String getPhone()
-      - public void setPhone(String phone)
+      - public Contacts setPhone(String phone)
       - public String getMobile()
-      - public void setMobile(String mobile)
+      - public Contacts setMobile(String mobile)
       - public String getCompany()
-      - public void setCompany(String company)
+      - public Contacts setCompany(String company)
       - public String getRole()
-      - public void setRole(String role)
+      - public Contacts setRole(String role)
       - public String getAddress()
-      - public void setAddress(String address)
+      - public Contacts setAddress(String address)
       - public String getZipCode()
-      - public void setZipCode(String zipCode)
+      - public Contacts setZipCode(String zipCode)
       - public String getCity()
-      - public void setCity(String city)
+      - public Contacts setCity(String city)
       - public String getCountry()
-      - public void setCountry(String country)
+      - public Contacts setCountry(String country)
       - public String getNotes()
-      - public void setNotes(String notes)
+      - public Contacts setNotes(String notes)
       - public JsonObject toJson()
-      - public static Contacts fromJson(JsonObject json)
       - public String toString()
+      - public static Contacts fromJson(JsonObject json)
   --------------------------------------------------------------
   📍 Classe : Tiers.java
     🔹 Champs :
-      - 	private Long id;
+      - 	private Integer id;
       - 	private String name;
       - 	private String thirdPartyType;
       - 	private String description;
@@ -259,20 +259,20 @@
       - 	public Tiers(String name)
       - 	public Tiers(String name, String thirdPartyType)
       - 	public Tiers(String name, String thirdPartyType, String description)
-      - 	public Tiers(Long Id, String name)
-      - 	public Tiers(Long id, String name, String thirdPartyType)
-      - 	public Tiers(Long id, String name, String thirdPartyType, String description)
-      - 	public static Tiers fromJson(JsonObject json)
-      - 	public Long getId()
-      - 	public void setId(Long id)
+      - 	public Tiers(Integer Id, String name)
+      - 	public Tiers(Integer id, String name, String thirdPartyType)
+      - 	public Tiers(Integer id, String name, String thirdPartyType, String description)
+      - 	public Integer getId()
+      - 	public Tiers setId(Integer id)
       - 	public String getName()
-      - 	public void setName(String name)
+      - 	public Tiers setName(String name)
       - 	public String getThirdPartyType()
-      - 	public void setThirdPartyType(String thirdPartyType)
+      - 	public Tiers setThirdPartyType(String thirdPartyType)
       - 	public String getDescription()
-      - 	public void setDescription(String description)
+      - 	public Tiers setDescription(String description)
       - 	public JsonObject toJson()
       - 	public String toString()
+      - 	public static Tiers fromJson(JsonObject json)
   --------------------------------------------------------------
   📍 Classe : package-info.java
     🔹 Champs :
@@ -431,7 +431,6 @@
       - 	public OperationStatus(String code, String name, String color)
       - 	public String getCode()
       - 	public OperationStatus setCode(String code)
-      - 	public String getName()
       - 	public OperationStatus setName(String name)
       - 	public String getColor()
       - 	public OperationStatus setColor(String color)
@@ -454,6 +453,7 @@
       - 	public String getDescription()
       - 	public PaymentMethod setDescription(String description)
       - 	public JsonObject toJson()
+      - 	public String toString()
   --------------------------------------------------------------
   📍 Classe : package-info.java
     🔹 Champs :
@@ -483,8 +483,8 @@
       - 	public PcpCoreDTO(JsonObject json)
       - 	public List<Tiers> getThirdParties()
       - 	public List<AnalyticDetail> getDetails()
-      - 	public void setThirdParties(List<Tiers> thirdParties)
-      - 	public void setDetails(List<AnalyticDetail> details)
+      - 	public PcpCoreDTO setThirdParties(List<Tiers> thirdParties)
+      - 	public PcpCoreDTO setDetails(List<AnalyticDetail> details)
   --------------------------------------------------------------
   📍 Classe : ReferentialCoreDTO.java
     🔹 Champs :

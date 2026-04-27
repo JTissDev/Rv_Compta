@@ -157,7 +157,7 @@ public class OperationStatusTest {
 	 * - {@code getColor()} returns the expected value from the JSON object.
 	 */
 	@Test
-	@DisplayName("Test JSON Constructor")
+	@DisplayName("Test JSON Full Constructor")
 	void testJsonConstructor() {
 		// Given & When
 		OperationStatus status = new OperationStatus(statusJson.getJsonObject("allFields"));
@@ -168,6 +168,37 @@ public class OperationStatusTest {
 				() -> assertEquals(NAME, status.getName(), "Name mapping failed"),
 				() -> assertEquals(COLOR, status.getColor(), "Color mapping failed")
 		);
+	}
+
+	/**
+	 * Validates the behavior of the JSON constructor in the {@code OperationStatus} class
+	 * when handling incomplete JSON data.
+	 *
+	 * This test ensures that the constructor can correctly map available fields
+	 * ("code" and "name") from a given JSON object and handle the absence of
+	 * the optional field ("color") gracefully.
+	 *
+	 * Test scenario:
+	 * - Constructs an {@code OperationStatus} instance using a JSON object
+	 *   containing only "code" and "name" fields, while omitting the "color" field.
+	 * - Verifies that the fields "code" and "name" are correctly mapped from the JSON object.
+	 * - Checks that the "color" field is set to {@code null} as it is absent in the JSON input.
+	 *
+	 * Assertions:
+	 * - {@code getCode()} returns the expected value mapped from the "code" field in the JSON object.
+	 * - {@code getName()} returns the expected value mapped from the "name" field in the JSON object.
+	 * - {@code getColor()} is {@code null}, as the "color" field is absent in the JSON object.
+	 */
+	@Test
+	@DisplayName("Test JSON constructor robustness with incomplete data")
+	void testJsonPartialConstructor() {
+		OperationStatus status = new OperationStatus(statusJson.getJsonObject("codeAndName"));
+
+		assertAll("Test JSON constructor: should handle JSON without color field",
+				() -> assertEquals(CODE, status.getCode(),"Code mapping failed"),
+				() -> assertEquals(NAME, status.getName(),"Name mapping failed"),
+				() -> assertNull(status.getColor(), "Color should be null")
+				);
 	}
 
 	/**
