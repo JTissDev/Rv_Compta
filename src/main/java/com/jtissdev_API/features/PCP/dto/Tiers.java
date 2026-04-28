@@ -1,5 +1,6 @@
 package com.jtissdev_API.features.PCP.dto;
 
+import com.jtissdev_API.features.PCG.dto.AccountingTypeDetails;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
@@ -92,7 +93,10 @@ public class Tiers {
 	 * @param name
 	 * 		the display name of the third party
 	 * @since 0.4
+	 * @deprecated Manual field initialization is discouraged.
+	 * Use {@link Tiers (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4", forRemoval = true)
 	public Tiers(String name) {
 		this.setName(name);
 	}
@@ -107,7 +111,10 @@ public class Tiers {
 	 * @param thirdPartyType
 	 * 		Category of the entity
 	 * @since 1.0.2
+	 * @deprecated Manual field initialization is discouraged.
+	 * Use {@link Tiers (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4", forRemoval = true)
 	public Tiers(String name, String thirdPartyType) {
 		this(name);
 		this.setThirdPartyType(thirdPartyType);
@@ -124,7 +131,10 @@ public class Tiers {
 	 * @param description
 	 * 		additional descriptive information about the third party
 	 * @since 0.4
+	 * @deprecated Manual field initialization is discouraged.
+	 * Use {@link Tiers (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4", forRemoval = true)
 	public Tiers(String name, String thirdPartyType, String description) {
 		this(name, thirdPartyType);
 		this.setDescription(description);
@@ -139,7 +149,10 @@ public class Tiers {
 	 * @param name
 	 * 		the display name of the third party
 	 * @since 0.4
+	 * @deprecated Manual field initialization is discouraged.
+	 * Use {@link Tiers (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4", forRemoval = true)
 	public Tiers(Integer Id, String name) {
 		this.setName(name);
 		this.setId(Id);
@@ -157,7 +170,10 @@ public class Tiers {
 	 * 		the category or type of the third party
 	 * @version 1.1
 	 * @since 0.1
+	 * @deprecated Manual field initialization is discouraged.
+	 * Use {@link Tiers (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4", forRemoval = true)
 	public Tiers(Integer id, String name, String thirdPartyType) {
 		this(name, thirdPartyType);
 		this.setId(id);
@@ -176,7 +192,10 @@ public class Tiers {
 	 * @param description
 	 * 		additional descriptive information about the third party
 	 * @since 0.4
+	 * @deprecated Manual field initialization is discouraged.
+	 * Use {@link Tiers (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4", forRemoval = true)
 	public Tiers(Integer id, String name, String thirdPartyType, String description) {
 		this(id, name, thirdPartyType);
 		this.setDescription(description);

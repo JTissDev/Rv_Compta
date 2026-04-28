@@ -116,7 +116,10 @@ public class AccountingTypeDetails {
 	 * @param description
 	 * 		human-readable description
 	 * @since 0.1
+	 * @deprecated Manual field initialization is discouraged.
+	 * Use {@link AccountingTypeDetails(JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4", forRemoval = true)
 	public AccountingTypeDetails(int id,
 	                             String name,
 	                             String accountingCode,
@@ -142,7 +145,10 @@ public class AccountingTypeDetails {
 	 * @param parentAccountingCode
 	 * 		parent accounting code used as prefix
 	 * @since 0.1
+	 * @deprecated Manual field initialization is discouraged.
+	 * Use {@link AccountingTypeDetails(JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4", forRemoval = true)
 	public AccountingTypeDetails(int id,
 	                             String name,
 	                             String accountingCode,
@@ -168,7 +174,10 @@ public class AccountingTypeDetails {
 	 * @param parentAccountingCode
 	 * 		the parent accounting code that acts as a prefix
 	 * @since 0.1
+	 * @deprecated Manual field initialization is discouraged.
+	 * Use {@link AccountingTypeDetails(JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4", forRemoval = true)
 	public AccountingTypeDetails(String name,
 	                             String accountingCode,
 	                             String description,

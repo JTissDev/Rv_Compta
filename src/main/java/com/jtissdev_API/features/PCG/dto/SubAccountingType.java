@@ -346,7 +346,7 @@ public class SubAccountingType {
 	 * @since 0.1
 	 */
 	public List<AccountingTypeDetails> getDetailsList() {
-		return detailsList;
+		return this.detailsList;
 	}
 
 	/**
@@ -357,8 +357,9 @@ public class SubAccountingType {
 	 * 		an empty list will be used
 	 * @since 0.1
 	 */
-	public void setDetailsList(List<AccountingTypeDetails> detailsList) {
+	public SubAccountingType setDetailsList(List<AccountingTypeDetails> detailsList) {
 		this.detailsList = (detailsList != null) ? detailsList : new ArrayList<>();
+		return this;
 	}
 
 	// =========================================================
