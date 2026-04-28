@@ -96,8 +96,8 @@ public class PaymentMethodTest {
 	}
 
 	@Test
-	@DisplayName("Test JSON Constructor")
-	void testJsonConstructor() {
+	@DisplayName("Test Full JSON Constructor")
+	void testFullJsonConstructor() {
 		// Given & When
 		PaymentMethod method = new PaymentMethod(paymentMethodJson.getJsonObject("allFields"));
 
@@ -109,6 +109,18 @@ public class PaymentMethodTest {
 		);
 	}
 
+	@Test@DisplayName("Test Code Only Constructor")
+	void testCodeOnlyConstructor() {
+		// Given and When
+		PaymentMethod method = new PaymentMethod(paymentMethodJson.getJsonObject("codeOnly"));
+
+		// Then
+		assertAll("Code only constructor mapping validation",
+					() -> assertEquals(CODE, method.getCode(), "Code mapping failed"),
+					() -> assertNull(method.getName(), "Name should be null"),
+					() -> assertNull(method.getDescription(), "Description should be null")
+			);
+	}
 	@Test
 	@DisplayName("Fluent API: setters should update fields and return this instance")
 	void testFluentSetters() {
