@@ -118,8 +118,8 @@ public class AnalyticDetailTest {
 	}
 
 	@Test
-	@DisplayName("Test JSON Constructor")
-	void testJsonConstructor() {
+	@DisplayName("Test Full JSON Constructor")
+	void testFullJsonConstructor() {
 		// Given & When
 		AnalyticDetail detail = new AnalyticDetail(detailJson.getJsonObject("allFields"));
 
@@ -130,6 +130,19 @@ public class AnalyticDetailTest {
 				() -> assertEquals(NAME, detail.getName(), "Name mapping failed"),
 				() -> assertEquals(DESCRIPTION, detail.getDescription(), "Description mapping failed")
 		);
+	}
+
+	@Test
+	@DisplayName("Test name only Json Conctructor")
+	void testNameOnlyJsonConstructor() {
+		AnalyticDetail detail = new AnalyticDetail(detailJson.getJsonObject("nameOnly"));
+
+		assertAll("JSON constructor mapping validation",
+				()->assertEquals(NAME, detail.getName(), "Name mapping failed"),
+				() -> assertNull(detail.getCode (),"Code should be Null"),
+				() -> assertNull(detail.getType (),"Type should be Null"),
+				() -> assertNull(detail.getDescription (),"Description should be Null")
+				);
 	}
 
 	@Test
