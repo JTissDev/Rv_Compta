@@ -318,16 +318,18 @@ public class AccountingType {
 			builder.add("fullCodeComptable", fullCode);
 		}
 
-		JsonArrayBuilder subTypesArray = Json.createArrayBuilder();
+
 		if (subTypes != null) {
+			JsonArrayBuilder subTypesArray = Json.createArrayBuilder();
 			for (SubAccountingType subType : subTypes) {
 				if (subType != null) {
 					JsonObject jsonSubType = subType.toJson();
 					subTypesArray.add(jsonSubType);
 				}
 			}
+			builder.add("subTypes", subTypesArray);
 		}
-		builder.add("subTypes", subTypesArray);
+
 
 		return builder.build();
 	}

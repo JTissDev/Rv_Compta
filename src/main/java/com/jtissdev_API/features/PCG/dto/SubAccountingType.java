@@ -446,8 +446,9 @@ public class SubAccountingType {
 		}
 
 		// detailsList (array)
-		JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+
 		if (detailsList != null) {
+			JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
 			for (AccountingTypeDetails d : detailsList) {
 				if (d == null) {
 					arrayBuilder.addNull();
@@ -455,8 +456,9 @@ public class SubAccountingType {
 					arrayBuilder.add(d.toJson());
 				}
 			}
+			builder.add("detailsList", arrayBuilder);
 		}
-		builder.add("detailsList", arrayBuilder);
+
 
 		return builder.build();
 	}
