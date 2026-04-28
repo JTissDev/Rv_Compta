@@ -77,8 +77,8 @@ public class TiersTest {
 	}
 
 	@Test
-	@DisplayName("Test Json Constructor")
-	void testJsonConstructor() {
+	@DisplayName("Test Full Json Constructor")
+	void testFullJsonConstructor() {
 		Tiers tier = new Tiers(tierJson.getJsonObject("allFields"));
 
 		assertAll("JSON constructor mapping validation",
@@ -86,6 +86,19 @@ public class TiersTest {
 				() -> assertEquals(NAME, tier.getName(), "Name mapping failed"),
 				() -> assertEquals(THIRD_PARTY_CODE, tier.getThirdPartyType(), "Third Party Code mapping failed"),
 				() -> assertEquals(DESCRIPTION, tier.getDescription(), "Description mapping failed")
+		);
+	}
+
+	@Test
+	@DisplayName("Test name only Json Constructor")
+	void testNameOnlyJsonConstructor() {
+		Tiers tier = new Tiers(tierJson.getJsonObject("nameOnly"));
+
+		assertAll("JSON constructor mapping validation",
+				() -> assertNull(tier.getId(), "Id should be null"),
+				() -> assertEquals(NAME, tier.getName(), "Name mapping failed"),
+				() -> assertNull(tier.getThirdPartyType(), "Third Party Code should be null"),
+				() -> assertNull(tier.getDescription(), "Description should be null")
 		);
 	}
 

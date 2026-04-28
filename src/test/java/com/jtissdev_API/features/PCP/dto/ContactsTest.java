@@ -1,6 +1,5 @@
 package com.jtissdev_API.features.PCP.dto;
 
-import com.jtissdev_API.features.core.dto.referential.OperationStatusTest;
 import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -141,8 +139,8 @@ public class ContactsTest {
 	}
 
 	@Test
-	@DisplayName("Test JSON Constructor")
-	public void testJSONConstructor() {
+	@DisplayName("Test Full JSON Constructor")
+	public void testFullJSONConstructor() {
 		Contacts contact = new Contacts(contactJson.getJsonObject("allFields"));
 
 		assertAll("JSON constructor mapping validation",
@@ -161,6 +159,26 @@ public class ContactsTest {
 		);
 	}
 
+	@Test
+	@DisplayName("Test name only Json Constructor")
+	public void testNameOnlyJsonConstructor() {
+		Contacts contact = new Contacts(contactJson.getJsonObject("nameOnly"));
+
+		assertAll("JSON constructor mapping validation",
+				() -> assertEquals(NAME, contact.getName(), "Name mapping failed"),
+				() -> assertNull(contact.getId(), "Id should be Null"),
+				() -> assertNull(contact.getEmail(), "Email should be Null"),
+				() -> assertNull(contact.getPhone(), "Phone should be Null"),
+				() -> assertNull(contact.getMobile(), "Mobile should be Null"),
+				() -> assertNull(contact.getCompany(), "Company should be Null"),
+				() -> assertNull(contact.getRole(), "Role should be Null"),
+				() -> assertNull(contact.getAddress(), "Address should be Null"),
+				() -> assertNull(contact.getZipCode(), "ZipCode should be Null"),
+				() -> assertNull(contact.getCity(), "City should be Null"),
+				() -> assertNull(contact.getCountry(), "Country should be Null"),
+				() -> assertNull(contact.getNotes(), "Notes should be Null")
+		);
+	}
 
 	/**
 	 * Tests all mutators (setters) and accessors (getters) to ensure
@@ -248,8 +266,8 @@ public class ContactsTest {
 		// Then
 		assertAll("toString content validation",
 				() -> assertThat(result).contains("Contacts"),
-				() -> assertThat(result).contains("name="+NAME),
-				() -> assertThat(result).contains("email="+EMAIL)
+				() -> assertThat(result).contains("name=" + NAME),
+				() -> assertThat(result).contains("email=" + EMAIL)
 		);
 	}
 }
