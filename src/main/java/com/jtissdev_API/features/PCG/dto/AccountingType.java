@@ -227,7 +227,7 @@ public class AccountingType {
 	 * @since 0.1
 	 */
 	public List<SubAccountingType> getSubTypes() {
-		return this.subTypes;
+		return this.subTypes != null ? this.subTypes : new ArrayList<>();
 	}
 
 	/**
@@ -260,10 +260,7 @@ public class AccountingType {
 	 */
 	public AccountingType addSubType(SubAccountingType subType) {
 		if (subType != null) {
-			if (this.subTypes == null) {
-				this.subTypes = new ArrayList<>();
-			}
-			this.subTypes.add(subType);
+			this.getSubTypes().add(subType);
 		}
 		return this;
 	}
@@ -279,8 +276,8 @@ public class AccountingType {
 	 *
 	 * @since 0.1
 	 */
-	public String getFullCodeComptable() {
-		return accountCode != null ? accountCode.toString() : null;
+	public String getFullAccountingCode() {
+		return this.getAccountCode() != null ? this.getAccountCode().toString() : null;
 	}
 
 	// =========================================================
@@ -300,28 +297,28 @@ public class AccountingType {
 	public JsonObject toJson() {
 		JsonObjectBuilder builder = Json.createObjectBuilder();
 
-		if (id != null) {
-			builder.add("id", id);
+		if (this.getId() != null) {
+			builder.add("id", this.getId());
 		}
-		if (name != null) {
-			builder.add("name", name);
+		if (this.getName() != null) {
+			builder.add("name", this.getName());
 		}
-		if (accountCode != null) {
-			builder.add("accountCode", accountCode);
+		if (this.getAccountCode() != null) {
+			builder.add("accountCode", this.getAccountCode());
 		}
-		if (description != null) {
-			builder.add("description", description);
-		}
-
-		String fullCode = getFullCodeComptable();
-		if (fullCode != null) {
-			builder.add("fullCodeComptable", fullCode);
+		if (this.getDescription() != null) {
+			builder.add("description", this.getDescription());
 		}
 
+		String fullCode = getFullAccountingCode();
+		if (this.getFullAccountingCode() != null) {
+			builder.add("fullCodeComptable", this.getFullAccountingCode());
+		}
 
-		if (subTypes != null) {
+
+		if (this.getSubTypes() != null) {
 			JsonArrayBuilder subTypesArray = Json.createArrayBuilder();
-			for (SubAccountingType subType : subTypes) {
+			for (SubAccountingType subType : this.getSubTypes()) {
 				if (subType != null) {
 					JsonObject jsonSubType = subType.toJson();
 					subTypesArray.add(jsonSubType);
@@ -346,20 +343,16 @@ public class AccountingType {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("AccountingType {")
-				.append("\n  id=").append(id)
-				.append(",\n  name='").append(name).append('\'')
-				.append(",\n  accountCode=").append(accountCode)
-				.append(",\n  description='").append(description).append('\'');
+				.append("\n  id=").append(this.getId() != null ? this.getId() : "null")
+				.append(",\n  name=").append(this.getName() != null ? this.getName() : "null")
+				.append(",\n  accountCode=").append(this.getAccountCode() != null ? this.getAccountCode() : "null")
+				.append(",\n  description=").append(this.getDescription() != null ? this.getDescription() : "null");
 
-		if (subTypes != null && !subTypes.isEmpty()) {
+		if (this.getSubTypes() != null && !this.getSubTypes().isEmpty()) {
 			sb.append(",\n  subTypes=[");
-			for (int i = 0; i < subTypes.size(); i++) {
+			for (SubAccountingType subType : this.getSubTypes()) {
 				// On ajoute un retour à la ligne et des espaces pour décaler les subtypes
-				sb.append("\n    ").append(subTypes.get(i).toString().replace("\n", "\n    "));
-
-				if (i < subTypes.size() - 1) {
-					sb.append(",");
-				}
+				sb.append("\n    ").append(subType.toString().replace("\n", "\n      "));
 			}
 			sb.append("\n  ]");
 		} else {

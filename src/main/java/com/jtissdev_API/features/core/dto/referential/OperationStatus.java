@@ -186,14 +186,14 @@ public class OperationStatus {
 	public JsonObject toJson() {
 		JsonObjectBuilder builder = Json.createObjectBuilder();
 
-		if (code != null) {
-			builder.add("code", code);
+		if (this.getCode() != null) {
+			builder.add("code", this.getCode());
 		}
-		if (name != null) {
-			builder.add("name", name);
+		if (this.getName() != null) {
+			builder.add("name", this.getName());
 		}
-		if (color != null) {
-			builder.add("color", color);
+		if (this.getColor() != null) {
+			builder.add("color", this.getColor());
 		}
 
 		return builder.build();
@@ -209,6 +209,6 @@ public class OperationStatus {
 	 * @since 0.4
 	 */
 	public String toString() {
-		return "OperationStatus {code=" + code + ", name=" + name + ", color=" + color + "}";
+		return "OperationStatus {code=" + this.getCode() + ", name=" + this.getName() + ", color=" + this.getColor() + "}";
 	}
 }

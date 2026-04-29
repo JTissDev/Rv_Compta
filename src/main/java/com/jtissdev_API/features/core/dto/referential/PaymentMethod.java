@@ -183,14 +183,14 @@ public class PaymentMethod {
 	public JsonObject toJson() {
 		JsonObjectBuilder builder = Json.createObjectBuilder();
 
-		if (code != null) {
-			builder.add("code", code);
+		if (this.getCode() != null) {
+			builder.add("code", this.getCode());
 		}
-		if (name != null) {
-			builder.add("name", name);
+		if (this.getName() != null) {
+			builder.add("name", this.getName());
 		}
-		if (description != null) {
-			builder.add("description", description);
+		if (this.getDescription() != null) {
+			builder.add("description", this.getDescription());
 		}
 
 		return builder.build();
@@ -205,9 +205,9 @@ public class PaymentMethod {
 	@Override
 	public String toString() {
 		return "PaymentMethod{" +
-				       "code=" + code +
-				       ", name=" + name +
-				       ", description=" + description +
+				       "code=" + this.getCode() +
+				       ", name=" + this.getName() +
+				       ", description=" + this.getDescription() +
 				       '}';
 	}
 }

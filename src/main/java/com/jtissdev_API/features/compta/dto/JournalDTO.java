@@ -19,7 +19,7 @@ import java.util.List;
  * </p>
  *
  * @author J.Tiss
- * @version 1.2.0
+ * @version 1.3.0
  * @since 0.3.0
  */
 public class JournalDTO {
@@ -108,7 +108,7 @@ public class JournalDTO {
 		}
 		if (json.containsKey("operations")) {
 			for(JsonObject operation : json.getJsonArray("operations").getValuesAs(JsonObject.class)) {
-				operations.add(new OperationDTO(operation));
+				this.operations.add(new OperationDTO(operation));
 			}
 		}
 	}
@@ -126,7 +126,11 @@ public class JournalDTO {
 	 * @param journalTypeCode
 	 * 		the technical type code
 	 * @since 0.3.0
+	 *
+	 * @deprecated {@since 0.4} Manual field initialization is discouraged.
+	 * Use {@link JournalDTO (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated(forRemoval = true, since = "0.4")
 	public JournalDTO(String name, LocalDate startDate, LocalDate endDate, String journalTypeCode) {
 		this();
 		this.name = name;
@@ -149,7 +153,11 @@ public class JournalDTO {
 	 * @param journalTypeCode
 	 * 		the technical type code
 	 * @since 0.3.0
+	 *
+	 * @deprecated {@since 0.4} Manual field initialization is discouraged.
+	 * Use {@link JournalDTO (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated(forRemoval = true, since = "0.4")
 	public JournalDTO(Long id, String name, LocalDate startDate, LocalDate endDate, String journalTypeCode) {
 		this(name, startDate, endDate, journalTypeCode);
 		this.id = id;
@@ -171,7 +179,11 @@ public class JournalDTO {
 	 * @param operations
 	 * 		the list of associated operations
 	 * @since 0.3.0
+	 *
+	 * @deprecated {@since 0.4} Manual field initialization is discouraged.
+	 * Use {@link JournalDTO (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated(forRemoval = true, since = "0.4")
 	public JournalDTO(Long id, String name, LocalDate startDate, LocalDate endDate,
 	                  String journalTypeCode, List<OperationDTO> operations) {
 		this(id, name, startDate, endDate, journalTypeCode);
@@ -188,7 +200,7 @@ public class JournalDTO {
 	 * @since 0.3.0
 	 */
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	/**
@@ -209,7 +221,7 @@ public class JournalDTO {
 	 * @since 0.3.0
 	 */
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	/**
@@ -230,7 +242,7 @@ public class JournalDTO {
 	 * @since 0.3.0
 	 */
 	public LocalDate getStartDate() {
-		return startDate;
+		return this.startDate;
 	}
 
 	/**
@@ -251,7 +263,7 @@ public class JournalDTO {
 	 * @since 0.3.0
 	 */
 	public LocalDate getEndDate() {
-		return endDate;
+		return this.endDate;
 	}
 
 	/**
@@ -272,7 +284,7 @@ public class JournalDTO {
 	 * @since 0.3.0
 	 */
 	public String getJournalTypeCode() {
-		return journalTypeCode;
+		return this.journalTypeCode;
 	}
 
 	/**
@@ -293,7 +305,7 @@ public class JournalDTO {
 	 * @since 0.3.0
 	 */
 	public List<OperationDTO> getOperations() {
-		return operations;
+		return this.operations;
 	}
 
 	/**

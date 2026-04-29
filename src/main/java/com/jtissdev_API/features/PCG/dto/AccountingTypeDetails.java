@@ -329,14 +329,14 @@ public class AccountingTypeDetails {
 	 * @since 0.1
 	 */
 	public String getFullCode() {
-		if (accountingCode == null) {
-			return null;
+		if (this.getAccountingCode() == null || this.getParentAccountingCode() == null) {
+			return null; // Donnée invalide : orphelin
 		}
-		String local = accountingCode.toString();
-		if (parentAccountingCode == null || parentAccountingCode.isBlank()) {
-			return local;
+		// Si code detail == parent (ex: Parent 40, Code 40), on ne double pas
+		if (this.getAccountingCode().equals(this.getParentAccountingCode())) {
+			return this.getParentAccountingCode();
 		}
-		return parentAccountingCode + local;
+		return this.getParentAccountingCode() + this.getAccountingCode();
 	}
 
 	/**

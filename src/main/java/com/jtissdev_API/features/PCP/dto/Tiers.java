@@ -352,10 +352,10 @@ public class Tiers {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Tiers {id=").append(this.id)
-				.append(", name=").append(this.name)
-				.append(", thirdPartyType=").append(this.thirdPartyType)
-				.append(", description=").append(this.description).append("}");
+		builder.append("Tiers {id=").append(this.getId())
+				.append(", name=").append(this.getName())
+				.append(", thirdPartyType=").append(this.getThirdPartyType())
+				.append(", description=").append(this.getDescription()).append("}");
 		return builder.toString();
 	}
 

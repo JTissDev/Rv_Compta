@@ -110,7 +110,7 @@ public class ReferentialCoreDTO {
 	 * @since 0.2.0
 	 */
 	public List<OperationStatus> getOperationStatuses() {
-		return this.operationStatuses;
+		return this.operationStatuses != null ? this.operationStatuses : new ArrayList<>();
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class ReferentialCoreDTO {
 	 * @since 0.2.0
 	 */
 	public List<PaymentMethod> getPaymentMethods() {
-		return this.paymentMethods;
+		return this.paymentMethods != null ? this.paymentMethods : new ArrayList<>();
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class ReferentialCoreDTO {
 	 */
 	public ReferentialCoreDTO setPaymentMethods(List<PaymentMethod> paymentMethods) {
 		// Note: correction logique pour correspondre au type du champ
-		this.paymentMethods = paymentMethods != null ? (List) paymentMethods : new ArrayList<>();
+		this.paymentMethods = (paymentMethods != null) ? paymentMethods : new ArrayList<>();
 		return this;
 	}
 
@@ -165,7 +165,7 @@ public class ReferentialCoreDTO {
 	 */
 	public ReferentialCoreDTO addOperationStatus(OperationStatus status) {
 		if (status != null) {
-			this.operationStatuses.add(status);
+			this.getOperationStatuses().add(status);
 		}
 		return this;
 	}
@@ -180,7 +180,7 @@ public class ReferentialCoreDTO {
 	 */
 	public ReferentialCoreDTO addPaymentMethod(PaymentMethod method) {
 		if (method != null) {
-			this.paymentMethods.add(method);
+			this.getPaymentMethods().add(method);
 		}
 		return this;
 	}
@@ -201,7 +201,7 @@ public class ReferentialCoreDTO {
 
 		// Statuses
 
-		for (OperationStatus status : operationStatuses) {
+		for (OperationStatus status : this.getOperationStatuses()) {
 			JsonArrayBuilder statusArray = Json.createArrayBuilder();
 			if (status != null) {
 				statusArray.add(status.toJson());
@@ -212,7 +212,7 @@ public class ReferentialCoreDTO {
 
 		// Payment Methods
 
-		for (PaymentMethod method : paymentMethods) {
+		for (PaymentMethod method : this.getPaymentMethods()) {
 			JsonArrayBuilder paymentArray = Json.createArrayBuilder();
 			if (method != null) {
 				paymentArray.add(method.toJson());
@@ -233,16 +233,16 @@ public class ReferentialCoreDTO {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 			builder.append("ReferentialCoreDTO {\n");
-			if (operationStatuses != null && !operationStatuses.isEmpty()) {
+			if (this.getOperationStatuses() != null && !this.getOperationStatuses().isEmpty()) {
 				builder.append("operationStatuses: [\n");
-					for (OperationStatus status : operationStatuses) {
+					for (OperationStatus status : this.getOperationStatuses()) {
 						builder.append(status.toString()).append("\n");
 					}
 					builder.append("]\n");
 			}
-			if (paymentMethods != null && !paymentMethods.isEmpty()) {
+			if (this.getPaymentMethods() != null && !this.getPaymentMethods().isEmpty()) {
 				builder.append("paymentMethods: [\n");
-					for (PaymentMethod method : paymentMethods) {
+					for (PaymentMethod method : this.getPaymentMethods()) {
 						builder.append(method.toString()).append("\n");
 					}
 			}

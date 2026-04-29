@@ -28,7 +28,7 @@ import jakarta.json.JsonObjectBuilder;
  *
  * @author jtiss
  * @since 0.3
- * @version 1.3.0
+ * @version 1.4.0
  */
 public class Contacts {
 
@@ -538,38 +538,38 @@ public class Contacts {
         JsonObjectBuilder builder = Json.createObjectBuilder();
 
         // id is intentionally not serialized
-        if (name != null) {
-            builder.add("name", name);
+        if (this.getName() != null) {
+            builder.add("name", this.getName());
         }
-        if (email != null) {
-            builder.add("email", email);
+        if (this.getEmail() != null) {
+            builder.add("email", this.getEmail());
         }
-        if (phone != null) {
-            builder.add("phone", phone);
+        if (this.getPhone() != null) {
+            builder.add("phone", this.getPhone());
         }
-        if (mobile != null) {
-            builder.add("mobile", mobile);
+        if (this.getMobile() != null) {
+            builder.add("mobile", this.getMobile());
         }
-        if (company != null) {
-            builder.add("company", company);
+        if (this.getCompany() != null) {
+            builder.add("company", this.getCompany());
         }
-        if (role != null) {
-            builder.add("role", role);
+        if (this.getRole() != null) {
+            builder.add("role", this.getRole());
         }
-        if (address != null) {
-            builder.add("address", address);
+        if (this.getAddress() != null) {
+            builder.add("address", this.getAddress());
         }
-        if (zipCode != null) {
-            builder.add("zipCode", zipCode);
+        if (this.getZipCode() != null) {
+            builder.add("zipCode", this.getZipCode());
         }
-        if (city != null) {
-            builder.add("city", city);
+        if (this.getCity() != null) {
+            builder.add("city", this.getCity());
         }
-        if (country != null) {
-            builder.add("country", country);
+        if (this.getCountry() != null) {
+            builder.add("country", this.getCountry());
         }
-        if (notes != null) {
-            builder.add("notes", notes);
+        if (this.getNotes() != null) {
+            builder.add("notes", this.getNotes());
         }
 
         return builder.build();
@@ -587,18 +587,18 @@ public class Contacts {
     @Override
     public String toString() {
         return "Contacts{" +
-                "id=" + this.id +
-                ", name=" + this.name +
-                ", email=" + this.email +
-                ", phone=" + this.phone +
-                ", mobile=" + this.mobile +
-                ", company=" + this.company +
-                ", role=" + this.role +
-                ", address=" + this.address +
-                ", zipCode=" + this.zipCode +
-                ", city=" + this.city +
-                ", country=" + this.country +
-                ", notes=" + this.notes +
+                "id=" + this.getId() +
+                ", name=" + this.getName() +
+                ", email=" + this.getEmail() +
+                ", phone=" + this.getPhone() +
+                ", mobile=" + this.getMobile() +
+                ", company=" + this.getCompany() +
+                ", role=" + this.getRole() +
+                ", address=" + this.getAddress() +
+                ", zipCode=" + this.getZipCode() +
+                ", city=" + this.getCity() +
+                ", country=" + this.getCountry() +
+                ", notes=" + this.getNotes() +
                 '}';
     }
 

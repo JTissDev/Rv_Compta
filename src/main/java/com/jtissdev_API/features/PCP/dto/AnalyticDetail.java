@@ -240,17 +240,17 @@ public class AnalyticDetail {
 	public JsonObject toJson() {
 		JsonObjectBuilder builder = Json.createObjectBuilder();
 
-		if (this.code != null) {
-			builder.add("code", code);
+		if (this.getCode() != null) {
+			builder.add("code", this.getCode());
 		}
-		if (this.type != null) {
-			builder.add("type", type);
+		if (this.getType() != null) {
+			builder.add("type", this.getType());
 		}
-		if (this.name != null) {
-			builder.add("name", name);
+		if (this.getName() != null) {
+			builder.add("name", this.getName());
 		}
-		if (this.description != null) {
-			builder.add("description", description);
+		if (this.getDescription() != null) {
+			builder.add("description", this.getDescription());
 		}
 
 		return builder.build();
@@ -266,10 +266,10 @@ public class AnalyticDetail {
 	@Override
 	public String toString() {
 		return "Analytic Detail [" +
-				       "code=" + code +
-				       ", type=" + type +
-				       ", name=" + name +
-				       ", description=" + description +
+				       "code=" + this.getCode() +
+				       ", type=" + this.getType() +
+				       ", name=" + this.getName() +
+				       ", description=" + this.getDescription() +
 				       "]";
 	}
 

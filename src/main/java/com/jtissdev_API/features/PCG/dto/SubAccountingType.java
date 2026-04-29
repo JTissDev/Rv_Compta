@@ -60,7 +60,7 @@ public class SubAccountingType {
 	 *
 	 * @since 0.1
 	 */
-	private String parentCodeComptable;
+	private String parentAccountingCode;
 
 	/**
 	 * List of detailed accounting types attached to this sub type.
@@ -115,7 +115,7 @@ public class SubAccountingType {
 			this.setDescription(json.getString("description"));
 		}
 		if (json.containsKey("parentCod")) {
-			this.setParentCodeComptable(json.getString("parentCodeComptable"));
+			this.setParentAccountingCode(json.getString("parentAccountingCode"));
 		}
 		if (json.containsKey("detailsList")) {
 			JsonArray array = json.getJsonArray("detailsList");
@@ -165,7 +165,7 @@ public class SubAccountingType {
 	 * 		local accounting numeric code
 	 * @param description
 	 * 		human-readable description
-	 * @param parentCodeComptable
+	 * @param parentAccountingCode
 	 * 		parent accounting code used as prefix
 	 * @param detailsList
 	 * 		list of details; if {@code null}, an empty list will be used
@@ -179,13 +179,13 @@ public class SubAccountingType {
 	                         String name,
 	                         String accountingCode,
 	                         String description,
-	                         String parentCodeComptable,
+	                         String parentAccountingCode,
 	                         List<AccountingTypeDetails> detailsList) {
 		this.id = id;
 		this.name = name;
 		this.accountingCode = accountingCode;
 		this.description = description;
-		this.parentCodeComptable = parentCodeComptable;
+		this.parentAccountingCode = parentAccountingCode;
 		this.detailsList = (detailsList != null) ? detailsList : new ArrayList<>();
 	}
 
@@ -297,19 +297,19 @@ public class SubAccountingType {
 	 *
 	 * @since 0.1
 	 */
-	public String getParentCodeComptable() {
-		return this.parentCodeComptable;
+	public String getParentAccountingCode() {
+		return this.parentAccountingCode;
 	}
 
 	/**
 	 * Sets the parent accounting code.
 	 *
-	 * @param parentCodeComptable
+	 * @param parentAccountingCode
 	 * 		the new parent accounting code
 	 * @since 0.1
 	 */
-	public SubAccountingType setParentCodeComptable(String parentCodeComptable) {
-		this.parentCodeComptable = parentCodeComptable;
+	public SubAccountingType setParentAccountingCode(String parentAccountingCode) {
+		this.parentAccountingCode = parentAccountingCode;
 		return this;
 	}
 
@@ -327,14 +327,14 @@ public class SubAccountingType {
 	 * @since 0.1
 	 */
 	public String getFullCode() {
-		if (accountingCode == null) {
-			return null;
+		if (this.getAccountingCode() == null || this.getParentAccountingCode() == null) {
+			return null; // Donnée invalide : orphelin
 		}
-		String local = accountingCode.toString();
-		if (parentCodeComptable == null || parentCodeComptable.isBlank()) {
-			return local;
+		// Si code detail == parent (ex: Parent 40, Code 40), on ne double pas
+		if (this.getAccountingCode().equals(this.getParentAccountingCode())) {
+			return this.getParentAccountingCode();
 		}
-		return parentCodeComptable + local;
+		return this.getParentAccountingCode() + this.getAccountingCode();
 	}
 
 	/**
@@ -346,7 +346,7 @@ public class SubAccountingType {
 	 * @since 0.1
 	 */
 	public List<AccountingTypeDetails> getDetailsList() {
-		return this.detailsList;
+		return this.detailsList != null ? this.detailsList : new ArrayList<>();
 	}
 
 	/**
@@ -374,14 +374,11 @@ public class SubAccountingType {
 	 * 		the details to add; ignored if {@code null}
 	 * @since 0.1
 	 */
-	public void addDetails(AccountingTypeDetails details) {
-		if (details == null) {
-			return;
+	public SubAccountingType addDetails(AccountingTypeDetails details) {
+		if (details != null) {
+			this.getDetailsList().add(details);
 		}
-		if (this.detailsList == null) {
-			this.detailsList = new ArrayList<>();
-		}
-		this.detailsList.add(details);
+		return this; // <--- C'est ça qui manquait pour le chaînage !
 	}
 
 	// =========================================================
@@ -402,58 +399,30 @@ public class SubAccountingType {
 	public JsonObject toJson() {
 		JsonObjectBuilder builder = Json.createObjectBuilder();
 
-		// id
-		if (id == null) {
-			builder.addNull("id");
-		} else {
-			builder.add("id", id);
+		if (this.getId() != null) {
+			builder.add("id", this.getId());
+		}
+		if (this.getName() != null) {
+			builder.add("name", this.getName());
+		}
+		if (this.getAccountingCode() != null) {
+			builder.add("accountingCode", this.getAccountingCode());
+		}
+		if (this.getDescription() != null) {
+			builder.add("description", this.getDescription());
+		}
+		if (this.getParentAccountingCode() != null) {
+			builder.add("parentAccountingCode", this.getParentAccountingCode());
+		}
+		if (this.getFullCode() != null) {
+			builder.add("fullCode", this.getFullCode());
 		}
 
-		// name
-		if (name == null) {
-			builder.addNull("name");
-		} else {
-			builder.add("name", name);
-		}
-
-		// accountingCode
-		if (accountingCode == null) {
-			builder.addNull("accountingCode");
-		} else {
-			builder.add("accountingCode", accountingCode);
-		}
-
-		// description
-		if (description == null) {
-			builder.addNull("description");
-		} else {
-			builder.add("description", description);
-		}
-
-		// parentCodeComptable
-		if (parentCodeComptable == null) {
-			builder.addNull("parentCodeComptable");
-		} else {
-			builder.add("parentCodeComptable", parentCodeComptable);
-		}
-
-		// fullCode (calculé)
-		String fullCode = getFullCode();
-		if (fullCode == null) {
-			builder.addNull("fullCode");
-		} else {
-			builder.add("fullCode", fullCode);
-		}
-
-		// detailsList (array)
-
-		if (detailsList != null) {
+		if (this.getDetailsList() != null && !this.getDetailsList().isEmpty()) {
 			JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-			for (AccountingTypeDetails d : detailsList) {
-				if (d == null) {
-					arrayBuilder.addNull();
-				} else {
-					arrayBuilder.add(d.toJson());
+			for (AccountingTypeDetails detail : this.getDetailsList()) {
+				if (detail != null) {
+					arrayBuilder.add(detail.toJson());
 				}
 			}
 			builder.add("detailsList", arrayBuilder);
@@ -475,15 +444,15 @@ public class SubAccountingType {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SubAccountingType {")
-				.append("\n    id=").append(id)
-				.append(",\n    name='").append(name).append('\'')
-				.append(",\n    accountingCode=").append(accountingCode)
-				.append(",\n    description='").append(description).append('\'')
-				.append(",\n    parentCodeComptable='").append(parentCodeComptable).append('\'');
+				.append("\n    id=").append(this.getId() != null ? this.getId() : "null")
+				.append(",\n    name=").append(this.getName() != null ? this.getName() : "null")
+				.append(",\n    accountingCode=").append(this.getAccountingCode() != null ? this.getAccountingCode() : "null")
+				.append(",\n    description=").append(this.getDescription() != null ? this.getDescription() : "null")
+				.append(",\n    parentAccountingCode=").append(this.getParentAccountingCode() != null ? this.getParentAccountingCode() : "null");
 
-		if (detailsList != null && !detailsList.isEmpty()) {
+		if (this.getDetailsList() != null && !this.getDetailsList().isEmpty()) {
 			sb.append(",\n    detailsList=[");
-			for (AccountingTypeDetails details : detailsList) {
+			for (AccountingTypeDetails details : this.getDetailsList()) {
 				// On ajoute encore un cran d'indentation pour les détails
 				sb.append("\n      ").append(details.toString().replace("\n", "\n      "));
 			}

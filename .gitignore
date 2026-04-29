@@ -41,3 +41,5 @@ build/
 ### Logs ###
 logs/
 /Dev-Reports/
+
+report_details.txt
