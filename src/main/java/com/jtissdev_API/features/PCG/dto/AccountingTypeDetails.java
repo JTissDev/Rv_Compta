@@ -359,7 +359,7 @@ public class AccountingTypeDetails {
 		if (description != null) builder.add("description", description);
 		if (parentAccountingCode != null) builder.add("parentAccountingCode", parentAccountingCode);
 
-		String fullCode = getFullCode();
+		String fullCode = this.getFullCode();
 		if (fullCode != null) builder.add("fullCode", fullCode);
 
 		return builder.build();

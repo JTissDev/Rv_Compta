@@ -4,13 +4,11 @@ thAll notable changes to this project will be documented in is file.
 
 # Changelog
 
-## [0.4.0-SNAPSHOT] - In Progress
-### Added
-- Implementation of the Excel Import module (data stream processing).
-- Mapping Logic: Transformation of Excel rows into `OperationDTO` objects.
-- JSON Export: Serialization of the `JournalDTO` into a structured JSON format.
+## [0.4.0] 2026-04-29
+### Clean Up
+- All DTO files.
 
-## [0.3.0] - 2024-04-16
+## [0.3.0] - 2026-04-16
 ### Added
 - Complete data structure overhaul (v0.3).
 - Creation of DTOs: `JournalDTO`, `OperationDTO`, `MovementDTO`.
