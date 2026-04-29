@@ -3,6 +3,7 @@ package com.jtissdev_API.features.core.dto;
 import com.jtissdev_API.features.core.dto.referential.OperationStatus;
 import com.jtissdev_API.features.core.dto.referential.OperationStatusTest;
 import com.jtissdev_API.features.core.dto.referential.PaymentMethod;
+import com.jtissdev_API.utils.TestGroup;
 import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(TestResultLogger.class)
 @DisplayName("ReferentialCoreDTO Test Suite")
+@TestGroup("Réferentiel")
 public class ReferentialCoreDTOTest {
 
 	/**

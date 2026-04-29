@@ -4,6 +4,12 @@ thAll notable changes to this project will be documented in is file.
 
 # Changelog
 
+## [0.5] in developpement
+### Added
+- Logs Banner
+- Logs Blocs
+- Logs suite
+
 ## [0.4.0] 2026-04-29
 ### Clean Up
 - All DTO files.

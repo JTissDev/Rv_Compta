@@ -6,6 +6,9 @@ import com.jtissdev_API.engine.loader.DetailsDataLoader;
 import com.jtissdev_API.engine.worker.CommandLineWorker;
 import com.jtissdev_API.features.core.dto.PcgCoreDTO;
 import com.jtissdev_API.features.core.dto.PcpCoreDTO;
+import com.jtissdev_API.utils.AppBanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,12 +21,19 @@ import org.springframework.context.annotation.Profile;
  *
  * @author J.Tiss
  * @since 0.1
- * @version 1.2
+ * @version 1.3
  */
 @SpringBootApplication
 public class App {
 
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
+
     public static void main(String[] args) {
+
+        AppBanner.display();
+
+        // 2. On lance le reste de l'application (Serveur, DB, etc.)
+        logger.info("Initialisation du serveur...");
         SpringApplication.run(App.class, args);
     }
 
@@ -94,7 +104,7 @@ public class App {
     //@Profile({"dev", "prod"})
     public CommandLineRunner operationalRunner(CommandLineWorker worker) {
         return args -> {
-            System.out.println("=== MODE OPÉRATIONNEL : ENGINE v0.4 ===");
+            System.out.println("=== MODE OPÉRATIONNEL : ENGINE v0.5 ===");
             worker.start();
         };
     }
