@@ -1,5 +1,6 @@
 package com.jtissdev_API.features.compta.dto;
 
+import com.jtissdev_API.features.PCG.dto.SubAccountingType;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
@@ -17,7 +18,7 @@ import java.math.BigDecimal;
  *
  * @author J.Tiss
  * @since 0.3.0
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class MovementDTO {
 
@@ -96,6 +97,13 @@ public class MovementDTO {
 		this.creditAmount = BigDecimal.ZERO;
 	}
 
+	/**
+	 * Constructs a new instance of {@code MovementDTO} using data from a provided {@code JsonObject}.
+	 * Each field is conditionally initialized if the corresponding key exists in the JSON object.
+	 *
+	 * @param json the {@code JsonObject} containing the data to populate the {@code MovementDTO} instance
+	 * @since 0.4
+	 */
 	public MovementDTO(JsonObject json) {
 		this();
 		if (json.containsKey("id")) {
@@ -127,7 +135,11 @@ public class MovementDTO {
 	 * @param creditAmount        the credit amount
 	 * @param description          the line description
 	 * @since 0.3.0
+	 *
+	 * @deprecated {@since 0.4} Manual field initialization is discouraged.
+	 * Use {@link MovementDTO (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated(forRemoval = true, since = "0.4")
 	public MovementDTO(Long tiersId, String paiementCode, String accountDetailCode,
 	                   BigDecimal debitAmount, BigDecimal creditAmount, String description) {
 		this();
@@ -151,7 +163,11 @@ public class MovementDTO {
 	 * @param creditAmount        the credit amount
 	 * @param description          the line description
 	 * @since 0.3.0
+	 *
+	 * @deprecated {@since 0.4} Manual field initialization is discouraged.
+	 * Use {@link MovementDTO (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated(forRemoval = true, since = "0.4")
 	public MovementDTO(Long id, Long tiersId, String paiementCode, String accountDetailCode,
 	                   BigDecimal debitAmount, BigDecimal creditAmount, String description) {
 		this(tiersId, paiementCode, accountDetailCode, debitAmount, creditAmount, description);
@@ -166,7 +182,11 @@ public class MovementDTO {
 	 * @param paiementCode         the payment method code
 	 * @param accountDetailCode the PCP detail code
 	 * @since 0.3.0
+	 *
+	 * @deprecated {@since 0.4} Manual field initialization is discouraged.
+	 * Use {@link MovementDTO (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated(forRemoval = true, since = "0.4")
 	public MovementDTO(Long tiersId, String paiementCode, String accountDetailCode) {
 		this();
 		this.tiersId = tiersId;
@@ -211,7 +231,7 @@ public class MovementDTO {
 	 * @since 0.3.0
 	 */
 	public String getAccountDetailCode() {
-		return accountDetailCode;
+		return this.accountDetailCode;
 	}
 
 	/**
@@ -219,7 +239,7 @@ public class MovementDTO {
 	 * @since 0.3.0
 	 */
 	public Long getTiersId() {
-		return tiersId;
+		return this.tiersId;
 	}
 
 	/**
@@ -227,7 +247,7 @@ public class MovementDTO {
 	 * @since 0.3.0
 	 */
 	public String getPaiementCode() {
-		return paiementCode;
+		return this.paiementCode;
 	}
 
 	/**
@@ -235,7 +255,7 @@ public class MovementDTO {
 	 * @since 0.3.0
 	 */
 	public BigDecimal getDebitAmount() {
-		return debitAmount;
+		return this.debitAmount;
 	}
 
 	/**
@@ -243,7 +263,7 @@ public class MovementDTO {
 	 * @since 0.3.0
 	 */
 	public BigDecimal getCreditAmount() {
-		return creditAmount;
+		return this.creditAmount;
 	}
 
 	/**
@@ -251,7 +271,7 @@ public class MovementDTO {
 	 * @since 0.3.0
 	 */
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	// =========================================================
@@ -274,8 +294,9 @@ public class MovementDTO {
 	 * @param accountingCode the accounting code to be assigned
 	 * @since 0.4
 	 */
-	public void setAccountingCode(String accountingCode) {
+	public MovementDTO setAccountingCode(String accountingCode) {
 		this.accountingCode = accountingCode;
+		return this;
 	}
 
 	/**
@@ -284,8 +305,9 @@ public class MovementDTO {
 	 * @param complementaryAccountingCode the complementary accounting code to set
 	 * @since 0.4
 	 */
-	public void setComplementaryAccountingCode(String complementaryAccountingCode) {
+	public MovementDTO setComplementaryAccountingCode(String complementaryAccountingCode) {
 		this.complementaryAccountingCode = complementaryAccountingCode;
+		return this;
 	}
 
 	/**
@@ -358,18 +380,20 @@ public class MovementDTO {
 	 * accountDetailCode, debitAmount, creditAmount, and description.
 	 *
 	 * @return a string representation of the MovementDTO object.
+	 * @since 0.4
 	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("MovementDTO [id=").append(id)
-				.append(", accountingCode=").append(accountingCode)
-				.append(", complementaryAccountingCode=").append(complementaryAccountingCode)
-				.append(", accountDetailCode=").append(accountDetailCode)
-				.append(", tiersId=").append(tiersId)
-				.append(", paiementCode=").append(paiementCode)
-				.append(", debitAmount=").append(debitAmount)
-				.append(", creditAmount=").append(creditAmount)
-				.append(", description=").append(description).append("]");
+		sb.append("MovementDTO [id=").append(this.getId() != null ? this.getId() : "null")
+				.append(", accountingCode=").append(this.getAccountingCode() != null ? this.getAccountingCode() : "null")
+				.append(", complementaryAccountingCode=").append(this.getComplementaryAccountingCode() != null ? this.getComplementaryAccountingCode() : "null")
+				.append(", accountDetailCode=").append(this.getAccountDetailCode() != null ? this.getAccountDetailCode() : "null")
+				.append(", tiersId=").append(this.getTiersId() != null ? this.getTiersId() : "null")
+				.append(", paiementCode=").append(this.getPaiementCode() != null ? this.getPaiementCode() : "null")
+				.append(", debitAmount=").append(this.getDebitAmount() != null ? this.getDebitAmount() : "null")
+				.append(", creditAmount=").append(this.getCreditAmount() != null ? this.getCreditAmount() : "null")
+				.append(", description=").append(this.getDescription() != null ? this.getDescription() : "null")
+				.append("]");
 		return sb.toString();
 	}
 
@@ -384,32 +408,32 @@ public class MovementDTO {
 	 */
 	public JsonObject toJson() {
 		JsonObjectBuilder builder = Json.createObjectBuilder();
-		if (this.id != null) {
-			builder.add("id", this.id);
+		if (this.getId() != null) {
+			builder.add("id", this.getId());
 		}
-		if (this.accountingCode != null) {
-			builder.add("accountingCode", this.accountingCode);
+		if (this.getAccountingCode() != null) {
+			builder.add("accountingCode", this.getAccountingCode());
 		}
-		if (this.complementaryAccountingCode != null) {
-				builder.add("complementaryAccountingCode", this.complementaryAccountingCode);
+		if (this.getComplementaryAccountingCode() != null) {
+				builder.add("complementaryAccountingCode", this.getComplementaryAccountingCode());
 		}
-		if (this.accountDetailCode != null) {
-			builder.add("accountDetailCode", this.accountDetailCode);
+		if (this.getAccountDetailCode() != null) {
+			builder.add("accountDetailCode", this.getAccountDetailCode());
 		}
-		if (this.tiersId != null) {
-				builder.add("tiersId", this.tiersId);
+		if (this.getTiersId() != null) {
+				builder.add("tiersId", this.getTiersId());
 		}
-		if (this.paiementCode != null) {
-				builder.add("paiementCode", this.paiementCode);
+		if (this.getPaiementCode() != null) {
+				builder.add("paiementCode", this.getPaiementCode());
 		}
-		if (this.debitAmount != null) {
-			builder.add("debitAmount", this.debitAmount);
+		if (this.getDebitAmount() != null) {
+			builder.add("debitAmount", this.getDebitAmount());
 		}
-		if (this.creditAmount != null) {
-			builder.add("creditAmount", this.creditAmount);
+		if (this.getCreditAmount() != null) {
+			builder.add("creditAmount", this.getCreditAmount());
 		}
-		if (this.description != null) {
-			builder.add("description", this.description);
+		if (this.getDescription() != null) {
+			builder.add("description", this.getDescription());
 		}
 		return builder.build();
 	}

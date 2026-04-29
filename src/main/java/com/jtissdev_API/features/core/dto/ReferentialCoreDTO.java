@@ -1,5 +1,6 @@
 package com.jtissdev_API.features.core.dto;
 
+import com.jtissdev_API.features.PCG.dto.AccountingTypeDetails;
 import com.jtissdev_API.features.core.dto.referential.OperationStatus;
 import com.jtissdev_API.features.core.dto.referential.PaymentMethod;
 import jakarta.json.*;
@@ -16,7 +17,7 @@ import java.util.List;
  *
  * @author J.Tiss
  * @since 0.2.0
- * @version 1.1.0
+ * @version 1.2.0
  */
 public class ReferentialCoreDTO {
 
@@ -61,7 +62,10 @@ public class ReferentialCoreDTO {
 	 * @param paymentMethods the list of payment methods to initialize the instance with
 	 *
 	 * @since 0.4
+	 * @deprecated Manual field initialization is discouraged.
+	 * Use {@link ReferentialCoreDTO (JsonObject)} instead for mapping from jsonObject
 	 */
+	@Deprecated (since = "0.4", forRemoval = true)
 	public ReferentialCoreDTO(List<OperationStatus> operationStatuses, List<PaymentMethod> paymentMethods) {
 		this();
 		this.setOperationStatuses(operationStatuses);
@@ -69,6 +73,13 @@ public class ReferentialCoreDTO {
 
 	}
 
+	/**
+	 * Constructs a {@code ReferentialCoreDTO} instance by parsing data from a provided {@code JsonObject}.
+	 * Initializes appropriate fields with the values obtained from the JSON structure.
+	 *
+	 * @param json the {@code JsonObject} containing data to populate the {@code ReferentialCoreDTO} instance
+	 * @since 0.4
+	 */
 	public ReferentialCoreDTO(JsonObject json) {
 		this();
 		if(json.containsKey("operationStatuses")) {
@@ -99,7 +110,7 @@ public class ReferentialCoreDTO {
 	 * @since 0.2.0
 	 */
 	public List<OperationStatus> getOperationStatuses() {
-		return operationStatuses;
+		return this.operationStatuses != null ? this.operationStatuses : new ArrayList<>();
 	}
 
 	/**
@@ -123,7 +134,7 @@ public class ReferentialCoreDTO {
 	 * @since 0.2.0
 	 */
 	public List<PaymentMethod> getPaymentMethods() {
-		return paymentMethods;
+		return this.paymentMethods != null ? this.paymentMethods : new ArrayList<>();
 	}
 
 	/**
@@ -136,7 +147,7 @@ public class ReferentialCoreDTO {
 	 */
 	public ReferentialCoreDTO setPaymentMethods(List<PaymentMethod> paymentMethods) {
 		// Note: correction logique pour correspondre au type du champ
-		this.paymentMethods = paymentMethods != null ? (List) paymentMethods : new ArrayList<>();
+		this.paymentMethods = (paymentMethods != null) ? paymentMethods : new ArrayList<>();
 		return this;
 	}
 
@@ -154,7 +165,7 @@ public class ReferentialCoreDTO {
 	 */
 	public ReferentialCoreDTO addOperationStatus(OperationStatus status) {
 		if (status != null) {
-			this.operationStatuses.add(status);
+			this.getOperationStatuses().add(status);
 		}
 		return this;
 	}
@@ -169,7 +180,7 @@ public class ReferentialCoreDTO {
 	 */
 	public ReferentialCoreDTO addPaymentMethod(PaymentMethod method) {
 		if (method != null) {
-			this.paymentMethods.add(method);
+			this.getPaymentMethods().add(method);
 		}
 		return this;
 	}
@@ -189,23 +200,52 @@ public class ReferentialCoreDTO {
 		JsonObjectBuilder builder = Json.createObjectBuilder();
 
 		// Statuses
-		JsonArrayBuilder statusArray = Json.createArrayBuilder();
-		for (OperationStatus status : operationStatuses) {
+
+		for (OperationStatus status : this.getOperationStatuses()) {
+			JsonArrayBuilder statusArray = Json.createArrayBuilder();
 			if (status != null) {
 				statusArray.add(status.toJson());
 			}
+			builder.add("operationStatuses", statusArray);
 		}
-		builder.add("operationStatuses", statusArray);
+
 
 		// Payment Methods
-		JsonArrayBuilder paymentArray = Json.createArrayBuilder();
-		for (PaymentMethod method : paymentMethods) {
+
+		for (PaymentMethod method : this.getPaymentMethods()) {
+			JsonArrayBuilder paymentArray = Json.createArrayBuilder();
 			if (method != null) {
 				paymentArray.add(method.toJson());
 			}
+			builder.add("paymentMethods", paymentArray);
 		}
-		builder.add("paymentMethods", paymentArray);
+
 
 		return builder.build();
+	}
+
+	/**
+	 * Generates a string representation of the ReferentialCoreDTO object, including
+	 * its operation statuses and payment methods if they are present.
+	 *
+	 * @return a string representation of the ReferentialCoreDTO object
+	 */
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+			builder.append("ReferentialCoreDTO {\n");
+			if (this.getOperationStatuses() != null && !this.getOperationStatuses().isEmpty()) {
+				builder.append("operationStatuses: [\n");
+					for (OperationStatus status : this.getOperationStatuses()) {
+						builder.append(status.toString()).append("\n");
+					}
+					builder.append("]\n");
+			}
+			if (this.getPaymentMethods() != null && !this.getPaymentMethods().isEmpty()) {
+				builder.append("paymentMethods: [\n");
+					for (PaymentMethod method : this.getPaymentMethods()) {
+						builder.append(method.toString()).append("\n");
+					}
+			}
+		return builder.toString();
 	}
 }

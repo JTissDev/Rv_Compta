@@ -4,7 +4,7 @@
 
   <groupId>com.jtissdev-API</groupId>
   <artifactId>Rv_Compta</artifactId>
-  <version>0.4-SNAPSHOT</version>
+  <version>0.5-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>Rv_Compta</name>
@@ -54,6 +54,7 @@
     <jakarta.version>2.1.2</jakarta.version>
     <parson.version>1.1.5</parson.version>
     <POI.version>5.2.5</POI.version>
+    <lombock.version>1.18.30</lombock.version>
   </properties>
 
   <dependencies>
@@ -95,6 +96,8 @@
       <artifactId>junit-platform-suite</artifactId>
       <scope>test</scope>
     </dependency>
+
+
   </dependencies>
 
   <build>
