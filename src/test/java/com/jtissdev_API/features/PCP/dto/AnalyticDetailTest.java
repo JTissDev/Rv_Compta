@@ -1,6 +1,7 @@
 package com.jtissdev_API.features.PCP.dto;
 
 import com.jtissdev_API.features.core.dto.referential.OperationStatusTest;
+import com.jtissdev_API.utils.TestGroup;
 import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
@@ -25,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @ExtendWith(TestResultLogger.class)
 @DisplayName("AnalyticDetail Test Suite")
+@TestGroup("PCP DTO")
 public class AnalyticDetailTest {
 
 

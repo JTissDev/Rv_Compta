@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(TestResultLogger.class)
 @DisplayName("ReferentialCoreDTO Test Suite")
-@TestGroup("Réferentiel")
+@TestGroup("Réferentiel DTO")
 public class ReferentialCoreDTOTest {
 
 	/**

@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @ExtendWith(TestResultLogger.class)
 @DisplayName("PaymentMethod Test Suite")
-@TestGroup("Réferentiel")
+@TestGroup("Réferentiel DTO")
 public class PaymentMethodTest {
 
 	/**

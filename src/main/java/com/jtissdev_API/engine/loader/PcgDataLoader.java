@@ -107,7 +107,7 @@ public class PcgDataLoader {
 				subObj.setParentAccountingCode(typeObj.getFullAccountingCode());
 
 				if (subJson.containsKey("id") && !subJson.isNull("id")) {
-					subObj.setId(subJson.getJsonNumber("id").longValue());
+					subObj.setId(subJson.getJsonNumber("id").intValue());
 				}
 
 				JsonArray detailsJson = subJson.getJsonArray("details");

@@ -31,7 +31,7 @@ public class SubAccountingType {
 	 *
 	 * @since 0.1
 	 */
-	private Long id;
+	private Integer id;
 
 	/**
 	 * Human-readable name of the sub accounting type.
@@ -103,7 +103,7 @@ public class SubAccountingType {
 	public SubAccountingType(JsonObject json) {
 		this();
 		if (json.containsKey("id")) {
-			this.setId(Long.valueOf(json.getString("Id")));
+			this.setId(json.getInt("id"));
 		}
 		if (json.containsKey("name")) {
 			this.setName(json.getString("name"));
@@ -114,7 +114,7 @@ public class SubAccountingType {
 		if (json.containsKey("description")) {
 			this.setDescription(json.getString("description"));
 		}
-		if (json.containsKey("parentCod")) {
+		if (json.containsKey("parentAccountingCode")) {
 			this.setParentAccountingCode(json.getString("parentAccountingCode"));
 		}
 		if (json.containsKey("detailsList")) {
@@ -142,7 +142,7 @@ public class SubAccountingType {
 	 * Use {@link SubAccountingType(JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public SubAccountingType(Long id,
+	public SubAccountingType(Integer id,
 	                         String name,
 	                         String accountingCode,
 	                         String description) {
@@ -175,7 +175,7 @@ public class SubAccountingType {
 	 * Use {@link SubAccountingType(JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public SubAccountingType(Long id,
+	public SubAccountingType(Integer id,
 	                         String name,
 	                         String accountingCode,
 	                         String description,
@@ -200,7 +200,7 @@ public class SubAccountingType {
 	 *
 	 * @since 0.1
 	 */
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -212,7 +212,7 @@ public class SubAccountingType {
 	 * @since 0.1
 	 * @return {this}
 	 */
-	public SubAccountingType setId(Long id) {
+	public SubAccountingType setId(Integer id) {
 		this.id = id;
 		return this;
 	}
@@ -362,6 +362,16 @@ public class SubAccountingType {
 		return this;
 	}
 
+	public SubAccountingType setDetailsList(JsonArray detailsList) {
+		if (this.getDetailsList() == null) { this.setDetailsList(new ArrayList<>());}
+		if (!detailsList.isEmpty()) {
+			for (JsonValue detail : detailsList) {
+				this.addDetails(new AccountingTypeDetails(detail.asJsonObject()));
+			}
+		}
+		return this;
+	}
+
 	// =========================================================
 	// == COLLECTION HELPERS                                  ==
 	// =========================================================
@@ -376,6 +386,7 @@ public class SubAccountingType {
 	 */
 	public SubAccountingType addDetails(AccountingTypeDetails details) {
 		if (details != null) {
+			details.setParentAccountingCode(this.getFullCode());
 			this.getDetailsList().add(details);
 		}
 		return this; // <--- C'est ça qui manquait pour le chaînage !

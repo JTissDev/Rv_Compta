@@ -1,5 +1,6 @@
 package com.jtissdev_API.features.PCG.dto;
 
+import com.jtissdev_API.utils.TestGroup;
 import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
@@ -13,7 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("AccountingTypeDetails Test Suite")
 @ExtendWith(TestResultLogger.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class AccountingTypeDetailsTest {
+@TestGroup("PCG DTO")
+public class AccountingTypeDetailsTest {
 
 	private static final Logger logger = LoggerFactory.getLogger(AccountingTypeDetailsTest.class);
 

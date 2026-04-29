@@ -1,5 +1,6 @@
 package com.jtissdev_API.features.PCP.dto;
 
+import com.jtissdev_API.utils.TestGroup;
 import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
@@ -29,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @DisplayName("Contacts Test")
 @ExtendWith(TestResultLogger.class)
+@TestGroup("PCP DTO")
 public class ContactsTest {
 
 	private static final Logger logger = LoggerFactory.getLogger(ContactsTest.class);

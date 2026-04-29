@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @ExtendWith(TestResultLogger.class)
 @DisplayName("OperationStatus Test")
-@TestGroup("Réferentiel")
+@TestGroup("Réferentiel DTO")
 public class OperationStatusTest {
 
 	/**

@@ -1,5 +1,8 @@
 package com.jtissdev_API;
 
+import com.jtissdev_API.features.PCG.dto.AccountingTypeDetails;
+import com.jtissdev_API.features.PCG.dto.AccountingTypeDetailsTest;
+import com.jtissdev_API.features.PCG.dto.SubAccountingTypeTest;
 import com.jtissdev_API.features.PCP.dto.AnalyticDetailTest;
 import com.jtissdev_API.features.PCP.dto.ContactsTest;
 import com.jtissdev_API.features.PCP.dto.TiersTest;
@@ -17,19 +20,22 @@ import org.junit.platform.suite.api.Suite;
 @DisplayName("🚀 JTissDev API : Rv-Compta - Full Test Suite")
 @ExtendWith(TestResultLogger.class)
 @SelectClasses({
-		// 1. On teste d'abord les petites briques (les "atomes")
+		// Referentiels
 		OperationStatusTest.class,
 		PaymentMethodTest.class,
-
+		// Conteners
 		ReferentialCoreDTOTest.class,
-
+		// PCP
 		AnalyticDetailTest.class,
 		ContactsTest.class,
 		TiersTest.class,
 
-		// 2. On teste ensuite les objets qui contiennent ces briques (les "molécules")
-		PcpCoreDTOTest.class
+		// Conteners
+		PcpCoreDTOTest.class,
 
+		// PCG
+		AccountingTypeDetailsTest.class,
+		SubAccountingTypeTest.class
 		// 3. Prochaine étape : tes Loaders viendront ici
 		// JournalLoaderTest.class
 })
