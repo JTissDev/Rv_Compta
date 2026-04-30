@@ -362,6 +362,20 @@ public class SubAccountingType {
 		return this;
 	}
 
+	/**
+	 * Sets the details list for this sub-accounting type using a JSON array.
+	 * If the existing details list is null, it initializes a new empty list.
+	 * Iterates through the provided JSON array and converts each JSON object
+	 * into an {@link AccountingTypeDetails} instance, which is then added
+	 * to the internal details list.
+	 *
+	 * @param detailsList
+	 *        a JSON array containing the details to set; must not be null
+	 *        and should contain valid JSON objects representing details
+	 *
+	 * @return this instance of {@code SubAccountingType}, allowing for method chaining
+	 * @since 0.5
+	 */
 	public SubAccountingType setDetailsList(JsonArray detailsList) {
 		if (this.getDetailsList() == null) { this.setDetailsList(new ArrayList<>());}
 		if (!detailsList.isEmpty()) {

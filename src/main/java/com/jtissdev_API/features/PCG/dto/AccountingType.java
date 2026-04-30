@@ -1,9 +1,6 @@
 package com.jtissdev_API.features.PCG.dto;
 
-import jakarta.json.Json;
-import jakarta.json.JsonArrayBuilder;
-import jakarta.json.JsonObject;
-import jakarta.json.JsonObjectBuilder;
+import jakarta.json.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +80,7 @@ public class AccountingType {
 
 	public AccountingType(JsonObject json) {
 		this();
-		if(json.containsKey("id")) {this.setId(Integer.valueOf(json.getString("id")));}
+		if(json.containsKey("id")) {this.setId(json.getInt("id"));}
 		if(json.containsKey("name")) {this.setName(json.getString("name"));}
 		if(json.containsKey("accountCode")) {this.setAccountCode(json.getString("accountCode"));}
 		if(json.containsKey("description")) {this.setDescription(json.getString("description"));}
@@ -245,6 +242,16 @@ public class AccountingType {
 		return this;
 	}
 
+	public AccountingType setSubTypes(JsonArray subTypes) {
+		if(this.getSubTypes() != null) {this.setSubTypes(new ArrayList<>());}
+		if(!subTypes.isEmpty()){
+				for(JsonObject subType : subTypes.getValuesAs(JsonObject.class)) {
+					this.addSubType(new SubAccountingType(subType));
+				}
+		}
+		return this;
+	}
+
 	// =========================================================
 	// == UTILITY METHODS                                     ==
 	// =========================================================
@@ -260,6 +267,7 @@ public class AccountingType {
 	 */
 	public AccountingType addSubType(SubAccountingType subType) {
 		if (subType != null) {
+			subType.setParentAccountingCode( this.getFullAccountingCode());
 			this.getSubTypes().add(subType);
 		}
 		return this;
@@ -310,11 +318,9 @@ public class AccountingType {
 			builder.add("description", this.getDescription());
 		}
 
-		String fullCode = getFullAccountingCode();
 		if (this.getFullAccountingCode() != null) {
 			builder.add("fullCodeComptable", this.getFullAccountingCode());
 		}
-
 
 		if (this.getSubTypes() != null) {
 			JsonArrayBuilder subTypesArray = Json.createArrayBuilder();
@@ -326,7 +332,6 @@ public class AccountingType {
 			}
 			builder.add("subTypes", subTypesArray);
 		}
-
 
 		return builder.build();
 	}

@@ -1,5 +1,6 @@
 package com.jtissdev_API.features.PCG.dto;
 
+import com.jtissdev_API.utils.TestGroup;
 import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
@@ -18,13 +19,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * @version 1.0.0
  * @since 0.5
  */
-@DisplayName("AccountingTypeDetails Test Suite")
+@DisplayName("Sub Accounting Type Test Suite")
 @ExtendWith(TestResultLogger.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@SuppressWarnings("PCG DTO")
+@TestGroup("PCG DTO")
 public class SubAccountingTypeTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(AccountingTypeDetailsTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(SubAccountingTypeTest.class);
 
 	private static final int ID = 1;
 	private static final String NAME = "Compte courant";
