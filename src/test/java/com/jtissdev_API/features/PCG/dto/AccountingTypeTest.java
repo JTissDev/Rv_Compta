@@ -147,7 +147,7 @@ public class AccountingTypeTest {
 		SubAccountingType subType = new SubAccountingType(SUB_TYPES_ARRAY.getJsonObject(0)).setParentAccountingCode(type.getAccountCode());
 		String subSType = subType.toString();
 		String sType = type.toString();
-		
+
 		assertAll("toString validation",
 				() -> assertTrue(sType.contains("AccountingType"),"toString should contains 'AccountingType'"),
 				() -> assertTrue(sType.contains(String.valueOf(ID)),"toString should contains the Id"),

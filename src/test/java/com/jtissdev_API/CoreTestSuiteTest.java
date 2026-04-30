@@ -1,12 +1,12 @@
 package com.jtissdev_API;
 
-import com.jtissdev_API.features.PCG.dto.AccountingTypeDetails;
 import com.jtissdev_API.features.PCG.dto.AccountingTypeDetailsTest;
 import com.jtissdev_API.features.PCG.dto.AccountingTypeTest;
 import com.jtissdev_API.features.PCG.dto.SubAccountingTypeTest;
 import com.jtissdev_API.features.PCP.dto.AnalyticDetailTest;
 import com.jtissdev_API.features.PCP.dto.ContactsTest;
 import com.jtissdev_API.features.PCP.dto.TiersTest;
+import com.jtissdev_API.features.core.dto.PcgCoreDTOTest;
 import com.jtissdev_API.features.core.dto.PcpCoreDTOTest;
 import com.jtissdev_API.features.core.dto.ReferentialCoreDTOTest;
 import com.jtissdev_API.features.core.dto.referential.OperationStatusTest;
@@ -21,23 +21,25 @@ import org.junit.platform.suite.api.Suite;
 @DisplayName("🚀 JTissDev API : Rv-Compta - Full Test Suite")
 @ExtendWith(TestResultLogger.class)
 @SelectClasses({
-		// Referentiels DTO
+		// Referential DTO
 		OperationStatusTest.class,
 		PaymentMethodTest.class,
-		// Referentiels Conteners
+		// Referential Data holder
 		ReferentialCoreDTOTest.class,
+
 		// PCP DTO
 		AnalyticDetailTest.class,
 		ContactsTest.class,
 		TiersTest.class,
-
-		// PCP Conteners
+		// PCP Data holder
 		PcpCoreDTOTest.class,
 
 		// PCG DTO
 		AccountingTypeDetailsTest.class,
 		SubAccountingTypeTest.class,
-		AccountingTypeTest.class
+		AccountingTypeTest.class,
+		// PCG Data holder
+		PcgCoreDTOTest.class
 
 		// 3. Prochaine étape : tes Loaders viendront ici
 		// JournalLoaderTest.class

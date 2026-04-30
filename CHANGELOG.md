@@ -9,6 +9,20 @@ thAll notable changes to this project will be documented in is file.
 - Logs Banner
 - Logs Blocs
 - Logs suite
+- Success Test for Referential DTO:
+- - PaymentMethod
+- - OperationStatus
+- - ReferentialCore
+- Success Test for PCP DTO
+- - Contacts
+- - Tiers
+- - AnalyticDetais
+- - PcpCoreDTO
+- Success Test for PCG DTO
+- - AccountingType
+- - SubAccountingType
+- - AccountingTypeDetails
+- - PcgCoreDTO
 
 ## [0.4.0] 2026-04-29
 ### Clean Up
