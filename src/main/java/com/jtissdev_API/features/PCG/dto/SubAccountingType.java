@@ -45,7 +45,7 @@ public class SubAccountingType {
 	 *
 	 * @since 0.1
 	 */
-	private String accountingCode;
+	private Integer accountingCode;
 
 	/**
 	 * Human-readable description of the sub accounting type.
@@ -109,7 +109,7 @@ public class SubAccountingType {
 			this.setName(json.getString("name"));
 		}
 		if (json.containsKey("accountingCode")) {
-			this.setAccountingCode(json.getString("accountingCode"));
+			this.setAccountingCode(json.getInt("accountingCode"));
 		}
 		if (json.containsKey("description")) {
 			this.setDescription(json.getString("description"));
@@ -144,7 +144,7 @@ public class SubAccountingType {
 	@Deprecated(forRemoval = true, since = "0.4")
 	public SubAccountingType(Integer id,
 	                         String name,
-	                         String accountingCode,
+	                         Integer accountingCode,
 	                         String description) {
 		this.id = id;
 		this.name = name;
@@ -177,7 +177,7 @@ public class SubAccountingType {
 	@Deprecated(forRemoval = true, since = "0.4")
 	public SubAccountingType(Integer id,
 	                         String name,
-	                         String accountingCode,
+	                         Integer accountingCode,
 	                         String description,
 	                         String parentAccountingCode,
 	                         List<AccountingTypeDetails> detailsList) {
@@ -247,7 +247,7 @@ public class SubAccountingType {
 	 *
 	 * @since 0.1
 	 */
-	public String getAccountingCode() {
+	public Integer getAccountingCode() {
 		return this.accountingCode;
 	}
 
@@ -258,7 +258,7 @@ public class SubAccountingType {
 	 * 		the new local accounting code
 	 * @since 0.1
 	 */
-	public SubAccountingType setAccountingCode(String accountingCode) {
+	public SubAccountingType setAccountingCode(Integer accountingCode) {
 		this.accountingCode = accountingCode;
 		return this;
 	}
@@ -327,7 +327,7 @@ public class SubAccountingType {
 	 * @since 0.1
 	 */
 	public String getFullCode() {
-		if (this.getAccountingCode() == null || this.getParentAccountingCode() == null) {
+		 if (this.getAccountingCode() == null || this.getParentAccountingCode() == null) {
 			return null; // Donnée invalide : orphelin
 		}
 		// Si code detail == parent (ex: Parent 40, Code 40), on ne double pas

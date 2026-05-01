@@ -2,7 +2,7 @@
 	{
 	  "id" : 1,
 	  "name" : "Marie Blachère Vierzon",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : ""
@@ -10,7 +10,7 @@
 	{
 	  "id" : 2,
 	  "name" : "Action Vierzon",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : ""
@@ -18,7 +18,7 @@
 	{
 	  "id" : 3,
 	  "name" : "Gifi Vierzon",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : ""
@@ -26,7 +26,7 @@
 	{
 	  "id" : 4,
 	  "name" : "Delbard Vierzon",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : ""
@@ -34,7 +34,7 @@
 	{
 	  "id" : 5,
 	  "name" : "Comité des fêtes Mehun sur Yevres",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : ""
@@ -42,7 +42,7 @@
 	{
 	  "id" : 6,
 	  "name" : "La Crepe Soy",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : ""
@@ -50,7 +50,7 @@
 	{
 	  "id" : 7,
 	  "name" : "But Vierzon",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : ""
@@ -58,7 +58,7 @@
 	{
 	  "id" : 8,
 	  "name" : "Total Access",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : ""
@@ -66,7 +66,7 @@
 	{
 	  "id" : 9,
 	  "name" : "Super U Vierzon",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : ""
@@ -74,7 +74,7 @@
 	{
 	  "id" : 10,
 	  "name" : "Intermarché Vierzon",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : ""
@@ -82,7 +82,7 @@
 	{
 	  "id" : 11,
 	  "name" : "Burger King St Doulchard",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : ""
@@ -90,7 +90,7 @@
 	{
 	  "id" : 12,
 	  "name" : "Maman",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : ""
@@ -98,7 +98,7 @@
 	{
 	  "id" : 13,
 	  "name" : "SAMSIC",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : "Agence d'interim"
@@ -106,7 +106,7 @@
 	{
 	  "id" : 14,
 	  "name" : "Google Play",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -114,7 +114,7 @@
 	{
 	  "id" : 15,
 	  "name" : "Brico Dépôt Vierzon",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : "Magasin bricolage"
@@ -122,7 +122,7 @@
 	{
 	  "id" : 16,
 	  "name" : "CAF",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -130,7 +130,7 @@
 	{
 	  "id" : 17,
 	  "name" : "Amazone Prime",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -138,7 +138,7 @@
 	{
 	  "id" : 18,
 	  "name" : "Burger King Orleans",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -146,7 +146,7 @@
 	{
 	  "id" : 19,
 	  "name" : "Crédit Agricol centre loire",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -154,7 +154,7 @@
 	{
 	  "id" : 20,
 	  "name" : "FREE",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -162,7 +162,7 @@
 	{
 	  "id" : 21,
 	  "name" : "Total Energie",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -170,7 +170,7 @@
 	{
 	  "id" : 22,
 	  "name" : "Cultura Bourges",
-	  "thirdPartyType" : 0,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -178,7 +178,7 @@
 	{
 	  "id" : 23,
 	  "name" : "Maxi Zoo Vierzon",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -186,7 +186,7 @@
 	{
 	  "id" : 24,
 	  "name" : "Planet WOK",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -194,7 +194,7 @@
 	{
 	  "id" : 25,
 	  "name" : "GEMO Vierzon",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -202,7 +202,7 @@
 	{
 	  "id" : 26,
 	  "name" : "Cabot",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -210,7 +210,7 @@
 	{
 	  "id" : 27,
 	  "name" : "Garage Auto Vierzon",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -218,7 +218,7 @@
 	{
 	  "id" : 28,
 	  "name" : "Mémère",
-	  "thirdPartyType" : 0,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -226,7 +226,7 @@
 	{
 	  "id" : 29,
 	  "name" : "Union Sprotive Reuilly",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -234,7 +234,7 @@
 	{
 	  "id" : 30,
 	  "name" : "Burger King Vierzon",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -242,7 +242,7 @@
 	{
 	  "id" : 31,
 	  "name" : "Leclerc St Doulchard",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -250,7 +250,7 @@
 	{
 	  "id" : 32,
 	  "name" : "L' Oriental Vierzon",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null
@@ -258,7 +258,7 @@
 	{
 	  "id" : 33,
 	  "name" : "Les Delices St Georges",
-	  "thirdPartyType" : 1,
+	  "thirdPartyType" : "Professionnal",
 	  "Siret" : null,
 	  "Code_Comptable_Defaut" : null,
 	  "Description" : null

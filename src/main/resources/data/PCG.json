@@ -1,8 +1,8 @@
 [
   {
     "type": "Patrimoine & Résultat",
-    "parent_code": 1,
-    "parent_desc": "Patrimoine et epargne long terme",
+    "accountCode": 1,
+    "description": "Patrimoine et epargne long terme",
     "subTypes": [
       {
         "name": "Dettes Long Terme",
@@ -28,8 +28,8 @@
   },
   {
     "type": "Immobilisation",
-    "parent_code": 2,
-    "parent_desc": "Valeur dite immobilière, comprends l'immobilier et le mobilier",
+    "accountCode": 2,
+    "description": "Valeur dite immobilière, comprends l'immobilier et le mobilier",
     "subTypes": [
       {
         "name": "Autres biens immo",
@@ -82,8 +82,8 @@
   },
   {
     "type": "Trésorerie",
-    "parent_code": 5,
-    "parent_desc": "Comptes, epargne court terme et espèce",
+    "accountCode": 5,
+    "description": "Comptes, epargne court terme et espèce",
     "subTypes": [
       {
         "name": "Compte courant",
@@ -135,8 +135,8 @@
   },
   {
     "type": "Dépenses",
-    "parent_code": 6,
-    "parent_desc": "liste des catégorie de dépenses",
+    "accountCode": 6,
+    "description": "liste des catégorie de dépenses",
     "subTypes": [
       {
         "name": "Alimentation-Hygiène",
@@ -252,8 +252,8 @@
   },
   {
     "type": "Revenus",
-    "parent_code": 7,
-    "parent_desc": "liste des catégories de revenus",
+    "accountCode": 7,
+    "description": "liste des catégories de revenus",
     "subTypes": [
       {
         "name": "Banquaire",

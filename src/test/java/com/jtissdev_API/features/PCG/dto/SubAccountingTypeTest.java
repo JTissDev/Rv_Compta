@@ -30,9 +30,9 @@ public class SubAccountingTypeTest {
 	private static final int ID = 1;
 	private static final String NAME = "Compte courant";
 	private static final String DESCRIPTION = "Compte courant";
-	private static final String ACCOUNTING_CODE = ".442";
-	private static final String PARENT_ACCOUNTING_CODE = "501";
-	private static final String FULL_CODE = "501.442";
+	private static final Integer ACCOUNTING_CODE = 3;
+	private static final String PARENT_ACCOUNTING_CODE = "50";
+	private static final String FULL_CODE = "503";
 	private static final JsonArray DETAILS_COMPTE = Json.createArrayBuilder()
 			                                                .add(Json.createObjectBuilder()
 					                                                     .add("name", "Capital")
@@ -169,7 +169,7 @@ public class SubAccountingTypeTest {
 				() -> assertEquals(ID,json.getInt("id"),"Id should be serialized"),
 				() -> assertEquals(NAME,json.getString("name"),"name should be serialized"),
 				() -> assertEquals(DESCRIPTION,json.getString("description"),"description should be serialized"),
-				() -> assertEquals(ACCOUNTING_CODE,json.getString("accountingCode"),"accounting code should be serialized"),
+				() -> assertEquals(ACCOUNTING_CODE,json.getInt("accountingCode"),"accounting code should be serialized"),
 				() -> assertEquals(PARENT_ACCOUNTING_CODE,json.getString("parentAccountingCode"),"parent code comptable should be serialized"),
 				() -> assertEquals(FULL_CODE,json.getString("fullCode"),"full code should be serialized"),
 				() -> assertEquals(DETAILS_COMPTE.size(),json.getJsonArray("detailsList").size(),"details list should be serialized")
@@ -187,7 +187,7 @@ public class SubAccountingTypeTest {
 					() -> assertTrue(sType.contains(String.valueOf(ID)  ),"toString should contain the id"),
 					() -> assertTrue(sType.contains(NAME ),"toString should contain the name"),
 					() -> assertTrue(sType.contains(DESCRIPTION ),"toString should contain the description"),
-					() -> assertTrue(sType.contains(ACCOUNTING_CODE ),"toString should contain the accounting code"),
+					() -> assertTrue(sType.contains(ACCOUNTING_CODE.toString() ),"toString should contain the accounting code"),
 					() -> assertTrue(sType.contains(PARENT_ACCOUNTING_CODE ),"toString should contain the parent accounting code"),
 					() -> assertTrue(sType.contains(FULL_CODE ),"toString should contain the full code")
 			);

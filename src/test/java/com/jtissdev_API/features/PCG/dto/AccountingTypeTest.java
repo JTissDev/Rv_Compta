@@ -30,7 +30,7 @@ public class AccountingTypeTest {
 	// --- DONNÉES DE TEST (Niveau 1) ---
 	private static final Integer ID = 1;
 	private static final String NAME = "Patrimoine & Résultat";
-	private static final String ACCOUNT_CODE = "1";
+	private static final Integer ACCOUNT_CODE = 1;
 	private static final String DESCRIPTION = "Patrimoine et epargne long terme";
 
 	// --- DONNÉES DE TEST (Niveau 2 - Array) ---
@@ -135,7 +135,7 @@ public class AccountingTypeTest {
 		assertAll("toJson validation",
 				() -> assertEquals(ID,json.getInt("id"),"Id should be serialized"),
 				() -> assertEquals(NAME,json.getString("name"),"name should be serialized"),
-				() -> assertEquals(ACCOUNT_CODE,json.getString("accountCode"),"Account code should be serialized"),
+				() -> assertEquals(ACCOUNT_CODE,json.getInt("accountCode"),"Account code should be serialized"),
 				() -> assertEquals(DESCRIPTION,json.getString("description"),"Description should be serialized"),
 				() -> assertEquals(SUB_TYPES_ARRAY.size(),json.getJsonArray("subTypes").size(),"SubTypes should be serialized")
 		);
@@ -144,7 +144,7 @@ public class AccountingTypeTest {
 	@Test @Order(4) @DisplayName("Serialization Test : toString")
 	void testToString(){
 		AccountingType type = new AccountingType(testDataJson.getJsonObject("fullLevel1"));
-		SubAccountingType subType = new SubAccountingType(SUB_TYPES_ARRAY.getJsonObject(0)).setParentAccountingCode(type.getAccountCode());
+		SubAccountingType subType = new SubAccountingType(SUB_TYPES_ARRAY.getJsonObject(0)).setParentAccountingCode(type.getFullAccountingCode());
 		String subSType = subType.toString();
 		String sType = type.toString();
 
@@ -153,7 +153,7 @@ public class AccountingTypeTest {
 				() -> assertTrue(sType.contains(String.valueOf(ID)),"toString should contains the Id"),
 				() -> assertTrue(sType.contains(NAME),"toString should contain the name"),
 				() -> assertTrue(sType.contains(DESCRIPTION),"toString should contain the description"),
-				() -> assertTrue(sType.contains(ACCOUNT_CODE),"toString should contain the accountCode"),
+				() -> assertTrue(sType.contains(ACCOUNT_CODE.toString()),"toString should contain the accountCode"),
 				() -> {
 					String cleanSType = sType.replaceAll("\\s+", "");
 					String cleanSubSType = subSType.replaceAll("\\s+", "");

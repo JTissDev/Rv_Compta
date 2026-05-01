@@ -27,7 +27,7 @@ public class MovementDTO {
 	 * Corresponds to the 'N_id' column in the 'tab_lignes' table.
 	 * @since 0.3.0
 	 */
-	private Long id;
+	private Integer id;
 
 	/**
 	 * Represents the general accounting code associated with a movement.
@@ -168,7 +168,7 @@ public class MovementDTO {
 	 * Use {@link MovementDTO (JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public MovementDTO(Long id, Long tiersId, String paiementCode, String accountDetailCode,
+	public MovementDTO(Integer id, Long tiersId, String paiementCode, String accountDetailCode,
 	                   BigDecimal debitAmount, BigDecimal creditAmount, String description) {
 		this(tiersId, paiementCode, accountDetailCode, debitAmount, creditAmount, description);
 		this.id = id;
@@ -202,7 +202,7 @@ public class MovementDTO {
 	 * @return the unique technical identifier.
 	 * @since 0.3.0
 	 */
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -283,7 +283,7 @@ public class MovementDTO {
 	 * @return this instance for chaining.
 	 * @since 0.3.0
 	 */
-	public MovementDTO setId(Long id) {
+	public MovementDTO setId(Integer id) {
 		this.id = id;
 		return this;
 	}

@@ -21,7 +21,7 @@ public class AccountingTypeDetailsTest {
 
 	private static final Integer ID = 1;
 	private static final String NAME = "Revenue";
-	private static final String ACCOUNTING_CODE = "4000";
+	private static final Integer ACCOUNTING_CODE = 4000;
 	private static final String DESCRIPTION = "Revenue Description";
 	private static final String PARENT_ACCOUNTING_CODE = "40";
 	private static final String FULL_CODE = "404000";
@@ -141,7 +141,7 @@ public class AccountingTypeDetailsTest {
 		assertAll("toJson validation",
 				() -> assertFalse(json.containsKey("id"),"Null id should be omitted"),
 				() -> assertEquals(NAME,json.getString("name"),"name should be serialized"),
-				() -> assertEquals(ACCOUNTING_CODE,json.getString("accountingCode"),"accounting code should be serialized"),
+				() -> assertEquals(ACCOUNTING_CODE,json.getInt("accountingCode"),"accounting code should be serialized"),
 				() -> assertFalse(json.containsKey("description"),"Null description should be omitted"),
 				() -> assertFalse(json.containsKey("parentAccountingCode"),"Null parent code comptable should be omitted"),
 				() -> assertFalse(json.containsKey("fullCode"),"No Parent accounting code should be ommited"),

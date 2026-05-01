@@ -3,9 +3,11 @@ package com.jtissdev_API.features.core.dto;
 import com.jtissdev_API.features.core.dto.referential.OperationStatus;
 import com.jtissdev_API.features.core.dto.referential.OperationStatusTest;
 import com.jtissdev_API.features.core.dto.referential.PaymentMethod;
+import com.jtissdev_API.utils.TestDataLoader;
 import com.jtissdev_API.utils.TestGroup;
 import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
+import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -30,6 +32,8 @@ public class ReferentialCoreDTOTest {
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(ReferentialCoreDTOTest.class);
 
+
+	private static JsonArray PAYMENT_METHOD_JSON;
 	/**
 	 * A static constant representing the JSON object for the "Carte Bancaire" (CB) payment method.
 	 *
@@ -87,6 +91,8 @@ public class ReferentialCoreDTOTest {
 	@BeforeAll
 	@DisplayName("Setup Objects for ReferencialCoreDTO Tests")
 	static void setUpTest() {
+		PAYMENT_METHOD_JSON = TestDataLoader.loadFromResources("data/PaymentMethod.json");
+
 		operationStatusReal = new OperationStatus(STATUS_REAL_JSON);
 		operationStatusValid = new OperationStatus(STATUS_VALID_JSON);
 		paymentMethodCB = new PaymentMethod(PAYMENT_METHOD_CB_JSON);
@@ -112,9 +118,7 @@ public class ReferentialCoreDTOTest {
 	@DisplayName("Test full Json Constructor")
 	void testFullJsonConstructor() {
 		REFERENTIAL_CORE_DTO = new ReferentialCoreDTO(Json.createObjectBuilder()
-				                                              .add("paymentMethods", Json.createArrayBuilder()
-						                                                                     .add(PAYMENT_METHOD_CB_JSON)
-						                                                                     .add(PAYMENT_METHOD_CHQ_JSON))
+				                                              .add("paymentMethods", PAYMENT_METHOD_JSON)
 				                                              .add("operationStatuses", Json.createArrayBuilder()
 						                                                                        .add(STATUS_VALID_JSON)
 						                                                                        .add(STATUS_REAL_JSON))
@@ -122,7 +126,7 @@ public class ReferentialCoreDTOTest {
 
 		JsonObject json = REFERENTIAL_CORE_DTO.toJson();
 		assertAll("Test Full Json constructor state validation",
-				() -> assertEquals(2, REFERENTIAL_CORE_DTO.getPaymentMethods().size(), "Two Payment methods should be in the list"),
+				() -> assertEquals(6, REFERENTIAL_CORE_DTO.getPaymentMethods().size(), "Six Payment methods should be in the list"),
 				() -> assertEquals(2, REFERENTIAL_CORE_DTO.getOperationStatuses().size(), "Two Operation Status should be in the list")
 		);
 	}
@@ -131,14 +135,12 @@ public class ReferentialCoreDTOTest {
 	@DisplayName("Test Json Constructor with empty OperationStatuses")
 	void testJsonConstructorWithEmptyOperationStatuses() {
 		REFERENTIAL_CORE_DTO = new ReferentialCoreDTO(Json.createObjectBuilder()
-				                                              .add("paymentMethods", Json.createArrayBuilder()
-						                                                                     .add(PAYMENT_METHOD_CB_JSON)
-						                                                                     .add(PAYMENT_METHOD_CHQ_JSON))
+				                                              .add("paymentMethods", PAYMENT_METHOD_JSON)
 				                                              .build());
 
 		JsonObject json = REFERENTIAL_CORE_DTO.toJson();
 		assertAll("Test Json constructor with empty OperationStatuses state validation",
-				() -> assertEquals(2, REFERENTIAL_CORE_DTO.getPaymentMethods().size(), "Two Payment methods should be in the list"),
+				() -> assertEquals(6, REFERENTIAL_CORE_DTO.getPaymentMethods().size(), "Six Payment methods should be in the list"),
 				() -> assertEquals(0, REFERENTIAL_CORE_DTO.getOperationStatuses().size(), "No Operation Status should be in the list")
 		);
 	}
@@ -152,8 +154,9 @@ public class ReferentialCoreDTOTest {
 		operationStatuses.add(operationStatusValid);
 
 		ArrayList<PaymentMethod> paymentMethods = new ArrayList<>();
-		paymentMethods.add(paymentMethodCB);
-		paymentMethods.add(paymentMethodChq);
+		for (JsonObject paymentMethod : PAYMENT_METHOD_JSON.getValuesAs(JsonObject.class)) {
+			paymentMethods.add(new PaymentMethod(paymentMethod));
+		}
 
 		ReferentialCoreDTO result = REFERENTIAL_CORE_DTO
 				                            .setOperationStatuses(operationStatuses)
@@ -163,7 +166,7 @@ public class ReferentialCoreDTOTest {
 		assertAll("Test Fluent API state validation",
 				() -> assertSame(REFERENTIAL_CORE_DTO, result, "Setter must return the same instance"),
 				() -> assertEquals(2, REFERENTIAL_CORE_DTO.getOperationStatuses().size(), "Two Operation Status should be in the list"),
-				() -> assertEquals(2, REFERENTIAL_CORE_DTO.getPaymentMethods().size(), "Two Payment methods should be in the list")
+				() -> assertEquals(6, REFERENTIAL_CORE_DTO.getPaymentMethods().size(), "Six Payment methods should be in the list")
 		);
 	}
 

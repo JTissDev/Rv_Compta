@@ -6,6 +6,8 @@ import com.jtissdev_API.features.compta.dto.OperationDTO;
 import com.jtissdev_API.features.core.dto.PcgCoreDTO;
 import com.jtissdev_API.features.core.dto.PcpCoreDTO;
 import com.jtissdev_API.features.compta.dto.JournalDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -28,6 +30,12 @@ import java.util.Scanner;
  */
 @Component
 public class CommandLineWorker {
+
+	// =========================================================
+	// == LOGGER                                              ==
+	// =========================================================
+
+	private static final Logger logger = LoggerFactory.getLogger(CommandLineWorker.class);
 
 	// =========================================================
 	// == FIELDS                                              ==
@@ -81,9 +89,13 @@ public class CommandLineWorker {
 		System.out.println("\n--- [INIT] CHARGEMENT DES RÉFÉRENTIELS ---");
 
 		PcgCoreDTO pcgCore = pcgLoader.loadFromJson("data/PCG.json");
+		logger.info("PCG Core loaded successfully.");
 		PcpCoreDTO pcpCore = new PcpCoreDTO();
+
 		pcpCore.setThirdParties(tiersLoader.loadTiersFromJson("Tiers.json"));
+		logger.info("Tiers loaded successfully.");
 		pcpCore.setDetails(detailsLoader.loadDetailsFromJson("Details.json"));
+		logger.info("Details loaded successfully.");
 
 
 		System.out.println("> Référentiels chargés. Prêt pour l'importation interactive.");
@@ -139,6 +151,7 @@ public class CommandLineWorker {
 					break;
 				case "0":
 					running = false;
+					logger.info("fermeture de l'application");
 					System.out.println("> Fermeture du programme.");
 					break;
 				default:

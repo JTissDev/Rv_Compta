@@ -43,7 +43,7 @@ public class AccountingTypeDetails {
 	 *
 	 * @since 0.1
 	 */
-	private String accountingCode;
+	private Integer accountingCode;
 
 	/**
 	 * Human-readable description of the accounting type.
@@ -93,7 +93,7 @@ public class AccountingTypeDetails {
 			this.setName(json.getString("name"));
 		}
 		if (json.containsKey("accountingCode")) {
-			this.setAccountingCode(json.getString("accountingCode"));
+			this.setAccountingCode(json.getInt("accountingCode"));
 		}
 		if (json.containsKey("description")) {
 			this.setDescription(json.getString("description"));
@@ -122,7 +122,7 @@ public class AccountingTypeDetails {
 	@Deprecated (since = "0.4", forRemoval = true)
 	public AccountingTypeDetails(int id,
 	                             String name,
-	                             String accountingCode,
+	                             Integer accountingCode,
 	                             String description) {
 		this.id = id;
 		this.name = name;
@@ -151,7 +151,7 @@ public class AccountingTypeDetails {
 	@Deprecated (since = "0.4", forRemoval = true)
 	public AccountingTypeDetails(int id,
 	                             String name,
-	                             String accountingCode,
+	                             Integer accountingCode,
 	                             String description,
 	                             String parentAccountingCode) {
 		this.id = id;
@@ -179,7 +179,7 @@ public class AccountingTypeDetails {
 	 */
 	@Deprecated (since = "0.4", forRemoval = true)
 	public AccountingTypeDetails(String name,
-	                             String accountingCode,
+	                             Integer accountingCode,
 	                             String description,
 	                             String parentAccountingCode) {
 		this.name = name;
@@ -246,7 +246,7 @@ public class AccountingTypeDetails {
 	 *
 	 * @since 0.1
 	 */
-	public String getAccountingCode() {
+	public Integer getAccountingCode() {
 		return this.accountingCode;
 	}
 
@@ -257,7 +257,7 @@ public class AccountingTypeDetails {
 	 * 		the new local accounting code
 	 * @since 0.1
 	 */
-	public AccountingTypeDetails setAccountingCode(String accountingCode) {
+	public AccountingTypeDetails setAccountingCode(Integer accountingCode) {
 		this.accountingCode = accountingCode;
 		return this;
 	}
