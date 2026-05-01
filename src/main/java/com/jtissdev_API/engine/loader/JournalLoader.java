@@ -112,14 +112,8 @@ public class JournalLoader {
 	 * @since 0.4.0
 	 */
 	private MovementDTO mapToMovementDTO(JsonObject json) {
-		return new MovementDTO()
-				       .setId(json.containsKey("id") ? (long) json.getInt("id") : null)
-				       .setTiersId(json.containsKey("tiersId") ? (long) json.getInt("tiersId") : null)
-				       .setPaiementCode(json.getString("paiementCode", null))
-				       .setAccountDetailCode(json.getString("codeDetailsComptable", null))
-				       .setDebitAmount(new BigDecimal(json.getString("montantDebit", "0")))
-				       .setCreditAmount(new BigDecimal(json.getString("montantCredit", "0")))
-				       .setDescription(json.getString("description", null));
+		return new MovementDTO(json);
+
 	}
 
 	/**

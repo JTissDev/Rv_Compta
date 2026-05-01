@@ -6,10 +6,7 @@ import com.jtissdev_API.utils.TestGroup;
 import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(TestResultLogger.class)
 @DisplayName("PcgCoreDTO Test Suite")
 @TestGroup("PCG DTO")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PcgCoreDTOTest {
 
 	public static JsonArray ACCOUNTING_JSON ;
@@ -45,7 +43,6 @@ public class PcgCoreDTOTest {
 	static void setUp() {
 		ACCOUNTING_JSON = TestDataLoader.loadFromResources("data/PCG.json");
 		validerStructure();
-		pcgCoreDTO = new PcgCoreDTO();
 	}
 
 	private static void validerStructure() {

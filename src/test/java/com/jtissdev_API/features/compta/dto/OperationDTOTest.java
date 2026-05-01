@@ -94,19 +94,19 @@ class OperationDTOTest {
 	@Test
 	@DisplayName("Should support fluent API and adding movements individually")
 	void shouldSupportFluentApiAndAddMovement() {
-		MovementDTO m1 = new MovementDTO().setId(10L);
+		MovementDTO m1 = new MovementDTO().setId(10);
 
 		OperationDTO operation = new OperationDTO()
 				                         .setId(50L)
 				                         .setLibelle("Fluent Test")
 				                         .addMovement(m1)
-				                         .addMovement(new MovementDTO().setId(11L));
+				                         .addMovement(new MovementDTO().setId(11));
 
 		assertAll("Fluent and Add verification",
 				() -> assertEquals(50L, operation.getId()),
 				() -> assertEquals("Fluent Test", operation.getLibelle()),
 				() -> assertEquals(2, operation.getMovements().size()),
-				() -> assertEquals(10L, operation.getMovements().get(0).getId())
+				() -> assertEquals(10, operation.getMovements().get(0).getId())
 		);
 	}
 

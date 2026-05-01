@@ -9,9 +9,7 @@ import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(TestResultLogger.class)
 @DisplayName("ReferentialCoreDTO Test Suite")
 @TestGroup("Réferentiel DTO")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ReferentialCoreDTOTest {
 
 	/**
