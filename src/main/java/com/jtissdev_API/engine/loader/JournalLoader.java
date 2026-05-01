@@ -84,7 +84,7 @@ public class JournalLoader {
 	 */
 	private OperationDTO mapToOperationDTO(JsonObject json) {
 		OperationDTO operation = new OperationDTO()
-				                         .setId(json.containsKey("id") ? (long) json.getInt("id") : null)
+				                         .setId(json.containsKey("id") ?  json.getInt("id") : null)
 				                         .setDateOperation(parseDate(json.getString("dateOperation", null)))
 				                         .setDateComptable(parseDate(json.getString("dateComptable", null)))
 				                         .setLibelle(json.getString("libelle", null))

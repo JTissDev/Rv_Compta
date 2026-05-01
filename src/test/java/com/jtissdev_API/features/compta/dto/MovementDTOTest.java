@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * </p>
  *
  * @author J.Tiss
- * @version 1.0.0
+ * @version 1.2.0
  * @since 0.3.0
  */
 @ExtendWith(TestResultLogger.class)
@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MovementDTOTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(PcpCoreDTOTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(MovementDTOTest.class);
 
 	private static final Integer MOVEMENT_ID = 123;
 	private static final Integer TIERS_ID = 456;

@@ -6,8 +6,8 @@ import com.jtissdev_API.features.PCG.dto.SubAccountingTypeTest;
 import com.jtissdev_API.features.PCP.dto.AnalyticDetailTest;
 import com.jtissdev_API.features.PCP.dto.ContactsTest;
 import com.jtissdev_API.features.PCP.dto.TiersTest;
-import com.jtissdev_API.features.compta.dto.MovementDTO;
 import com.jtissdev_API.features.compta.dto.MovementDTOTest;
+import com.jtissdev_API.features.compta.dto.OperationDTOTest;
 import com.jtissdev_API.features.core.dto.PcgCoreDTOTest;
 import com.jtissdev_API.features.core.dto.PcpCoreDTOTest;
 import com.jtissdev_API.features.core.dto.ReferentialCoreDTOTest;
@@ -43,9 +43,9 @@ import org.junit.platform.suite.api.Suite;
 		// PCG Data holder
 		PcgCoreDTOTest.class,
 
-					   // Journal DTO
-		MovementDTOTest.class
-
+		// Journal DTO
+		MovementDTOTest.class,
+		OperationDTOTest.class
 
 
 		// 3. Prochaine étape : tes Loaders viendront ici
