@@ -90,7 +90,7 @@ public class ReferentialCoreDTOTest {
 	@BeforeAll
 	@DisplayName("Setup Objects for ReferencialCoreDTO Tests")
 	static void setUpTest() {
-		PAYMENT_METHOD_JSON = TestDataLoader.loadFromResources("data/PaymentMethod.json");
+		PAYMENT_METHOD_JSON = TestDataLoader.loadFromResources("data/PaymentMethod.json").getJsonArray("data");
 
 		operationStatusReal = new OperationStatus(STATUS_REAL_JSON);
 		operationStatusValid = new OperationStatus(STATUS_VALID_JSON);

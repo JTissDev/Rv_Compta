@@ -41,7 +41,7 @@ public class PcgCoreDTOTest {
 
 	@BeforeAll
 	static void setUp() {
-		ACCOUNTING_JSON = TestDataLoader.loadFromResources("data/PCG.json");
+		ACCOUNTING_JSON = TestDataLoader.loadFromResources("data/PCG.json").getJsonArray("data");
 		validerStructure();
 	}
 
