@@ -57,7 +57,7 @@ public class JournalLoader {
 	 */
 	private JournalDTO mapToJournalDTO(JsonObject json) {
 		JournalDTO journal = new JournalDTO()
-				                     .setId(json.containsKey("id") ? (long) json.getInt("id") : null)
+				                     .setId(json.containsKey("id") ?  json.getInt("id") : null)
 				                     .setName(json.getString("nom", null))
 				                     .setStartDate(parseDate(json.getString("dateDebut", null)))
 				                     .setEndDate(parseDate(json.getString("dateFin", null)))

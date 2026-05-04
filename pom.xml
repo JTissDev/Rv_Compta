@@ -59,65 +59,71 @@
 
   <dependencies>
 
+    <!-- Fournit les outils de test pour Spring Boot (JUnit, Mockito, etc.) -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
 
+    <!-- Dépendance de base pour Spring Boot (gestion des logs, auto-configuration, YAML) -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
     </dependency>
 
-
-    <!-- API JSON-P -->
+    <!-- Interface standard Java pour la manipulation de structures JSON (JSON-Processing) -->
     <dependency>
       <groupId>jakarta.json</groupId>
       <artifactId>jakarta.json-api</artifactId>
       <version>${jakarta.version}</version>
     </dependency>
 
-    <!-- Implémentation JSON-P (provider Parsson) -->
+    <!-- Implémentation technique pour faire fonctionner l'API Jakarta JSON -->
     <dependency>
       <groupId>org.eclipse.parsson</groupId>
       <artifactId>parsson</artifactId>
       <version>${parson.version}</version>
     </dependency>
 
+    <!-- Bibliothèque permettant de lire et écrire des fichiers Microsoft Excel (XLSX) -->
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
       <version>${POI.version}</version>
     </dependency>
 
+    <!-- Permet de regrouper et d'exécuter plusieurs classes de tests comme une suite unique -->
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-suite</artifactId>
       <scope>test</scope>
     </dependency>
 
-
   </dependencies>
 
   <build>
     <plugins>
+      <!-- Permet de packager l'application en un fichier JAR exécutable et de lancer l'app via Maven -->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
 
+      <!-- Gère l'exécution des tests unitaires durant la phase de compilation -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.2</version>
         <configuration>
           <includes>
+            <!-- Cible spécifiquement ta classe de suite de tests pour l'exécution -->
             <include>**/CoreTestSuiteTest.java</include>
           </includes>
         </configuration>
       </plugin>
 
+      <!-- Permet d'exécuter des scripts Groovy pour dynamiser Maven (ici : formater la liste des développeurs) -->
       <plugin>
         <groupId>org.codehaus.gmavenplus</groupId>
         <artifactId>gmavenplus-plugin</artifactId>
@@ -131,7 +137,7 @@
             <configuration>
               <scripts>
                 <script>
-                  // On transforme la liste des développeurs en une chaîne séparée par des virgules
+                  // Formate les noms et emails des auteurs pour l'injection dans les ressources
                   def prefix = "\n##                : "
                   project.properties['project.devs.list'] = project.developers
                   .collect { "${it.name} (${it.email})" }
@@ -142,6 +148,7 @@
           </execution>
         </executions>
         <dependencies>
+          <!-- Moteur Groovy nécessaire au fonctionnement du plugin gmavenplus -->
           <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-all</artifactId>
@@ -151,8 +158,31 @@
           </dependency>
         </dependencies>
       </plugin>
+
+      <!-- Analyse la version actuelle pour la découper en chiffres (Majeur, Mineur, Correctif) -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>parse-version</id>
+            <goals>
+              <goal>parse-version</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Met à jour les versions dans le(s) fichier(s) POM (très utile pour tes releases Git) -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.16.2</version>
+      </plugin>
     </plugins>
 
+    <!-- Définition des dossiers de ressources (config, icônes) avec activation du filtrage (injection de variables) -->
     <resources>
       <resource>
         <directory>src/main/resources</directory>
@@ -166,5 +196,7 @@
       </testResource>
     </testResources>
   </build>
+
+
 
 </project>

@@ -66,7 +66,7 @@ class JournalLoaderTest {
 		JournalDTO journal = journalLoader.loadJournal(is);
 
 		assertNotNull(journal);
-		assertEquals(1L, journal.getId());
+		assertEquals(1, journal.getId());
 		assertEquals("General Journal 2024", journal.getName());
 		assertEquals(1, journal.getOperations().size());
 

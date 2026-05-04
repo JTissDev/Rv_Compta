@@ -34,6 +34,8 @@ public class TestDataLoader {
 	public static JsonObject loadFromResources(String fileName) {
 		InputStream is = TestDataLoader.class.getClassLoader().getResourceAsStream(fileName);
 		if (is == null) {
+			System.out.println("DEBUG: Looking for file in: " +
+					                   TestDataLoader.class.getClassLoader().getResource(".").getPath());
 			throw new RuntimeException("[Resources] File not found: " + fileName);
 		}
 		return processStream(is, fileName);

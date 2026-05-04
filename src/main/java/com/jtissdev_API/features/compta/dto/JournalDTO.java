@@ -94,11 +94,12 @@ public class JournalDTO {
 		if (json.containsKey("name")) {
 			this.setName(json.getString("name"));
 		}
-		if (json.containsKey("startDate")) {
-			this.setStartDate(json.getJsonNumber("startDate").toString().equals("null") ? null : LocalDate.parse(json.getJsonNumber("startDate").toString()));
+		if (json.containsKey("startDate") && !json.isNull("startDate")) {
+			this.setStartDate(LocalDate.parse(json.getString("startDate")));
 		}
-		if (json.containsKey("endDate")) {
-			this.setEndDate(json.getJsonNumber("endDate").toString().equals("null") ? null : LocalDate.parse(json.getJsonNumber("endDate").toString()));
+
+		if (json.containsKey("endDate") && !json.isNull("endDate")) {
+			this.setEndDate(LocalDate.parse(json.getString("endDate")));
 		}
 		if (json.containsKey("journalTypeCode")) {
 			this.setJournalTypeCode(json.getString("journalTypeCode"));
