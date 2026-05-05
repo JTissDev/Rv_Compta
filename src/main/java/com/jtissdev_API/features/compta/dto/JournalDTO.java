@@ -1,9 +1,6 @@
 package com.jtissdev_API.features.compta.dto;
 
-import jakarta.json.Json;
-import jakarta.json.JsonArrayBuilder;
-import jakarta.json.JsonObject;
-import jakarta.json.JsonObjectBuilder;
+import jakarta.json.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,7 +16,7 @@ import java.util.List;
  * </p>
  *
  * @author J.Tiss
- * @version 1.3.0
+ * @version 1.4.0
  * @since 0.3.0
  */
 public class JournalDTO {
@@ -29,7 +26,7 @@ public class JournalDTO {
 	 *
 	 * @since 0.3.0
 	 */
-	private Long id;
+	private Integer id;
 
 	/**
 	 * Human-readable name or title of the journal (e.g., "General Journal 2024").
@@ -92,16 +89,17 @@ public class JournalDTO {
 	public JournalDTO(JsonObject json) {
 		this();
 		if (json.containsKey("id")) {
-			this.setId(json.getJsonNumber("id").longValue());
+			this.setId(json.getInt("id"));
 		}
 		if (json.containsKey("name")) {
 			this.setName(json.getString("name"));
 		}
-		if (json.containsKey("startDate")) {
-			this.setStartDate(json.getJsonNumber("startDate").toString().equals("null") ? null : LocalDate.parse(json.getJsonNumber("startDate").toString()));
+		if (json.containsKey("startDate") && !json.isNull("startDate")) {
+			this.setStartDate(LocalDate.parse(json.getString("startDate")));
 		}
-		if (json.containsKey("endDate")) {
-			this.setEndDate(json.getJsonNumber("endDate").toString().equals("null") ? null : LocalDate.parse(json.getJsonNumber("endDate").toString()));
+
+		if (json.containsKey("endDate") && !json.isNull("endDate")) {
+			this.setEndDate(LocalDate.parse(json.getString("endDate")));
 		}
 		if (json.containsKey("journalTypeCode")) {
 			this.setJournalTypeCode(json.getString("journalTypeCode"));
@@ -158,7 +156,7 @@ public class JournalDTO {
 	 * Use {@link JournalDTO (JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public JournalDTO(Long id, String name, LocalDate startDate, LocalDate endDate, String journalTypeCode) {
+	public JournalDTO(Integer id, String name, LocalDate startDate, LocalDate endDate, String journalTypeCode) {
 		this(name, startDate, endDate, journalTypeCode);
 		this.id = id;
 	}
@@ -184,7 +182,7 @@ public class JournalDTO {
 	 * Use {@link JournalDTO (JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public JournalDTO(Long id, String name, LocalDate startDate, LocalDate endDate,
+	public JournalDTO(Integer id, String name, LocalDate startDate, LocalDate endDate,
 	                  String journalTypeCode, List<OperationDTO> operations) {
 		this(id, name, startDate, endDate, journalTypeCode);
 		this.setOperations(operations);
@@ -199,7 +197,7 @@ public class JournalDTO {
 	 *
 	 * @since 0.3.0
 	 */
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -210,7 +208,7 @@ public class JournalDTO {
 	 *
 	 * @since 0.3.0
 	 */
-	public JournalDTO setId(Long id) {
+	public JournalDTO setId(Integer id) {
 		this.id = id;
 		return this;
 	}
@@ -319,6 +317,26 @@ public class JournalDTO {
 	 */
 	public JournalDTO setOperations(List<OperationDTO> operations) {
 		this.operations = operations != null ? operations : new ArrayList<>();
+		return this;
+	}
+
+	/**
+	 * Sets the operations for the journal based on the provided {@link JsonArray}.
+	 * Each element in the given {@code JsonArray} is converted into an {@link OperationDTO}
+	 * and added to the operations list of this journal.
+	 *
+	 * @param operations
+	 *        the {@code JsonArray} containing operation data to be set.
+	 *        If the array is empty, no operations will be added.
+	 * @return this {@link JournalDTO} instance for method chaining.
+	 * @since 0.5
+	 */
+	public JournalDTO setOperations(JsonArray operations) {
+		if (!operations.isEmpty()) {
+			for (JsonObject operation : operations.getValuesAs(JsonObject.class)) {
+				this.getOperations().add(new OperationDTO(operation));
+			}
+		}
 		return this;
 	}
 

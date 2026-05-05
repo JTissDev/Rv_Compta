@@ -8,6 +8,7 @@ import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -36,7 +37,7 @@ public class PcgDataLoader {
 	public PcgCoreDTO loadFromJson(String fileName) {
 		// On utilise FileSystemResource pour lire le fichier sur le disque
 		// fileName doit être "data/PCG.json"
-		Resource resource = new FileSystemResource(fileName);
+		Resource resource = new ClassPathResource(fileName);
 
 		try (InputStream is = resource.getInputStream();
 		     JsonReader reader = Json.createReader(is)) {
@@ -87,8 +88,8 @@ public class PcgDataLoader {
 
 			AccountingType typeObj = new AccountingType();
 			typeObj.setName(typeJson.getString("type", "Unnamed"));
-			typeObj.setAccountCode(typeJson.getString("parent_code"));
-			typeObj.setDescription(typeJson.getString("parent_desc", ""));
+			typeObj.setAccountCode(typeJson.getInt("accountCode"));
+			typeObj.setDescription(typeJson.getString("description", ""));
 
 			// Handling Long ID from JSON
 			if (typeJson.containsKey("id") && !typeJson.isNull("id")) {
@@ -101,13 +102,13 @@ public class PcgDataLoader {
 
 				SubAccountingType subObj = new SubAccountingType();
 				subObj.setName(subJson.getString("name", ""));
-				subObj.setAccountingCode(subJson.getString("subType_Num"));
+				subObj.setAccountingCode(subJson.getInt("subType_Num"));
 				subObj.setDescription(subJson.getString("subType_desc", ""));
 
 				subObj.setParentAccountingCode(typeObj.getFullAccountingCode());
 
 				if (subJson.containsKey("id") && !subJson.isNull("id")) {
-					subObj.setId(subJson.getJsonNumber("id").longValue());
+					subObj.setId(subJson.getJsonNumber("id").intValue());
 				}
 
 				JsonArray detailsJson = subJson.getJsonArray("details");
@@ -116,7 +117,7 @@ public class PcgDataLoader {
 					AccountingTypeDetails detObj = new AccountingTypeDetails();
 					detObj.setName(detJson.getString("name", ""));
 					detObj.setDescription(detJson.getString("desc_detail", ""));
-					detObj.setAccountingCode(detJson.getString("no_detail"));
+					detObj.setAccountingCode(detJson.getInt("no_detail"));
 
 					detObj.setParentAccountingCode(subObj.getFullCode());
 

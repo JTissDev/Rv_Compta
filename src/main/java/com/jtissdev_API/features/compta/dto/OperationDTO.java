@@ -1,9 +1,6 @@
 package com.jtissdev_API.features.compta.dto;
 
-import jakarta.json.Json;
-import jakarta.json.JsonArrayBuilder;
-import jakarta.json.JsonObject;
-import jakarta.json.JsonObjectBuilder;
+import jakarta.json.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -35,7 +32,7 @@ public class OperationDTO {
 	 *
 	 * @since 0.3.0
 	 */
-	private Long id;
+	private Integer id;
 
 	/**
 	 * The real date when the physical transaction or event took place.
@@ -129,7 +126,7 @@ public class OperationDTO {
 	public OperationDTO(JsonObject jsonObject) {
 		this();
 		if (jsonObject.containsKey("id")) {
-			this.setId(jsonObject.getJsonNumber("id").longValue());
+			this.setId(jsonObject.getInt("id"));
 		}
 		if (jsonObject.containsKey("dateOperation")) {
 			this.setDateOperation(LocalDate.parse(jsonObject.getString("dateOperation")));
@@ -212,7 +209,7 @@ public class OperationDTO {
 	 * 		Use {@link OperationDTO (JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public OperationDTO(Long id, LocalDate dateOperation, LocalDate dateComptable, String libelle,
+	public OperationDTO(Integer id, LocalDate dateOperation, LocalDate dateComptable, String libelle,
 	                    String referenceDocument, String descriptif, String statutCode) {
 		this(dateOperation, dateComptable, libelle, referenceDocument, descriptif, statutCode);
 		this.id = id;
@@ -243,7 +240,7 @@ public class OperationDTO {
 	 * 		Use {@link OperationDTO (JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public OperationDTO(Long id, LocalDate dateOperation, LocalDate dateComptable, String libelle,
+	public OperationDTO(Integer id, LocalDate dateOperation, LocalDate dateComptable, String libelle,
 	                    String referenceDocument, String descriptif, String statutCode, List<MovementDTO> movements) {
 		this(id, dateOperation, dateComptable, libelle, referenceDocument, descriptif, statutCode);
 		this.setMovements(movements);
@@ -258,7 +255,7 @@ public class OperationDTO {
 	 *
 	 * @since 0.3.0
 	 */
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -269,7 +266,7 @@ public class OperationDTO {
 	 *
 	 * @since 0.3.0
 	 */
-	public OperationDTO setId(Long id) {
+	public OperationDTO setId(Integer id) {
 		this.id = id;
 		return this;
 	}
@@ -418,6 +415,15 @@ public class OperationDTO {
 	 */
 	public OperationDTO setMovements(List<MovementDTO> movements) {
 		this.movements = movements != null ? movements : new ArrayList<>();
+		return this;
+	}
+
+	public OperationDTO setMovements(JsonArray movments) {
+		if(!movments.isEmpty()) {
+			for(JsonObject movement : movments.getValuesAs(JsonObject.class)) {
+				this.movements.add(new MovementDTO(movement));
+			}
+		}
 		return this;
 	}
 

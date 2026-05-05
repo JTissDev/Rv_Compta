@@ -27,7 +27,7 @@ public class MovementDTO {
 	 * Corresponds to the 'N_id' column in the 'tab_lignes' table.
 	 * @since 0.3.0
 	 */
-	private Long id;
+	private Integer id;
 
 	/**
 	 * Represents the general accounting code associated with a movement.
@@ -55,7 +55,7 @@ public class MovementDTO {
 	 * References the 'N_id' in 'tab_tiers'.
 	 * @since 0.3.0
 	 */
-	private Long tiersId;
+	private Integer tiersId;
 
 	/**
 	 * Technical code of the payment method used for this specific line.
@@ -107,17 +107,28 @@ public class MovementDTO {
 	public MovementDTO(JsonObject json) {
 		this();
 		if (json.containsKey("id")) {
-			this.setId(json.getJsonNumber("id").longValue());
+			this.setId(json.getInt("id"));
 		}
 		if (json.containsKey("tiersId")) {
-			this.setTiersId(json.getJsonNumber("tiersId").longValue());
+			this.setTiersId(json.getInt("tiersId"));
 		}
-		if (json.containsKey("paiementCode")) {
-			this.setPaiementCode(json.getString("paiementCode"));
+		if (json.containsKey("paymentCode")) {
+			this.setPaiementCode(json.getString("paymentCode"));
 		}
-
 		if (json.containsKey("accountDetailCode")) {
 			this.setAccountDetailCode(json.getString("accountDetailCode"));
+		}
+		if (json.containsKey("accountingCode")) {
+			this.setAccountingCode(json.getString("accountingCode"));
+		}
+		if (json.containsKey("complementaryAccountingCode")) {
+			this.setComplementaryAccountingCode(json.getString("complementaryAccountingCode"));
+		}
+		if (json.containsKey("description")) {
+			this.setDescription(json.getString("description"));
+		}
+		if (json.containsKey("creditAmount")) {
+			this.setCreditAmount(json.getJsonNumber("creditAmount").bigDecimalValue());
 		}
 		if (json.containsKey("debitAmount")) {
 			this.setDebitAmount(json.getJsonNumber("debitAmount").bigDecimalValue());
@@ -140,7 +151,7 @@ public class MovementDTO {
 	 * Use {@link MovementDTO (JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public MovementDTO(Long tiersId, String paiementCode, String accountDetailCode,
+	public MovementDTO(Integer tiersId, String paiementCode, String accountDetailCode,
 	                   BigDecimal debitAmount, BigDecimal creditAmount, String description) {
 		this();
 		this.setTiersId( tiersId );
@@ -168,7 +179,7 @@ public class MovementDTO {
 	 * Use {@link MovementDTO (JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public MovementDTO(Long id, Long tiersId, String paiementCode, String accountDetailCode,
+	public MovementDTO(Integer id, Integer tiersId, String paiementCode, String accountDetailCode,
 	                   BigDecimal debitAmount, BigDecimal creditAmount, String description) {
 		this(tiersId, paiementCode, accountDetailCode, debitAmount, creditAmount, description);
 		this.id = id;
@@ -187,7 +198,7 @@ public class MovementDTO {
 	 * Use {@link MovementDTO (JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public MovementDTO(Long tiersId, String paiementCode, String accountDetailCode) {
+	public MovementDTO(Integer tiersId, String paiementCode, String accountDetailCode) {
 		this();
 		this.tiersId = tiersId;
 		this.paiementCode = paiementCode;
@@ -202,7 +213,7 @@ public class MovementDTO {
 	 * @return the unique technical identifier.
 	 * @since 0.3.0
 	 */
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -238,7 +249,7 @@ public class MovementDTO {
 	 * @return the associated Tiers ID.
 	 * @since 0.3.0
 	 */
-	public Long getTiersId() {
+	public Integer getTiersId() {
 		return this.tiersId;
 	}
 
@@ -283,7 +294,7 @@ public class MovementDTO {
 	 * @return this instance for chaining.
 	 * @since 0.3.0
 	 */
-	public MovementDTO setId(Long id) {
+	public MovementDTO setId(Integer id) {
 		this.id = id;
 		return this;
 	}
@@ -325,7 +336,7 @@ public class MovementDTO {
 	 * @return this instance for chaining.
 	 * @since 0.3.0
 	 */
-	public MovementDTO setTiersId(Long tiersId) {
+	public MovementDTO setTiersId(Integer tiersId) {
 		this.tiersId = tiersId;
 		return this;
 	}
@@ -389,7 +400,7 @@ public class MovementDTO {
 				.append(", complementaryAccountingCode=").append(this.getComplementaryAccountingCode() != null ? this.getComplementaryAccountingCode() : "null")
 				.append(", accountDetailCode=").append(this.getAccountDetailCode() != null ? this.getAccountDetailCode() : "null")
 				.append(", tiersId=").append(this.getTiersId() != null ? this.getTiersId() : "null")
-				.append(", paiementCode=").append(this.getPaiementCode() != null ? this.getPaiementCode() : "null")
+				.append(", paymentCode=").append(this.getPaiementCode() != null ? this.getPaiementCode() : "null")
 				.append(", debitAmount=").append(this.getDebitAmount() != null ? this.getDebitAmount() : "null")
 				.append(", creditAmount=").append(this.getCreditAmount() != null ? this.getCreditAmount() : "null")
 				.append(", description=").append(this.getDescription() != null ? this.getDescription() : "null")
@@ -424,7 +435,7 @@ public class MovementDTO {
 				builder.add("tiersId", this.getTiersId());
 		}
 		if (this.getPaiementCode() != null) {
-				builder.add("paiementCode", this.getPaiementCode());
+				builder.add("paymentCode", this.getPaiementCode());
 		}
 		if (this.getDebitAmount() != null) {
 			builder.add("debitAmount", this.getDebitAmount());

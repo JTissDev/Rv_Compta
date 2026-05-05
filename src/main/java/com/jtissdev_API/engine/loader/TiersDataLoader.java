@@ -45,9 +45,9 @@ public class TiersDataLoader {
 
 			for (JsonObject obj : jsonArray.getValuesAs(JsonObject.class)) {
 				// We use the complete constructor or setters via the default one
-				Tiers tiers = new Tiers();
+				Tiers tiers = new Tiers(obj);
 
-				// Mapping: N_id (int) -> id (Long)
+				/* // Mapping: N_id (int) -> id (Long)
 				tiers.setId((Integer) obj.getInt("N_id"));
 
 				// Mapping: Nom_RaisonSociale -> name
@@ -63,7 +63,7 @@ public class TiersDataLoader {
 				} else {
 					tiers.setDescription("");
 				}
-
+ */
 				tiersList.add(tiers);
 			}
 

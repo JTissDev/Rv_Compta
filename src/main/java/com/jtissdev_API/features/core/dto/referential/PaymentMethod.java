@@ -105,7 +105,7 @@ public class PaymentMethod {
 	 * @since 0.2.0
 	 */
 	public String getCode() {
-		return code;
+		return this.code;
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class PaymentMethod {
 	 * @since 0.2.0
 	 */
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class PaymentMethod {
 	 * @since 0.2.0
 	 */
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	/**

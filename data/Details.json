@@ -2,181 +2,181 @@
 	{
 	  "Code" : ".229",
 	  "type" : "Banque",
-	  "Nom" : "Compte courant .229",
+	  "name" : "Compte courant .229",
 	  "description" : "Compte joint leslie à supprimer"
 	},
 	{
 	  "Code" : ".442",
 	  "type" : "Banque",
-	  "Nom" : "Compte courant .442",
+	  "name" : "Compte courant .442",
 	  "description" : "Compte courant principal"
 	},
 	{
 	  "Code" : ".Aiz",
 	  "type" : "Immo",
-	  "Nom" : "Bois Aize",
+	  "name" : "Bois Aize",
 	  "description" : "Foncier Bois à Aize"
 	},
 	{
 	  "Code" : ".Ber",
 	  "type" : "Immo",
-	  "Nom" : "Terrain les Berthiers",
+	  "name" : "Terrain les Berthiers",
 	  "description" : "Foncier mon verger en cours de création"
 	},
 	{
 	  "Code" : ".Bill1",
 	  "type" : "Immo",
-	  "Nom" : "Terrain billauderie 92",
+	  "name" : "Terrain billauderie 92",
 	  "description" : "Foncier Terrain en fermage"
 	},
 	{
 	  "Code" : ".Bill2",
 	  "type" : "Immo",
-	  "Nom" : "Terrain billauderie 93",
+	  "name" : "Terrain billauderie 93",
 	  "description" : "Foncier Terrain en fermage"
 	},
 	{
 	  "Code" : ".Chas",
 	  "type" : "Loisirs",
-	  "Nom" : "Chasse",
+	  "name" : "Chasse",
 	  "description" : ""
 	},
 	{
 	  "Code" : ".Damp",
 	  "type" : "Immo",
-	  "Nom" : "Terrain Dampierre",
+	  "name" : "Terrain Dampierre",
 	  "description" : "Terrain 1 hectare Vivi à Dampierre"
 	},
 	{
 	  "Code" : ".DanE",
 	  "type" : "Loisirs",
-	  "Nom" : "Danse Eliana",
+	  "name" : "Danse Eliana",
 	  "description" : ""
 	},
 	{
 	  "Code" : ".Dev",
 	  "type" : "Revenus",
-	  "Nom" : "Developpeur",
+	  "name" : "Developpeur",
 	  "description" : "Revenus de mes activités de développement informatique"
 	},
 	{
 	  "Code" : ".Dis",
 	  "type" : "Streaming",
-	  "Nom" : "Disney+",
+	  "name" : "Disney+",
 	  "description" : ""
 	},
 	{
 	  "Code" : ".Epi",
 	  "type" : "Revenus",
-	  "Nom" : "Epines du Berry",
+	  "name" : "Epines du Berry",
 	  "description" : "Revenus liés a mon activités des épines du berry"
 	},
 	{
 	  "Code" : ".eq",
 	  "type" : "Vehicule",
-	  "Nom" : "Equipement Divers",
+	  "name" : "Equipement Divers",
 	  "description" : ""
 	},
 	{
 	  "Code" : ".FooA",
 	  "type" : "Loisirs",
-	  "Nom" : "FootBall Analia",
+	  "name" : "FootBall Analia",
 	  "description" : ""
 	},
 	{
 	  "Code" : ".mam",
 	  "type" : "Pret",
-	  "Nom" : "Pret Maman",
+	  "name" : "Pret Maman",
 	  "description" : "Pret consenti a maman"
 	},
 	{
 	  "Code" : ".Meg",
 	  "type" : "Vehicule",
-	  "Nom" : "Renault Mégane",
+	  "name" : "Renault Mégane",
 	  "description" : ""
 	},
 	{
 	  "Code" : ".Net",
 	  "type" : "Streaming",
-	  "Nom" : "Netflix",
+	  "name" : "Netflix",
 	  "description" : ""
 	},
 	{
 	  "Code" : ".P106",
 	  "type" : "Vehicule",
-	  "Nom" : "Peugeot 106",
+	  "name" : "Peugeot 106",
 	  "description" : ""
 	},
 	{
 	  "Code" : ".Pech",
 	  "type" : "Loisirs",
-	  "Nom" : "Pêche",
+	  "name" : "Pêche",
 	  "description" : ""
 	},
 	{
 	  "Code" : ".Pont",
 	  "type" : "Immo",
-	  "Nom" : "Maison le Pont",
+	  "name" : "Maison le Pont",
 	  "description" : "Maison Vivi"
 	},
 	{
 	  "Code" : ".Pri",
 	  "type" : "Streaming",
-	  "Nom" : "Prime Vidéo",
+	  "name" : "Prime Vidéo",
 	  "description" : ""
 	},
 	{
 	  "Code" : ".Rou",
 	  "type" : "Immo",
-	  "Nom" : "Bois Rouvres",
+	  "name" : "Bois Rouvres",
 	  "description" : "Foncier Bois à Rouvres les Bois"
 	},
 	{
 	  "Code" : ".S26",
 	  "type" : "Vehicule",
-	  "Nom" : "Solis 26",
+	  "name" : "Solis 26",
 	  "description" : ""
 	},
 	{
 	  "Code" : ".Sce",
 	  "type" : "Vehicule",
-	  "Nom" : "Renault Scenic",
+	  "name" : "Renault Scenic",
 	  "description" : ""
 	},
 	{
 	  "Code" : ".Vig",
 	  "type" : "Immo",
-	  "Nom" : "Maison Les vignes",
+	  "name" : "Maison Les vignes",
 	  "description" : "Foncier ma maison principale"
 	},
 	{
 	  "Code" : "LEP-J",
 	  "type" : "Banque",
-	  "Nom" : "LEP Julien",
+	  "name" : "LEP Julien",
 	  "description" : "Epargne long terme Julien"
 	},
 	{
 	  "Code" : "LVA-G",
 	  "type" : "Banque",
-	  "Nom" : "Livret A Greg",
+	  "name" : "Livret A Greg",
 	  "description" : "Epargne liquide Grégory"
 	},
 	{
 	  "Code" : "LVA-J",
 	  "type" : "Banque",
-	  "Nom" : "Livret 1 Julien",
+	  "name" : "Livret 1 Julien",
 	  "description" : "Epargne liquide Julien"
 	},
 	{
 	  "Code" : "PS-J",
 	  "type" : "Banque",
-	  "Nom" : "Part Sociales",
+	  "name" : "Part Sociales",
 	  "description" : "Epargnes long terme Julien"
 	},
 	{
 	  "Code" : "Ven",
 	  "type" : "Vehicule",
-	  "Nom" : "Kia Venga",
+	  "name" : "Kia Venga",
 	  "description" : ""
 	}
   ]

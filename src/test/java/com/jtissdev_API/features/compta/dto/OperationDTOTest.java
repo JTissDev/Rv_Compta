@@ -1,11 +1,16 @@
 package com.jtissdev_API.features.compta.dto;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import com.jtissdev_API.utils.TestGroup;
+import com.jtissdev_API.utils.TestResultLogger;
+import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonObject;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,17 +22,74 @@ import static org.junit.jupiter.api.Assertions.*;
  * </p>
  *
  * @author J.Tiss
+ * @version 1.1.0
  * @since 0.3.0
- * @version 1.0.0
  */
-class OperationDTOTest {
+@ExtendWith(TestResultLogger.class)
+@DisplayName("Operation Test Suite")
+@TestGroup("Compta DTO")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class OperationDTOTest {
+
+	private static final Logger logger = LoggerFactory.getLogger(OperationDTOTest.class);
+
+	private static final Integer OPERATION_ID = 123;
+	private static final String OPERATION_LIBELLE = "Operation Test";
+	private static final String REFERENCE_DOCUMENT = "REF-123";
+	private static final String DESCRIPTION = "This is a test operation";
+	private static final String STATUT_CODE = "VAL";
+	private static LocalDate OPERATION_DATE = LocalDate.of(2026, 5, 15);
+	private static LocalDate CONTABLE_DATE = LocalDate.of(2026, 5, 16);
+	private static JsonArray movementsJson;
+	private static JsonObject operationJson;
+	private static OperationDTO operation;
+
+	@BeforeAll
+	static void setUp() {
+		movementsJson = Json.createArrayBuilder()
+				                .add(Json.createObjectBuilder()
+						                     .add("id", 1)
+						                     .add("accountingCode", "12")
+						                     .add("paymentCode", "ESPECES")
+						                     .add("creditAmount", 12.5)
+						                     .build())
+				                .add(Json.createObjectBuilder()
+						                     .add("id", 2)
+						                     .add("accountingCode", "13")
+						                     .add("debitAmount", 12.5)
+						                     .build())
+				                .build();
+		operationJson = Json.createObjectBuilder()
+				                .add("withoutmovment", Json.createObjectBuilder()
+						                                       .add("id", OPERATION_ID)
+						                                       .add("dateOperation", String.valueOf(OPERATION_DATE))
+						                                       .add("dateComptable", String.valueOf(CONTABLE_DATE))
+						                                       .add("libelle", OPERATION_LIBELLE)
+						                                       .add("referenceDocument", REFERENCE_DOCUMENT)
+						                                       .add("descriptif", DESCRIPTION)
+						                                       .add("statutCode", STATUT_CODE)
+						                                       .build())
+				                .add("withmovment", Json.createObjectBuilder()
+						                                    .add("id", OPERATION_ID)
+						                                    .add("dateOperation", String.valueOf(OPERATION_DATE))
+						                                    .add("dateComptable", String.valueOf(CONTABLE_DATE))
+						                                    .add("libelle", OPERATION_LIBELLE)
+						                                    .add("referenceDocument", REFERENCE_DOCUMENT)
+						                                    .add("descriptif", DESCRIPTION)
+						                                    .add("statutCode", STATUT_CODE)
+						                                    .add("movements", movementsJson)
+						                                    .build())
+				                .build();
+	}
 
 	/**
 	 * Tests the default constructor.
 	 * Verified: The movements list must be initialized and empty, not null.
+	 *
 	 * @since 0.3.0
 	 */
 	@Test
+	@Order(1)
 	@DisplayName("Should initialize with an empty movements list")
 	void shouldInitializeWithEmptyList() {
 		OperationDTO operation = new OperationDTO();
@@ -36,91 +98,83 @@ class OperationDTOTest {
 		assertTrue(operation.getMovements().isEmpty(), "Movements list should be empty on init");
 	}
 
-	/**
-	 * Tests the creation constructor (no ID, no movements).
-	 * Verified: All descriptive fields are correctly mapped.
-	 * @since 0.3.0
-	 */
 	@Test
-	@DisplayName("Should initialize with creation constructor")
-	void shouldInitializeWithCreationConstructor() {
-		LocalDate now = LocalDate.now();
-		OperationDTO operation = new OperationDTO(now, now, "Courses", "FAC-001", "Courses hebdomadaires", "PROV");
+	@Order(2)
+	@DisplayName("Test Fluent Setters")
+	void testFluentSetters() {
+		operation = new OperationDTO();
+		OperationDTO result = operation.setId(OPERATION_ID)
+				                      .setDateOperation(OPERATION_DATE)
+				                      .setDescriptif(DESCRIPTION)
+				                      .setDateComptable(CONTABLE_DATE)
+				                      .setLibelle(OPERATION_LIBELLE)
+				                      .setReferenceDocument(REFERENCE_DOCUMENT)
+				                      .setStatutCode(STATUT_CODE)
+				                      .setMovements(movementsJson);
 
-		assertNull(operation.getId());
-		assertEquals("Courses", operation.getLibelle());
-		assertEquals("FAC-001", operation.getReferenceDocument());
-		assertEquals("PROV", operation.getStatutCode());
-	}
+		assertAll("Setters should return this instance",
+				() -> assertSame(result, operation, "setters should return this instance"),
+				() -> assertEquals(OPERATION_ID, operation.getId(), "id must be initialized")
 
-	/**
-	 * Tests the persistence constructor (with ID, no movements).
-	 * Verified: ID and metadata are correctly mapped.
-	 * @since 0.3.0
-	 */
-	@Test
-	@DisplayName("Should initialize with persistence constructor")
-	void shouldInitializeWithPersistenceConstructor() {
-		OperationDTO operation = new OperationDTO(100L, LocalDate.now(), LocalDate.now(), "Loyer", null, null, "VAL");
-
-		assertEquals(100L, operation.getId());
-		assertEquals("VAL", operation.getStatutCode());
-		assertTrue(operation.getMovements().isEmpty());
-	}
-
-	/**
-	 * Tests the full constructor (with ID and movements).
-	 * Verified: Deep mapping of the movements list.
-	 * @since 0.3.0
-	 */
-	@Test
-	@DisplayName("Should initialize with full constructor and movements")
-	void shouldInitializeWithFullConstructor() {
-		List<MovementDTO> movements = new ArrayList<>();
-		movements.add(new MovementDTO());
-		movements.add(new MovementDTO());
-
-		OperationDTO operation = new OperationDTO(1L, LocalDate.now(), LocalDate.now(), "Op", "Ref", "Desc", "STAT", movements);
-
-		assertEquals(1L, operation.getId());
-		assertEquals(2, operation.getMovements().size(), "Should have 2 movements linked");
-	}
-
-	/**
-	 * Tests the Fluent API and individual movement addition.
-	 * Verified: Method chaining and addMovement logic.
-	 * @since 0.3.0
-	 */
-	@Test
-	@DisplayName("Should support fluent API and adding movements individually")
-	void shouldSupportFluentApiAndAddMovement() {
-		MovementDTO m1 = new MovementDTO().setId(10L);
-
-		OperationDTO operation = new OperationDTO()
-				                         .setId(50L)
-				                         .setLibelle("Fluent Test")
-				                         .addMovement(m1)
-				                         .addMovement(new MovementDTO().setId(11L));
-
-		assertAll("Fluent and Add verification",
-				() -> assertEquals(50L, operation.getId()),
-				() -> assertEquals("Fluent Test", operation.getLibelle()),
-				() -> assertEquals(2, operation.getMovements().size()),
-				() -> assertEquals(10L, operation.getMovements().get(0).getId())
 		);
 	}
 
-	/**
-	 * Tests the null-safety of the setMovements method.
-	 * Verified: Passing null to setMovements should result in an empty list instead of null.
-	 * @since 0.3.0
-	 */
 	@Test
-	@DisplayName("Should handle null movements list safely")
-	void shouldHandleNullMovementsSafely() {
-		OperationDTO operation = new OperationDTO();
-		operation.setMovements(null);
+	@Order(3)
+	@DisplayName("Test Json Constructor")
+	void testJsonConstructor() {
 
-		assertNotNull(operation.getMovements(), "SetMovements(null) should initialize an empty list");
+		operation = new OperationDTO(operationJson.getJsonObject("withmovment"));
+		assertAll("Test Json Constructor",
+				() -> assertEquals(OPERATION_ID, operation.getId(), "id must be initialized"),
+				() -> assertEquals(OPERATION_DATE, operation.getDateOperation(), "dateOperation must be initialized"),
+				() -> assertEquals(CONTABLE_DATE, operation.getDateComptable(), "dateComptable must be initialized"),
+				() -> assertEquals(DESCRIPTION, operation.getDescriptif(), "descriptif must be initialized"),
+				() -> assertEquals(REFERENCE_DOCUMENT, operation.getReferenceDocument(), "referenceDocument must be initialized"),
+				() -> assertEquals(STATUT_CODE, operation.getStatutCode(), "statutCode must be initialized"),
+				() -> assertEquals(2, operation.getMovements().size(), "movements must be initialized")
+		);
+
+	}
+
+	@Test
+	@Order(3)
+	@DisplayName("Test unfull Json Constructor")
+	void testUnfullJsonConstructor() {
+		operation = new OperationDTO(operationJson.getJsonObject("withoutmovment"));
+		assertAll("Test Json Constructor",
+				() -> assertEquals(OPERATION_ID, operation.getId(), "id must be initialized"),
+				() -> assertEquals(OPERATION_DATE, operation.getDateOperation(), "dateOperation must be initialized"),
+				() -> assertEquals(CONTABLE_DATE, operation.getDateComptable(), "dateComptable must be initialized"),
+				() -> assertEquals(DESCRIPTION, operation.getDescriptif(), "descriptif must be initialized"),
+				() -> assertEquals(REFERENCE_DOCUMENT, operation.getReferenceDocument(), "referenceDocument must be initialized"),
+				() -> assertEquals(STATUT_CODE, operation.getStatutCode(), "statutCode must be initialized"),
+				() -> assertTrue(operation.getMovements().isEmpty(), "movements must be initialized")
+		);
+
+
+	}
+
+
+	@Test
+	@Order(4)
+	@DisplayName("Test Serialization toJson")
+	void testToJson() {
+		operation = new OperationDTO(operationJson.getJsonObject("withmovment"));
+		operation.setStatutCode(null);
+		JsonObject json = operation.toJson();
+
+		assertAll("Json must serialize only non null values",
+				() -> assertTrue(json.containsKey("id"),"id not null keys should be inserted"),
+				() -> assertTrue(json.containsKey("dateOperation"),"dateOperation not null keys should be inserted"),
+				() -> assertTrue(json.containsKey("dateComptable"),"dateComptable not null keys should be inserted"),
+				() -> assertTrue(json.containsKey("libelle"),"libelle not null keys should be inserted"),
+				() -> assertTrue(json.containsKey("referenceDocument"),"referenceDocument not null keys should be inserted"),
+				() -> assertTrue(json.containsKey("descriptif"),"descriptif not null keys should be inserted"),
+				() -> assertTrue(json.containsKey("movements"),"movements not null keys should be inserted"),
+				() -> assertFalse(json.containsKey("statutCode"),"statutCode null keys should not be inserted")
+		);
+
+
 	}
 }

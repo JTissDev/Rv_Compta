@@ -31,7 +31,7 @@ public class SubAccountingType {
 	 *
 	 * @since 0.1
 	 */
-	private Long id;
+	private Integer id;
 
 	/**
 	 * Human-readable name of the sub accounting type.
@@ -45,7 +45,7 @@ public class SubAccountingType {
 	 *
 	 * @since 0.1
 	 */
-	private String accountingCode;
+	private Integer accountingCode;
 
 	/**
 	 * Human-readable description of the sub accounting type.
@@ -103,18 +103,18 @@ public class SubAccountingType {
 	public SubAccountingType(JsonObject json) {
 		this();
 		if (json.containsKey("id")) {
-			this.setId(Long.valueOf(json.getString("Id")));
+			this.setId(json.getInt("id"));
 		}
 		if (json.containsKey("name")) {
 			this.setName(json.getString("name"));
 		}
 		if (json.containsKey("accountingCode")) {
-			this.setAccountingCode(json.getString("accountingCode"));
+			this.setAccountingCode(json.getInt("accountingCode"));
 		}
 		if (json.containsKey("description")) {
 			this.setDescription(json.getString("description"));
 		}
-		if (json.containsKey("parentCod")) {
+		if (json.containsKey("parentAccountingCode")) {
 			this.setParentAccountingCode(json.getString("parentAccountingCode"));
 		}
 		if (json.containsKey("detailsList")) {
@@ -142,9 +142,9 @@ public class SubAccountingType {
 	 * Use {@link SubAccountingType(JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public SubAccountingType(Long id,
+	public SubAccountingType(Integer id,
 	                         String name,
-	                         String accountingCode,
+	                         Integer accountingCode,
 	                         String description) {
 		this.id = id;
 		this.name = name;
@@ -175,9 +175,9 @@ public class SubAccountingType {
 	 * Use {@link SubAccountingType(JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public SubAccountingType(Long id,
+	public SubAccountingType(Integer id,
 	                         String name,
-	                         String accountingCode,
+	                         Integer accountingCode,
 	                         String description,
 	                         String parentAccountingCode,
 	                         List<AccountingTypeDetails> detailsList) {
@@ -200,7 +200,7 @@ public class SubAccountingType {
 	 *
 	 * @since 0.1
 	 */
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -212,7 +212,7 @@ public class SubAccountingType {
 	 * @since 0.1
 	 * @return {this}
 	 */
-	public SubAccountingType setId(Long id) {
+	public SubAccountingType setId(Integer id) {
 		this.id = id;
 		return this;
 	}
@@ -247,7 +247,7 @@ public class SubAccountingType {
 	 *
 	 * @since 0.1
 	 */
-	public String getAccountingCode() {
+	public Integer getAccountingCode() {
 		return this.accountingCode;
 	}
 
@@ -258,7 +258,7 @@ public class SubAccountingType {
 	 * 		the new local accounting code
 	 * @since 0.1
 	 */
-	public SubAccountingType setAccountingCode(String accountingCode) {
+	public SubAccountingType setAccountingCode(Integer accountingCode) {
 		this.accountingCode = accountingCode;
 		return this;
 	}
@@ -327,7 +327,7 @@ public class SubAccountingType {
 	 * @since 0.1
 	 */
 	public String getFullCode() {
-		if (this.getAccountingCode() == null || this.getParentAccountingCode() == null) {
+		 if (this.getAccountingCode() == null || this.getParentAccountingCode() == null) {
 			return null; // Donnée invalide : orphelin
 		}
 		// Si code detail == parent (ex: Parent 40, Code 40), on ne double pas
@@ -362,6 +362,30 @@ public class SubAccountingType {
 		return this;
 	}
 
+	/**
+	 * Sets the details list for this sub-accounting type using a JSON array.
+	 * If the existing details list is null, it initializes a new empty list.
+	 * Iterates through the provided JSON array and converts each JSON object
+	 * into an {@link AccountingTypeDetails} instance, which is then added
+	 * to the internal details list.
+	 *
+	 * @param detailsList
+	 *        a JSON array containing the details to set; must not be null
+	 *        and should contain valid JSON objects representing details
+	 *
+	 * @return this instance of {@code SubAccountingType}, allowing for method chaining
+	 * @since 0.5
+	 */
+	public SubAccountingType setDetailsList(JsonArray detailsList) {
+		if (this.getDetailsList() == null) { this.setDetailsList(new ArrayList<>());}
+		if (!detailsList.isEmpty()) {
+			for (JsonValue detail : detailsList) {
+				this.addDetails(new AccountingTypeDetails(detail.asJsonObject()));
+			}
+		}
+		return this;
+	}
+
 	// =========================================================
 	// == COLLECTION HELPERS                                  ==
 	// =========================================================
@@ -376,6 +400,7 @@ public class SubAccountingType {
 	 */
 	public SubAccountingType addDetails(AccountingTypeDetails details) {
 		if (details != null) {
+			details.setParentAccountingCode(this.getFullCode());
 			this.getDetailsList().add(details);
 		}
 		return this; // <--- C'est ça qui manquait pour le chaînage !

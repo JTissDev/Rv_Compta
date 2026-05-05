@@ -2,12 +2,11 @@ package com.jtissdev_API.features.core.dto;
 
 import com.jtissdev_API.features.PCP.dto.AnalyticDetail;
 import com.jtissdev_API.features.PCP.dto.Tiers;
+import com.jtissdev_API.utils.TestGroup;
 import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +29,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @ExtendWith(TestResultLogger.class)
 @DisplayName("PcpCoreDTO Test Suite")
+@TestGroup("PCP DTO")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PcpCoreDTOTest {
 
 	/**

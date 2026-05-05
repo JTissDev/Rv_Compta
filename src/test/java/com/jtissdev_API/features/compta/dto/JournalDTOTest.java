@@ -1,11 +1,16 @@
 package com.jtissdev_API.features.compta.dto;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import com.jtissdev_API.utils.TestDataLoader;
+import com.jtissdev_API.utils.TestGroup;
+import com.jtissdev_API.utils.TestResultLogger;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonObject;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,141 +22,151 @@ import static org.junit.jupiter.api.Assertions.*;
  * </p>
  *
  * @author J.Tiss
+ * @version 1.1.0
  * @since 0.3.0
- * @version 1.0.0
  */
-class JournalDTOTest {
+@ExtendWith(TestResultLogger.class)
+@DisplayName("Journal Test Suite")
+@TestGroup("Compta DTO")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class JournalDTOTest {
 
-	/**
-	 * Tests the default constructor.
-	 * Verified: The operations list must be initialized and empty.
-	 * @since 0.3.0
-	 */
-	@Test
-	@DisplayName("Should initialize with an empty operations list")
-	void shouldInitializeWithEmptyList() {
-		JournalDTO journal = new JournalDTO();
+	private static final Logger logger = LoggerFactory.getLogger(JournalDTOTest.class);
 
-		assertNotNull(journal.getOperations(), "Operations list should never be null");
-		assertTrue(journal.getOperations().isEmpty(), "Operations list should be empty on init");
+	// Global test data holders
+	public static JsonObject TEST_DATA_JSON;
+	public static JsonObject INITIAL_JOURNAL_JSON;
+	public static JsonArray OPERATIONS_TO_ADD;
+
+	private static JournalDTO journal;
+
+
+	@BeforeAll
+	static void setUp() {
+		// Loading the root JsonObject from resources
+		TEST_DATA_JSON = TestDataLoader.loadFromResources("data/journal-test.json");
+
+		// Initializing the main journal DTO with the 'initialJournal' part
+		INITIAL_JOURNAL_JSON = TEST_DATA_JSON.getJsonObject("initialJournal");
+		// Extracting operations intended for 'add' tests
+		OPERATIONS_TO_ADD = TEST_DATA_JSON.getJsonArray("operationsToAdd");
+
+		validateStructure();
+		logger.info("Test environment initialized for JournalDTO");
 	}
 
 	/**
-	 * Tests the creation constructor (no ID).
-	 * Verified: Metadata for Excel import phase are correctly mapped.
-	 * @since 0.3.0
+	 * Validates that the test data is correctly loaded and not null.
 	 */
-	@Test
-	@DisplayName("Should initialize with creation constructor")
-	void shouldInitializeWithCreationConstructor() {
-		LocalDate start = LocalDate.of(2024, 1, 1);
-		LocalDate end = LocalDate.of(2024, 12, 31);
-		JournalDTO journal = new JournalDTO("Journal de test", start, end, "GEN");
+	private static void validateStructure() {
+		assertNotNull(TEST_DATA_JSON, "The root test JSON should not be null");
+		assertNotNull(OPERATIONS_TO_ADD, "The array of operations to add should be present");
 
-		assertNull(journal.getId());
-		assertEquals("Journal de test", journal.getName());
-		assertEquals(start, journal.getStartDate());
-		assertEquals(end, journal.getEndDate());
-		assertEquals("GEN", journal.getJournalTypeCode());
 	}
 
-	/**
-	 * Tests the persistence constructor (with ID).
-	 * Verified: ID and period metadata are correctly mapped.
-	 * @since 0.3.0
-	 */
 	@Test
-	@DisplayName("Should initialize with persistence constructor")
-	void shouldInitializeWithPersistenceConstructor() {
-		JournalDTO journal = new JournalDTO(500L, "Journal 2023", LocalDate.MIN, LocalDate.MAX, "OLD");
+	@Order(1)
+	@DisplayName("Test Empty Constructor")
+	void testEmptyConstructor() {
+		// 1. Action : instanciation
+		journal = new JournalDTO();
 
-		assertEquals(500L, journal.getId());
-		assertEquals("OLD", journal.getJournalTypeCode());
-		assertTrue(journal.getOperations().isEmpty());
-	}
-
-	/**
-	 * Tests the full constructor (with ID and operations).
-	 * Verified: Mapping of the operational data.
-	 * @since 0.3.0
-	 */
-	@Test
-	@DisplayName("Should initialize with full constructor and operations")
-	void shouldInitializeWithFullConstructor() {
-		List<OperationDTO> ops = new ArrayList<>();
-		ops.add(new OperationDTO());
-
-		JournalDTO journal = new JournalDTO(1L, "Journal Complet", null, null, "FULL", ops);
-
-		assertEquals(1L, journal.getId());
-		assertEquals(1, journal.getOperations().size(), "Should have 1 operation linked");
-	}
-
-	/**
-	 * Tests the Fluent API and operation addition.
-	 * Verified: Method chaining and individual addition logic.
-	 * @since 0.3.0
-	 */
-	@Test
-	@DisplayName("Should support fluent API and adding operations individually")
-	void shouldSupportFluentApiAndAddOperation() {
-		OperationDTO op1 = new OperationDTO().setId(100L);
-
-		JournalDTO journal = new JournalDTO()
-				                     .setId(10L)
-				                     .setName("Fluent Journal")
-				                     .addOperation(op1)
-				                     .addOperation(new OperationDTO().setId(101L));
-
-		assertAll("Fluent verification",
-				() -> assertEquals(10L, journal.getId()),
-				() -> assertEquals("Fluent Journal", journal.getName()),
-				() -> assertEquals(2, journal.getOperations().size()),
-				() -> assertEquals(100L, journal.getOperations().get(0).getId())
+		// 2. Assertions : vérification de l'état initial
+		assertAll("Verify default state of empty JournalDTO",
+				() -> assertNotNull(journal, "Journal should not be null"),
+				() -> assertNotNull(journal.getOperations(), "Operations list should be initialized (not null)"),
+				() -> assertTrue(journal.getOperations().isEmpty(), "Operations list should be empty initially")
 		);
 	}
 
-	/**
-	 * Tests the null-safety of the setOperations method.
-	 * Verified: Passing null to setOperations should result in an empty list.
-	 * @since 0.3.0
-	 */
 	@Test
-	@DisplayName("Should handle null operations list safely")
-	void shouldHandleNullOperationsSafely() {
-		JournalDTO journal = new JournalDTO();
-		journal.setOperations(null);
+	@Order(2)
+	@DisplayName("Fluent Setters")
+	void testFluentSetters() {
+		// 1. Action : On part d'un objet vide
+		journal = new JournalDTO();
 
-		assertNotNull(journal.getOperations(), "SetOperations(null) should initialize an empty list");
+		// Préparation : Conversion des chaînes JSON en LocalDate
+		LocalDate expectedStartDate = LocalDate.parse(INITIAL_JOURNAL_JSON.getString("startDate"));
+		LocalDate expectedEndDate = LocalDate.parse(INITIAL_JOURNAL_JSON.getString("endDate"));
+		int initialSize = journal.getOperations().size();
+		// 2. Utilisation de l'API Fluent avec enchaînement
+		JournalDTO result = journal.setId(INITIAL_JOURNAL_JSON.getInt("id"))
+				                    .setName(INITIAL_JOURNAL_JSON.getString("name"))
+				                    .setStartDate(expectedStartDate)
+				                    .setEndDate(expectedEndDate)
+				                    .setJournalTypeCode(INITIAL_JOURNAL_JSON.getString("journalTypeCode"))
+				                    .setOperations(INITIAL_JOURNAL_JSON.getJsonArray("operations"));
+
+		int expectedSize = initialSize + INITIAL_JOURNAL_JSON.getJsonArray("operations").size();
+		// 3. Assertions : On vérifie que tout a bien fonctionné
+		assertAll("Verify fluent setters logic",
+				// Vérifie que la méthode retourne bien la même instance (le principe du "fluent")
+				() -> assertSame(journal, result, "The setter must return the same instance"),
+
+				// Vérifie que les champs ont bien été modifiés
+				() -> assertEquals(INITIAL_JOURNAL_JSON.getInt("id"), journal.getId(), "The ID should be set correctly"),
+				() -> assertEquals(INITIAL_JOURNAL_JSON.getString("name"), journal.getName(), "The name should be set correctly"),
+				() -> assertEquals(expectedStartDate, journal.getStartDate(), "The start date should be set correctly"),
+				() -> assertEquals(expectedEndDate, journal.getEndDate(), "The end date should be set correctly"),
+				() -> assertEquals(INITIAL_JOURNAL_JSON.getString("journalTypeCode"), journal.getJournalTypeCode(), "The journal type code should be set correctly"),
+				() -> assertEquals(expectedSize, journal.getOperations().size(), "Total size should be " + expectedSize),
+				() -> assertEquals(INITIAL_JOURNAL_JSON.getJsonArray("operations").getJsonObject(0).getString("libelle"), journal.getOperations().get(initialSize).getLibelle(), "First added operation mismatch"),
+				() -> assertEquals(INITIAL_JOURNAL_JSON.getJsonArray("operations").getJsonObject(1).getString("libelle"), journal.getOperations().get(initialSize + 1).getLibelle(), "Second added operation mismatch")
+		);
 	}
 
-	/**
-	 * Tests the toJson method.
-	 * Verified: The JSON representation matches the expected structure and values.
-	 *
-	 * @since 0.3.0
-	 */
+
 	@Test
-	@DisplayName("Should convert to JSON correctly")
-	void shouldConvertToJsonCorrectly() {
-		List<OperationDTO> operations = new ArrayList<>();
-		operations.add(new OperationDTO().setId(100L));
-		operations.add(new OperationDTO().setId(101L));
+	@Order(3)
+	@DisplayName("Test json constructor")
+	void testJsonConstructor() {
+		journal = new JournalDTO(INITIAL_JOURNAL_JSON);
 
-		JournalDTO journal = new JournalDTO(1L, "Journal Test", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 12, 31),
-				"GEN", operations);
+		int journalSize = journal.getOperations().size();
+		// Préparation : Conversion des chaînes JSON en LocalDate
+		LocalDate expectedStartDate = LocalDate.parse(INITIAL_JOURNAL_JSON.getString("startDate"));
+		LocalDate expectedEndDate = LocalDate.parse(INITIAL_JOURNAL_JSON.getString("endDate"));
 
-		var json = journal.toJson();
+		assertAll("check correct journal mapping form json Object ",
+				() -> assertEquals(INITIAL_JOURNAL_JSON.getInt("id"), journal.getId(), "The ID should be set correctly"),
+				() -> assertEquals(INITIAL_JOURNAL_JSON.getString("name"), journal.getName(), "The name should be set correctly"),
+				() -> assertEquals(expectedStartDate, journal.getStartDate(), "The start date should be set correctly"),
+				() -> assertEquals(expectedEndDate, journal.getEndDate(), "The end date should be set correctly"),
+				() -> assertEquals(INITIAL_JOURNAL_JSON.getString("journalTypeCode"), journal.getJournalTypeCode(), "The journal type code should be set correctly"),
+				() -> assertEquals(journalSize, journal.getOperations().size(), "Total size should be " + journalSize),
+				() -> assertEquals(INITIAL_JOURNAL_JSON.getJsonArray("operations").getJsonObject(0).getString("libelle"), journal.getOperations().get(0).getLibelle(), "First added operation mismatch"),
+				() -> assertEquals(INITIAL_JOURNAL_JSON.getJsonArray("operations").getJsonObject(1).getString("libelle"), journal.getOperations().get(1).getLibelle(),"Second added operation mismatch")
+				);
+	}
 
-		assertAll("JSON Verification",
-				() -> assertEquals(1L, json.getJsonNumber("id").longValue()),
-				() -> assertEquals("Journal Test", json.getString("name")),
-				() -> assertEquals("2024-01-01", json.getString("startDate")),
-				() -> assertEquals("2024-12-31", json.getString("endDate")),
-				() -> assertEquals("GEN", json.getString("journalTypeCode")),
-				() -> assertEquals(2, json.getJsonArray("operations").size()),
-				() -> assertEquals(100L, json.getJsonArray("operations").getJsonObject(0).getJsonNumber("id").longValue()),
-				() -> assertEquals(101L, json.getJsonArray("operations").getJsonObject(1).getJsonNumber("id").longValue())
+	@Test
+	@Order(4)
+	@DisplayName("Add Single Operation")
+	void testAddSingleOperation() {
+		// 1. Action : Initialisation avec les données de base (le journal contient déjà 2 opérations)
+		journal = new JournalDTO(INITIAL_JOURNAL_JSON); //[cite: 6, 7]
+
+		int initialSize = journal.getOperations().size();
+		int expectedSize = initialSize + 1;
+
+		// On crée une opération à partir du premier objet de notre tableau "operationsToAdd"
+		JsonObject opJson = OPERATIONS_TO_ADD.getJsonObject(0); //
+		OperationDTO operation = new OperationDTO(opJson);
+
+		// 2. Action : Ajout de l'opération
+		JournalDTO result = journal.addOperation(operation); //[cite: 8]
+
+		// 3. Assertions
+		assertAll("Verify single operation addition",
+				// Vérifie que la méthode est fluide (retourne l'instance actuelle)
+				() -> assertSame(journal, result, "The addOperation method should return the same instance"),
+
+				// Vérifie l'incrémentation de la taille
+				() -> assertEquals(expectedSize, journal.getOperations().size(), "Journal should contain " + expectedSize + " operations"),
+
+				// Vérifie que les données du dernier élément correspondent à l'opération ajoutée
+				() -> assertEquals(operation.getLibelle(), journal.getOperations().get(initialSize).getLibelle(), "Operation labels should match")
 		);
 	}
 }
