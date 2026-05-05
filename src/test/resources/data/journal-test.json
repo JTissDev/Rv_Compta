@@ -1,0 +1,120 @@
+{
+  "initialJournal": {
+	"id": 1,
+	"name": "Journal de Banque Mai 2026",
+	"startDate": "2026-05-01",
+	"endDate": "2026-05-31",
+	"journalTypeCode": "BQE",
+	"operations": [
+	  {
+		"id": 101,
+		"dateOperation": "2026-05-15",
+		"dateComptable": "2026-05-16",
+		"libelle": "Paiement Facture Internet",
+		"referenceDocument": "FA-NET-001",
+		"descriptif": "Abonnement fibre optique Mai",
+		"statutCode": "VAL",
+		"movements": [
+		  {
+			"id": 1001,
+			"accountingCode": "626",
+			"debitAmount": 45.00,
+			"creditAmount": 0.00,
+			"description": "Frais postaux et télécoms",
+			"paymentCode": "PRLV"
+		  },
+		  {
+			"id": 1002,
+			"accountingCode": "512",
+			"debitAmount": 0.00,
+			"creditAmount": 45.00,
+			"description": "Banque",
+			"paymentCode": "PRLV"
+		  }
+		]
+	  },
+	  {
+		"id": 102,
+		"dateOperation": "2026-05-18",
+		"dateComptable": "2026-05-18",
+		"libelle": "Encaissement Client Dupont",
+		"referenceDocument": "FA-VTE-042",
+		"descriptif": "Règlement prestation de conseil",
+		"statutCode": "VAL",
+		"movements": [
+		  {
+			"id": 1003,
+			"accountingCode": "512",
+			"debitAmount": 1200.00,
+			"creditAmount": 0.00,
+			"description": "Banque",
+			"paymentCode": "VIR"
+		  },
+		  {
+			"id": 1004,
+			"accountingCode": "411",
+			"tiersId": 8,
+			"debitAmount": 0.00,
+			"creditAmount": 1200.00,
+			"description": "Client Dupont",
+			"paymentCode": "VIR"
+		  }
+		]
+	  }
+	]
+  },
+  "operationsToAdd": [
+	{
+	  "id": 201,
+	  "dateOperation": "2026-05-20",
+	  "dateComptable": "2026-05-21",
+	  "libelle": "Achat Logiciel Développement",
+	  "referenceDocument": "FA-LOG-005",
+	  "descriptif": "Licence annuelle IDE",
+	  "statutCode": "BROUILLON",
+	  "movements": [
+		{
+		  "id": 2001,
+		  "accountingCode": "6065",
+		  "debitAmount": 250.00,
+		  "creditAmount": 0.00,
+		  "description": "Logiciels",
+		  "paymentCode": "CB"
+		},
+		{
+		  "id": 2002,
+		  "accountingCode": "512",
+		  "debitAmount": 0.00,
+		  "creditAmount": 250.00,
+		  "description": "Banque",
+		  "paymentCode": "CB"
+		}
+	  ]
+	},
+	{
+	  "id": 202,
+	  "dateOperation": "2026-05-28",
+	  "dateComptable": "2026-05-28",
+	  "libelle": "Frais tenus de compte",
+	  "referenceDocument": "RELEVE-05",
+	  "descriptif": "Frais bancaires mensuels",
+	  "statutCode": "VAL",
+	  "movements": [
+		{
+		  "id": 2003,
+		  "accountingCode": "627",
+		  "debitAmount": 15.50,
+		  "creditAmount": 0.00,
+		  "description": "Services bancaires"
+		},
+		{
+		  "id": 2004,
+		  "accountingCode": "512",
+		  "debitAmount": 0.00,
+		  "creditAmount": 15.50,
+		  "description": "Banque"
+		}
+	  ]
+	}
+  ]
+}
