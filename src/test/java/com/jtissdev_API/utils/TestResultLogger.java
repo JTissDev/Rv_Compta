@@ -129,12 +129,12 @@ public class TestResultLogger implements BeforeAllCallback, AfterAllCallback, Af
 
 	private java.util.Properties loadProjectProperties() {
 		java.util.Properties props = new java.util.Properties();
-		try (java.io.InputStream is = getClass().getClassLoader().getResourceAsStream("project-info.properties")) {
+		try (java.io.InputStream is = getClass().getClassLoader().getResourceAsStream("app-info.properties")) {
 			if (is != null) {
 				props.load(is);
 			}
 		} catch (java.io.IOException e) {
-			logger.error("Impossible de charger project-info.properties");
+			logger.error("Impossible de charger app-info.properties");
 		}
 		return props;
 	}

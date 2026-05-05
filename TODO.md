@@ -43,6 +43,11 @@
 - [ ] **Robust Error Handling**: `GlobalExceptionHandler` and Business Exceptions.
 - [ ] **Environment Management**: Spring Profiles (`dev`, `prod`, etc.).
 - [ ] **API Documentation**: Swagger/OpenAPI integration.
+- [ ] **Comprehensive Testing**: Unit, Integration, and End-to-End tests.
+- [ ] **CI/CD Pipeline**: GitHub Actions for automated builds and tests.
+- [ ] **Containerization**: Dockerize the application for consistent deployment.
+- [ ] **Monitoring & Logging**: Integrate with .
+- [ ] **DataBase Migrations**: migrate consistent management to DataBase maria DB.
 
 ### 👤 User Management & Profiles
 - [ ] **Multi-Profile System**: `INDIVIDUAL`, `ASSOCIATION`, `PROFESSIONAL` logic toggles.

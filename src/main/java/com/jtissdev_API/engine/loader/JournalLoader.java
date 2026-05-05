@@ -40,8 +40,7 @@ public class JournalLoader {
 		}
 
 		try (JsonReader reader = Json.createReader(is)) {
-			JsonObject jsonJournal = reader.readObject();
-			return mapToJournalDTO(jsonJournal);
+			return new JournalDTO(reader.readObject());
 		} catch (Exception e) {
 			// Log error in a real scenario
 			return null;
@@ -56,21 +55,8 @@ public class JournalLoader {
 	 * @since 0.4.0
 	 */
 	private JournalDTO mapToJournalDTO(JsonObject json) {
-		JournalDTO journal = new JournalDTO()
-				                     .setId(json.containsKey("id") ?  json.getInt("id") : null)
-				                     .setName(json.getString("nom", null))
-				                     .setStartDate(parseDate(json.getString("dateDebut", null)))
-				                     .setEndDate(parseDate(json.getString("dateFin", null)))
-				                     .setJournalTypeCode(json.getString("typeJournalCode", null));
+		JournalDTO journal = new JournalDTO(json);
 
-		if (json.containsKey("operations")) {
-			JsonArray opsArray = json.getJsonArray("operations");
-			opsArray.forEach(val -> {
-				if (val instanceof JsonObject) {
-					journal.addOperation(mapToOperationDTO((JsonObject) val));
-				}
-			});
-		}
 
 		return journal;
 	}
@@ -83,23 +69,8 @@ public class JournalLoader {
 	 * @since 0.4.0
 	 */
 	private OperationDTO mapToOperationDTO(JsonObject json) {
-		OperationDTO operation = new OperationDTO()
-				                         .setId(json.containsKey("id") ?  json.getInt("id") : null)
-				                         .setDateOperation(parseDate(json.getString("dateOperation", null)))
-				                         .setDateComptable(parseDate(json.getString("dateComptable", null)))
-				                         .setLibelle(json.getString("libelle", null))
-				                         .setReferenceDocument(json.getString("referenceDocument", null))
-				                         .setDescriptif(json.getString("descriptif", null))
-				                         .setStatutCode(json.getString("statutCode", null));
+		OperationDTO operation = new OperationDTO(json);
 
-		if (json.containsKey("movements")) {
-			JsonArray movArray = json.getJsonArray("movements");
-			movArray.forEach(val -> {
-				if (val instanceof JsonObject) {
-					operation.addMovement(mapToMovementDTO((JsonObject) val));
-				}
-			});
-		}
 
 		return operation;
 	}
