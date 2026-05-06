@@ -1,13 +1,12 @@
 package com.jtissdev_API;
 
 import com.jtissdev.logging.banner.AppBanner;
+import com.jtissdev_API.controller.MainConsoleController;
 import com.jtissdev_API.engine.loader.DetailsDataLoader;
 import com.jtissdev_API.engine.loader.PcgDataLoader;
 import com.jtissdev_API.engine.loader.TiersDataLoader;
-import com.jtissdev_API.engine.worker.CommandLineWorker;
 import com.jtissdev_API.features.core.dto.PcgCoreDTO;
 import com.jtissdev_API.features.core.dto.PcpCoreDTO;
-//import com.jtissdev_API.utils.AppBanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
@@ -124,24 +123,10 @@ public class App {
 	 * @since 0.4
 	 */
 	@Bean
-	public CommandLineRunner operationalRunner(CommandLineWorker worker) {
+	public CommandLineRunner operationalRunner(MainConsoleController mainController) {
 		return args -> {
-			// Test direct pour voir si le fichier est chargé
-			java.util.Properties props = new java.util.Properties();
-			try (java.io.InputStream is = getClass().getClassLoader().getResourceAsStream("app-info.properties")) {
-				if (is != null) {
-					props.load(is);
-					System.out.println("--- DEBUG VERSION MAVEN : " + props.getProperty("app.version") + " ---");
-				} else {
-					System.out.println("--- DEBUG : Fichier app-info.properties introuvable ! ---");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 
-			AppBanner.display();
-			System.out.println("=== MODE OPÉRATIONNEL : ENGINE "+ props.getProperty("app.version") +" ===");
-			worker.start();
+			mainController.run();
 		};
 	}
 }
