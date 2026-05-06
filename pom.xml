@@ -4,7 +4,7 @@
 
   <groupId>com.jtissdev-API</groupId>
   <artifactId>Rv_Compta</artifactId>
-  <version>0.5-SNAPSHOT</version>
+  <version>0.5.0</version>
   <packaging>jar</packaging>
 
   <name>Rv_Compta</name>
