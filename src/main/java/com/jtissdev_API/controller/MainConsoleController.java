@@ -20,7 +20,7 @@ import java.util.Scanner;
  *
  * @author jtiss
  * @version 1.0.0
- * @since 0.1
+ * @since 0.5
  */
 @Component
 public class MainConsoleController {

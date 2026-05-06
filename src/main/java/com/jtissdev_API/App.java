@@ -23,7 +23,7 @@ import org.springframework.context.event.ContextClosedEvent;
  * Performs the "Test de Vérité" by loading PCG and PCP data.
  *
  * @author J.Tiss
- * @version 1.3
+ * @version 1.4
  * @since 0.1
  */
 @SpringBootApplication
@@ -116,8 +116,8 @@ public class App {
 	 * This runner initializes the application by displaying an operational mode banner
 	 * and starting the provided worker.
 	 *
-	 * @param worker
-	 * 		The CommandLineWorker instance responsible for executing the operational tasks.
+	 * @param mainController
+	 * 		The MainConsoleController instance responsible for executing the operational tasks.
 	 * @return A CommandLineRunner which sets the application in operational mode and starts the worker.
 	 *
 	 * @since 0.4
