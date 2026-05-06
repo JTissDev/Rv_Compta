@@ -4,8 +4,8 @@ import com.jtissdev_API.core.util.ExcelReader;
 import com.jtissdev_API.engine.loader.JournalLoader;
 import com.jtissdev_API.features.compta.dto.JournalDTO;
 import com.jtissdev_API.features.compta.dto.OperationDTO;
+import com.jtissdev_API.features.compta.view.JournalConsoleView;
 import com.jtissdev_API.view.MainConsoleView;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -24,14 +24,17 @@ import java.util.Scanner;
  */
 @Component
 public class MainConsoleController {
-	private final MainConsoleView view;
+	private final MainConsoleView mainConsoleView;
+	private final JournalConsoleView journalView;
+
 	private final Properties appProps = new Properties();
 	private final JournalLoader journalLoader; // TODO À remplacer par JournalService plus tard
 	private final ExcelReader excelReader;
 	private final Scanner scanner = new Scanner(System.in);
 
 	public MainConsoleController(JournalLoader journalLoader, ExcelReader excelReader) {
-		this.view = new MainConsoleView();
+		this.mainConsoleView = new MainConsoleView();
+		this.journalView = new JournalConsoleView();
 		this.journalLoader = journalLoader;
 		this.excelReader = excelReader;
 
@@ -50,15 +53,15 @@ public class MainConsoleController {
 
 	public void run() {
 		// Logique de chargement initial récupérée de App et CLW[cite: 54, 55]
-		view.displayHeader();
+		mainConsoleView.displayHeader();
 
 		JournalDTO journal = loadJournalInitial();
 
-		view.displayJournal(journal.getOperations(), journal.getOperations().size());
+		journalView.displayOperations(journal.getOperations());
 
 		boolean running = true;
 		while (running) {
-			view.displayMainMenu();
+			mainConsoleView.displayMainMenu();
 			String choice = scanner.nextLine();
 
 			switch (choice) {
@@ -66,32 +69,32 @@ public class MainConsoleController {
 				case "2" -> processManual(journal);
 				case "0" -> {
 					running = false;
-					view.displayMessage("> Fermeture du programme.");
+					mainConsoleView.displayMessage("> Fermeture du programme.");
 				}
-				default -> view.displayError("Choix invalide.");
+				default -> mainConsoleView.displayError("Choix invalide.");
 			}
 		}
 	}
 
 	private void processImport(JournalDTO journal) {
 		// Ici, tu remets ta logique de sélection de fichier Excel[cite: 49]
-		view.displayMessage("> Lancement de l'importation Excel...");
+		mainConsoleView.displayMessage("> Lancement de l'importation Excel...");
 		// Appelle tes méthodes privées de lecture excel ici
 	}
 
 	private void processManual(JournalDTO journal) {
-		view.displayMessage("\n--- [SAISIE MANUELLE] ---");
+		mainConsoleView.displayMessage("\n--- [SAISIE MANUELLE] ---");
 		OperationDTO op = new OperationDTO();
 
-		view.displayMessage("Date (JJ/MM/AAAA) : ");
+		mainConsoleView.displayMessage("Date (JJ/MM/AAAA) : ");
 		String dateStr = scanner.nextLine();
 		op.setDateOperation(LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-		view.displayMessage("Libellé : ");
+		mainConsoleView.displayMessage("Libellé : ");
 		op.setDescriptif(scanner.nextLine());
 
 		journal.getOperations().add(op);
-		view.displayMessage("✅ Opération ajoutée au journal.");
+		mainConsoleView.displayMessage("✅ Opération ajoutée au journal.");
 	}
 
 	private JournalDTO loadJournalInitial() {
@@ -100,7 +103,7 @@ public class MainConsoleController {
 			try (FileInputStream fis = new FileInputStream(journalFile)) {
 				return journalLoader.loadJournal(fis);
 			} catch (Exception e) {
-				view.displayError("Erreur de lecture : " + e.getMessage());
+				mainConsoleView.displayError("Erreur de lecture : " + e.getMessage());
 			}
 		}
 		return new JournalDTO(); // Retourne un journal vide si erreur ou inexistant[cite: 49]
