@@ -5,6 +5,7 @@ import com.jtissdev_API.engine.loader.JournalLoader;
 import com.jtissdev_API.features.compta.dto.JournalDTO;
 import com.jtissdev_API.features.compta.dto.OperationDTO;
 import com.jtissdev_API.features.compta.view.JournalConsoleView;
+import com.jtissdev_API.features.compta.view.OperationConsolView;
 import com.jtissdev_API.view.MainConsoleView;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -26,15 +28,18 @@ import java.util.Scanner;
 public class MainConsoleController {
 	private final MainConsoleView mainConsoleView;
 	private final JournalConsoleView journalView;
+	private final OperationConsolView operationView;
 
 	private final Properties appProps = new Properties();
 	private final JournalLoader journalLoader; // TODO À remplacer par JournalService plus tard
 	private final ExcelReader excelReader;
 	private final Scanner scanner = new Scanner(System.in);
 
+
 	public MainConsoleController(JournalLoader journalLoader, ExcelReader excelReader) {
 		this.mainConsoleView = new MainConsoleView();
 		this.journalView = new JournalConsoleView();
+		this.operationView = new OperationConsolView();
 		this.journalLoader = journalLoader;
 		this.excelReader = excelReader;
 
@@ -57,7 +62,17 @@ public class MainConsoleController {
 
 		JournalDTO journal = loadJournalInitial();
 
-		journalView.displayOperations(journal.getOperations());
+		//Display Journal Header
+		journalView.displayJournalHeader(journal);
+
+		if (!journal.getOperations().isEmpty()) {
+			journalView.displayJournalSize(journal.getOperations().size());
+			for (OperationDTO op : journal.getOperations()) {
+				operationView.displayOperation(op);
+			}
+		} else {
+			journalView.displayEmptyJournal();
+		}
 
 		boolean running = true;
 		while (running) {
@@ -67,6 +82,7 @@ public class MainConsoleController {
 			switch (choice) {
 				case "1" -> processImport(journal);
 				case "2" -> processManual(journal);
+				case "3" -> processEdit(journal);
 				case "0" -> {
 					running = false;
 					mainConsoleView.displayMessage("> Fermeture du programme.");
@@ -95,6 +111,57 @@ public class MainConsoleController {
 
 		journal.getOperations().add(op);
 		mainConsoleView.displayMessage("✅ Opération ajoutée au journal.");
+	}
+
+	private void processEdit(JournalDTO journal) {
+		List<OperationDTO> ops = journal.getOperations();
+
+		if (ops.isEmpty()) {
+			mainConsoleView.displayMessage("> Le journal est vide, aucune opération à modifier.");
+			return;
+		}
+
+		mainConsoleView.displayMessage("\n--- [ MODIFIER UNE OPÉRATION ] ---");
+
+		// On réaffiche la liste brièvement pour que l'utilisateur voit les numéros (1 à N)
+		for (int i = 0; i < ops.size(); i++) {
+			System.out.println("[" + (i + 1) + "] " + ops.get(i).getDescriptif() + " (" + ops.get(i).getDateOperation() + ")");
+		}
+
+		mainConsoleView.displayMessage("\nEntrez le numéro de l'opération à modifier (ou 0 pour annuler) : ");
+
+		try {
+			int index = Integer.parseInt(scanner.nextLine()) - 1; // -1 car la liste commence à 0
+
+			if (index == -1) {
+				mainConsoleView.displayMessage("> Modification annulée.");
+				return;
+			}
+
+			if (index >= 0 && index < ops.size()) {
+				OperationDTO targetOp = ops.get(index);
+
+				// On affiche le détail avant modif
+				mainConsoleView.displayMessage("\n> Opération sélectionnée :");
+				operationView.displayOperation(targetOp);
+
+				// Saisie de la modification
+				mainConsoleView.displayMessage("Nouveau libellé (laissez vide pour conserver l'actuel) : ");
+				String newDesc = scanner.nextLine();
+
+				if (!newDesc.trim().isEmpty()) {
+					targetOp.setDescriptif(newDesc);
+					mainConsoleView.displayMessage("✅ Opération mise à jour.");
+				} else {
+					mainConsoleView.displayMessage("> Aucune modification apportée.");
+				}
+
+			} else {
+				mainConsoleView.displayError("Numéro invalide.");
+			}
+		} catch (NumberFormatException e) {
+			mainConsoleView.displayError("Veuillez entrer un chiffre valide.");
+		}
 	}
 
 	private JournalDTO loadJournalInitial() {

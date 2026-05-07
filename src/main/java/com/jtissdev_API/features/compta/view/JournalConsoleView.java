@@ -1,8 +1,7 @@
 package com.jtissdev_API.features.compta.view;
 
+import com.jtissdev_API.features.compta.dto.JournalDTO;
 import com.jtissdev_API.features.compta.dto.OperationDTO;
-
-import java.util.List;
 
 /**
  * The JournalConsoleView class is responsible for displaying journal-related operations
@@ -23,19 +22,34 @@ public class JournalConsoleView {
 	 * 		If the list is empty, a message indicating no operations
 	 * 		are available will be displayed.
 	 */
-	public void displayOperations(List<OperationDTO> operations) {
-		System.out.println("\n--- [JOURNAL] DERNIÈRES OPÉRATIONS ---");
-		System.out.println("Affichage de " + operations.size() + " opérations :");
+	public void displayJournalHeader(JournalDTO journal) {
+		StringBuilder sb = new StringBuilder();
+		String start = (journal.getStartDate() != null) ? journal.getStartDate().toString() : null;
+		String end = (journal.getEndDate() != null) ? journal.getEndDate().toString() : java.time.LocalDate.now().toString();
 
-		if (operations.isEmpty()) {
-			System.out.println("Aucune opération à afficher.");
-			return;
+		sb.append("\n ===  Affichage du Journal Comptable : ").append(journal.getName() != "null" ? journal.getName():" ").append(" ===\n");
+		sb.append(journal.getJournalTypeCode() != null ? "Type de journal : " + journal.getJournalTypeCode() + "\n" : "");
+		sb.append("======================================================\n");
+		if (start == null) {
+			sb.append(String.format("Analyse jusqu'au : %s\n", end));
+		} else {
+			sb.append(String.format("Analyse entre : %s et %s\n", start, end));
 		}
+		sb.append("======================================================\n");
 
-		// Ici tu peux faire un affichage plus élégant (en tableau par exemple)
-		for (OperationDTO op : operations) {
-			formatOperationLine(op);
-		}
+		System.out.println(sb.toString());
+	}
+
+	public void displayJournalSize(int size) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Nombre d'opérations trouvées : ").append(size).append("\n");
+		System.out.println(sb.toString());
+	}
+
+	public void displayEmptyJournal(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("Aucune operation trouvée dans le journal.\n");
+		System.out.println(sb.toString());
 	}
 
 	/**

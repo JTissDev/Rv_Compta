@@ -24,6 +24,7 @@ public class MainConsoleView {
 		System.out.println("\n--- [MENU PRINCIPAL] ---");
 		System.out.println("[1] Charger un fichier Excel (Importation)");
 		System.out.println("[2] Ajouter une opération manuellement");
+		System.out.println("[3] Modifier une opération existante"); // <-- Nouvelle option
 		System.out.println("[0] Quitter");
 		System.out.print("\nVotre choix : ");
 	}
