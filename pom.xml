@@ -82,6 +82,12 @@
       <artifactId>spring-boot-starter</artifactId>
     </dependency>
 
+    <!-- Fournit les outils de développement web pour Spring Boot (REST, MVC, etc.) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
     <!-- Interface standard Java pour la manipulation de structures JSON (JSON-Processing) -->
     <dependency>
       <groupId>jakarta.json</groupId>

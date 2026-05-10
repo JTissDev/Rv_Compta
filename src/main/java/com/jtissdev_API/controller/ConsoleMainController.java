@@ -27,7 +27,7 @@ import java.util.Scanner;
  * @author jtiss
  */
 @Component
-@Profile({"dev", "prod", "show"})
+@Profile("console")
 public class ConsoleMainController implements MainController{
 
 	@Value("${app.data.path}")
