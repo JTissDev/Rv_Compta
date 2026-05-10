@@ -7,6 +7,8 @@ import com.jtissdev_API.features.compta.dto.OperationDTO;
 import com.jtissdev_API.features.compta.view.JournalConsoleView;
 import com.jtissdev_API.features.compta.view.OperationConsolView;
 import com.jtissdev_API.view.MainConsoleView;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -18,32 +20,37 @@ import java.util.Properties;
 import java.util.Scanner;
 
 /**
- * Represents a MainConsoleController DTO.
+ * Represents a ConsoleMainController, which is the main controller for the console application.
  *
- * @author jtiss
+ * @since 0.6
  * @version 1.0.0
- * @since 0.5
+ * @author jtiss
  */
 @Component
-public class MainConsoleController {
+@Profile("console")
+public class ConsoleMainController implements MainController{
+
+	@Value("${app.data.path}")
+	private String dataPath;
+
 	private final MainConsoleView mainConsoleView;
 	private final JournalConsoleView journalView;
 	private final OperationConsolView operationView;
 
-	private final Properties appProps = new Properties();
+	//private final Properties appProps = new Properties();
 	private final JournalLoader journalLoader; // TODO À remplacer par JournalService plus tard
-	private final ExcelReader excelReader;
+	//private final ExcelReader excelReader;
 	private final Scanner scanner = new Scanner(System.in);
 
 
-	public MainConsoleController(JournalLoader journalLoader, ExcelReader excelReader) {
+	public ConsoleMainController(JournalLoader journalLoader/*, ExcelReader excelReader*/) {
 		this.mainConsoleView = new MainConsoleView();
 		this.journalView = new JournalConsoleView();
 		this.operationView = new OperationConsolView();
 		this.journalLoader = journalLoader;
-		this.excelReader = excelReader;
+		//this.excelReader = excelReader;
 
-		try (java.io.InputStream is = getClass().getClassLoader().getResourceAsStream("app-info.properties")) {
+		/*try (java.io.InputStream is = getClass().getClassLoader().getResourceAsStream("app-info.properties")) {
 			if (is != null) {
 				this.appProps.load(is);
 				//System.out.println("--- DEBUG VERSION MAVEN : " + this.props.getProperty("app.version") + " ---");
@@ -52,27 +59,14 @@ public class MainConsoleController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 
 	}
-
+	@Override
 	public void run() {
-		// Logique de chargement initial récupérée de App et CLW[cite: 54, 55]
 		mainConsoleView.displayHeader();
-
 		JournalDTO journal = loadJournalInitial();
-
-		//Display Journal Header
 		journalView.displayJournalHeader(journal);
-
-		if (!journal.getOperations().isEmpty()) {
-			journalView.displayJournalSize(journal.getOperations().size());
-			for (OperationDTO op : journal.getOperations()) {
-				operationView.displayOperation(op);
-			}
-		} else {
-			journalView.displayEmptyJournal();
-		}
 
 		boolean running = true;
 		while (running) {
@@ -80,9 +74,8 @@ public class MainConsoleController {
 			String choice = scanner.nextLine();
 
 			switch (choice) {
-				case "1" -> processImport(journal);
+				case "1" -> mainConsoleView.displayMessage("> Importation Excel à implémenter...");
 				case "2" -> processManual(journal);
-				case "3" -> processEdit(journal);
 				case "0" -> {
 					running = false;
 					mainConsoleView.displayMessage("> Fermeture du programme.");
@@ -165,7 +158,8 @@ public class MainConsoleController {
 	}
 
 	private JournalDTO loadJournalInitial() {
-		File journalFile = new File("data/compta.json");
+		// Utilisation du dataPath injecté par Spring
+		File journalFile = new File(dataPath + "compta.json");
 		if (journalFile.exists()) {
 			try (FileInputStream fis = new FileInputStream(journalFile)) {
 				return journalLoader.loadJournal(fis);
@@ -173,6 +167,6 @@ public class MainConsoleController {
 				mainConsoleView.displayError("Erreur de lecture : " + e.getMessage());
 			}
 		}
-		return new JournalDTO(); // Retourne un journal vide si erreur ou inexistant[cite: 49]
+		return new JournalDTO();
 	}
 }

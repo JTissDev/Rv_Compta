@@ -19,6 +19,7 @@ import java.util.List;
  * @version 1.4.0
  * @since 0.3.0
  */
+
 public class JournalDTO {
 
 	/**

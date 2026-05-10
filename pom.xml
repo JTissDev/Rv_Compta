@@ -49,12 +49,21 @@
   </licenses>
 
   <properties>
+    <!-- Version de Java utilisée pour compiler le projet -->
     <java.version>21</java.version>
+    <!-- Encodage utilisé pour compiler le code source et générer les rapports -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <!-- Versions centralisées des dépendances pour faciliter la maintenance et les mises à jour -->
+    <!-- Version de l'API Jakarta JSON pour la manipulation de données JSON -->
     <jakarta.version>2.1.2</jakarta.version>
+    <!-- Version de l'implémentation Parson pour faire fonctionner l'API Jakarta JSON -->
     <parson.version>1.1.5</parson.version>
+    <!-- Version de la bibliothèque Apache POI pour lire et écrire des fichiers Excel (XLSX) -->
     <POI.version>5.2.5</POI.version>
+    <!-- Version de Lombok pour réduire le code boilerplate (getters, setters, etc.) -->
     <lombock.version>1.18.30</lombock.version>
+    <!-- Version de la bibliothèque de logging personnalisée pour bénéficier de ses fonctionnalités (ex: logger de démarrage) -->
     <logging.version>1.2</logging.version>
   </properties>
 
@@ -71,6 +80,12 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+    <!-- Fournit les outils de développement web pour Spring Boot (REST, MVC, etc.) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
     <!-- Interface standard Java pour la manipulation de structures JSON (JSON-Processing) -->

@@ -43,3 +43,4 @@ logs/
 /Dev-Reports/
 
 report_details.txt
+/src/main/resources/.env/
