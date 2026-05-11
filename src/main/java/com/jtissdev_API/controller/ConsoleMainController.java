@@ -83,7 +83,7 @@ public class ConsoleMainController implements MainController{
 		boolean quitApp = false;
 		while (!back && !quitApp) {
 			List<OperationDTO> operations = currentJournal.getOperations();
-			journalView.displayJournalForSelection(operations);
+			journalView.displayJournalForSelection(currentJournal);
 
 			String input = scanner.nextLine().trim();
 			String[] parts = input.split("\\s+");

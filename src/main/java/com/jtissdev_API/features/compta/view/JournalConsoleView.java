@@ -12,7 +12,7 @@ import java.util.List;
  * with customizable formatting.
  *
  * @author jtiss
- * @version 1.1.0
+ * @version 1.2.0
  * @since 0.5
  */
 public class JournalConsoleView {
@@ -50,6 +50,49 @@ public class JournalConsoleView {
 		}
 	}
 
+
+	public void displayUpdatingJournal(JournalDTO journal) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n ===  Mise à jour du Journal Comptable : ").append(journal.getName() != "null" ? journal.getName():" ").append(" ===\n");
+		sb.append(journal.getJournalTypeCode() != null ? "Type de journal : " + journal.getJournalTypeCode() + "\n" : "");
+		sb.append(ViewUtil.MAIN_SEPARATOR).append("\n");
+		System.out.println(sb.toString());
+		if (journal.getOperations().isEmpty()) {
+			this.displayEmptyJournal();
+		}
+		else {
+			java.util.stream.IntStream.range(0, journal.getOperations().size())
+					.forEach(i -> operationView.displaySelectableOperation(journal.getOperations().get(i),i+1));
+		}
+
+
+
+	}
+
+
+	/**
+	 * Displays a list of operations in the console, allowing the user to select one operation.
+	 * 1. Displays the number of operations in the list.
+	 * 2. Displays each operation in the list, allowing the user to select one operation.
+	 * @param journal
+	 * 		the JournalDTO object containing the journal information and its operations.
+	 * 		The number of operations in the journal will be displayed before listing the operations.
+	 * 		Each operation will be displayed with an index number for selection.
+	 * 		If the journal has no operations, a message indicating that the journal is empty will be displayed.
+	 * @author jtiss
+	 * @since 0.5
+	 * @see JournalDTO
+	 * @see OperationDTO
+	 * @see OperationConsolView
+	 */
+	public void displayJournalForSelection(JournalDTO journal) {
+		this.displayJournalHeader(journal);
+
+			java.util.stream.IntStream.range(0, journal.getOperations().size())
+					.forEach(i -> operationView.displaySelectableOperation(journal.getOperations().get(i),i+1));
+
+	}
+
 	/**
 	 * Displays a list of operations in the journal using the console.
 	 *
@@ -84,31 +127,29 @@ public class JournalConsoleView {
 		System.out.println(sb.toString());
 	}
 
-
-	public void displayUpdatingJournal(JournalDTO journal) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("\n ===  Mise à jour du Journal Comptable : ").append(journal.getName() != "null" ? journal.getName():" ").append(" ===\n");
-		sb.append(journal.getJournalTypeCode() != null ? "Type de journal : " + journal.getJournalTypeCode() + "\n" : "");
-		sb.append(ViewUtil.MAIN_SEPARATOR).append("\n");
-		System.out.println(sb.toString());
-		if (journal.getOperations().isEmpty()) {
-			this.displayEmptyJournal();
-		}
-		else {
-			java.util.stream.IntStream.range(0, journal.getOperations().size())
-					.forEach(i -> operationView.displaySelectableOperation(journal.getOperations().get(i),i+1));
-		}
-
-
-
-	}
-
+	/**
+	 * Displays the number of operations in the journal.
+	 * 1. Constructs a string with the number of operations.
+	 * 2. Prints the string to the console.
+	 *
+	 * @param size
+	 * 		the number of operations in the journal to be displayed.
+	 * @author jtiss
+	 * @since 0.5
+	 */
 	public void displayJournalSize(int size) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Nombre d'opérations trouvées : ").append(size).append("\n");
 		System.out.println(sb.toString());
 	}
 
+	/**
+	 * Displays a message indicating that the journal is empty.
+	 * 1. Constructs a string with the message.
+	 * 2. Prints the string to the console.
+	 * @author jtiss
+	 * @since 0.5
+	 */
 	public void displayEmptyJournal(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Aucune operation trouvée dans le journal.\n");
@@ -116,7 +157,4 @@ public class JournalConsoleView {
 	}
 
 
-	public void displayJournalForSelection(List<OperationDTO> operations) {
-		ViewUtil.displayNotImplemented();
-	}
 }

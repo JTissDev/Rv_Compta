@@ -43,10 +43,6 @@ public class MainConsoleView {
 	}
 
 
-
-
-
-
 	public void displayExcelRow(List<String> row) {
 		// Transfert de la logique de tableau complexe de CommandLineWorker
 		String libelle = row.get(2).replace("\n", " ").trim();
