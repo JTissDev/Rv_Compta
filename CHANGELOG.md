@@ -4,7 +4,15 @@ All notable changes to this project will be documented in is file.
 
 # Changelog
 
-## [0.5] in developpement
+## [0.6] in progress
+
+### Added
+- View `Compta`, `Journal`, `Operation`, `Movement`
+- View `PCP`
+- View `PCG`
+- View `Referential`
+
+## [0.5] 2026-05-06
 
 ### Added
 
@@ -15,8 +23,9 @@ All notable changes to this project will be documented in is file.
 - Success Test for Compta DTO `MovmentDTO`, `OperationDTO`
 
 ### Deprecated
-
-
+- all construtors of DTOs except the default one, to enforce the use of Fluent API for better readability and maintainability.
+and the one with jsonObject as parameter.
+- all methods fromJson for the same reason, to centralize JSON parsing logic within the DTOs and ensure consistency across the codebase.
 
 ## [0.4.0] 2026-04-29
 
