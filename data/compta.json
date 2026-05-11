@@ -12,12 +12,20 @@
 	  "statutCode": "",
 	  "movements": [
 		{
-		  "paiementCode": "",
-		  "codeComptable": 210,
-		  "codeComplementaire": "",
-		  "codeDetailsComptable": ".Vig",
-		  "montantDebit": 75000,
-		  "montantCredit": 0,
+		  "tiers": {
+			"id" : 1,
+			"name" : "Marie Blachère Vierzon",
+			"thirdPartyType" : "Professionnal",
+			"Siret" : null,
+			"Code_Comptable_Defaut" : null,
+			"Description" : ""
+		  },
+		  "paymentCode": "",
+		  "accountingCode": "210",
+		  "complementaryAccountingCode": "",
+		  "accountDetailCode": ".Vig",
+		  "debitAmount": 75000,
+		  "creditAmount": 0,
 		  "description": "Valeur Initial du bien immoobilier"
 		}
 	  ]

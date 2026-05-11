@@ -7,6 +7,7 @@ import com.jtissdev_API.features.compta.dto.OperationDTO;
 import com.jtissdev_API.features.compta.view.JournalConsoleView;
 import com.jtissdev_API.features.compta.view.OperationConsolView;
 import com.jtissdev_API.view.MainConsoleView;
+import com.jtissdev_API.view.ViewUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,6 @@ import java.io.FileInputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Properties;
 import java.util.Scanner;
 
 /**
@@ -41,6 +41,7 @@ public class ConsoleMainController implements MainController{
 	private final JournalLoader journalLoader; // TODO À remplacer par JournalService plus tard
 	//private final ExcelReader excelReader;
 	private final Scanner scanner = new Scanner(System.in);
+	private JournalDTO currentJournal;
 
 
 	public ConsoleMainController(JournalLoader journalLoader/*, ExcelReader excelReader*/) {
@@ -50,84 +51,127 @@ public class ConsoleMainController implements MainController{
 		this.journalLoader = journalLoader;
 		//this.excelReader = excelReader;
 
-		/*try (java.io.InputStream is = getClass().getClassLoader().getResourceAsStream("app-info.properties")) {
-			if (is != null) {
-				this.appProps.load(is);
-				//System.out.println("--- DEBUG VERSION MAVEN : " + this.props.getProperty("app.version") + " ---");
-			} else {
-				//System.out.println("--- DEBUG : Fichier app-info.properties introuvable ! ---");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
+
 
 	}
 	@Override
 	public void run() {
 		mainConsoleView.displayHeader();
-		JournalDTO journal = loadJournalInitial();
-		journalView.displayJournalHeader(journal);
+		currentJournal = loadJournalInitial();
+		journalView.displayJournal(currentJournal);
 
-		boolean running = true;
-		while (running) {
+		boolean quitApp = false;
+		while (!quitApp) {
 			mainConsoleView.displayMainMenu();
 			String choice = scanner.nextLine();
 
 			switch (choice) {
-				case "1" -> mainConsoleView.displayMessage("> Importation Excel à implémenter...");
-				case "2" -> processManual(journal);
+				case "1" -> ViewUtil.displayNotImplemented(); //processImport(currentJournal);
+				case "2" -> quitApp = handleJournalMenu();
 				case "0" -> {
-					running = false;
-					mainConsoleView.displayMessage("> Fermeture du programme.");
+					quitApp = true;
+					ViewUtil.displayMessage("> Fermeture du programme.");
 				}
-				default -> mainConsoleView.displayError("Choix invalide.");
+				default -> ViewUtil.displayError("Choix invalide.");
 			}
 		}
 	}
 
+
+	private boolean handleJournalMenu() {
+		boolean back = false;
+		boolean quitApp = false;
+		while (!back && !quitApp) {
+			List<OperationDTO> operations = currentJournal.getOperations();
+			journalView.displayJournalForSelection(operations);
+
+			String input = scanner.nextLine().trim();
+			String[] parts = input.split("\\s+");
+			String action = parts[0].toUpperCase();
+
+			switch (action) {
+				case "N":
+					newOperation();
+					break;
+				case "UP":
+					processUpdateCommand(parts, operations);
+					break;
+				case "INS":
+					processInsertCommand(parts, operations);
+					break;
+				case "B": // Back
+					back = true;
+					break;
+				case "Q": // Quit
+					quitApp = true;
+					break;
+				default:
+					ViewUtil.displayError("Action invalide dans le journal");
+			}
+		}
+		return quitApp;
+	}
+
+	private void processUpdateCommand(String[] parts, List<OperationDTO> operations) {
+		ViewUtil.displayNotImplemented();
+		//TODO need to be implemented after implementing the view
+	}
+
+	private void processInsertCommand(String[] parts, List<OperationDTO> operations) {
+		ViewUtil.displayNotImplemented();
+		//TODO need to be implemented after implementing the view
+	}
+
+	private void newOperation() {
+		ViewUtil.displayNotImplemented();
+		//TODO need to be implemented after implementing the view
+	}
+
+
+
 	private void processImport(JournalDTO journal) {
 		// Ici, tu remets ta logique de sélection de fichier Excel[cite: 49]
-		mainConsoleView.displayMessage("> Lancement de l'importation Excel...");
+		ViewUtil.displayMessage("> Lancement de l'importation Excel...");
 		// Appelle tes méthodes privées de lecture excel ici
 	}
 
 	private void processManual(JournalDTO journal) {
-		mainConsoleView.displayMessage("\n--- [SAISIE MANUELLE] ---");
+		ViewUtil.displayMessage("\n--- [SAISIE MANUELLE] ---");
 		OperationDTO op = new OperationDTO();
 
-		mainConsoleView.displayMessage("Date (JJ/MM/AAAA) : ");
+		ViewUtil.displayMessage("Date (JJ/MM/AAAA) : ");
 		String dateStr = scanner.nextLine();
 		op.setDateOperation(LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-		mainConsoleView.displayMessage("Libellé : ");
+		ViewUtil.displayMessage("Libellé : ");
 		op.setDescriptif(scanner.nextLine());
 
 		journal.getOperations().add(op);
-		mainConsoleView.displayMessage("✅ Opération ajoutée au journal.");
+		ViewUtil.displayMessage("✅ Opération ajoutée au journal.");
 	}
 
 	private void processEdit(JournalDTO journal) {
 		List<OperationDTO> ops = journal.getOperations();
 
 		if (ops.isEmpty()) {
-			mainConsoleView.displayMessage("> Le journal est vide, aucune opération à modifier.");
+			ViewUtil.displayMessage("> Le journal est vide, aucune opération à modifier.");
 			return;
 		}
 
-		mainConsoleView.displayMessage("\n--- [ MODIFIER UNE OPÉRATION ] ---");
+		ViewUtil.displayMessage("\n--- [ MODIFIER UNE OPÉRATION ] ---");
 
 		// On réaffiche la liste brièvement pour que l'utilisateur voit les numéros (1 à N)
 		for (int i = 0; i < ops.size(); i++) {
 			System.out.println("[" + (i + 1) + "] " + ops.get(i).getDescriptif() + " (" + ops.get(i).getDateOperation() + ")");
 		}
 
-		mainConsoleView.displayMessage("\nEntrez le numéro de l'opération à modifier (ou 0 pour annuler) : ");
+		ViewUtil.displayMessage("\nEntrez le numéro de l'opération à modifier (ou 0 pour annuler) : ");
 
 		try {
 			int index = Integer.parseInt(scanner.nextLine()) - 1; // -1 car la liste commence à 0
 
 			if (index == -1) {
-				mainConsoleView.displayMessage("> Modification annulée.");
+				ViewUtil.displayMessage("> Modification annulée.");
 				return;
 			}
 
@@ -135,25 +179,25 @@ public class ConsoleMainController implements MainController{
 				OperationDTO targetOp = ops.get(index);
 
 				// On affiche le détail avant modif
-				mainConsoleView.displayMessage("\n> Opération sélectionnée :");
+				ViewUtil.displayMessage("\n> Opération sélectionnée :");
 				operationView.displayOperation(targetOp);
 
 				// Saisie de la modification
-				mainConsoleView.displayMessage("Nouveau libellé (laissez vide pour conserver l'actuel) : ");
+				ViewUtil.displayMessage("Nouveau libellé (laissez vide pour conserver l'actuel) : ");
 				String newDesc = scanner.nextLine();
 
 				if (!newDesc.trim().isEmpty()) {
 					targetOp.setDescriptif(newDesc);
-					mainConsoleView.displayMessage("✅ Opération mise à jour.");
+					ViewUtil.displayMessage("✅ Opération mise à jour.");
 				} else {
-					mainConsoleView.displayMessage("> Aucune modification apportée.");
+					ViewUtil.displayMessage("> Aucune modification apportée.");
 				}
 
 			} else {
-				mainConsoleView.displayError("Numéro invalide.");
+				ViewUtil.displayError("Numéro invalide.");
 			}
 		} catch (NumberFormatException e) {
-			mainConsoleView.displayError("Veuillez entrer un chiffre valide.");
+			ViewUtil.displayError("Veuillez entrer un chiffre valide.");
 		}
 	}
 
@@ -164,7 +208,7 @@ public class ConsoleMainController implements MainController{
 			try (FileInputStream fis = new FileInputStream(journalFile)) {
 				return journalLoader.loadJournal(fis);
 			} catch (Exception e) {
-				mainConsoleView.displayError("Erreur de lecture : " + e.getMessage());
+				ViewUtil.displayError("Erreur de lecture : " + e.getMessage());
 			}
 		}
 		return new JournalDTO();

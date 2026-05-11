@@ -3,6 +3,7 @@ package com.jtissdev_API.controller;
 import com.jtissdev_API.engine.loader.DetailsDataLoader;
 import com.jtissdev_API.engine.loader.PcgDataLoader;
 import com.jtissdev_API.engine.loader.TiersDataLoader;
+import com.jtissdev_API.features.PCG.view.AccountingTypeView;
 import com.jtissdev_API.features.compta.view.OperationConsolView;
 import com.jtissdev_API.features.core.dto.PcgCoreDTO;
 import com.jtissdev_API.features.core.dto.PcpCoreDTO;
@@ -47,7 +48,8 @@ public class TestMainController implements MainController {
 
 		// --- AFFICHAGE DE DIAGNOSTIC ---
 		System.out.println("\n--- CONTENU DU BLOC PCG ---");
-		System.out.println("PCG : " + pcgCore.toString());
+		AccountingTypeView accountingTypeView = new AccountingTypeView();
+		pcgCore.getAccountingClasses().forEach(accountingTypeView::displayCascadeAccountingType);
 
 		System.out.println("\n--- CONTENU DU BLOC PCP ---");
 		System.out.println("[Tiers] Nombre d'entrées : " + pcpCore.getThirdParties().size());
