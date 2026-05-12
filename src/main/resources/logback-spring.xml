@@ -2,21 +2,18 @@
 <configuration>
     <property name="LOG_DIR" value="logs" />
 
-    <!-- 1. CONSOLE STANDARD (Format complet) -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} %highlight(%-5level) %cyan(%logger{20}) - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- 2. CONSOLE BANNIÈRE (Épurée : Uniquement le message) -->
     <appender name="BANNER_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- 3. FICHIER DE LOG -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_DIR}/app-compta.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -28,16 +25,31 @@
         </encoder>
     </appender>
 
-    <!-- 4. LOGGER SPÉCIFIQUE POUR LA BANNIÈRE (CORRIGÉ) -->
-    <!-- On définit le logger ET ses destinations à l'intérieur du bloc -->
+    <appender name="TEST_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_DIR}/test-verite.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <springProfile name="test">
+        <logger name="com.jtissdev_API" level="TRACE" additivity="false">
+            <appender-ref ref="TEST_FILE" />
+            <appender-ref ref="CONSOLE" />
+        </logger>
+    </springProfile>
+
+    <springProfile name="console">
+        <logger name="com.jtissdev_API" level="INFO" />
+    </springProfile>
+
     <logger name="c.jtissdev.logging.banner.AppBanner" level="INFO" additivity="false">
         <appender-ref ref="BANNER_CONSOLE" />
         <appender-ref ref="FILE" />
     </logger>
 
-    <!-- 5. CONFIGURATION GÉNÉRALE -->
     <logger name="org.springframework" level="WARN" />
-    <logger name="com.jtissdev_API" level="INFO" />
 
     <root level="INFO">
         <appender-ref ref="CONSOLE" />

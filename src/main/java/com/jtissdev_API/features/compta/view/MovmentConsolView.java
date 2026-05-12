@@ -50,10 +50,16 @@ public class MovmentConsolView {
 	}
 
 	public void displayResumMovement(MovementDTO movementDTO) {
+		ViewUtil.displayNotImplemented();
 
 	}
 
 	public void displayInlineMovment(MovementDTO movementDTO) {
 		System.out.println(getInlineMovement(movementDTO));
+	}
+
+	public String getResumMovement(MovementDTO movementDTO) {
+		ViewUtil.displayMessage("View: Movment, getResumMovement non implémenté");
+		return null;
 	}
 }

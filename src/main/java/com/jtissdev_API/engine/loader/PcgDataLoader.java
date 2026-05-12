@@ -1,5 +1,6 @@
 package com.jtissdev_API.engine.loader;
 
+import com.jtissdev_API.controller.TestMainController;
 import com.jtissdev_API.features.PCG.dto.AccountingType;
 import com.jtissdev_API.features.PCG.dto.AccountingTypeDetails;
 import com.jtissdev_API.features.PCG.dto.SubAccountingType;
@@ -8,6 +9,8 @@ import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -24,6 +27,8 @@ import java.io.InputStream;
  */
 @Component
 public class PcgDataLoader {
+
+	private static final Logger logger = LoggerFactory.getLogger(PcgDataLoader.class);
 
 	/**
 	 * Loads the General Chart of Accounts (PCG) from a JSON file located
@@ -85,7 +90,7 @@ public class PcgDataLoader {
 
 		for (JsonObject typeJson : json.getValuesAs(JsonObject.class)) {
 			System.out.println("=============================================");
-
+			logger.debug("Processing Type JSON: " );
 			AccountingType typeObj = new AccountingType();
 			typeObj.setName(typeJson.getString("type", "Unnamed"));
 			typeObj.setAccountCode(typeJson.getInt("accountCode"));

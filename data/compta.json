@@ -1,32 +1,49 @@
 {
-  "name": "Journal Comptable J.Tissier",
-  "startDate": "2026-01-01",
-  "journalTypeCode": "Private",
-  "operations": [
+  "name" : "Journal Comptable J.Tissier" ,
+  "startDate" : "2026-01-01" ,
+  "journalTypeCode" : "Private" ,
+  "operations" : [
 	{
-	  "dateOperation": "2026-01-01",
-	  "dateComptable" : "2026-01-01",
-	  "libelle": "Etat Initial",
-	  "referenceDocument": "",
-	  "descriptif": "Saisie ligne du patrimoine initial de suivie",
-	  "statutCode": "",
-	  "movements": [
+	  "dateOperation" : "2026-01-01" ,
+	  "dateComptable" : "2026-01-01" ,
+	  "libelle" : "Etat Initial" ,
+	  "referenceDocument" : "" ,
+	  "descriptif" : "Saisie ligne du patrimoine initial de suivie" ,
+	  "statutCode" : "" ,
+	  "movements" : [
 		{
-		  "tiers": {
-			"id" : 1,
-			"name" : "Marie Blachère Vierzon",
-			"thirdPartyType" : "Professionnal",
-			"Siret" : null,
-			"Code_Comptable_Defaut" : null,
+		  "tiers" : {
+			"id" : 1 ,
+			"name" : "Marie Blachère Vierzon" ,
+			"thirdPartyType" : "Professionnal" ,
+			"Siret" : null ,
+			"Code_Comptable_Defaut" : null ,
 			"Description" : ""
-		  },
-		  "paymentCode": "",
-		  "accountingCode": "210",
-		  "complementaryAccountingCode": "",
-		  "accountDetailCode": ".Vig",
-		  "debitAmount": 75000,
-		  "creditAmount": 0,
-		  "description": "Valeur Initial du bien immoobilier"
+		  } ,
+		  "paymentCode" : "" ,
+		  "accountingCode" : "210" ,
+		  "complementaryAccountingCode" : "" ,
+		  "accountDetailCode" : ".Vig" ,
+		  "debitAmount" : 75000 ,
+		  "creditAmount" : 0 ,
+		  "description" : "Valeur Initial du bien immoobilier"
+		},
+		{
+		  "tiers" : {
+			"id" : 1 ,
+			"name" : "Marie Blachère Vierzon" ,
+			"thirdPartyType" : "Professionnal" ,
+			"Siret" : null ,
+			"Code_Comptable_Defaut" : null ,
+			"Description" : ""
+		  } ,
+		  "paymentCode" : "" ,
+		  "accountingCode" : "101" ,
+		  "complementaryAccountingCode" : "" ,
+		  "accountDetailCode" : ".Vig" ,
+		  "debitAmount" : 0 ,
+		  "creditAmount" : 75000 ,
+		  "description" : "contrepartie de la valeur Initial du bien immoobilier"
 		}
 	  ]
 	}

@@ -8,7 +8,7 @@ import com.jtissdev_API.view.ViewUtil;
  * It provides a method to display the information of an OperationDTO object, including its movements and balance status.
  *
  * @author jtiss
- * @version 1.1.0
+ * @version 1.2.0
  * @since 0.6
  */
 public class OperationConsolView {
@@ -99,40 +99,60 @@ public class OperationConsolView {
 	}
 
 	/**
-	 * Displays the details of an OperationDTO object, including its movements and balance status.
-	 * The movements are displayed in a table format.
-	 * The balance status is color-coded, using green for a balanced status and red for an unbalanced status.
-	 * 1. Displays the index of the operation.
-	 * 2. Displays the ID of the operation.
-	 * 3. Displays the date of the operation.
-	 * 4. Displays the description of the operation.
-	 * 5. Displays the balance status of the operation.
-	 * 6. Displays the movements of the operation.
-	 * 7. Prints a newline character to separate the operation from the next one.
+	 * Displays a summary of an OperationDTO object, including its movements and balance status.
+	 *
 	 * @param operation
 	 * 		the OperationDTO object containing the details of the operation to be displayed.
 	 * @param i	the index of the operation in the list of operations, used for display purposes.
 	 * @author jtiss
 	 * @since 0.6
 	 * @see OperationDTO
+	 * @see #getFormattedResumOperation(OperationDTO, int)
 	 *
 	 */
 	public void displayResumOperation(OperationDTO operation, int i) {
-		String indexColor = operation.isBalance() ? "" : ViewUtil.RED;
+		System.out.println(getFormattedResumOperation(operation,i));
+	}
 
+	/**
+	 * Returns a formatted string representation of an OperationDTO object, including its movements and balance status.
+	 * The movements are displayed in a table format.
+	 * The balance status is color-coded, using green for a balanced status and red for an unbalanced status.
+	 * 1. Displays the index of the operation.
+	 * 2. Displays the date of the operation.
+	 * 3. Displays the description of the operation.
+	 * 4. Displays the balance status of the operation.
+	 * 5. Prints a newline character to separate the operation from the next one.
+	 * 6. Displays the movements of the operation in a table format.
+	 * @param operation
+	 * 		the OperationDTO object containing the details of the operation to be formatted.
+	 * @param i	the index of the operation in the list of operations, used for display purposes.
+	 * @return a formatted string representing the operation.
+	 * @author jtiss
+	 * @since 0.6
+	 */
+	public String getFormattedResumOperation(OperationDTO operation, int i) {
+		String indexColor = operation.isBalance() ? "" : ViewUtil.RED;
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(indexColor).append("[").append(i).append("]").append(ViewUtil.RESET).append(" ");
 		sb.append("ID: ").append(operation.getId() != null ? operation.getId() : "NEW").append(" | ");
 		sb.append(operation.getDateOperation()).append(" | ");
+		sb.append(operation.getDateComptable() != null ? operation.getDateComptable() : "No date").append(" | ");
+		sb.append(operation.getLibelle() != null ? operation.getLibelle() : "No lib").append(" | ");
 		sb.append(operation.getDescriptif() != null ? operation.getDescriptif() : "No desc").append(" | ");
 		sb.append(getFormattedStatus(operation.isBalance())).append("\n");
 
 		System.out.print(sb.toString());
 
 		if (operation.getMovements() != null) {
-			operation.getMovements().forEach(movementView::displayResumMovement);
+			String allMovements = operation.getMovements().stream()
+					                      .map(movementView::getResumMovement) // Transforme chaque DTO en String
+					                      .collect(java.util.stream.Collectors.joining("\n")); // Joint tout avec un \n
+
+			sb.append(allMovements);
 		}
+		return sb.toString();
 	}
 
 	/**

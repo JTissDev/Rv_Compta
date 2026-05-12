@@ -28,26 +28,16 @@ import java.util.Scanner;
  */
 @Component
 @Profile("console")
-public class ConsoleMainController implements MainController{
+public class ConsoleMainController extends AbstractConsoleController implements MainController{
 
-	@Value("${app.data.path}")
-	private String dataPath;
-
-	private final MainConsoleView mainConsoleView;
-	private final JournalConsoleView journalView;
-	private final OperationConsolView operationView;
 
 	//private final Properties appProps = new Properties();
 	private final JournalLoader journalLoader; // TODO À remplacer par JournalService plus tard
-	//private final ExcelReader excelReader;
-	private final Scanner scanner = new Scanner(System.in);
-	private JournalDTO currentJournal;
+
 
 
 	public ConsoleMainController(JournalLoader journalLoader/*, ExcelReader excelReader*/) {
-		this.mainConsoleView = new MainConsoleView();
-		this.journalView = new JournalConsoleView();
-		this.operationView = new OperationConsolView();
+		super();
 		this.journalLoader = journalLoader;
 		//this.excelReader = excelReader;
 

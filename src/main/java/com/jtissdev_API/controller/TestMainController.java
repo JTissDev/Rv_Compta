@@ -1,5 +1,6 @@
 package com.jtissdev_API.controller;
 
+import com.jtissdev_API.App;
 import com.jtissdev_API.engine.loader.DetailsDataLoader;
 import com.jtissdev_API.engine.loader.PcgDataLoader;
 import com.jtissdev_API.engine.loader.TiersDataLoader;
@@ -7,6 +8,10 @@ import com.jtissdev_API.features.PCG.view.AccountingTypeView;
 import com.jtissdev_API.features.compta.view.OperationConsolView;
 import com.jtissdev_API.features.core.dto.PcgCoreDTO;
 import com.jtissdev_API.features.core.dto.PcpCoreDTO;
+import com.jtissdev_API.features.core.dto.SelectionContext;
+import com.jtissdev_API.view.ViewUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -19,14 +24,25 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Profile("test")
-public class TestMainController implements MainController {
+public class TestMainController extends AbstractConsoleController implements MainController {
+
+	private static final Logger logger = LoggerFactory.getLogger(TestMainController.class);
 
 	private final PcgDataLoader pcgLoader;
 	private final TiersDataLoader tiersLoader;
 	private final DetailsDataLoader detailsLoader;
-	private final OperationConsolView diagView = new OperationConsolView();
+	private PcgCoreDTO pcgCore;
+	private PcpCoreDTO pcpCore;
+
+	public TestMainController() {
+		super();
+		this.pcgLoader = new PcgDataLoader();
+		this.tiersLoader = new TiersDataLoader();
+		this.detailsLoader = new DetailsDataLoader();
+	}
 
 	public TestMainController(PcgDataLoader pcgLoader, TiersDataLoader tiersLoader, DetailsDataLoader detailsLoader) {
+		super();
 		this.pcgLoader = pcgLoader;
 		this.tiersLoader = tiersLoader;
 		this.detailsLoader = detailsLoader;
@@ -34,27 +50,49 @@ public class TestMainController implements MainController {
 
 	@Override
 	public void run() {
-		System.out.println("=== DÉMARRAGE DU TEST DE VÉRITÉ (AUTOMATIQUE) ===\n");
+		logger.info(ViewUtil.CYAN + "=== DÉMARRAGE DU TEST DE VÉRITÉ (AUTOMATIQUE) === \n" + ViewUtil.RESET);
 
 		// --- CHARGEMENT DU PCG ---
-		System.out.println("> Chargement du Bloc PCG...");
-		PcgCoreDTO pcgCore = pcgLoader.loadFromJson("data/PCG.json");
+		logger.info("> Chargement du Bloc PCG...");
+		pcgCore = pcgLoader.loadFromJson("data/PCG.json");
+		this.testDisplayPCG();
+		this.testDisplayPartialPcg();
 
 		// --- CHARGEMENT DU PCP ---
-		System.out.println("> Chargement du Bloc PCP...");
-		PcpCoreDTO pcpCore = new PcpCoreDTO();
+		logger.info("> Chargement du Bloc PCP...");
+		pcpCore = new PcpCoreDTO();
 		pcpCore.setThirdParties(tiersLoader.loadTiersFromJson("Tiers.json"));
 		pcpCore.setDetails(detailsLoader.loadDetailsFromJson("Details.json"));
-
+		this.testDisplayPCP();
 		// --- AFFICHAGE DE DIAGNOSTIC ---
-		System.out.println("\n--- CONTENU DU BLOC PCG ---");
-		AccountingTypeView accountingTypeView = new AccountingTypeView();
+
+		logger.info(ViewUtil.CYAN + "\n=== FIN DU TEST DE VÉRITÉ : TOUT EST OK ===" + ViewUtil.RESET);
+	}
+
+	private void testDisplayPCG(){
+		logger.info("> Test Affichage du Bloc PCG...");
+
 		pcgCore.getAccountingClasses().forEach(accountingTypeView::displayCascadeAccountingType);
+	}
 
-		System.out.println("\n--- CONTENU DU BLOC PCP ---");
-		System.out.println("[Tiers] Nombre d'entrées : " + pcpCore.getThirdParties().size());
-		System.out.println("[Détails Niveau 4] Nombre d'entrées : " + pcpCore.getDetails().size());
+	private void testDisplayPartialPcg(){
+		logger.info("> Test Affichage du Bloc PCG correspondant a un AccountingType ...");
+		SelectionContext context = new SelectionContext(pcgCore.getAccountingClasses().get(1));
+		accountingTypeView.displayCascadeAccountingType(context.getType(), context);
+		logger.info("> Test Affichage du Bloc PCG correspondant a un SubAccountingType ...");
+		context.setSubType(pcgCore.getAccountingClasses().get(1).getSubTypes().get(1));
+		accountingTypeView.displayCascadeAccountingType(context.getType(), context);
+		logger.info("> Test Affichage du Bloc PCG correspondant a un AccountingTypeDetails ...");
+		context.setDetail(pcgCore.getAccountingClasses().get(1).getSubTypes().get(1).getDetailsList().get(1));
+		accountingTypeView.displayCascadeAccountingType(context.getType(), context);
 
-		System.out.println("\n=== FIN DU TEST DE VÉRITÉ : TOUT EST OK ===");
+	}
+
+	private void testDisplayPCP(){
+		logger.info("> Test Affichage du Bloc PCP...");
+		OperationConsolView operationConsolView = new OperationConsolView();
+		ViewUtil.displayNotImplemented();
+		logger.debug("[Tiers] Nombre d'entrées : " + pcpCore.getThirdParties().size());
+		logger.debug("[Détails Niveau 4] Nombre d'entrées : " + pcpCore.getDetails().size());
 	}
 }
