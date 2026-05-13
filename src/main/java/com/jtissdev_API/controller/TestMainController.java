@@ -4,9 +4,7 @@ import com.jtissdev_API.App;
 import com.jtissdev_API.engine.loader.DetailsDataLoader;
 import com.jtissdev_API.engine.loader.PcgDataLoader;
 import com.jtissdev_API.engine.loader.TiersDataLoader;
-import com.jtissdev_API.features.PCG.view.AccountingTypeView;
 import com.jtissdev_API.features.compta.view.OperationConsolView;
-import com.jtissdev_API.features.core.dto.PcgCoreDTO;
 import com.jtissdev_API.features.core.dto.PcpCoreDTO;
 import com.jtissdev_API.features.core.dto.SelectionContext;
 import com.jtissdev_API.view.ViewUtil;
@@ -48,6 +46,7 @@ public class TestMainController extends AbstractConsoleController implements Mai
 		this.detailsLoader = detailsLoader;
 	}
 
+
 	@Override
 	public void run() {
 		logger.info(ViewUtil.CYAN + "=== DÉMARRAGE DU TEST DE VÉRITÉ (AUTOMATIQUE) === \n" + ViewUtil.RESET);
@@ -73,18 +72,22 @@ public class TestMainController extends AbstractConsoleController implements Mai
 		logger.info("> Test Affichage du Bloc PCG...");
 
 		pcgCore.getAccountingClasses().forEach(accountingTypeView::displayCascadeAccountingType);
+		ViewUtil.waitForUser();
 	}
 
 	private void testDisplayPartialPcg(){
 		logger.info("> Test Affichage du Bloc PCG correspondant a un AccountingType ...");
 		SelectionContext context = new SelectionContext(pcgCore.getAccountingClasses().get(1));
 		accountingTypeView.displayCascadeAccountingType(context.getType(), context);
+		ViewUtil.waitForUser();
 		logger.info("> Test Affichage du Bloc PCG correspondant a un SubAccountingType ...");
 		context.setSubType(pcgCore.getAccountingClasses().get(1).getSubTypes().get(1));
 		accountingTypeView.displayCascadeAccountingType(context.getType(), context);
+		ViewUtil.waitForUser();
 		logger.info("> Test Affichage du Bloc PCG correspondant a un AccountingTypeDetails ...");
 		context.setDetail(pcgCore.getAccountingClasses().get(1).getSubTypes().get(1).getDetailsList().get(1));
 		accountingTypeView.displayCascadeAccountingType(context.getType(), context);
+		ViewUtil.waitForUser();
 
 	}
 

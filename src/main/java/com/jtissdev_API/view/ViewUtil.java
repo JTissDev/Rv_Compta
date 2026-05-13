@@ -4,7 +4,7 @@ package com.jtissdev_API.view;
  * The ViewUtil class is a utility class that provides common methods and constants for view-related operations in the application.
  *
  * @author jtiss
- * @version 1.0.0
+ * @version 1.1.0
  * @since 0.6
  */
 public class ViewUtil {
@@ -58,6 +58,22 @@ public class ViewUtil {
 	 */
 	public static void displayError(String error) {
 		System.err.println("❌ " + error);
+	}
+
+	/**
+	 * Waits for the user to press the Enter key.
+	 * This method is typically used to pause the execution of the application until the user is ready to continue,
+	 * allowing them to read messages or view output before proceeding.
+	 * @since 0.6
+	 * @author jtiss
+	 */
+	public static void waitForUser() {
+		System.out.println("\n" + CYAN + "Press [ENTER] to continue..." + RESET);
+		try {
+			System.in.read(); // Attend une entrée clavier
+		} catch (Exception e) {
+			// Optionnel : logger l'erreur
+		}
 	}
 
 }

@@ -14,6 +14,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * * @author JtissDev
  * @version 1.0
  */
+@DisplayName("PcgDataLoader Test Suite")
+
 class PcgDataLoaderTest {
 
 	private PcgDataLoader loader;
@@ -32,6 +34,7 @@ class PcgDataLoaderTest {
 	 */
 	@Test
 	@DisplayName("Should throw RuntimeException when file is missing")
+	@SuppressWarnings("removal") //ToDo addapt to new version
 	void shouldThrowExceptionWhenFileNotFound() {
 		// Given
 		String unknownFile = "missing_file.json";
@@ -49,6 +52,7 @@ class PcgDataLoaderTest {
 	 */
 	@Test
 	@DisplayName("Should return a valid DTO when file exists")
+	@SuppressWarnings("removal") //ToDo addapt to new version
 	void shouldReturnDtoWhenFileExists() {
 		// Given
 		// Create a dummy 'pcg_test.json' in src/test/resources/data/ for this to pass
