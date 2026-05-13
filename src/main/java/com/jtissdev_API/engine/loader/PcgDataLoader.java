@@ -22,13 +22,41 @@ import java.io.InputStream;
  * Engine component responsible for loading and parsing Accounting Plan data
  * from external physical resources.
  * @author JtissDev
- * @version 1.0.0
+ * @version 1.1.0
  * @since 0.1
  */
 @Component
 public class PcgDataLoader {
 
 	private static final Logger logger = LoggerFactory.getLogger(PcgDataLoader.class);
+
+	/**
+	 * Loads the General Chart of Accounts (PCG) from a specified JSON file located
+	 * in the application classpath. The method processes the JSON content into a
+	 * {@link PcgCoreDTO} object containing the hierarchical data structure.
+	 *
+	 * @param fileName The name of the JSON file to be loaded (e.g., "pcg.json").
+	 * @return A {@link PcgCoreDTO} object containing the parsed PCG data.
+	 * @throws RuntimeException If an error occurs while accessing the file or parsing the JSON content.
+	 * @since 0.6
+	 *
+	 */
+	public PcgCoreDTO loadPcg(String fileName) {
+		Resource resource = new ClassPathResource(fileName);
+		try (InputStream is = resource.getInputStream();
+		     JsonReader reader = Json.createReader(is)) {
+
+			JsonArray jsonArray = reader.readArray();
+			logger.info("PCG loaded \n JSON Array size: " + jsonArray.size());
+			return new PcgCoreDTO(jsonArray);
+
+		} catch (Exception e) {
+			// On affiche le chemin absolu en cas d'erreur pour déboguer facilement
+			String absolutePath = new java.io.File(fileName).getAbsolutePath();
+			logger.error("Failed to load PCG resource : " + absolutePath, e);
+			throw new RuntimeException("Failed to load PCG resource : " + absolutePath, e);
+		}
+	}
 
 	/**
 	 * Loads the General Chart of Accounts (PCG) from a JSON file located

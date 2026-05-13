@@ -13,7 +13,7 @@ import jakarta.json.JsonObjectBuilder;
  * parent accounting code with the local accounting code.
  *
  * @author jtiss
- * @version 1.1.0
+ * @version 1.2.0
  * @since 0.1
  */
 public class AccountingTypeDetails {
@@ -187,6 +187,10 @@ public class AccountingTypeDetails {
 		this.description = description;
 		this.parentAccountingCode = parentAccountingCode;
 	}
+
+
+
+
 
 	// =========================================================
 	// == GETTERS                                             ==

@@ -1,332 +1,332 @@
 [
   {
-    "type": "Patrimoine & Résultat",
+    "name": "Patrimoine & Résultat",
     "accountCode": 1,
     "description": "Patrimoine et epargne long terme",
     "subTypes": [
       {
         "name": "Dettes Long Terme",
-        "subType_Num": 3,
-        "subType_desc": "ensemble des dettes long terme",
-        "details": [
-          { "name": "Crédit Immobilier", "no_detail": 1, "desc_detail": "" },
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Prêt Bancaire Long Terme", "no_detail": 2, "desc_detail": "" }
+        "accountingCode": 3,
+        "description": "ensemble des dettes long terme",
+        "detailsList": [
+          { "name": "Crédit Immobilier", "accountingCode": 1, "description": "" },
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Prêt Bancaire Long Terme", "accountingCode": 2, "description": "" }
         ]
       },
       {
         "name": "Patrimoine net initial",
-        "subType_Num": 0,
-        "subType_desc": "ensemble des biens et dettes au début dez suivi",
-        "details": [
-          { "name": "Contrepartie Solde Début", "no_detail": 1, "desc_detail": "" },
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Patrimoine Initial Réel", "no_detail": 0, "desc_detail": "" }
+        "accountingCode": 0,
+        "description": "ensemble des biens et dettes au début dez suivi",
+        "detailsList": [
+          { "name": "Contrepartie Solde Début", "accountingCode": 1, "description": "" },
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Patrimoine Initial Réel", "accountingCode": 0, "description": "" }
         ]
       }
     ]
   },
   {
-    "type": "Immobilisation",
+    "name": "Immobilisation",
     "accountCode": 2,
     "description": "Valeur dite immobilière, comprends l'immobilier et le mobilier",
     "subTypes": [
       {
         "name": "Autres biens immo",
-        "subType_Num": 2,
-        "subType_desc": "Valeur & amélioration des autres biens immobiliers",
-        "details": [
-          { "name": "Travaux & Amélioration", "no_detail": 1, "desc_detail": "Travaux impactant la valeur du bien et réestimation" },
-          { "name": "Valeur du bien", "no_detail": 0, "desc_detail": "Valeur initial du bien" }
+        "accountingCode": 2,
+        "description": "Valeur & amélioration des autres biens immobiliers",
+        "detailsList": [
+          { "name": "Travaux & Amélioration", "accountingCode": 1, "description": "Travaux impactant la valeur du bien et réestimation" },
+          { "name": "Valeur du bien", "accountingCode": 0, "description": "Valeur initial du bien" }
         ]
       },
       {
         "name": "Créances Long Terme",
-        "subType_Num": 5,
-        "subType_desc": "Capital & interet des prets consentis",
-        "details": [
-          { "name": "Capital", "no_detail": 1, "desc_detail": "Capital des prêt consenti" },
-          { "name": "Divers", "no_detail": 9, "desc_detail": "Créances diverses" },
-          { "name": "Intérêts à recevoir", "no_detail": 2, "desc_detail": "Interet à recevoir sur les prêts consenti" }
+        "accountingCode": 5,
+        "description": "Capital & interet des prets consentis",
+        "detailsList": [
+          { "name": "Capital", "accountingCode": 1, "description": "Capital des prêt consenti" },
+          { "name": "Divers", "accountingCode": 9, "description": "Créances diverses" },
+          { "name": "Intérêts à recevoir", "accountingCode": 2, "description": "Interet à recevoir sur les prêts consenti" }
         ]
       },
       {
         "name": "Immo Financières",
-        "subType_Num": 0,
-        "subType_desc": "compte d'investissements & assurance vie",
-        "details": [
-          { "name": "Assurance Vie", "no_detail": 0, "desc_detail": "Montant des assurances vie souscrites" },
-          { "name": "Comptes d'investissement", "no_detail": 1, "desc_detail": "Montant des comptes d'investissements" },
-          { "name": "Divers", "no_detail": 9, "desc_detail": "Immo Financières diverses" }
+        "accountingCode": 0,
+        "description": "compte d'investissements & assurance vie",
+        "detailsList": [
+          { "name": "Assurance Vie", "accountingCode": 0, "description": "Montant des assurances vie souscrites" },
+          { "name": "Comptes d'investissement", "accountingCode": 1, "description": "Montant des comptes d'investissements" },
+          { "name": "Divers", "accountingCode": 9, "description": "Immo Financières diverses" }
         ]
       },
       {
         "name": "Résidence principale",
-        "subType_Num": 1,
-        "subType_desc": "Valeur & amélioration de la résidence principale",
-        "details": [
-          { "name": "Travaux & Amélioration", "no_detail": 1, "desc_detail": "Travaux impactant la valeur du bien et réestimation" },
-          { "name": "Valeur du bien", "no_detail": 0, "desc_detail": "Valeur initial du bien" }
+        "accountingCode": 1,
+        "description": "Valeur & amélioration de la résidence principale",
+        "detailsList": [
+          { "name": "Travaux & Amélioration", "accountingCode": 1, "description": "Travaux impactant la valeur du bien et réestimation" },
+          { "name": "Valeur du bien", "accountingCode": 0, "description": "Valeur initial du bien" }
         ]
       },
       {
         "name": "Véhicules",
-        "subType_Num": 3,
-        "subType_desc": "valeurs des différents véhicules",
-        "details": [
-          { "name": "Autres Véhicules", "no_detail": 2, "desc_detail": "Valeur initial du bien" },
-          { "name": "Véhicule Principal", "no_detail": 1, "desc_detail": "Valeur initial du bien" }
+        "accountingCode": 3,
+        "description": "valeurs des différents véhicules",
+        "detailsList": [
+          { "name": "Autres Véhicules", "accountingCode": 2, "description": "Valeur initial du bien" },
+          { "name": "Véhicule Principal", "accountingCode": 1, "description": "Valeur initial du bien" }
         ]
       }
     ]
   },
   {
-    "type": "Trésorerie",
+    "name": "Trésorerie",
     "accountCode": 5,
     "description": "Comptes, epargne court terme et espèce",
     "subTypes": [
       {
         "name": "Compte courant",
-        "subType_Num": 0,
-        "subType_desc": "Solde du compte courant principal",
-        "details": [
-          { "name": "Compte courant principal", "no_detail": 1, "desc_detail": "Solde du compte courant principal" }
+        "accountingCode": 0,
+        "description": "Solde du compte courant principal",
+        "detailsList": [
+          { "name": "Compte courant principal", "accountingCode": 1, "description": "Solde du compte courant principal" }
         ]
       },
       {
         "name": "Comptes secondaires",
-        "subType_Num": 1,
-        "subType_desc": "Solde des autres comptes bancaire",
-        "details": [
-          { "name": "Compte joint", "no_detail": 1, "desc_detail": "Solde du compte courant joint" },
-          { "name": "Compte Secondaire", "no_detail": 2, "desc_detail": "Solde des comptes secondaires" }
+        "accountingCode": 1,
+        "description": "Solde des autres comptes bancaire",
+        "detailsList": [
+          { "name": "Compte joint", "accountingCode": 1, "description": "Solde du compte courant joint" },
+          { "name": "Compte Secondaire", "accountingCode": 2, "description": "Solde des comptes secondaires" }
         ]
       },
       {
         "name": "Dettes / Créances Courtes",
-        "subType_Num": 6,
-        "subType_desc": "Capital et interet des dettes et créances courtes",
-        "details": [
-          { "name": "Accompte sur salaire", "no_detail": 0, "desc_detail": "Accompte perçu sur salaire" },
-          { "name": "Dettes diverses", "no_detail": 9, "desc_detail": "Dettes diverses code complémentaire perlet de distinguer" }
+        "accountingCode": 6,
+        "description": "Capital et interet des dettes et créances courtes",
+        "detailsList": [
+          { "name": "Accompte sur salaire", "accountingCode": 0, "description": "Accompte perçu sur salaire" },
+          { "name": "Dettes diverses", "accountingCode": 9, "description": "Dettes diverses code complémentaire perlet de distinguer" }
         ]
       },
       {
         "name": "Epargne liquide",
-        "subType_Num": 2,
-        "subType_desc": "Solde des comptes d'épargne",
-        "details": [
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "LEP Juju", "no_detail": 4, "desc_detail": "" },
-          { "name": "LVA Greg", "no_detail": 1, "desc_detail": "" },
-          { "name": "LVA Juju", "no_detail": 2, "desc_detail": "" }
+        "accountingCode": 2,
+        "description": "Solde des comptes d'épargne",
+        "detailsList": [
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "LEP Juju", "accountingCode": 4, "description": "" },
+          { "name": "LVA Greg", "accountingCode": 1, "description": "" },
+          { "name": "LVA Juju", "accountingCode": 2, "description": "" }
         ]
       },
       {
         "name": "Virements Internes",
-        "subType_Num": 8,
-        "subType_desc": "Compte de virements solde doit toujours etre 0",
-        "details": [
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Virement de compte à compte", "no_detail": 0, "desc_detail": "" }
+        "accountingCode": 8,
+        "description": "Compte de virements solde doit toujours etre 0",
+        "detailsList": [
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Virement de compte à compte", "accountingCode": 0, "description": "" }
         ]
       }
     ]
   },
   {
-    "type": "Dépenses",
+    "name": "Dépenses",
     "accountCode": 6,
     "description": "liste des catégorie de dépenses",
     "subTypes": [
       {
         "name": "Alimentation-Hygiène",
-        "subType_Num": 1,
-        "subType_desc": "Dépenses d'alimentation",
-        "details": [
-          { "name": "Alimentation", "no_detail": 1, "desc_detail": "Dépenses d'électricité" },
-          { "name": "Animaux", "no_detail": 3, "desc_detail": "Dépense d'assurance" },
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Hygiène", "no_detail": 2, "desc_detail": "Dépense en eau & assainissement" },
-          { "name": "Restaurant", "no_detail": 8, "desc_detail": "" }
+        "accountingCode": 1,
+        "description": "Dépenses d'alimentation",
+        "detailsList": [
+          { "name": "Alimentation", "accountingCode": 1, "description": "Dépenses d'électricité" },
+          { "name": "Animaux", "accountingCode": 3, "description": "Dépense d'assurance" },
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Hygiène", "accountingCode": 2, "description": "Dépense en eau & assainissement" },
+          { "name": "Restaurant", "accountingCode": 8, "description": "" }
         ]
       },
       {
         "name": "Cadeaux & dons",
-        "subType_Num": 7,
-        "subType_desc": "Cadeaux et dons faits",
-        "details": [
-          { "name": "Cadeaux Fetes", "no_detail": 1, "desc_detail": "" },
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" }
+        "accountingCode": 7,
+        "description": "Cadeaux et dons faits",
+        "detailsList": [
+          { "name": "Cadeaux Fetes", "accountingCode": 1, "description": "" },
+          { "name": "Divers", "accountingCode": 9, "description": "" }
         ]
       },
       {
         "name": "Charges Financières",
-        "subType_Num": 8,
-        "subType_desc": "Frais bancaire diverses",
-        "details": [
-          { "name": "CB", "no_detail": 2, "desc_detail": "Facturation Carte bleue" },
-          { "name": "Compte", "no_detail": 1, "desc_detail": "Facturation comptes" },
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Frais", "no_detail": 3, "desc_detail": "Frais bancaire pour irrégularité et incident" },
-          { "name": "Interet", "no_detail": 4, "desc_detail": "Interets débiteurs" }
+        "accountingCode": 8,
+        "description": "Frais bancaire diverses",
+        "detailsList": [
+          { "name": "CB", "accountingCode": 2, "description": "Facturation Carte bleue" },
+          { "name": "Compte", "accountingCode": 1, "description": "Facturation comptes" },
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Frais", "accountingCode": 3, "description": "Frais bancaire pour irrégularité et incident" },
+          { "name": "Interet", "accountingCode": 4, "description": "Interets débiteurs" }
         ]
       },
       {
         "name": "Divers & imprévus",
-        "subType_Num": 9,
-        "subType_desc": "Dépenses diverses",
-        "details": [
-          { "name": "Divers", "no_detail": 0, "desc_detail": "Dépenses non catégorisées" }
+        "accountingCode": 9,
+        "description": "Dépenses diverses",
+        "detailsList": [
+          { "name": "Divers", "accountingCode": 0, "description": "Dépenses non catégorisées" }
         ]
       },
       {
         "name": "Impôts & taxes",
-        "subType_Num": 4,
-        "subType_desc": "Dépenses d'aux impots & taxes",
-        "details": [
-          { "name": "Impôts sur le revenus", "no_detail": 1, "desc_detail": "" },
-          { "name": "Taxes diverses", "no_detail": 9, "desc_detail": "" }
+        "accountingCode": 4,
+        "description": "Dépenses d'aux impots & taxes",
+        "detailsList": [
+          { "name": "Impôts sur le revenus", "accountingCode": 1, "description": "" },
+          { "name": "Taxes diverses", "accountingCode": 9, "description": "" }
         ]
       },
       {
         "name": "Logement",
-        "subType_Num": 0,
-        "subType_desc": "Dépenses liées au logement",
-        "details": [
-          { "name": "Assurance du bien", "no_detail": 3, "desc_detail": "Dépense d'assurance" },
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Eau & Assainissement", "no_detail": 2, "desc_detail": "Dépense en eau & assainissement" },
-          { "name": "Electricité", "no_detail": 1, "desc_detail": "Dépenses d'électricité" },
-          { "name": "Entretien & Reparations", "no_detail": 5, "desc_detail": "Frais d'entretien et de réparation" },
-          { "name": "Internet", "no_detail": 4, "desc_detail": "Forfait internet" },
-          { "name": "Streaming", "no_detail": 7, "desc_detail": "Dépenses de streaming pour la maison" },
-          { "name": "Taxes Foncières", "no_detail": 8, "desc_detail": "Taxe foncière du logement" }
+        "accountingCode": 0,
+        "description": "Dépenses liées au logement",
+        "detailsList": [
+          { "name": "Assurance du bien", "accountingCode": 3, "description": "Dépense d'assurance" },
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Eau & Assainissement", "accountingCode": 2, "description": "Dépense en eau & assainissement" },
+          { "name": "Electricité", "accountingCode": 1, "description": "Dépenses d'électricité" },
+          { "name": "Entretien & Reparations", "accountingCode": 5, "description": "Frais d'entretien et de réparation" },
+          { "name": "Internet", "accountingCode": 4, "description": "Forfait internet" },
+          { "name": "Streaming", "accountingCode": 7, "description": "Dépenses de streaming pour la maison" },
+          { "name": "Taxes Foncières", "accountingCode": 8, "description": "Taxe foncière du logement" }
         ]
       },
       {
         "name": "Loisirs & culture",
-        "subType_Num": 6,
-        "subType_desc": "Dépenses de loisirs et culturel",
-        "details": [
-          { "name": "Cinéma", "no_detail": 2, "desc_detail": "" },
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Livres", "no_detail": 1, "desc_detail": "" },
-          { "name": "Sports", "no_detail": 3, "desc_detail": "" },
-          { "name": "Vacances & voyages", "no_detail": 4, "desc_detail": "" }
+        "accountingCode": 6,
+        "description": "Dépenses de loisirs et culturel",
+        "detailsList": [
+          { "name": "Cinéma", "accountingCode": 2, "description": "" },
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Livres", "accountingCode": 1, "description": "" },
+          { "name": "Sports", "accountingCode": 3, "description": "" },
+          { "name": "Vacances & voyages", "accountingCode": 4, "description": "" }
         ]
       },
       {
         "name": "Personnelles",
-        "subType_Num": 5,
-        "subType_desc": "Dépenses personnelles diverses ( coiffeur, vetements",
-        "details": [
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Vetements", "no_detail": 1, "desc_detail": "Dépenses achats de vetements" }
+        "accountingCode": 5,
+        "description": "Dépenses personnelles diverses ( coiffeur, vetements",
+        "detailsList": [
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Vetements", "accountingCode": 1, "description": "Dépenses achats de vetements" }
         ]
       },
       {
         "name": "Santé",
-        "subType_Num": 3,
-        "subType_desc": "Dépenses liées a la santé",
-        "details": [
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Medecin", "no_detail": 1, "desc_detail": "" },
-          { "name": "Mutuelle", "no_detail": 2, "desc_detail": "" },
-          { "name": "Pharmacie", "no_detail": 3, "desc_detail": "" }
+        "accountingCode": 3,
+        "description": "Dépenses liées a la santé",
+        "detailsList": [
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Medecin", "accountingCode": 1, "description": "" },
+          { "name": "Mutuelle", "accountingCode": 2, "description": "" },
+          { "name": "Pharmacie", "accountingCode": 3, "description": "" }
         ]
       },
       {
         "name": "Transport",
-        "subType_Num": 2,
-        "subType_desc": "Dépenses liées au transport",
-        "details": [
-          { "name": "Amandes", "no_detail": 5, "desc_detail": "" },
-          { "name": "Assurances", "no_detail": 3, "desc_detail": "Frais d'assurance" },
-          { "name": "Carburant", "no_detail": 1, "desc_detail": "Frais de carbutant" },
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Entretien-Réparation", "no_detail": 2, "desc_detail": "Frais d'entretien et de réparation" },
-          { "name": "Péage & parking", "no_detail": 4, "desc_detail": "" }
+        "accountingCode": 2,
+        "description": "Dépenses liées au transport",
+        "detailsList": [
+          { "name": "Amandes", "accountingCode": 5, "description": "" },
+          { "name": "Assurances", "accountingCode": 3, "description": "Frais d'assurance" },
+          { "name": "Carburant", "accountingCode": 1, "description": "Frais de carbutant" },
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Entretien-Réparation", "accountingCode": 2, "description": "Frais d'entretien et de réparation" },
+          { "name": "Péage & parking", "accountingCode": 4, "description": "" }
         ]
       }
     ]
   },
   {
-    "type": "Revenus",
+    "name": "Revenus",
     "accountCode": 7,
     "description": "liste des catégories de revenus",
     "subTypes": [
       {
         "name": "Banquaire",
-        "subType_Num": 5,
-        "subType_desc": "Interet des placement epargnes",
-        "details": [
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Intérêts LEP", "no_detail": 2, "desc_detail": "" },
-          { "name": "Intérêts Livret A", "no_detail": 1, "desc_detail": "" }
+        "accountingCode": 5,
+        "description": "Interet des placement epargnes",
+        "detailsList": [
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Intérêts LEP", "accountingCode": 2, "description": "" },
+          { "name": "Intérêts Livret A", "accountingCode": 1, "description": "" }
         ]
       },
       {
         "name": "CAF",
-        "subType_Num": 2,
-        "subType_desc": "allocations de la CAF",
-        "details": [
-          { "name": "APL", "no_detail": 1, "desc_detail": "" },
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Prime d'activité", "no_detail": 3, "desc_detail": "" },
-          { "name": "RSA", "no_detail": 2, "desc_detail": "" }
+        "accountingCode": 2,
+        "description": "allocations de la CAF",
+        "detailsList": [
+          { "name": "APL", "accountingCode": 1, "description": "" },
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Prime d'activité", "accountingCode": 3, "description": "" },
+          { "name": "RSA", "accountingCode": 2, "description": "" }
         ]
       },
       {
         "name": "D'entreprise",
-        "subType_Num": 1,
-        "subType_desc": "Revenus d'entreprises personnelles",
-        "details": [
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Epines du berry", "no_detail": 1, "desc_detail": "" },
-          { "name": "J.Tiss Developpeur", "no_detail": 2, "desc_detail": "" }
+        "accountingCode": 1,
+        "description": "Revenus d'entreprises personnelles",
+        "detailsList": [
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Epines du berry", "accountingCode": 1, "description": "" },
+          { "name": "J.Tiss Developpeur", "accountingCode": 2, "description": "" }
         ]
       },
       {
         "name": "Divers, Cadeaux et Dons",
-        "subType_Num": 9,
-        "subType_desc": "revenus divers",
-        "details": [
-          { "name": "cadeaux et dons", "no_detail": 1, "desc_detail": "" },
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" }
+        "accountingCode": 9,
+        "description": "revenus divers",
+        "detailsList": [
+          { "name": "cadeaux et dons", "accountingCode": 1, "description": "" },
+          { "name": "Divers", "accountingCode": 9, "description": "" }
         ]
       },
       {
         "name": "France Travail",
-        "subType_Num": 3,
-        "subType_desc": "Allocations France Travail",
-        "details": [
-          { "name": "Allocation chomage", "no_detail": 1, "desc_detail": "" },
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" }
+        "accountingCode": 3,
+        "description": "Allocations France Travail",
+        "detailsList": [
+          { "name": "Allocation chomage", "accountingCode": 1, "description": "" },
+          { "name": "Divers", "accountingCode": 9, "description": "" }
         ]
       },
       {
         "name": "Locatifs",
-        "subType_Num": 6,
-        "subType_desc": "Loyers perçu pour les biens immobiliers",
-        "details": [
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" }
+        "accountingCode": 6,
+        "description": "Loyers perçu pour les biens immobiliers",
+        "detailsList": [
+          { "name": "Divers", "accountingCode": 9, "description": "" }
         ]
       },
       {
         "name": "Pension Alimentaire",
-        "subType_Num": 4,
-        "subType_desc": "Pension alimentaire et associés",
-        "details": [
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" }
+        "accountingCode": 4,
+        "description": "Pension alimentaire et associés",
+        "detailsList": [
+          { "name": "Divers", "accountingCode": 9, "description": "" }
         ]
       },
       {
         "name": "Salaire",
-        "subType_Num": 0,
-        "subType_desc": "revenus salariaux",
-        "details": [
-          { "name": "Divers", "no_detail": 9, "desc_detail": "" },
-          { "name": "Julien", "no_detail": 1, "desc_detail": "" }
+        "accountingCode": 0,
+        "description": "revenus salariaux",
+        "detailsList": [
+          { "name": "Divers", "accountingCode": 9, "description": "" },
+          { "name": "Julien", "accountingCode": 1, "description": "" }
         ]
       }
     ]

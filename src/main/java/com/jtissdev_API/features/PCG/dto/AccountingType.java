@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author jtiss
  * @since 0.1
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class AccountingType {
 
@@ -86,7 +86,9 @@ public class AccountingType {
 		if(json.containsKey("description")) {this.setDescription(json.getString("description"));}
 		if(json.containsKey("subTypes")) {
 			for(JsonObject subType : json.getJsonArray("subTypes").getValuesAs(JsonObject.class)) {
-				this.addSubType(new SubAccountingType(subType));
+
+				this.addSubType(new SubAccountingType(subType).setParentAccountingCode(this.getFullAccountingCode()));
+
 			}
 		}
 	}

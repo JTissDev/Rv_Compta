@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 /**
  * Represents a TestMainController class for testing purposes.
  *
- * @version 1.0.0
+ * @version 1.1.0
  * @since 0.6
  * @author jtiss
  */
@@ -28,22 +28,22 @@ public class TestMainController extends AbstractConsoleController implements Mai
 
 	private static final Logger logger = LoggerFactory.getLogger(TestMainController.class);
 
-	private final PcgDataLoader pcgLoader;
+
 	private final TiersDataLoader tiersLoader;
 	private final DetailsDataLoader detailsLoader;
-	private PcgCoreDTO pcgCore;
+
 	private PcpCoreDTO pcpCore;
 
 	public TestMainController() {
 		super();
-		this.pcgLoader = new PcgDataLoader();
+
 		this.tiersLoader = new TiersDataLoader();
 		this.detailsLoader = new DetailsDataLoader();
 	}
 
 	public TestMainController(PcgDataLoader pcgLoader, TiersDataLoader tiersLoader, DetailsDataLoader detailsLoader) {
 		super();
-		this.pcgLoader = pcgLoader;
+
 		this.tiersLoader = tiersLoader;
 		this.detailsLoader = detailsLoader;
 	}
@@ -53,8 +53,8 @@ public class TestMainController extends AbstractConsoleController implements Mai
 		logger.info(ViewUtil.CYAN + "=== DÉMARRAGE DU TEST DE VÉRITÉ (AUTOMATIQUE) === \n" + ViewUtil.RESET);
 
 		// --- CHARGEMENT DU PCG ---
-		logger.info("> Chargement du Bloc PCG...");
-		pcgCore = pcgLoader.loadFromJson("data/PCG.json");
+
+
 		this.testDisplayPCG();
 		this.testDisplayPartialPcg();
 
