@@ -9,35 +9,39 @@ import java.util.List;
  * Represents a MainConsoleView DTO.
  *
  * @author jtiss
- * @version 1.0.0
+ * @version 1.1.0
  * @since 0.5
  */
 
 public class MainConsoleView {
 
+	/**
+	 * Displays the application header with the application name and version.
+	 * This method uses the AppBanner class to display a stylized banner in the console.
+	 * It serves as the initial welcome message when the application starts.
+	 * @see AppBanner
+	 * @author jtiss
+	 * @since 0.5
+	 */
 	public void displayHeader() {
 		AppBanner.display();
 		//System.out.println("\n=== MODE OPÉRATIONNEL : ENGINE " + version + " ===");
 	}
 
+
+	/**
+	 * Displays the main menu options to the user.
+	 * @author jtiss
+	 * @since 0.5
+	 */
 	public void displayMainMenu() {
 		System.out.println("\n--- [MENU PRINCIPAL] ---");
 		System.out.println("[1] Charger un fichier Excel (Importation)");
-		System.out.println("[2] Ajouter une opération manuellement");
-		System.out.println("[3] Modifier une opération existante"); // <-- Nouvelle option
+		System.out.println("[2] Modifier le journal actuel (Ajouter ou modifier une opération)"); //n
 		System.out.println("[0] Quitter");
 		System.out.print("\nVotre choix : ");
 	}
 
-	public void displayJournal(List<OperationDTO> operations, int total) {
-		System.out.println("\n--- [JOURNAL] DERNIÈRES OPÉRATIONS ---");
-		if (operations.isEmpty()) {
-			System.out.println(" > Le journal est actuellement vide.");
-			return;
-		}
-		System.out.println("Affichage de " + operations.size() + " sur " + total + " opérations :");
-		operations.forEach(op -> System.out.println(op.toString()));
-	}
 
 	public void displayExcelRow(List<String> row) {
 		// Transfert de la logique de tableau complexe de CommandLineWorker
@@ -53,11 +57,4 @@ public class MainConsoleView {
 		System.out.print("👉 [Entrée] Continuer | [Q] Quitter : ");
 	}
 
-	public void displayMessage(String msg) {
-		System.out.println(msg);
-	}
-
-	public void displayError(String error) {
-		System.err.println("❌ " + error);
-	}
 }

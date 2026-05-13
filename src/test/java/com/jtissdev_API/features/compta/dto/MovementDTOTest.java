@@ -1,6 +1,6 @@
 package com.jtissdev_API.features.compta.dto;
 
-import com.jtissdev_API.features.core.dto.PcpCoreDTOTest;
+import com.jtissdev_API.features.PCP.dto.Tiers;
 import com.jtissdev_API.utils.TestGroup;
 import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
@@ -34,7 +34,7 @@ public class MovementDTOTest {
 	private static final Logger logger = LoggerFactory.getLogger(MovementDTOTest.class);
 
 	private static final Integer MOVEMENT_ID = 123;
-	private static final Integer TIERS_ID = 456;
+	private static final Tiers TIERS = new Tiers().setId(456);
 	private static final String ACCOUNT_CODE = "123456";
 	private static final String COMPLEMENT_CODE = "COMP-123";
 	private static final String DETAIL_CODE = "DETAIL-123";
@@ -57,7 +57,7 @@ public class MovementDTOTest {
 						                              .build())
 				              .add("fullCreditMovement", Json.createObjectBuilder()
 						                                         .add("id", MOVEMENT_ID)
-						                                         .add("tiersId", TIERS_ID)
+						                                         .add("tiers", TIERS.toJson())
 						                                         .add("accountingCode", ACCOUNT_CODE)
 						                                         .add("complementaryAccountingCode", COMPLEMENT_CODE)
 						                                         .add("accountDetailCode", DETAIL_CODE)
@@ -68,7 +68,7 @@ public class MovementDTOTest {
 						                                         .build())
 				              .add("fullDebitMovement", Json.createObjectBuilder()
 						                                        .add("id", MOVEMENT_ID)
-						                                        .add("tiersId", TIERS_ID)
+						                                        .add("tiers", TIERS.toJson())
 						                                        .add("accountingCode", ACCOUNT_CODE)
 						                                        .add("complementaryAccountingCode", COMPLEMENT_CODE)
 						                                        .add("accountDetailCode", DETAIL_CODE)
@@ -79,7 +79,7 @@ public class MovementDTOTest {
 						                                        .build())
 				              .add("simpleDebitMovement", Json.createObjectBuilder()
 						                                          .add("id", MOVEMENT_ID)
-						                                          .add("tiersId", TIERS_ID)
+						                                          .add("tiers", TIERS.toJson())
 						                                          .add("accountingCode", ACCOUNT_CODE)
 						                                          .add("paymentCode", PAYMENT_CODE)
 						                                          .add("description", DESCRIPTION)
@@ -88,7 +88,7 @@ public class MovementDTOTest {
 						                                          .build())
 				              .add("simpleCreditMovement", Json.createObjectBuilder()
 						                                           .add("id", MOVEMENT_ID)
-						                                           .add("tiersId", TIERS_ID)
+						                                           .add("tiers", TIERS.toJson())
 						                                           .add("accountingCode", ACCOUNT_CODE)
 						                                           .add("paymentCode", PAYMENT_CODE)
 						                                           .add("description", DESCRIPTION)
@@ -127,7 +127,7 @@ public class MovementDTOTest {
 	void shouldSupportFluentApi() {
 		movement = new MovementDTO();
 		MovementDTO movementResult = movement.setId(MOVEMENT_ID)
-				                             .setTiersId(TIERS_ID)
+				                             .setTiers(TIERS)
 				                             .setPaiementCode(PAYMENT_CODE)
 				                             .setDescription(DESCRIPTION)
 				                             .setAccountingCode(ACCOUNT_CODE)
@@ -139,7 +139,7 @@ public class MovementDTOTest {
 		assertAll("Fluent setter verification",
 				() -> assertSame(movementResult, movement, "Setter should return 'this'"),
 				() -> assertEquals(MOVEMENT_ID, movement.getId()),
-				() -> assertEquals(TIERS_ID, movement.getTiersId()),
+				() -> assertEquals(TIERS.getId(), movement.getTiers().getId()),
 				() -> assertEquals(PAYMENT_CODE, movement.getPaiementCode()),
 				() -> assertEquals(DESCRIPTION, movement.getDescription()),
 				() -> assertEquals(ACCOUNT_CODE, movement.getAccountingCode()),
@@ -156,7 +156,7 @@ public class MovementDTOTest {
 
 		assertAll("Json constructor verification",
 				() -> assertEquals(MOVEMENT_ID, movement.getId()),
-				() -> assertEquals(TIERS_ID, movement.getTiersId()),
+				() -> assertEquals(TIERS.getId(), movement.getTiers().getId()),
 				() -> assertEquals(PAYMENT_CODE, movement.getPaiementCode()),
 				() -> assertEquals(DESCRIPTION, movement.getDescription()),
 				() -> assertEquals(ACCOUNT_CODE, movement.getAccountingCode()),
@@ -171,7 +171,7 @@ public class MovementDTOTest {
 		movement = new MovementDTO(movmentJson.getJsonObject("fullDebitMovement"));
 		assertAll("Json constructor verification",
 					() -> assertEquals(MOVEMENT_ID, movement.getId()),
-					() -> assertEquals(TIERS_ID, movement.getTiersId()),
+					() -> assertEquals(TIERS.getId(), movement.getTiers().getId()),
 					() -> assertEquals(PAYMENT_CODE, movement.getPaiementCode()),
 					() -> assertEquals(DESCRIPTION, movement.getDescription()),
 					() -> assertEquals(ACCOUNT_CODE, movement.getAccountingCode()),
@@ -188,7 +188,7 @@ public class MovementDTOTest {
 
 		assertAll("check keys are include when value are not null",
 				() -> assertTrue(json.containsKey("id"),"id not null keys should be inserted"),
-				() -> assertTrue(json.containsKey("tiersId"),"tiersId not null keys should be inserted"),
+				() -> assertTrue(json.containsKey("tiers"),"tiers not null keys should be inserted"),
 				() -> assertTrue(json.containsKey("accountingCode"),"accountingCode not null keys should be inserted"),
 				() -> assertTrue(json.containsKey("paymentCode"),"paymentCode not null keys should be inserted"),
 				() -> assertTrue(json.containsKey("description"),"description not null keys should be inserted")

@@ -77,7 +77,7 @@ public class PcpCoreDTO {
 	 * @version 1.1
 	 */
 	public List<Tiers> getThirdParties() {
-		return thirdParties != null ? thirdParties : new ArrayList<>();
+		return this.thirdParties != null ? this.thirdParties : new ArrayList<>();
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class PcpCoreDTO {
 	 * @version 1.1
 	 */
 	public List<AnalyticDetail> getDetails() {
-		return details != null ? details : new ArrayList<>();
+		return this.details != null ? this.details : new ArrayList<>();
 	}
 
 	// =========================================================

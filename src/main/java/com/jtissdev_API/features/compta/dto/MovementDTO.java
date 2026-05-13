@@ -1,6 +1,6 @@
 package com.jtissdev_API.features.compta.dto;
 
-import com.jtissdev_API.features.PCG.dto.SubAccountingType;
+import com.jtissdev_API.features.PCP.dto.Tiers;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
@@ -55,7 +55,7 @@ public class MovementDTO {
 	 * References the 'N_id' in 'tab_tiers'.
 	 * @since 0.3.0
 	 */
-	private Integer tiersId;
+	private Tiers tiers;
 
 	/**
 	 * Technical code of the payment method used for this specific line.
@@ -109,8 +109,8 @@ public class MovementDTO {
 		if (json.containsKey("id")) {
 			this.setId(json.getInt("id"));
 		}
-		if (json.containsKey("tiersId")) {
-			this.setTiersId(json.getInt("tiersId"));
+		if (json.containsKey("tiers")) {
+			this.setTiers(new Tiers(json.getJsonObject("tiers")));
 		}
 		if (json.containsKey("paymentCode")) {
 			this.setPaiementCode(json.getString("paymentCode"));
@@ -139,7 +139,7 @@ public class MovementDTO {
 	 * Constructor for new movements (without ID).
 	 * Used during the initial creation of an operation's lines.
 	 *
-	 * @param tiersId              the ID of the associated tiers
+	 * @param tiers              the ID of the associated tiers
 	 * @param paiementCode         the payment method code
 	 * @param accountDetailCode the PCP detail code
 	 * @param debitAmount         the debit amount
@@ -151,10 +151,10 @@ public class MovementDTO {
 	 * Use {@link MovementDTO (JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public MovementDTO(Integer tiersId, String paiementCode, String accountDetailCode,
+	public MovementDTO(Tiers tiers, String paiementCode, String accountDetailCode,
 	                   BigDecimal debitAmount, BigDecimal creditAmount, String description) {
 		this();
-		this.setTiersId( tiersId );
+		this.setTiers(tiers);
 		this.setPaiementCode(paiementCode) ;
 		this.accountDetailCode = accountDetailCode;
 		this.debitAmount = debitAmount;
@@ -167,7 +167,7 @@ public class MovementDTO {
 	 * Used when retrieving existing lines from the database.
 	 *
 	 * @param id                   the technical identifier
-	 * @param tiersId              the ID of the associated tiers
+	 * @param tiers              the ID of the associated tiers
 	 * @param paiementCode         the payment method code
 	 * @param accountDetailCode the PCP detail code
 	 * @param debitAmount         the debit amount
@@ -179,9 +179,9 @@ public class MovementDTO {
 	 * Use {@link MovementDTO (JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public MovementDTO(Integer id, Integer tiersId, String paiementCode, String accountDetailCode,
+	public MovementDTO(Integer id, Tiers tiers, String paiementCode, String accountDetailCode,
 	                   BigDecimal debitAmount, BigDecimal creditAmount, String description) {
-		this(tiersId, paiementCode, accountDetailCode, debitAmount, creditAmount, description);
+		this(tiers, paiementCode, accountDetailCode, debitAmount, creditAmount, description);
 		this.id = id;
 	}
 
@@ -189,7 +189,7 @@ public class MovementDTO {
 	 * Minimal constructor for quick instantiation without amounts.
 	 * Useful for temporary structures before financial calculation.
 	 *
-	 * @param tiersId              the ID of the associated tiers
+	 * @param tiers              the ID of the associated tiers
 	 * @param paiementCode         the payment method code
 	 * @param accountDetailCode the PCP detail code
 	 * @since 0.3.0
@@ -198,9 +198,9 @@ public class MovementDTO {
 	 * Use {@link MovementDTO (JsonObject)} instead for mapping from jsonObject
 	 */
 	@Deprecated(forRemoval = true, since = "0.4")
-	public MovementDTO(Integer tiersId, String paiementCode, String accountDetailCode) {
+	public MovementDTO(Tiers tiers, String paiementCode, String accountDetailCode) {
 		this();
-		this.tiersId = tiersId;
+		this.tiers = tiers;
 		this.paiementCode = paiementCode;
 		this.accountDetailCode = accountDetailCode;
 	}
@@ -249,8 +249,8 @@ public class MovementDTO {
 	 * @return the associated Tiers ID.
 	 * @since 0.3.0
 	 */
-	public Integer getTiersId() {
-		return this.tiersId;
+	public Tiers getTiers() {
+		return this.tiers;
 	}
 
 	/**
@@ -332,12 +332,12 @@ public class MovementDTO {
 	}
 
 	/**
-	 * @param tiersId the ID from tab_tiers to link.
+	 * @param tiers the ID from tab_tiers to link.
 	 * @return this instance for chaining.
 	 * @since 0.3.0
 	 */
-	public MovementDTO setTiersId(Integer tiersId) {
-		this.tiersId = tiersId;
+	public MovementDTO setTiers(Tiers tiers) {
+		this.tiers = tiers;
 		return this;
 	}
 
@@ -387,7 +387,7 @@ public class MovementDTO {
 
 	/**
 	 * Returns a string representation of the MovementDTO object.
-	 * The string includes the values of its fields, such as id, tiersId, paiementCode,
+	 * The string includes the values of its fields, such as id, tiers, paiementCode,
 	 * accountDetailCode, debitAmount, creditAmount, and description.
 	 *
 	 * @return a string representation of the MovementDTO object.
@@ -399,7 +399,7 @@ public class MovementDTO {
 				.append(", accountingCode=").append(this.getAccountingCode() != null ? this.getAccountingCode() : "null")
 				.append(", complementaryAccountingCode=").append(this.getComplementaryAccountingCode() != null ? this.getComplementaryAccountingCode() : "null")
 				.append(", accountDetailCode=").append(this.getAccountDetailCode() != null ? this.getAccountDetailCode() : "null")
-				.append(", tiersId=").append(this.getTiersId() != null ? this.getTiersId() : "null")
+				.append(", tiers=").append(this.getTiers() != null ? this.getTiers() : "null")
 				.append(", paymentCode=").append(this.getPaiementCode() != null ? this.getPaiementCode() : "null")
 				.append(", debitAmount=").append(this.getDebitAmount() != null ? this.getDebitAmount() : "null")
 				.append(", creditAmount=").append(this.getCreditAmount() != null ? this.getCreditAmount() : "null")
@@ -411,7 +411,7 @@ public class MovementDTO {
 	/**
 	 * Converts the current instance of MovementDTO to a JSON representation.
 	 * The JSON will include non-null fields such as id, accountingCode,
-	 * complementaryAccountingCode, accountDetailCode, tiersId, paiementCode,
+	 * complementaryAccountingCode, accountDetailCode, tiers, paiementCode,
 	 * debitAmount, creditAmount, and description.
 	 *
 	 * @return a JsonObject representing the current MovementDTO instance.
@@ -431,8 +431,8 @@ public class MovementDTO {
 		if (this.getAccountDetailCode() != null) {
 			builder.add("accountDetailCode", this.getAccountDetailCode());
 		}
-		if (this.getTiersId() != null) {
-				builder.add("tiersId", this.getTiersId());
+		if (this.getTiers() != null) {
+				builder.add("tiers", this.getTiers().toJson());
 		}
 		if (this.getPaiementCode() != null) {
 				builder.add("paymentCode", this.getPaiementCode());
