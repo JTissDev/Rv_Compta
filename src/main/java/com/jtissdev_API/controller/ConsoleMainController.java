@@ -60,7 +60,7 @@ public class ConsoleMainController extends AbstractConsoleController implements 
 	}
 
 
-	private boolean handleJournalMenu() {
+	protected boolean handleJournalMenu() {
 		boolean back = false;
 		boolean quitApp = false;
 		while (!back && !quitApp) {

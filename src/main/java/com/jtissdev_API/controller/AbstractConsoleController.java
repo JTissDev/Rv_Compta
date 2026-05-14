@@ -50,6 +50,11 @@ public class AbstractConsoleController {
 		pcpCore.setDetails(detailsLoader.loadDetailsFromJson("Details.json"));
 	}
 
+	// Remplace tes scanner.nextLine() par un appel à cette méthode partout
+	protected String readLine() {
+		return scanner.nextLine();
+	}
+
 	protected boolean mainMenuChoice(String choice) {
 		switch (choice) {
 			case "1" -> {
@@ -57,8 +62,7 @@ public class AbstractConsoleController {
 				return false;
 			}
 			case "2" -> {
-				ViewUtil.displayNotImplemented();
-				return false;
+				return handleJournalMenu();
 			}
 			case "0" -> {
 				ViewUtil.displayMessage("> Fermeture du programme.");
@@ -70,6 +74,11 @@ public class AbstractConsoleController {
 			}
 		}
 
+	}
+
+	protected boolean handleJournalMenu() {
+		ViewUtil.displayNotImplemented();
+		return false;
 	}
 
 }
