@@ -44,3 +44,5 @@ logs/
 
 report_details.txt
 /src/main/resources/.env/
+
+exportToHTML/

@@ -30,24 +30,17 @@ import java.util.Scanner;
 @Profile("console")
 public class ConsoleMainController extends AbstractConsoleController implements MainController{
 
-
-	//private final Properties appProps = new Properties();
-	private final JournalLoader journalLoader; // TODO À remplacer par JournalService plus tard
-
-
-
-	public ConsoleMainController(JournalLoader journalLoader/*, ExcelReader excelReader*/) {
+	public ConsoleMainController() {
 		super();
-		this.journalLoader = journalLoader;
-		//this.excelReader = excelReader;
-
-
 
 	}
+
 	@Override
 	public void run() {
-		mainConsoleView.displayHeader();
 		currentJournal = loadJournalInitial();
+
+		mainConsoleView.displayHeader();
+
 		journalView.displayJournal(currentJournal);
 
 		boolean quitApp = false;
@@ -55,20 +48,19 @@ public class ConsoleMainController extends AbstractConsoleController implements 
 			mainConsoleView.displayMainMenu();
 			String choice = scanner.nextLine();
 
-			switch (choice) {
-				case "1" -> ViewUtil.displayNotImplemented(); //processImport(currentJournal);
-				case "2" -> quitApp = handleJournalMenu();
-				case "0" -> {
-					quitApp = true;
-					ViewUtil.displayMessage("> Fermeture du programme.");
-				}
-				default -> ViewUtil.displayError("Choix invalide.");
+			try{
+				String input = choice.trim();
+				quitApp = mainMenuChoice(input);
+			} catch (Exception e) {
+				ViewUtil.displayError("Erreur de saisie : " + e.getMessage());
+				continue;
 			}
+
 		}
 	}
 
 
-	private boolean handleJournalMenu() {
+	protected boolean handleJournalMenu() {
 		boolean back = false;
 		boolean quitApp = false;
 		while (!back && !quitApp) {

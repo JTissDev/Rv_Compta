@@ -36,8 +36,9 @@ public class SubAccountingTypeView {
 	}
 
 	public void displayCascadeSubAccountingType(SubAccountingType subAccountingType, SelectionContext context) {
-		this.displaySubAccountingTypeHeader(subAccountingType);
+
 		if (context.getDetail() != null) {
+			this.displaySubAccountingTypeHeader(subAccountingType);
 			accountingTypeDetailView.displayAccountingDetail(context.getDetail());
 		} else {
 			System.out.println(this.getCascadeSubAccountingType(subAccountingType, subIndent));
@@ -66,8 +67,8 @@ public class SubAccountingTypeView {
 	private String getSubAccountingTypeHeader(SubAccountingType sub) {
 		// Version simplifiée pour l'exemple
 		StringBuilder sb = new StringBuilder();
-		sb.append(">> ").append(sub.getName());
-		sb.append("    Code : ").append(sub.getFullCode()).append("\n");
+		sb.append(">> ").append(sub.getName()).append("\n");
+		sb.append(" *** Code : ").append(sub.getFullCode());
 		if (sub.getDescription() != null) {
 			sb.append("    Description : ").append(sub.getDescription());
 		}
