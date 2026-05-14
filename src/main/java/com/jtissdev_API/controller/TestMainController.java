@@ -1,6 +1,5 @@
 package com.jtissdev_API.controller;
 
-import com.jtissdev_API.App;
 import com.jtissdev_API.engine.loader.DetailsDataLoader;
 import com.jtissdev_API.engine.loader.PcgDataLoader;
 import com.jtissdev_API.engine.loader.TiersDataLoader;
@@ -13,12 +12,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Represents a TestMainController class for testing purposes.
  *
- * @version 1.1.0
- * @since 0.6
  * @author jtiss
+ * @version 1.2.0
+ * @since 0.6
  */
 @Component
 @Profile("test")
@@ -26,56 +28,78 @@ public class TestMainController extends AbstractConsoleController implements Mai
 
 	private static final Logger logger = LoggerFactory.getLogger(TestMainController.class);
 
+	private final Queue<Object> inputQueue = new LinkedList<>();
 
-	private final TiersDataLoader tiersLoader;
-	private final DetailsDataLoader detailsLoader;
+
 
 	private PcpCoreDTO pcpCore;
 
 	public TestMainController() {
 		super();
 
-		this.tiersLoader = new TiersDataLoader();
-		this.detailsLoader = new DetailsDataLoader();
-	}
 
-	public TestMainController(PcgDataLoader pcgLoader, TiersDataLoader tiersLoader, DetailsDataLoader detailsLoader) {
-		super();
-
-		this.tiersLoader = tiersLoader;
-		this.detailsLoader = detailsLoader;
 	}
 
 
 	@Override
 	public void run() {
-		logger.info(ViewUtil.CYAN + "=== DÉMARRAGE DU TEST DE VÉRITÉ (AUTOMATIQUE) === \n" + ViewUtil.RESET);
+		mainConsoleView.displayHeader();
+		logger.info(ViewUtil.CYAN + "=== DÉMARRAGE DES TESTS (AUTOMATIQUE) === \n" + ViewUtil.RESET);
 
-		// --- CHARGEMENT DU PCG ---
+		/* =====================
+		 Test Affichage basiques
+		===================== */
+		//this.testDisplays();
+
+		/* =====================
+		Test Scenarios
+		 ===================== */
 
 
+
+
+		logger.info(ViewUtil.CYAN + "\n=== FIN DES TESTS : TOUT EST OK ===" + ViewUtil.RESET);
+	}
+
+	// =========================================================
+	// == DÉFINITION DES SCÉNARIOS                            ==
+	// =========================================================
+
+	private void testScenarios() {
+		logger.info("> Test de scénario complet...");
+		// IL SUFFIT DE COMMENTER/DÉCOMMENTER ICI
+		//scenario_ConsultationPCG();
+		// scenario_InsertionOperationComplexe();
+		// scenario_ErreurSaisie();
+		// TODO : Implémenter un scénario de test complet qui couvre les fonctionnalités clés de l'application
+		ViewUtil.displayNotImplemented();
+		logger.info("--- TOUT LES SCÉNARIOS TERMINÉS ---");
+	}
+
+	// =========================================================
+	// == Test D'affichage basiques                           ==
+	// =========================================================
+
+	private void testDisplays() {
+		logger.info("> Test Affichage basiques...");
+
+		logger.info("> Affichage du Bloc PCG...");
 		this.testDisplayPCG();
 		this.testDisplayPartialPcg();
 
-		// --- CHARGEMENT DU PCP ---
-		logger.info("> Chargement du Bloc PCP...");
-		pcpCore = new PcpCoreDTO();
-		pcpCore.setThirdParties(tiersLoader.loadTiersFromJson("Tiers.json"));
-		pcpCore.setDetails(detailsLoader.loadDetailsFromJson("Details.json"));
-		this.testDisplayPCP();
-		// --- AFFICHAGE DE DIAGNOSTIC ---
 
-		logger.info(ViewUtil.CYAN + "\n=== FIN DU TEST DE VÉRITÉ : TOUT EST OK ===" + ViewUtil.RESET);
+		logger.info("> Chargement du Bloc PCP...");
+		this.testDisplayPCP();
 	}
 
-	private void testDisplayPCG(){
+	private void testDisplayPCG() {
 		logger.info("> Test Affichage du Bloc PCG...");
 
 		pcgCore.getAccountingClasses().forEach(accountingTypeView::displayCascadeAccountingType);
 		ViewUtil.waitForUser();
 	}
 
-	private void testDisplayPartialPcg(){
+	private void testDisplayPartialPcg() {
 		logger.info("> Test Affichage du Bloc PCG correspondant a un AccountingType ...");
 		SelectionContext context = new SelectionContext(pcgCore.getAccountingClasses().get(1));
 		accountingTypeView.displayCascadeAccountingType(context.getType(), context);
@@ -91,7 +115,7 @@ public class TestMainController extends AbstractConsoleController implements Mai
 
 	}
 
-	private void testDisplayPCP(){
+	private void testDisplayPCP() {
 		logger.info("> Test Affichage du Bloc PCP...");
 		OperationConsolView operationConsolView = new OperationConsolView();
 		ViewUtil.displayNotImplemented();
