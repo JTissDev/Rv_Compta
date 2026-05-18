@@ -7,7 +7,7 @@
     - [x] Define DTO structures for Core & Hierarchy. *(Validated in v0.2)*
     - [x] Develop `PcgDataLoader` (JSON/Jakarta JSON). *(Validated in v0.2)*
     - [x] Define Tiers and metadata referential structures. *(Validated in v0.1)*
-    - [ ] **Gap-based Sequencing**: Implement `position` logic in `OperationDTO` (intervals of 1000) for internal sorting.
+    - [x] **Gap-based Sequencing**: Implement `position` logic in `OperationDTO` (intervals of 1000) for internal sorting.
     - [ ] **Real-time Balancing**: Add a `BalanceService` to calculate account totals on-the-fly from the `JournalDTO`.
   * **Accounting Engine (Core Logic)**:
     - [x] Create `OperationDTO` & `MovementDTO` with Fluent API. *(Validated in v0.3)*

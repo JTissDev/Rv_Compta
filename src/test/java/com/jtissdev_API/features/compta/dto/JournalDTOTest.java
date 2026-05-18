@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * </p>
  *
  * @author J.Tiss
- * @version 1.1.0
+ * @version 1.5.0
  * @since 0.3.0
  */
 @ExtendWith(TestResultLogger.class)
@@ -34,139 +36,126 @@ public class JournalDTOTest {
 	private static final Logger logger = LoggerFactory.getLogger(JournalDTOTest.class);
 
 	// Global test data holders
-	public static JsonObject TEST_DATA_JSON;
-	public static JsonObject INITIAL_JOURNAL_JSON;
-	public static JsonArray OPERATIONS_TO_ADD;
+	private static final Integer JOURNAL_ID = 1;
+	private static final String JOURNAL_NAME = "Journal Général de Test";
+	private static final String JOURNAL_TYPE_CODE = "BQE";
 
-	private static JournalDTO journal;
+	private static JsonObject testDataset;
+	private JournalDTO journal;
 
 
 	@BeforeAll
-	static void setUp() {
-		// Loading the root JsonObject from resources
-		TEST_DATA_JSON = TestDataLoader.loadFromResources("data/journal-test.json");
-
-		// Initializing the main journal DTO with the 'initialJournal' part
-		INITIAL_JOURNAL_JSON = TEST_DATA_JSON.getJsonObject("initialJournal");
-		// Extracting operations intended for 'add' tests
-		OPERATIONS_TO_ADD = TEST_DATA_JSON.getJsonArray("operationsToAdd");
-
-		validateStructure();
-		logger.info("Test environment initialized for JournalDTO");
+	static void initAll() {
+		logger.info("Initializing dataset from data/journal-test.json using TestDataLoader");
+		testDataset = TestDataLoader.loadFromResources("data/journal-test.json");
+		assertNotNull(testDataset, "The global test dataset must be loaded successfully.");
 	}
 
-	/**
-	 * Validates that the test data is correctly loaded and not null.
-	 */
-	private static void validateStructure() {
-		assertNotNull(TEST_DATA_JSON, "The root test JSON should not be null");
-		assertNotNull(OPERATIONS_TO_ADD, "The array of operations to add should be present");
-
+	@BeforeEach
+	void setUp() {
+		journal = new JournalDTO();
 	}
 
 	@Test
 	@Order(1)
-	@DisplayName("Test Empty Constructor")
-	void testEmptyConstructor() {
-		// 1. Action : instanciation
-		journal = new JournalDTO();
-
-		// 2. Assertions : vérification de l'état initial
-		assertAll("Verify default state of empty JournalDTO",
-				() -> assertNotNull(journal, "Journal should not be null"),
-				() -> assertNotNull(journal.getOperations(), "Operations list should be initialized (not null)"),
-				() -> assertTrue(journal.getOperations().isEmpty(), "Operations list should be empty initially")
+	@DisplayName("Test Default Constructor and Default Values")
+	void testDefaultConstructor() {
+		assertAll("Default constructor must initialize empty structures and defensive defaults",
+				() -> assertNull(journal.getId(), "ID should be null by default"),
+				() -> assertNull(journal.getName(), "Name should be null by default"),
+				() -> assertNull(journal.getStartDate(), "startDate should be null by default"),
+				() -> assertNull(journal.getEndDate(), "endDate should be null by default"),
+				// Si journalTypeCode s'initialise à null ou "", adapte la ligne ci-dessous :
+				() -> assertNull(journal.getJournalTypeCode(), "journalTypeCode should be null by default"),
+				() -> assertNotNull(journal.getOperations(), "Operations list must never be null"),
+				() -> assertTrue(journal.getOperations().isEmpty(), "Operations list must be initialized empty")
 		);
 	}
 
 	@Test
 	@Order(2)
-	@DisplayName("Fluent Setters")
-	void testFluentSetters() {
-		// 1. Action : On part d'un objet vide
-		journal = new JournalDTO();
+	@DisplayName("Test Fluent Getters and Setters")
+	void testFluentGettersSetters() {
+		LocalDate startDate = LocalDate.of(2026, 5, 1);
+		LocalDate endDate = LocalDate.of(2026, 5, 31);
+		List<OperationDTO> ops = new ArrayList<>();
 
-		// Préparation : Conversion des chaînes JSON en LocalDate
-		LocalDate expectedStartDate = LocalDate.parse(INITIAL_JOURNAL_JSON.getString("startDate"));
-		LocalDate expectedEndDate = LocalDate.parse(INITIAL_JOURNAL_JSON.getString("endDate"));
-		int initialSize = journal.getOperations().size();
-		// 2. Utilisation de l'API Fluent avec enchaînement
-		JournalDTO result = journal.setId(INITIAL_JOURNAL_JSON.getInt("id"))
-				                    .setName(INITIAL_JOURNAL_JSON.getString("name"))
-				                    .setStartDate(expectedStartDate)
-				                    .setEndDate(expectedEndDate)
-				                    .setJournalTypeCode(INITIAL_JOURNAL_JSON.getString("journalTypeCode"))
-				                    .setOperations(INITIAL_JOURNAL_JSON.getJsonArray("operations"));
+		journal.setId(JOURNAL_ID)
+				.setName(JOURNAL_NAME)
+				.setStartDate(startDate)
+				.setEndDate(endDate)
+				.setJournalTypeCode(JOURNAL_TYPE_CODE)
+				.setOperations(ops);
 
-		int expectedSize = initialSize + INITIAL_JOURNAL_JSON.getJsonArray("operations").size();
-		// 3. Assertions : On vérifie que tout a bien fonctionné
-		assertAll("Verify fluent setters logic",
-				// Vérifie que la méthode retourne bien la même instance (le principe du "fluent")
-				() -> assertSame(journal, result, "The setter must return the same instance"),
-
-				// Vérifie que les champs ont bien été modifiés
-				() -> assertEquals(INITIAL_JOURNAL_JSON.getInt("id"), journal.getId(), "The ID should be set correctly"),
-				() -> assertEquals(INITIAL_JOURNAL_JSON.getString("name"), journal.getName(), "The name should be set correctly"),
-				() -> assertEquals(expectedStartDate, journal.getStartDate(), "The start date should be set correctly"),
-				() -> assertEquals(expectedEndDate, journal.getEndDate(), "The end date should be set correctly"),
-				() -> assertEquals(INITIAL_JOURNAL_JSON.getString("journalTypeCode"), journal.getJournalTypeCode(), "The journal type code should be set correctly"),
-				() -> assertEquals(expectedSize, journal.getOperations().size(), "Total size should be " + expectedSize),
-				() -> assertEquals(INITIAL_JOURNAL_JSON.getJsonArray("operations").getJsonObject(0).getString("libelle"), journal.getOperations().get(initialSize).getLibelle(), "First added operation mismatch"),
-				() -> assertEquals(INITIAL_JOURNAL_JSON.getJsonArray("operations").getJsonObject(1).getString("libelle"), journal.getOperations().get(initialSize + 1).getLibelle(), "Second added operation mismatch")
+		assertAll("Fluent API state validation for JournalDTO",
+				() -> assertEquals(JOURNAL_ID, journal.getId()),
+				() -> assertEquals(JOURNAL_NAME, journal.getName()),
+				() -> assertEquals(startDate, journal.getStartDate()),
+				() -> assertEquals(endDate, journal.getEndDate()),
+				() -> assertEquals(JOURNAL_TYPE_CODE, journal.getJournalTypeCode()),
+				() -> assertEquals(ops, journal.getOperations(), "Operations list content must match perfectly")
 		);
-	}
 
+	}
 
 	@Test
 	@Order(3)
-	@DisplayName("Test json constructor")
-	void testJsonConstructor() {
-		journal = new JournalDTO(INITIAL_JOURNAL_JSON);
+	@DisplayName("Test JSON Hydration - Valid Initial Journal mapping")
+	void testJsonHydrationValid() {
+		JsonObject initialJournalJson = testDataset.getJsonObject("initialJournal");
 
-		int journalSize = journal.getOperations().size();
-		// Préparation : Conversion des chaînes JSON en LocalDate
-		LocalDate expectedStartDate = LocalDate.parse(INITIAL_JOURNAL_JSON.getString("startDate"));
-		LocalDate expectedEndDate = LocalDate.parse(INITIAL_JOURNAL_JSON.getString("endDate"));
+		journal = new JournalDTO(initialJournalJson);
 
-		assertAll("check correct journal mapping form json Object ",
-				() -> assertEquals(INITIAL_JOURNAL_JSON.getInt("id"), journal.getId(), "The ID should be set correctly"),
-				() -> assertEquals(INITIAL_JOURNAL_JSON.getString("name"), journal.getName(), "The name should be set correctly"),
-				() -> assertEquals(expectedStartDate, journal.getStartDate(), "The start date should be set correctly"),
-				() -> assertEquals(expectedEndDate, journal.getEndDate(), "The end date should be set correctly"),
-				() -> assertEquals(INITIAL_JOURNAL_JSON.getString("journalTypeCode"), journal.getJournalTypeCode(), "The journal type code should be set correctly"),
-				() -> assertEquals(journalSize, journal.getOperations().size(), "Total size should be " + journalSize),
-				() -> assertEquals(INITIAL_JOURNAL_JSON.getJsonArray("operations").getJsonObject(0).getString("libelle"), journal.getOperations().get(0).getLibelle(), "First added operation mismatch"),
-				() -> assertEquals(INITIAL_JOURNAL_JSON.getJsonArray("operations").getJsonObject(1).getString("libelle"), journal.getOperations().get(1).getLibelle(),"Second added operation mismatch")
-				);
+		assertAll("Validation of rehydrated fields from valid Journal JSON structure",
+				() -> assertEquals(1, journal.getId()),
+				() -> assertEquals("Journal de Banque Mai 2026", journal.getName()),
+				() -> assertEquals(LocalDate.parse("2026-05-01"), journal.getStartDate()),
+				() -> assertEquals(LocalDate.parse("2026-05-31"), journal.getEndDate()),
+				() -> assertEquals("BQE", journal.getJournalTypeCode()),
+				() -> assertEquals(4, journal.getOperations().size(), "Should have successfully parsed 4 operations from dataset")
+		);
 	}
 
 	@Test
 	@Order(4)
-	@DisplayName("Add Single Operation")
+	@DisplayName("Test Fluent Operation Addition")
 	void testAddSingleOperation() {
-		// 1. Action : Initialisation avec les données de base (le journal contient déjà 2 opérations)
-		journal = new JournalDTO(INITIAL_JOURNAL_JSON); //[cite: 6, 7]
+		JsonObject initialJournalJson = testDataset.getJsonObject("initialJournal");
+		JsonArray operationsToAdd = testDataset.getJsonArray("operationsToAdd");
 
+		// Initialisation du journal (contient déjà 4 opérations)
+		journal = new JournalDTO(initialJournalJson);
 		int initialSize = journal.getOperations().size();
-		int expectedSize = initialSize + 1;
 
-		// On crée une opération à partir du premier objet de notre tableau "operationsToAdd"
-		JsonObject opJson = OPERATIONS_TO_ADD.getJsonObject(0); //
-		OperationDTO operation = new OperationDTO(opJson);
+		// Extraction et instanciation de la première opération à ajouter (ID 201)
+		JsonObject opJson = operationsToAdd.getJsonObject(0);
+		OperationDTO newOperation = new OperationDTO(opJson);
 
-		// 2. Action : Ajout de l'opération
-		JournalDTO result = journal.addOperation(operation); //[cite: 8]
+		// Ajout fluide
+		JournalDTO resultJournal = journal.addOperation(newOperation);
 
-		// 3. Assertions
-		assertAll("Verify single operation addition",
-				// Vérifie que la méthode est fluide (retourne l'instance actuelle)
-				() -> assertSame(journal, result, "The addOperation method should return the same instance"),
+		assertAll("Verification of operational behaviors and side effects on structural list",
+				() -> assertSame(journal, resultJournal, "The addOperation method must support chaining by returning this instance"),
+				() -> assertEquals(initialSize + 1, journal.getOperations().size(), "Journal collection size should increment by 1"),
+				() -> assertEquals(201, journal.getOperations().get(journal.getOperations().size() - 1).getId(), "The last operation added must match the target ID")
+		);
+	}
 
-				// Vérifie l'incrémentation de la taille
-				() -> assertEquals(expectedSize, journal.getOperations().size(), "Journal should contain " + expectedSize + " operations"),
+	@Test
+	@Order(5)
+	@DisplayName("Test Serialization toJson & State Conservation")
+	void testToJsonSerialization() {
+		JsonObject initialJournalJson = testDataset.getJsonObject("initialJournal");
+		journal = new JournalDTO(initialJournalJson);
 
-				// Vérifie que les données du dernier élément correspondent à l'opération ajoutée
-				() -> assertEquals(operation.getLibelle(), journal.getOperations().get(initialSize).getLibelle(), "Operation labels should match")
+		// Sérialisation
+		JsonObject serializedJson = journal.toJson();
+
+		assertAll("JSON Output formatting constraints mapping for JournalDTO",
+				() -> assertTrue(serializedJson.containsKey("id"), "Technical numeric key 'id' must be serialized"),
+				() -> assertEquals("Journal de Banque Mai 2026", serializedJson.getString("name")),
+				() -> assertTrue(serializedJson.containsKey("operations"), "Embedded structural array 'operations' must exist"),
+				() -> assertEquals(4, serializedJson.getJsonArray("operations").size(), "Exported JSON operations array length mismatch")
 		);
 	}
 }
