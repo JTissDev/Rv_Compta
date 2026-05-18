@@ -21,7 +21,7 @@ import java.util.List;
  * </p>
  *
  * @author J.Tiss
- * @version 1.4.0
+ * @version 1.5.0
  * @since 0.3.0
  */
 public class OperationDTO {
@@ -56,7 +56,7 @@ public class OperationDTO {
 	 *
 	 * @since 0.3.0
 	 */
-	private String libelle;
+	private String libelle = "";
 
 	/**
 	 * External reference string to a supporting document (Invoice, Receipt).
@@ -64,7 +64,7 @@ public class OperationDTO {
 	 *
 	 * @since 0.3.0
 	 */
-	private String referenceDocument;
+	private String referenceDocument = "";
 
 	/**
 	 * Optional extended description or notes providing more context.
@@ -72,7 +72,7 @@ public class OperationDTO {
 	 *
 	 * @since 0.3.0
 	 */
-	private String descriptif;
+	private String descriptif = "";
 
 	/**
 	 * Technical status code linking to the operation's current state.
@@ -80,7 +80,7 @@ public class OperationDTO {
 	 *
 	 * @since 0.3.0
 	 */
-	private String statutCode;
+	private String statutCode = "";
 
 	/**
 	 * Internal list of atomic financial movements (lines) composing this operation.
@@ -88,6 +88,11 @@ public class OperationDTO {
 	 * @since 0.3.0
 	 */
 	private List<MovementDTO> movements;
+
+	/**
+	 *
+	 */
+	private int position;
 
 	// =========================================================
 	// == CONSTRUCTORS                                        ==
@@ -120,11 +125,13 @@ public class OperationDTO {
 	 * 		                 <li>"statutCode" (optional): A string representing the status code.</li>
 	 * 		                 <li>"movements" (optional): An array of JSON objects representing movement data, which will be converted into {@code MovementDTO} objects and added to the list
 	 * 		of movements.</li>
+	 * 		                   <li>"position" (optional): An integer representing the position of the operation.</li>
 	 * 		                 </ul>
 	 * @since 0.4
 	 */
 	public OperationDTO(JsonObject jsonObject) {
 		this();
+
 		if (jsonObject.containsKey("id")) {
 			this.setId(jsonObject.getInt("id"));
 		}
@@ -146,6 +153,9 @@ public class OperationDTO {
 		if (jsonObject.containsKey("statutCode")) {
 			this.setStatutCode(jsonObject.getString("statutCode"));
 		}
+		if (jsonObject.containsKey("position")) {
+			this.setPosition(jsonObject.getInt("position"));
+		}
 		if (jsonObject.containsKey("movements") && !jsonObject.isNull("movements")) {
 			for (JsonObject movement : jsonObject.getJsonArray("movements").getValuesAs(JsonObject.class)) {
 				this.getMovements().add(new MovementDTO(movement));
@@ -153,6 +163,7 @@ public class OperationDTO {
 		}
 
 	}
+
 
 	/**
 	 * Constructor for new operations (without ID and without movements).
@@ -398,6 +409,30 @@ public class OperationDTO {
 	}
 
 	/**
+	 * Returns the position of the operation.
+	 *
+	 * @return the position of the operation.
+	 *
+	 * @since 0.6
+	 */
+	public int getPosition() {
+		return this.position;
+	}
+
+	/**
+	 *
+	 * @param position
+	 * 		the position to set
+	 * @return this instance for chaining.
+	 *
+	 * @since 0.6
+	 */
+	public OperationDTO setPosition(int position) {
+		this.position = position;
+		return this;
+	}
+
+	/**
 	 * @return the list of associated movement lines.
 	 *
 	 * @since 0.3.0
@@ -419,8 +454,8 @@ public class OperationDTO {
 	}
 
 	public OperationDTO setMovements(JsonArray movments) {
-		if(!movments.isEmpty()) {
-			for(JsonObject movement : movments.getValuesAs(JsonObject.class)) {
+		if (!movments.isEmpty()) {
+			for (JsonObject movement : movments.getValuesAs(JsonObject.class)) {
 				this.movements.add(new MovementDTO(movement));
 			}
 		}
@@ -484,10 +519,12 @@ public class OperationDTO {
 		sb.append("Operation [id=").append(this.getId() != null ? this.getId() : "null")
 				.append(", dateOperation = ").append(this.getDateOperation() != null ? this.getDateOperation().toString() : "null")
 				.append(", dateComptable = ").append(this.getDateComptable() != null ? this.getDateComptable().toString() : "null")
-				.append(", libelle = ").append(this.getLibelle() != null ? this.getLibelle() : "null")
-				.append(", referenceDocument = ").append(this.getReferenceDocument() != null ? this.getReferenceDocument() : "null")
-				.append(", descriptif = ").append(this.getDescriptif() != null ? this.getDescriptif() : "null")
-				.append(", statutCode = ").append(this.getStatutCode() != null ? this.getStatutCode() : "null")
+				.append(", libelle = ").append(this.getLibelle() != "" ? this.getLibelle() : "null")
+				.append(", referenceDocument = ").append(this.getReferenceDocument() != "" ? this.getReferenceDocument() : "null")
+				.append(", descriptif = ").append(this.getDescriptif() != "" ? this.getDescriptif() : "null")
+				.append(", statutCode = ").append(this.getStatutCode() != "" ? this.getStatutCode() : "null")
+				.append(", position = ").append(this.getPosition() != 0 && this.getDateComptable() != null
+						                                ? (this.getDateComptable().toString() + this.getPosition()) : "null")
 				.append(", movements : ").append("\n");
 		if (this.getMovements() != null) {
 			for (MovementDTO movement : this.getMovements()) {
@@ -521,17 +558,20 @@ public class OperationDTO {
 		if (this.getDateComptable() != null) {
 			builder.add("dateComptable", this.getDateComptable().toString());
 		}
-		if (this.getLibelle() != null) {
+		if (this.getLibelle() != "" && this.getLibelle() != null) {
 			builder.add("libelle", this.getLibelle());
 		}
-		if (this.getReferenceDocument() != null) {
+		if (this.getReferenceDocument() != ""  && this.getReferenceDocument() != null) {
 			builder.add("referenceDocument", this.getReferenceDocument());
 		}
-		if (this.getDescriptif() != null) {
+		if (this.getDescriptif() != "" && this.getDescriptif() != null) {
 			builder.add("descriptif", this.getDescriptif());
 		}
-		if (this.getStatutCode() != null) {
+		if (this.getStatutCode() != ""  && this.getStatutCode() != null) {
 			builder.add("statutCode", this.getStatutCode());
+		}
+		if (this.getPosition() != 0 && this.getDateComptable() != null) {
+			builder.add("position", this.getPosition());
 		}
 		if (this.getMovements() != null && !this.getMovements().isEmpty()) {
 			JsonArrayBuilder movementsBuilder = Json.createArrayBuilder();

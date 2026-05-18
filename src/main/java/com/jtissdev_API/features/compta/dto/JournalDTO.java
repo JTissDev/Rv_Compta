@@ -4,7 +4,9 @@ import jakarta.json.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Data Transfer Object representing an Accounting Journal.
@@ -16,7 +18,7 @@ import java.util.List;
  * </p>
  *
  * @author J.Tiss
- * @version 1.4.0
+ * @version 1.5.0
  * @since 0.3.0
  */
 
@@ -106,9 +108,7 @@ public class JournalDTO {
 			this.setJournalTypeCode(json.getString("journalTypeCode"));
 		}
 		if (json.containsKey("operations")) {
-			for(JsonObject operation : json.getJsonArray("operations").getValuesAs(JsonObject.class)) {
-				this.operations.add(new OperationDTO(operation));
-			}
+			this.setOperations(json.getJsonArray("operations"));
 		}
 	}
 
@@ -307,6 +307,8 @@ public class JournalDTO {
 		return this.operations;
 	}
 
+
+
 	/**
 	 * Sets the list of operations. Initializes an empty list if null is provided.
 	 *
@@ -317,8 +319,26 @@ public class JournalDTO {
 	 * @since 0.3.0
 	 */
 	public JournalDTO setOperations(List<OperationDTO> operations) {
-		this.operations = operations != null ? operations : new ArrayList<>();
+		this.operations = operations != null ? sortedOperations(operations) : new ArrayList<>();
 		return this;
+	}
+
+	/**
+	 * Trie une liste d'opérations chronologiquement selon la date comptable,
+	 * puis par leur position (index de tri technique).
+	 *
+	 * @param operations la liste brute à trier
+	 * @return une nouvelle liste triée
+	 * @since 0.6
+	 */
+	private List<OperationDTO> sortedOperations(List<OperationDTO> operations) {
+		return operations.stream()
+				       .sorted(Comparator
+						               // 1er critère : La date comptable (on gère les nulls au cas où l'opération est en cours de saisie)
+						               .comparing(OperationDTO::getDateComptable, Comparator.nullsLast(Comparator.naturalOrder()))
+						               // 2ème critère : La position (INT) pour garder l'ordre des insertions du même jour
+						               .thenComparingInt(OperationDTO::getPosition))
+				       .collect(Collectors.toList());
 	}
 
 	/**
@@ -334,9 +354,12 @@ public class JournalDTO {
 	 */
 	public JournalDTO setOperations(JsonArray operations) {
 		if (!operations.isEmpty()) {
+			List<OperationDTO> tempOperations = new ArrayList<>();
 			for (JsonObject operation : operations.getValuesAs(JsonObject.class)) {
-				this.getOperations().add(new OperationDTO(operation));
+				tempOperations.add(new OperationDTO(operation));
 			}
+			// On passe par le setter officiel qui inclut le tri !
+			this.setOperations(tempOperations);
 		}
 		return this;
 	}
