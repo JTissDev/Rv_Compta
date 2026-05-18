@@ -1,0 +1,26 @@
+# ===================================================================
+# MODELE DE CONFIGURATION POUR LES MODES D'EXÉCUTION (API / CONSOLE)
+# ===================================================================
+# Instructions : Selon le profil technique que vous activez, créez le fichier correspondant :
+
+# -------------------------------------------------------------------
+# CAS 1 : Pour le fichier 'application-api.properties'
+# -------------------------------------------------------------------
+# Réactive le serveur web (Tomcat embarqué) pour exposer les endpoints REST
+# spring.main.web-application-type=servlet
+# server.port=8080
+
+# Logs spécifiques au trafic web
+# logging.level.org.springframework.web=INFO
+
+
+# -------------------------------------------------------------------
+# CAS 2 : Pour le fichier 'application-console.properties'
+# -------------------------------------------------------------------
+# Désactive les bannières et réduit les logs Spring au démarrage pour le mode CLI
+# spring.main.banner-mode=off
+# logging.level.org.springframework=WARN
+# logging.level.org.hibernate=WARN
+
+# Maintient les logs métiers actifs pour suivre l'exécution des traitements
+# logging.level.com.jtissdev_API=INFO

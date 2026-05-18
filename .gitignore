@@ -43,6 +43,11 @@ logs/
 /Dev-Reports/
 
 report_details.txt
-/src/main/resources/.env/
+
 
 exportToHTML/
+
+/src/main/resources/.env/*
+# Ne PAS ignorer les fichiers exemples
+!src/main/resources/.env/application-env.properties.example
+!src/main/resources/application-mode.properties.example

@@ -1,0 +1,18 @@
+# ===================================================================
+# MODELE DE CONFIGURATION POUR LES ENVIRONNEMENTS (DEV / TEST / PROD)
+# ===================================================================
+# Instructions : Dupliquez ce fichier dans dossier ./.env et renommez-le :
+#   - application-dev.properties  (pour votre machine locale)
+#   - application-test.properties (pour la suite de tests)
+#   - application-prod.properties (pour le déploiement de production)
+
+# --- Configuration de la Persistance Fichier ---
+# Nom du fichier cible pour la sauvegarde (ex: svgDev.json, svgTest.json, svgProd.json)
+app.persistence.filename=YOUR_FILENAME.json
+
+# --- Configuration Base de Données (Anticipation MariaDB) ---
+# Décommentez et complétez ces lignes lors du passage en base de données
+# spring.datasource.url=jdbc:mariadb://[HOST]:[PORT]/[DB_NAME]
+# spring.datasource.username=YOUR_DATABASE_USER
+# spring.datasource.password=YOUR_DATABASE_PASSWORD
+# spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
