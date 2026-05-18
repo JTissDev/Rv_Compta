@@ -95,7 +95,7 @@ public class JournalDTOTest {
 				() -> assertEquals(JOURNAL_TYPE_CODE, journal.getJournalTypeCode()),
 				() -> assertEquals(ops, journal.getOperations(), "Operations list content must match perfectly")
 		);
-		
+
 	}
 
 	@Test

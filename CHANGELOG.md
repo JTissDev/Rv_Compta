@@ -11,6 +11,7 @@ All notable changes to this project will be documented in is file.
 - View `PCP`
 - View `PCG`
 - View `Referential`
+- OperationDTO : Add position management for sorting operation by countable date (e.g., due date, payment date) and not just by creation date.
 
 ## [0.5] 2026-05-06
 
