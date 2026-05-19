@@ -9,6 +9,7 @@ import com.jtissdev_API.features.PCP.dto.TiersTest;
 import com.jtissdev_API.features.compta.dto.JournalDTOTest;
 import com.jtissdev_API.features.compta.dto.MovementDTOTest;
 import com.jtissdev_API.features.compta.dto.OperationDTOTest;
+import com.jtissdev_API.features.compta.repository.JsonFileJournalRepositoryTest;
 import com.jtissdev_API.features.core.dto.PcgCoreDTOTest;
 import com.jtissdev_API.features.core.dto.PcpCoreDTOTest;
 import com.jtissdev_API.features.core.dto.ReferentialCoreDTOTest;
@@ -48,6 +49,9 @@ import org.junit.platform.suite.api.Suite;
 		MovementDTOTest.class,
 		OperationDTOTest.class,
 		JournalDTOTest.class,
+
+		// Journal Repository
+		JsonFileJournalRepositoryTest.class,
 
 
 		// 3. Prochaine étape : tes Loaders viendront ici
