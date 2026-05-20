@@ -18,6 +18,9 @@ import java.util.List;
  */
 public class PcgCoreDTO {
 
+	// =======================================================
+	// FIELDS                                               ==
+	// =======================================================
 	/**
 	 * List of main accounting classes (e.g., Class 1, Class 2, etc.)
 	 *
@@ -25,6 +28,9 @@ public class PcgCoreDTO {
 	 */
 	private List<AccountingType> accountingClasses;
 
+	// =======================================================
+	// CONSTRUCTORS                                         ==
+	// =======================================================
 	/**
 	 * Default constructor initializing an empty collection of accounting classes.
 	 *
@@ -43,7 +49,9 @@ public class PcgCoreDTO {
 	 * @author J.Tiss <jtissdev@gmail.com>
 	 * @version 1.0.0
 	 * @since 0.4
+	 * @deprecated Manual field initialization is discouraged.
 	 */
+	@Deprecated(forRemoval = true, since = "0.6")
 	public PcgCoreDTO(List<AccountingType> accountingClasses) {
 		this();
 		this.setAccountingClasses(accountingClasses);
@@ -66,6 +74,35 @@ public class PcgCoreDTO {
 		}
 	}
 
+	/**
+	 * Constructs a new PcgCoreDTO object by initializing it with the provided JSON object.
+	 * @param json The JSON object containing the PCG data.
+	 *             Expected keys: "accountingClasses" (JsonArray)
+	 *
+	 *             The JSON structure should be as follows:
+	 *             {
+	 *               "accountingClasses": [
+	 *                 { ... }
+	 *               ]
+	 *             }
+	 * @author J.Tiss
+	 * @since 0.6
+	 */
+	public PcgCoreDTO(JsonObject json) {
+		this();
+		if (json != null) {
+			JsonArray jsonArray = json.getJsonArray("accountingClasses");
+			if (jsonArray != null) {
+				for (JsonObject obj : jsonArray.getValuesAs(JsonObject.class)) {
+					this.addAccountingClass(new AccountingType(obj));
+				}
+			}
+		}
+	}
+
+	// =======================================================
+	// FLUENT METHODS                                       ==
+	// =======================================================
 	/**
 	 * Gets the list of all top-level accounting classes.
 	 *
@@ -147,6 +184,9 @@ public class PcgCoreDTO {
 		return this;
 	}
 
+	// =======================================================
+	// SERIALIZATION                                        ==
+	// =======================================================
 	/**
 	 * Serializes the PcgCoreDTO object into a JsonObject.
 	 *

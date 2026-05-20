@@ -35,6 +35,10 @@ public class TestMainController extends AbstractConsoleController implements Mai
 	 */
 	@Override
 	public void run() {
+		logger.info("Test encodage : é è ê à ç ù €");
+		logger.info("file.encoding={}", System.getProperty("file.encoding"));
+		logger.info("sun.stdout.encoding={}", System.getProperty("sun.stdout.encoding"));
+		logger.info("sun.stderr.encoding={}", System.getProperty("sun.stderr.encoding"));
 		mainConsoleView.displayHeader();
 		logger.info(ViewUtil.CYAN + "=== DÉMARRAGE DES TESTS (AUTOMATIQUE) === \n" + ViewUtil.RESET);
 

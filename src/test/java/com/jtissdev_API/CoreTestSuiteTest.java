@@ -15,6 +15,7 @@ import com.jtissdev_API.features.core.dto.PcpCoreDTOTest;
 import com.jtissdev_API.features.core.dto.ReferentialCoreDTOTest;
 import com.jtissdev_API.features.core.dto.referential.OperationStatusTest;
 import com.jtissdev_API.features.core.dto.referential.PaymentMethodTest;
+import com.jtissdev_API.features.core.repository.JsonFileReferentialCoreRepositoryTest;
 import com.jtissdev_API.utils.TestResultLogger;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,6 +31,9 @@ import org.junit.platform.suite.api.Suite;
 		PaymentMethodTest.class,
 		// Referential Data holder
 		ReferentialCoreDTOTest.class,
+
+		// Referential Repository
+		JsonFileReferentialCoreRepositoryTest.class,
 
 		// PCP DTO
 		AnalyticDetailTest.class,
