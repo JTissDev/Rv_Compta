@@ -15,6 +15,7 @@ import com.jtissdev_API.features.core.dto.PcpCoreDTOTest;
 import com.jtissdev_API.features.core.dto.ReferentialCoreDTOTest;
 import com.jtissdev_API.features.core.dto.referential.OperationStatusTest;
 import com.jtissdev_API.features.core.dto.referential.PaymentMethodTest;
+import com.jtissdev_API.features.core.repository.JsonFilePcgRepositoryTest;
 import com.jtissdev_API.features.core.repository.JsonFileReferentialCoreRepositoryTest;
 import com.jtissdev_API.utils.TestResultLogger;
 import org.junit.jupiter.api.DisplayName;
@@ -26,40 +27,51 @@ import org.junit.platform.suite.api.Suite;
 @DisplayName("🚀 JTissDev API : Rv-Compta - Full Test Suite")
 @ExtendWith(TestResultLogger.class)
 @SelectClasses({
+	    /* ====================================================================
+	    ===                             REFERENTIAL                         ===
+	    ==================================================================== */
 		// Referential DTO
-		OperationStatusTest.class,
-		PaymentMethodTest.class,
+		OperationStatusTest.class, PaymentMethodTest.class,
 		// Referential Data holder
 		ReferentialCoreDTOTest.class,
 
 		// Referential Repository
 		JsonFileReferentialCoreRepositoryTest.class,
 
+		/* ====================================================================
+	    ===                  PCP - PLAN COMPTABLE PERSONALISE               ===
+	    ==================================================================== */
+
 		// PCP DTO
-		AnalyticDetailTest.class,
-		ContactsTest.class,
-		TiersTest.class,
+		AnalyticDetailTest.class, ContactsTest.class, TiersTest.class,
 		// PCP Data holder
 		PcpCoreDTOTest.class,
 
+		/* ====================================================================
+	    ===                  PCG - PLAN COMPTABLE GÉNÉRAL                   ===
+	    ==================================================================== */
 		// PCG DTO
-		AccountingTypeDetailsTest.class,
-		SubAccountingTypeTest.class,
-		AccountingTypeTest.class,
+		AccountingTypeDetailsTest.class, SubAccountingTypeTest.class, AccountingTypeTest.class,
 		// PCG Data holder
 		PcgCoreDTOTest.class,
 
+		// PCG Repository
+		JsonFilePcgRepositoryTest.class,
+
+		/* ====================================================================
+	    ===                  COMPTA - JOURNAL & MOUVEMENTS                  ===
+	    ==================================================================== */
+
 		// Journal DTO
-		MovementDTOTest.class,
-		OperationDTOTest.class,
-		JournalDTOTest.class,
+		MovementDTOTest.class, OperationDTOTest.class, JournalDTOTest.class,
 
 		// Journal Repository
 		JsonFileJournalRepositoryTest.class,
 
 
-		// 3. Prochaine étape : tes Loaders viendront ici
-		// JournalLoaderTest.class
+		/* ====================================================================
+	    ===                  TESTS GÉNÉRAUX & UTILITAIRES                  ===
+	    ==================================================================== */
 })
 public class CoreTestSuiteTest {
 	// Cette classe reste vide.

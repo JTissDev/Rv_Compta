@@ -18,7 +18,7 @@ import java.util.Queue;
  * @since 0.6
  */
 @Component
-@Profile("test")
+@Profile("test & console")
 public class TestMainController extends AbstractConsoleController implements MainController {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestMainController.class);
@@ -35,17 +35,14 @@ public class TestMainController extends AbstractConsoleController implements Mai
 	 */
 	@Override
 	public void run() {
-		logger.info("Test encodage : é è ê à ç ù €");
-		logger.info("file.encoding={}", System.getProperty("file.encoding"));
-		logger.info("sun.stdout.encoding={}", System.getProperty("sun.stdout.encoding"));
-		logger.info("sun.stderr.encoding={}", System.getProperty("sun.stderr.encoding"));
+
 		mainConsoleView.displayHeader();
 		logger.info(ViewUtil.CYAN + "=== DÉMARRAGE DES TESTS (AUTOMATIQUE) === \n" + ViewUtil.RESET);
 
         /* =====================
            Test Affichage basiques
            ===================== */
-		// this.testDisplays();
+		 this.testDisplays();
 
         /* =====================
            Test Scenarios

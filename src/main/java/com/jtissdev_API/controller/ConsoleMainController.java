@@ -27,7 +27,7 @@ import java.util.Scanner;
  * @author jtiss
  */
 @Component
-@Profile("console")
+@Profile("console & !test")
 public class ConsoleMainController extends AbstractConsoleController implements MainController{
 
 	public ConsoleMainController() {
