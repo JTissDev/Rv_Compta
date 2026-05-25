@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 import java.util.Optional;
 
 /**
- * Concrete implementation of {@link JournalRepository} for flat-file JSON persistence.
+ * Concrete implementation of {@link JournalRepositoryInterface} for flat-file JSON persistence.
  * <p>
  * This class handles saving and loading the accounting journal to and from a local JSON file.
  * The storage directory and filename are dynamically injected from the application properties,
@@ -31,9 +31,9 @@ import java.util.Optional;
  * @since 0.6.0
  */
 @Repository
-public class JsonFileJournalRepository implements JournalRepository {
+public class JsonFileJournalRepository extends JournalRepository implements JournalRepositoryInterface {
 
-	private static final Logger logger = LoggerFactory.getLogger(JsonFileJournalRepository.class);
+
 
 	private final Path storagePath;
 

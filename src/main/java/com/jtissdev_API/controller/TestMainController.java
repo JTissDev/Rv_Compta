@@ -18,7 +18,7 @@ import java.util.Queue;
  * @since 0.6
  */
 @Component
-@Profile("test & console")
+@Profile("test")
 public class TestMainController extends AbstractConsoleController implements MainController {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestMainController.class);

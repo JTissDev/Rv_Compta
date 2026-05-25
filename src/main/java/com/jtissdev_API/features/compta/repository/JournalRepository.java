@@ -1,10 +1,12 @@
 package com.jtissdev_API.features.compta.repository;
 
-/**
- * Represents a JournalRepository DTO.
- *
- * @author jtiss
- * @since 0.1
- * @version 1.0.0
- */public class JournalRepository {
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public abstract class JournalRepository {
+
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
 }

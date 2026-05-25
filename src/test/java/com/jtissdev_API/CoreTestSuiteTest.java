@@ -16,6 +16,7 @@ import com.jtissdev_API.features.core.dto.ReferentialCoreDTOTest;
 import com.jtissdev_API.features.core.dto.referential.OperationStatusTest;
 import com.jtissdev_API.features.core.dto.referential.PaymentMethodTest;
 import com.jtissdev_API.features.core.repository.JsonFilePcgRepositoryTest;
+import com.jtissdev_API.features.core.repository.JsonFilePcpRepositoryTest;
 import com.jtissdev_API.features.core.repository.JsonFileReferentialCoreRepositoryTest;
 import com.jtissdev_API.utils.TestResultLogger;
 import org.junit.jupiter.api.DisplayName;
@@ -46,6 +47,9 @@ import org.junit.platform.suite.api.Suite;
 		AnalyticDetailTest.class, ContactsTest.class, TiersTest.class,
 		// PCP Data holder
 		PcpCoreDTOTest.class,
+		// PCP Repository
+		JsonFilePcpRepositoryTest.class,
+
 
 		/* ====================================================================
 	    ===                  PCG - PLAN COMPTABLE GÉNÉRAL                   ===

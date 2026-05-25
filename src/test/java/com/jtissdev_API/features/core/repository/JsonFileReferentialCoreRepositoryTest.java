@@ -30,8 +30,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * </p>
  *
  * @author J.Tiss
- * @email jtissdev@gmail.com
  * @version 2.0.0
+ * @email jtissdev@gmail.com
  * @since 0.6.0
  */
 @SpringBootTest

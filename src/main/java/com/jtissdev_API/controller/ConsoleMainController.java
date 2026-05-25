@@ -1,14 +1,10 @@
 package com.jtissdev_API.controller;
 
-import com.jtissdev_API.core.util.ExcelReader;
-import com.jtissdev_API.engine.loader.JournalLoader;
 import com.jtissdev_API.features.compta.dto.JournalDTO;
 import com.jtissdev_API.features.compta.dto.OperationDTO;
-import com.jtissdev_API.features.compta.view.JournalConsoleView;
-import com.jtissdev_API.features.compta.view.OperationConsolView;
-import com.jtissdev_API.view.MainConsoleView;
 import com.jtissdev_API.view.ViewUtil;
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -17,18 +13,20 @@ import java.io.FileInputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Represents a ConsoleMainController, which is the main controller for the console application.
  *
- * @since 0.6
- * @version 1.0.0
  * @author jtiss
+ * @version 1.0.0
+ * @since 0.6
  */
 @Component
 @Profile("console & !test")
-public class ConsoleMainController extends AbstractConsoleController implements MainController{
+public class ConsoleMainController extends AbstractConsoleController implements MainController {
+
+
+	private static final Logger logger = LoggerFactory.getLogger(ConsoleMainController.class);
 
 	public ConsoleMainController() {
 		super();
@@ -40,6 +38,7 @@ public class ConsoleMainController extends AbstractConsoleController implements 
 		currentJournal = loadJournalInitial();
 
 		mainConsoleView.displayHeader();
+		logger.debug("Current journal is {}", currentJournal.getName());
 
 		journalView.displayJournal(currentJournal);
 
@@ -48,7 +47,7 @@ public class ConsoleMainController extends AbstractConsoleController implements 
 			mainConsoleView.displayMainMenu();
 			String choice = scanner.nextLine();
 
-			try{
+			try {
 				String input = choice.trim();
 				quitApp = mainMenuChoice(input);
 			} catch (Exception e) {
@@ -108,7 +107,6 @@ public class ConsoleMainController extends AbstractConsoleController implements 
 		ViewUtil.displayNotImplemented();
 		//TODO need to be implemented after implementing the view
 	}
-
 
 
 	private void processImport(JournalDTO journal) {

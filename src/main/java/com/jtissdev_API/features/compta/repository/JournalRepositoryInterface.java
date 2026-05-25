@@ -17,7 +17,7 @@ import java.util.Optional;
  * @version 1.0.0
  * @since 0.5.0
  */
-public interface JournalRepository {
+public interface JournalRepositoryInterface {
 
 	/**
 	 * Persists the state of the provided accounting journal.

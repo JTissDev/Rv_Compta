@@ -1,7 +1,10 @@
 package com.jtissdev_API.features.core.repository;
 
 import com.jtissdev_API.features.core.dto.PcgCoreDTO;
+import com.jtissdev_API.utils.TestGroup;
+import com.jtissdev_API.utils.TestResultLogger;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +66,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * @since 0.6
  */
 @SpringBootTest
+@ExtendWith(TestResultLogger.class)
+@DisplayName("Json File PCG Repository Test Suite")
+@TestGroup("Core Repository")
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class JsonFilePcgRepositoryTest {

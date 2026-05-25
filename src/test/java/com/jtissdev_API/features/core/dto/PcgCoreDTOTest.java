@@ -33,13 +33,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PcgCoreDTOTest {
 
-	public static JsonArray ACCOUNTING_JSON ;
+	private static JsonArray ACCOUNTING_JSON ;
 
 	private static final Logger logger = LoggerFactory.getLogger(PcpCoreDTOTest.class);
 
 	private static PcgCoreDTO pcgCoreDTO;
 
-	@BeforeAll
+	@BeforeAll @DisplayName("TestDataInitialization")
 	static void setUp() {
 		ACCOUNTING_JSON = TestDataLoader.loadFromResources("data/PCG.json").getJsonArray("data");
 		validerStructure();

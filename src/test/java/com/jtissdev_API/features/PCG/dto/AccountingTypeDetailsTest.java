@@ -61,8 +61,8 @@ public class AccountingTypeDetailsTest {
 	}
 
 	@Test
-	@DisplayName("Test Empty Constructor")
 	@Order(1)
+	@DisplayName("Test Empty Constructor")
 	void testEmptyConstructor() {
 		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails();
 
@@ -76,8 +76,8 @@ public class AccountingTypeDetailsTest {
 	}
 
 	@Test
-	@DisplayName("Test Fluent Setters")
 	@Order(2)
+	@DisplayName("Test Fluent Setters")
 	void testFluentSetters() {
 		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails();
 
@@ -100,8 +100,8 @@ public class AccountingTypeDetailsTest {
 	}
 
 	@Test
-	@DisplayName("Test Full Json Constructor")
 	@Order(3)
+	@DisplayName("Test Full Json Constructor")
 	void testJsonConstructor() {
 		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails(accountingTypeDetailsJson.getJsonObject("allFields"));
 		assertAll("Json constructor test validation",
@@ -115,8 +115,8 @@ public class AccountingTypeDetailsTest {
 	}
 
 	@Test
-	@DisplayName("Test name Only Json Constructor")
 	@Order(3)
+	@DisplayName("Test name Only Json Constructor")
 	void testNameOnlyJsonConstructor() {
 		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails(accountingTypeDetailsJson.getJsonObject("nameOnly"));
 
@@ -133,8 +133,8 @@ public class AccountingTypeDetailsTest {
 
 
 	@Test
-	@DisplayName("toJson: should only include non-null fields")
 	@Order(4)
+	@DisplayName("toJson: should only include non-null fields")
 	void testToJsonSerialization() {
 		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails(accountingTypeDetailsJson.getJsonObject("nameAndAccountingCode"));
 		JsonObject json = accountingTypeDetails.toJson();
@@ -150,8 +150,8 @@ public class AccountingTypeDetailsTest {
 	}
 
 	@Test
-	@DisplayName("toString : must have required format")
 	@Order(4)
+	@DisplayName("toString : must have required format")
 	void testToStringSerialization(){
 		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails(accountingTypeDetailsJson.getJsonObject("allFields"));
 

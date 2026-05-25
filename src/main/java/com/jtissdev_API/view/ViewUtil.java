@@ -9,6 +9,8 @@ package com.jtissdev_API.view;
  */
 public class ViewUtil {
 
+	private static final int TAILLE_LINE = 30;
+
 	public static final String RESET = "\u001B[0m";
 	public static final String GREEN = "\u001B[32m";
 	public static final String RED = "\u001B[31m";
@@ -17,9 +19,9 @@ public class ViewUtil {
 
 	public static final String TABLE_FORMAT = "  | %-10s | %-15s | %-20s | %10s | %10s |%n";
 	public static final String TABLE_LINE = "--+------------+-----------------+----------------------+------------+------------+";
-	public static final String MAIN_SEPARATOR = "==========================================";
-	public static final String SEPARATOR = "----------------------------------------";
-	public static final String SEPARATOR_LINE = "****************************************";
+	public static final String MAIN_SEPARATOR = "=".repeat(TAILLE_LINE);
+	public static final String SEPARATOR = "-".repeat(TAILLE_LINE);
+	public static final String SEPARATOR_LINE = "*".repeat(TAILLE_LINE);
 
 
 	/**

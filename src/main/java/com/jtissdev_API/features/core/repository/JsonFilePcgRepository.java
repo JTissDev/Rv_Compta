@@ -30,15 +30,12 @@ import java.util.Optional;
  * @since 0.6.0
  */
 @Repository
-public class JsonFilePcgRepository {
+public class JsonFilePcgRepository extends PcgRepository { ;
 
-	private static final Logger log = LoggerFactory.getLogger(JsonFilePcgRepository.class);
-
-	private final ResourceLoader resourceLoader;
 	private final JsonWriterFactory writerFactory;
 
 	private final File pcgLiveFile;
-	private final String pcgSeedPath;
+
 
 	/**
 	 * Constructs the PCG repository with environment-specific dynamic path injection.
@@ -54,21 +51,18 @@ public class JsonFilePcgRepository {
 	public JsonFilePcgRepository(
 			ResourceLoader resourceLoader,
 			@Value("${app.persistence.storage-path}") String storageDir,
-			@Value("${app.persistence.seed-path}") String seedFolder) {
+			@Value("${app.seed.folder-path}") String seedFolder,
+			@Value("${app.seed.pcg-file-name}") String pcgSeedFileName) {
+		super(resourceLoader,seedFolder,pcgSeedFileName);
 
-		this.resourceLoader = resourceLoader;
-
-		// Un seul fichier physique nommé PCG.json
-		String pcgFilename = "PCG.json";
-		this.pcgLiveFile = new File(storageDir, pcgFilename);
-		this.pcgSeedPath = seedFolder + pcgFilename;
+		this.pcgLiveFile = new File(storageDir, pcgSeedFileName);
 
 		// Configuration du Pretty Printing pour conserver un fichier propre et lisible sur disque
 		Map<String, Object> config = new HashMap<>();
 		config.put(JsonGenerator.PRETTY_PRINTING, true);
 		this.writerFactory = Json.createWriterFactory(config);
 
-		log.info("[Persistence] PCG Repository bound to live target: {}", pcgLiveFile.getAbsolutePath());
+		logger.info("[Persistence] PCG Repository bound to live target: {}", pcgLiveFile.getAbsolutePath());
 	}
 
 	/**
@@ -85,7 +79,7 @@ public class JsonFilePcgRepository {
 			checkAndCopySeed();
 
 			if (!pcgLiveFile.exists()) {
-				log.error("[Persistence] Critical PCG reference file is missing even after seed copy execution.");
+				logger.error("[Persistence] Critical PCG reference file is missing even after seed copy execution.");
 				return Optional.empty();
 			}
 
@@ -105,7 +99,7 @@ public class JsonFilePcgRepository {
 			return Optional.of(new PcgCoreDTO(wrappedJson));
 
 		} catch (Exception e) {
-			log.error("[Persistence] Critical failure while loading Plan Comptable Général hierarchy", e);
+			logger.error("[Persistence] Critical failure while loading Plan Comptable Général hierarchy", e);
 			return Optional.empty();
 		}
 	}
@@ -141,9 +135,23 @@ public class JsonFilePcgRepository {
 		     OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
 		     JsonWriter writer = this.writerFactory.createWriter(osw)) {
 			writer.writeArray(pcgArray);
-			log.info("[Persistence] PCG structure successfully flattened and written to disk.");
+			logger.info("[Persistence] PCG structure successfully flattened and written to disk.");
 		} catch (IOException e) {
-			log.error("[Persistence] Failed to write PCG JSON structure to file: {}", pcgLiveFile.getName(), e);
+			logger.error("[Persistence] Failed to write PCG JSON structure to file: {}", pcgLiveFile.getName(), e);
+		}
+	}
+
+	@Override
+	public int getDataSize() {
+		Resource seedResource = resourceLoader.getResource(pcgSeedPath);
+		try (InputStream in = seedResource.getInputStream()) {
+			Files.copy(in, pcgLiveFile.toPath());
+			logger.info("[Persistence] Successfully deployed internal PCG seed template to destination: {}", pcgLiveFile.getName());
+			return 1;
+		}
+		 catch (IOException e) {
+			throw new RuntimeException(e);
+
 		}
 	}
 
@@ -151,12 +159,12 @@ public class JsonFilePcgRepository {
 	// == PRIVATE UTILITY CORE                                ==
 	// =========================================================
 
-	private void checkAndCopySeed() throws IOException {
+	protected void checkAndCopySeed() throws IOException {
 		if (pcgLiveFile.exists()) {
 			return;
 		}
 
-		log.info("[Persistence] Live PCG file not found. Activating seed copy from source: {}", pcgSeedPath);
+		logger.info("[Persistence] Live PCG file not found. Activating seed copy from source: {}", pcgSeedPath);
 		Resource seedResource = resourceLoader.getResource(pcgSeedPath);
 
 		if (!seedResource.exists()) {
@@ -167,7 +175,7 @@ public class JsonFilePcgRepository {
 
 		try (InputStream in = seedResource.getInputStream()) {
 			Files.copy(in, pcgLiveFile.toPath());
-			log.info("[Persistence] Successfully deployed internal PCG seed template to destination: {}", pcgLiveFile.getName());
+			logger.info("[Persistence] Successfully deployed internal PCG seed template to destination: {}", pcgLiveFile.getName());
 		}
 	}
 
@@ -175,7 +183,7 @@ public class JsonFilePcgRepository {
 		File parentDir = pcgLiveFile.getParentFile();
 		if (parentDir != null && !parentDir.exists()) {
 			if (parentDir.mkdirs()) {
-				log.info("[Persistence] Created missing directory layer for PCG path: {}", parentDir.getAbsolutePath());
+				logger.info("[Persistence] Created missing directory layer for PCG path: {}", parentDir.getAbsolutePath());
 			}
 		}
 	}

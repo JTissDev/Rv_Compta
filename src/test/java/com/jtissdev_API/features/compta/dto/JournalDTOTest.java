@@ -28,9 +28,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * @since 0.3.0
  */
 @ExtendWith(TestResultLogger.class)
-@DisplayName("Journal Test Suite")
 @TestGroup("Compta DTO")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@DisplayName("Journal Test Suite")
 public class JournalDTOTest {
 
 	private static final Logger logger = LoggerFactory.getLogger(JournalDTOTest.class);
