@@ -1,6 +1,6 @@
-package com.jtissdev_API.features.core.repository;
+package com.jtissdev_API.features.referential.repository;
 
-import com.jtissdev_API.features.core.dto.ReferentialCoreDTO;
+import com.jtissdev_API.features.referential.dto.ReferentialCoreDTO;
 import com.jtissdev_API.utils.TestGroup;
 import com.jtissdev_API.utils.TestResultLogger;
 import jakarta.json.Json;
@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @email jtissdev@gmail.com
  * @since 0.6.0
  */
-@SpringBootTest
+
 @ActiveProfiles("test")
 @ExtendWith(TestResultLogger.class)
 @DisplayName("Json File Referential Repository Test Suite")
@@ -47,13 +47,13 @@ public class JsonFileReferentialCoreRepositoryTest {
 	@Autowired
 	private JsonFileReferentialCoreRepository repository;
 
-	@Value("${app.persistence.storage-path}")
+	//@Value("${app.persistence.storage-path}")
 	private String configuredStorageDir;
 
-	@Value("${app.persistence.filename-status}")
+	//@Value("${app.persistence.filename-status}")
 	private String configuredStatusFilename;
 
-	@Value("${app.persistence.filename-payment}")
+	//@Value("${app.persistence.filename-payment}")
 	private String configuredPaymentFilename;
 
 	private Path fullStatusPath;

@@ -1,6 +1,6 @@
-package com.jtissdev_API.features.core.dto;
+package com.jtissdev_API.features.PCG.dto;
 
-import com.jtissdev_API.features.PCG.dto.AccountingType;
+import com.jtissdev_API.features.PCP.dto.PcpCoreDTOTest;
 import com.jtissdev_API.utils.TestDataLoader;
 import com.jtissdev_API.utils.TestGroup;
 import com.jtissdev_API.utils.TestResultLogger;

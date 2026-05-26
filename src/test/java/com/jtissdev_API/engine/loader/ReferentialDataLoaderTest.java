@@ -1,6 +1,6 @@
 package com.jtissdev_API.engine.loader;
 
-import com.jtissdev_API.features.core.dto.ReferentialCoreDTO;
+import com.jtissdev_API.features.referential.dto.ReferentialCoreDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

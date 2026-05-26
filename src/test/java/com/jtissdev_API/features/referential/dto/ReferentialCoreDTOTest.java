@@ -1,8 +1,5 @@
-package com.jtissdev_API.features.core.dto;
+package com.jtissdev_API.features.referential.dto;
 
-import com.jtissdev_API.features.core.dto.referential.OperationStatus;
-import com.jtissdev_API.features.core.dto.referential.OperationStatusTest;
-import com.jtissdev_API.features.core.dto.referential.PaymentMethod;
 import com.jtissdev_API.utils.TestDataLoader;
 import com.jtissdev_API.utils.TestGroup;
 import com.jtissdev_API.utils.TestResultLogger;

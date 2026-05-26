@@ -1,4 +1,4 @@
-package com.jtissdev_API.features.core.dto;
+package com.jtissdev_API.features.core;
 
 import com.jtissdev_API.features.PCG.dto.AccountingType;
 import com.jtissdev_API.features.PCG.dto.AccountingTypeDetails;

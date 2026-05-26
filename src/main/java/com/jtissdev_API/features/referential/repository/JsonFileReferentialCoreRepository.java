@@ -1,6 +1,6 @@
-package com.jtissdev_API.features.core.repository;
+package com.jtissdev_API.features.referential.repository;
 
-import com.jtissdev_API.features.core.dto.ReferentialCoreDTO;
+import com.jtissdev_API.features.referential.dto.ReferentialCoreDTO;
 import jakarta.json.*;
 import jakarta.json.stream.JsonGenerator;
 import org.slf4j.Logger;
@@ -57,8 +57,8 @@ public class JsonFileReferentialCoreRepository {
 			ResourceLoader resourceLoader,
 			@Value("${app.persistence.storage-path}") String storageDir,
 			@Value("${app.persistence.seed-path}") String seedFolder,
-			@Value("${app.persistence.filename-status}") String statusFilename,
-			@Value("${app.persistence.filename-payment}") String paymentFilename) {
+			@Value("${app.persistence.file-name.status}") String statusFilename,
+			@Value("${app.persistence.file-name.paymentMethod}") String paymentFilename) {
 
 		this.resourceLoader = resourceLoader;
 

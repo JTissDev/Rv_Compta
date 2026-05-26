@@ -1,8 +1,8 @@
-package com.jtissdev_API.features.core.repository;
+package com.jtissdev_API.features.PCP.repository;
 
 import com.jtissdev_API.features.PCP.dto.AnalyticDetail;
 import com.jtissdev_API.features.PCP.dto.Tiers;
-import com.jtissdev_API.features.core.dto.PcpCoreDTO;
+import com.jtissdev_API.features.PCP.dto.PcpCoreDTO;
 import jakarta.json.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -153,10 +153,10 @@ public class JsonFilePcpRepository {
 	 */
 	public JsonFilePcpRepository(
 			ResourceLoader resourceLoader,
-			@Value("${app.persistence.path}") String storagePath,
+			@Value("${app.persistence.storage-path}") String storagePath,
 			@Value("${app.persistence.seed-path}") String seedPath,
-			@Value("${app.persistence.filename-tiers}") String filenameTiers,
-			@Value("${app.persistence.filename-details}") String filenameDetails) {
+			@Value("${app.persistence.file-name.tiers}") String filenameTiers,
+			@Value("${app.persistence.file-name.details}") String filenameDetails) {
 
 		this.resourceLoader = resourceLoader;
 

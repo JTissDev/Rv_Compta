@@ -1,4 +1,4 @@
-package com.jtissdev_API.features.core.dto.referential;
+package com.jtissdev_API.features.referential.dto;
 
 import com.jtissdev_API.utils.TestGroup;
 import com.jtissdev_API.utils.TestResultLogger;

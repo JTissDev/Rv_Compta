@@ -1,11 +1,18 @@
 package com.jtissdev_API.controller;
 
+import com.jtissdev_API.features.PCG.repository.JsonFilePcgRepository;
+import com.jtissdev_API.features.PCG.repository.PcgRepository;
 import com.jtissdev_API.features.compta.dto.JournalDTO;
 import com.jtissdev_API.features.compta.dto.OperationDTO;
 import com.jtissdev_API.view.ViewUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -28,13 +35,23 @@ public class ConsoleMainController extends AbstractConsoleController implements 
 
 	private static final Logger logger = LoggerFactory.getLogger(ConsoleMainController.class);
 
-	public ConsoleMainController() {
-		super();
+	/* @Value("${app.persistence.storage-path}")
+	private String storageDir;
+
+	@Value("${app.seed.folder-path}")
+	private String seedFolder;
+
+	@Value("${app.seed.pcg-file-name}")
+	private String pcgSeedFileName; */
+	public ConsoleMainController(@Value("${app.data.path}") String dataPath) {
+		super(dataPath);
 
 	}
 
 	@Override
 	public void run() {
+		//ResourceLoader resourceLoader = new DefaultResourceLoader();
+		//PcgRepository pcgRepository = new JsonFilePcgRepository(resourceLoader,storageDir,seedFolder,pcgSeedFileName);
 		currentJournal = loadJournalInitial();
 
 		mainConsoleView.displayHeader();

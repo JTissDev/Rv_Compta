@@ -1,6 +1,6 @@
 package com.jtissdev_API.view;
 
-import com.jtissdev_API.features.core.dto.SelectionContext;
+import com.jtissdev_API.features.core.SelectionContext;
 
 /**
  * Represents a NavigationContextView DTO.

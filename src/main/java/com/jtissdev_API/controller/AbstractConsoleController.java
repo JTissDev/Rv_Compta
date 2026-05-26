@@ -4,15 +4,18 @@ import com.jtissdev_API.engine.loader.DetailsDataLoader;
 import com.jtissdev_API.engine.loader.JournalLoader;
 import com.jtissdev_API.engine.loader.PcgDataLoader;
 import com.jtissdev_API.engine.loader.TiersDataLoader;
+import com.jtissdev_API.features.PCG.repository.JsonFilePcgRepository;
+import com.jtissdev_API.features.PCG.repository.PcgRepository;
 import com.jtissdev_API.features.PCG.view.AccountingTypeView;
 import com.jtissdev_API.features.compta.dto.JournalDTO;
 import com.jtissdev_API.features.compta.view.JournalConsoleView;
 import com.jtissdev_API.features.compta.view.OperationConsolView;
-import com.jtissdev_API.features.core.dto.PcgCoreDTO;
-import com.jtissdev_API.features.core.dto.PcpCoreDTO;
+import com.jtissdev_API.features.PCG.dto.PcgCoreDTO;
+import com.jtissdev_API.features.PCP.dto.PcpCoreDTO;
 import com.jtissdev_API.view.MainConsoleView;
 import com.jtissdev_API.view.ViewUtil;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 
 import java.util.Scanner;
 
@@ -23,6 +26,7 @@ import java.util.Scanner;
  * @version 1.0.0
  * @since 0.6
  */
+@Controller
 public class AbstractConsoleController {
 
 	protected final Scanner scanner = new Scanner(System.in);
@@ -35,15 +39,16 @@ public class AbstractConsoleController {
 	protected final DetailsDataLoader detailsLoader = new DetailsDataLoader();
 	protected final JournalLoader journalLoader = new JournalLoader(); // TODO À remplacer par JournalService plus tard
 
-	@Value("${app.data.path}")
-	protected String dataPath;
+
+	protected final String dataPath;
 	protected JournalDTO currentJournal;
 	protected PcgCoreDTO pcgCore;
 	protected PcpCoreDTO pcpCore;
 
 
-	public AbstractConsoleController() {
+	public AbstractConsoleController(@Value("${app.data.path}") String dataPath) {
 
+		this.dataPath = dataPath;
 		this.pcgCore = pcgLoader.loadPcg("data/PCG.json");
 		pcpCore = new PcpCoreDTO();
 		pcpCore.setThirdParties(tiersLoader.loadTiersFromJson("Tiers.json"));

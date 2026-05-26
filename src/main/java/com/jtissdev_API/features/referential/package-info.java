@@ -11,4 +11,4 @@
  * @version 1.0.0
  * @since 0.2.0
  */
-package com.jtissdev_API.features.core.dto.referential;
+package com.jtissdev_API.features.referential;

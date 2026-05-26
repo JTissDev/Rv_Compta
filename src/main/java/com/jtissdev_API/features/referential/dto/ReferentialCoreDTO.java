@@ -1,8 +1,5 @@
-package com.jtissdev_API.features.core.dto;
+package com.jtissdev_API.features.referential.dto;
 
-import com.jtissdev_API.features.PCG.dto.AccountingTypeDetails;
-import com.jtissdev_API.features.core.dto.referential.OperationStatus;
-import com.jtissdev_API.features.core.dto.referential.PaymentMethod;
 import jakarta.json.*;
 
 import java.util.ArrayList;

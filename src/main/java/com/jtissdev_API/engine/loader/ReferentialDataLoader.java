@@ -1,8 +1,8 @@
 package com.jtissdev_API.engine.loader;
 
-import com.jtissdev_API.features.core.dto.ReferentialCoreDTO;
-import com.jtissdev_API.features.core.dto.referential.OperationStatus;
-import com.jtissdev_API.features.core.dto.referential.PaymentMethod;
+import com.jtissdev_API.features.referential.dto.ReferentialCoreDTO;
+import com.jtissdev_API.features.referential.dto.OperationStatus;
+import com.jtissdev_API.features.referential.dto.PaymentMethod;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;

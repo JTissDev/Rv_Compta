@@ -1,10 +1,8 @@
-package com.jtissdev_API.features.core.repository;
+package com.jtissdev_API.features.PCG.repository;
 
-import com.jtissdev_API.features.core.dto.PcgCoreDTO;
+import com.jtissdev_API.features.PCG.dto.PcgCoreDTO;
 import jakarta.json.*;
 import jakarta.json.stream.JsonGenerator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -13,27 +11,26 @@ import org.springframework.stereotype.Repository;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 /**
  * File-based implementation of the Plan Comptable Général (PCG) repository.
- * <p>
- * Manages the single JSON file persistence for the entire accounting structural hierarchy.
- * Includes an automated seed fallback mechanism to deploy standard configuration templates
- * across variable environments.
- * </p>
+ *  * <p>
+ *  * Manages the single JSON file persistence for the entire accounting structural hierarchy.
+ *  * Relies on the parent class abstract logic to handle seed deployment orchestration.
+ *  * </p>
  *
  * @author J.Tiss
- * @version 2.0.0
+ * @version 2.1.0
  * @since 0.6.0
  */
 @Repository
 public class JsonFilePcgRepository extends PcgRepository { ;
 
 	private final JsonWriterFactory writerFactory;
-
 	private final File pcgLiveFile;
 
 
@@ -73,15 +70,17 @@ public class JsonFilePcgRepository extends PcgRepository { ;
 	 *
 	 * @since 2.0.0
 	 */
+	@Override
 	public Optional<PcgCoreDTO> load() {
 		try {
 			// Déclenchement automatique de la copie de la graine si le fichier vivant n'existe pas
-			checkAndCopySeed();
+			checkAndDeploySeed();
 
 			if (!pcgLiveFile.exists()) {
 				logger.error("[Persistence] Critical PCG reference file is missing even after seed copy execution.");
 				return Optional.empty();
 			}
+
 
 			// Le fichier PCG.json stocke directement un tableau natif [ ... ]
 			JsonArray pcgArray;
@@ -114,6 +113,7 @@ public class JsonFilePcgRepository extends PcgRepository { ;
 	 * 		if the provided core instance is null.
 	 * @since 2.0.0
 	 */
+	@Override
 	public void save(PcgCoreDTO pcgCore) {
 		if (pcgCore == null) {
 			throw new IllegalArgumentException("Cannot save a null PCG core object.");
@@ -143,15 +143,21 @@ public class JsonFilePcgRepository extends PcgRepository { ;
 
 	@Override
 	public int getDataSize() {
-		Resource seedResource = resourceLoader.getResource(pcgSeedPath);
-		try (InputStream in = seedResource.getInputStream()) {
-			Files.copy(in, pcgLiveFile.toPath());
-			logger.info("[Persistence] Successfully deployed internal PCG seed template to destination: {}", pcgLiveFile.getName());
-			return 1;
+		if (!pcgLiveFile.exists()) {
+			return 0; // Aucun fichier, donc taille = 0
 		}
-		 catch (IOException e) {
-			throw new RuntimeException(e);
 
+		// Lecture simple du fichier pour retourner la taille du tableau sans écraser de données
+		try (FileInputStream fis = new FileInputStream(pcgLiveFile);
+		     InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+		     JsonReader reader = Json.createReader(isr)) {
+
+			JsonArray pcgArray = reader.readArray();
+			return pcgArray.size();
+
+		} catch (Exception e) {
+			logger.error("[Persistence] Failed to compute data size from live file.", e);
+			return 0;
 		}
 	}
 
@@ -159,24 +165,10 @@ public class JsonFilePcgRepository extends PcgRepository { ;
 	// == PRIVATE UTILITY CORE                                ==
 	// =========================================================
 
-	protected void checkAndCopySeed() throws IOException {
-		if (pcgLiveFile.exists()) {
-			return;
-		}
-
-		logger.info("[Persistence] Live PCG file not found. Activating seed copy from source: {}", pcgSeedPath);
-		Resource seedResource = resourceLoader.getResource(pcgSeedPath);
-
-		if (!seedResource.exists()) {
-			throw new FileNotFoundException("PCG seed resource could not be found inside the application bundle: " + pcgSeedPath);
-		}
-
+	@Override
+	protected void writeSeedToLiveZone(InputStream seedStream) throws IOException {
 		ensureParentDirectoryExists();
-
-		try (InputStream in = seedResource.getInputStream()) {
-			Files.copy(in, pcgLiveFile.toPath());
-			logger.info("[Persistence] Successfully deployed internal PCG seed template to destination: {}", pcgLiveFile.getName());
-		}
+		Files.copy(seedStream, pcgLiveFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 	}
 
 	private void ensureParentDirectoryExists() {

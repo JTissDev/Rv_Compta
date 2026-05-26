@@ -1,9 +1,10 @@
 package com.jtissdev_API.controller;
 
-import com.jtissdev_API.features.core.dto.SelectionContext;
+import com.jtissdev_API.features.core.SelectionContext;
 import com.jtissdev_API.view.ViewUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -26,8 +27,8 @@ public class TestMainController extends AbstractConsoleController implements Mai
 	/** File d'attente simulant les saisies utilisateur */
 	private final Queue<String> inputQueue = new LinkedList<>();
 
-	public TestMainController() {
-		super();
+	public TestMainController(@Value("${app.data.path}") String dataPath) {
+		super( dataPath);
 	}
 
 	/**

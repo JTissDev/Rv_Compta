@@ -1,7 +1,7 @@
 package com.jtissdev_API.features.PCG.view;
 
 import com.jtissdev_API.features.PCG.dto.SubAccountingType;
-import com.jtissdev_API.features.core.dto.SelectionContext;
+import com.jtissdev_API.features.core.SelectionContext;
 
 /**
  * Represents a SubAccountingTypeView DTO.

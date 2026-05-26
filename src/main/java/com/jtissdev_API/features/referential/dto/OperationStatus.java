@@ -1,4 +1,4 @@
-package com.jtissdev_API.features.core.dto.referential;
+package com.jtissdev_API.features.referential.dto;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;

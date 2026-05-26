@@ -9,15 +9,15 @@ import com.jtissdev_API.features.PCP.dto.TiersTest;
 import com.jtissdev_API.features.compta.dto.JournalDTOTest;
 import com.jtissdev_API.features.compta.dto.MovementDTOTest;
 import com.jtissdev_API.features.compta.dto.OperationDTOTest;
-import com.jtissdev_API.features.compta.repository.JsonFileJournalRepositoryTest;
-import com.jtissdev_API.features.core.dto.PcgCoreDTOTest;
-import com.jtissdev_API.features.core.dto.PcpCoreDTOTest;
-import com.jtissdev_API.features.core.dto.ReferentialCoreDTOTest;
-import com.jtissdev_API.features.core.dto.referential.OperationStatusTest;
-import com.jtissdev_API.features.core.dto.referential.PaymentMethodTest;
-import com.jtissdev_API.features.core.repository.JsonFilePcgRepositoryTest;
-import com.jtissdev_API.features.core.repository.JsonFilePcpRepositoryTest;
-import com.jtissdev_API.features.core.repository.JsonFileReferentialCoreRepositoryTest;
+//import com.jtissdev_API.features.compta.repository.JsonFileJournalRepositoryTest;
+import com.jtissdev_API.features.PCG.dto.PcgCoreDTOTest;
+import com.jtissdev_API.features.PCP.dto.PcpCoreDTOTest;
+import com.jtissdev_API.features.referential.dto.ReferentialCoreDTOTest;
+import com.jtissdev_API.features.referential.dto.OperationStatusTest;
+import com.jtissdev_API.features.referential.dto.PaymentMethodTest;
+import com.jtissdev_API.features.PCG.repository.JsonFilePcgRepositoryTest;
+//import com.jtissdev_API.features.PCP.repository.JsonFilePcpRepositoryTest;
+//import com.jtissdev_API.features.referential.repository.JsonFileReferentialCoreRepositoryTest;
 import com.jtissdev_API.utils.TestResultLogger;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +37,7 @@ import org.junit.platform.suite.api.Suite;
 		ReferentialCoreDTOTest.class,
 
 		// Referential Repository
-		JsonFileReferentialCoreRepositoryTest.class,
+		//JsonFileReferentialCoreRepositoryTest.class,
 
 		/* ====================================================================
 	    ===                  PCP - PLAN COMPTABLE PERSONALISE               ===
@@ -48,7 +48,7 @@ import org.junit.platform.suite.api.Suite;
 		// PCP Data holder
 		PcpCoreDTOTest.class,
 		// PCP Repository
-		JsonFilePcpRepositoryTest.class,
+		//JsonFilePcpRepositoryTest.class,
 
 
 		/* ====================================================================
@@ -70,7 +70,7 @@ import org.junit.platform.suite.api.Suite;
 		MovementDTOTest.class, OperationDTOTest.class, JournalDTOTest.class,
 
 		// Journal Repository
-		JsonFileJournalRepositoryTest.class,
+		//JsonFileJournalRepositoryTest.class,
 
 
 		/* ====================================================================

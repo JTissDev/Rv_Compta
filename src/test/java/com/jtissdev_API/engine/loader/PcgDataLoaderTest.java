@@ -1,6 +1,6 @@
 package com.jtissdev_API.engine.loader;
 
-import com.jtissdev_API.features.core.dto.PcgCoreDTO;
+import com.jtissdev_API.features.PCG.dto.PcgCoreDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

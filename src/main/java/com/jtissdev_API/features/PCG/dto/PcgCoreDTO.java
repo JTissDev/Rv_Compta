@@ -1,6 +1,5 @@
-package com.jtissdev_API.features.core.dto;
+package com.jtissdev_API.features.PCG.dto;
 
-import com.jtissdev_API.features.PCG.dto.AccountingType;
 import jakarta.json.*;
 import java.util.ArrayList;
 import java.util.List;

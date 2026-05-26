@@ -1,8 +1,7 @@
 package com.jtissdev_API.features.PCG.view;
 
 import com.jtissdev_API.features.PCG.dto.AccountingType;
-import com.jtissdev_API.features.core.dto.SelectionContext;
-import com.jtissdev_API.view.NavigationContextView;
+import com.jtissdev_API.features.core.SelectionContext;
 
 /**
  * The AccountingTypeView class is responsible for displaying the list of accounting types in a console-based user interface.

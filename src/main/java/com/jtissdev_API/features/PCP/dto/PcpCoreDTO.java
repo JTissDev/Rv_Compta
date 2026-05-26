@@ -1,7 +1,5 @@
-package com.jtissdev_API.features.core.dto;
+package com.jtissdev_API.features.PCP.dto;
 
-import com.jtissdev_API.features.PCP.dto.AnalyticDetail;
-import com.jtissdev_API.features.PCP.dto.Tiers;
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
