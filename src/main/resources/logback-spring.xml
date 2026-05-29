@@ -38,14 +38,14 @@
 
 
     <springProfile name="test">
-        <logger name="com.jtissdev_API" level="TRACE" additivity="false">
+        <logger name="com.jtissdev" level="TRACE" additivity="false">
             <appender-ref ref="TEST_FILE" />
             <appender-ref ref="CONSOLE" />
         </logger>
     </springProfile>
 
     <springProfile name="console">
-        <logger name="com.jtissdev_API" level="INFO" />
+        <logger name="com.jtissdev" level="INFO" />
     </springProfile>
 
     <logger name="c.jtissdev.logging.banner.AppBanner" level="INFO" additivity="false">

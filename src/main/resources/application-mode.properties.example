@@ -23,4 +23,4 @@
 # logging.level.org.hibernate=WARN
 
 # Maintient les logs métiers actifs pour suivre l'exécution des traitements
-# logging.level.com.jtissdev_API=INFO
+# logging.level.com.jtissdev=INFO
