@@ -1,6 +1,6 @@
 # 📝 Project Tracking - Rv_Compta
 
-## 4. Global RoadMap & Progress
+## Global RoadMap & Progress
 
 - [ ] **Version 1.0: The Stable Console MVP**
   * **Referential & PCG/PCP Modules**:
@@ -15,7 +15,8 @@
     - [x] Unit Testing for DTOs and business rules. *(Validated in v0.3)*
     - [x] Implement `JournalLoader` (JSON to DTO rehydration). *(Validated in v0.4)*
     - [ ] **Excel Import Service**: Implement `.xlsx` / `.csv` parsing (Apache POI).
-    - [ ] **Interactive Mapping**: User-defined Excel row-to-DTO mapping.
+      - [ ] **Correspondence Map**
+      - [ ] **Interactive Mapping**: User-defined Excel row-to-DTO mapping.
     - [ ] **Validation Engine**: Enforce (Sum(Debit) == Sum(Credit)) and VIRINT automation.
   * **Console UI & Persistence**:
     - [ ] **Final CLI**: Robust navigation, journal auditing, and reporting.
@@ -48,3 +49,21 @@
   * [ ] **User Management**: Authentication and Authorization (JWT).
   * [ ] **RBAC**: Role-Based Access Control.
   * [ ] **Audit Logging**: Tracking user actions for financial compliance.
+
+- [ ] **Version 5.0: Association update**
+  * [ ] **Multi-Type-Profil** :  `Particular`, `association`, `entreprise`
+  * [ ] **Update PCG**
+  * [ ] **Integrating Association constraint**
+    * [ ] **Documentation**
+    * [ ] **Rules**
+
+- [ ] **Version 6.0: Entreprise update**
+  * [ ] **Update PCG**
+  * [ ] **Integrating Entreprise constraint**
+    * [ ] **Documentation**
+    * [ ] **Rules**
+
+
+## Évolutions / Refactoring
+- [ ] ⚙️ **Stabilisation du Mapping JSON** : Valider le fonctionnement de `AbstractJsonMapper` et de `JsonMappingException` sur l'application `Rv-Compta` actuelle.
+- [ ] 📦 **Modularisation (jtiss-dev-utils)** : Extraire l'infrastructure de mapping (`AbstractJsonMapper` et son exception dédiée) pour les injecter dans un module indépendant de `jtiss-dev-utils` afin de les rendre réutilisables.
