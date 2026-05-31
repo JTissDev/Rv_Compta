@@ -7,8 +7,6 @@ import com.jtissdev.features.pcg.dto.AccountingTypeDetails;
 import com.jtissdev.features.pcg.dto.SubAccountingType;
 import com.jtissdev.features.pcg.dto.PcgCoreDTO;
 import jakarta.json.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -187,10 +185,10 @@ public class PcgDataMapper extends AbstractJsonMapper implements DataMapper {
 
 				SubAccountingType subObj = new SubAccountingType();
 				subObj.setName(subJson.getString("name", ""));
-				subObj.setAccountingCode(subJson.getInt("subType_Num"));
+				subObj.setAccountCode(subJson.getInt("subType_Num"));
 				subObj.setDescription(subJson.getString("subType_desc", ""));
 
-				subObj.setParentAccountingCode(typeObj.getFullAccountingCode());
+				subObj.setParentAccountingCode(typeObj.getFullCode());
 
 				if (subJson.containsKey("id") && !subJson.isNull("id")) {
 					subObj.setId(subJson.getJsonNumber("id").intValue());
@@ -202,7 +200,7 @@ public class PcgDataMapper extends AbstractJsonMapper implements DataMapper {
 					AccountingTypeDetails detObj = new AccountingTypeDetails();
 					detObj.setName(detJson.getString("name", ""));
 					detObj.setDescription(detJson.getString("desc_detail", ""));
-					detObj.setAccountingCode(detJson.getInt("no_detail"));
+					detObj.setAccountCode(detJson.getInt("no_detail"));
 
 					detObj.setParentAccountingCode(subObj.getFullCode());
 

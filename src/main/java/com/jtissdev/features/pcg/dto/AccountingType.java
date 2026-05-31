@@ -17,51 +17,22 @@ import java.util.List;
  * its full accounting code is therefore equal to its local accounting code.
  *
  * @author jtiss
+ * @version 2.0.0
  * @since 0.1
- * @version 1.3.0
  */
-public class AccountingType {
+public class AccountingType extends AccountElement<AccountingType> {
 
 	// =========================================================
 	// == FIELDS                                              ==
 	// =========================================================
 
-	/**
-	 * Technical identifier used by the database.
-	 *
-	 * @since 0.1
-	 */
-	private Integer id;
-
-	/**
-	 * Human-readable name of the root accounting type.
-	 *
-	 * @since 0.1
-	 */
-	private String name;
-
-	/**
-	 * Local accounting code (numeric value) for this root type.
-	 * Since this type cannot have a parent code, this value is
-	 * also considered to be the full accounting code.
-	 *
-	 * @since 0.1
-	 */
-	private Integer accountCode;
-
-	/**
-	 * Human-readable description of the root accounting type.
-	 *
-	 * @since 0.1
-	 */
-	private String description;
 
 	/**
 	 * List of sub accounting types attached to this root type.
 	 *
 	 * @since 0.1
 	 */
-	private List<SubAccountingType> subTypes;
+	private List<SubAccountingType> subTypes = new ArrayList<>();
 
 	// =========================================================
 	// == CONSTRUCTORS                                        ==
@@ -79,15 +50,11 @@ public class AccountingType {
 	}
 
 	public AccountingType(JsonObject json) {
-		this();
-		if(json.containsKey("id")) {this.setId(json.getInt("id"));}
-		if(json.containsKey("name")) {this.setName(json.getString("name"));}
-		if(json.containsKey("accountCode")) {this.setAccountCode(json.getInt("accountCode"));}
-		if(json.containsKey("description")) {this.setDescription(json.getString("description"));}
-		if(json.containsKey("subTypes")) {
-			for(JsonObject subType : json.getJsonArray("subTypes").getValuesAs(JsonObject.class)) {
+		super(json);
+		if (json.containsKey("subTypes")) {
+			for (JsonObject subType : json.getJsonArray("subTypes").getValuesAs(JsonObject.class)) {
 
-				this.addSubType(new SubAccountingType(subType).setParentAccountingCode(this.getFullAccountingCode()));
+				this.addSubType(new SubAccountingType(subType).setParentAccountingCode(this.getFullCode()));
 
 			}
 		}
@@ -97,24 +64,27 @@ public class AccountingType {
 	 * Creates a {@code AccountingType} instance with main fields initialized.
 	 * The list of sub types is initialized to an empty {@link ArrayList}.
 	 *
-	 * @param id            technical identifier used by the database
-	 * @param name          human-readable name of the root accounting type
-	 * @param accountCode local accounting code (numeric value)
-	 * @param description   human-readable description of the root accounting type
-	 *
+	 * @param id
+	 * 		technical identifier used by the database
+	 * @param name
+	 * 		human-readable name of the root accounting type
+	 * @param accountCode
+	 * 		local accounting code (numeric value)
+	 * @param description
+	 * 		human-readable description of the root accounting type
 	 * @since 0.1
 	 * @deprecated Manual field initialization is discouraged.
-	 * Use {@link AccountingType(JsonObject)} instead for mapping from jsonObject
+	 * 		Use {@link AccountingType(JsonObject)} instead for mapping from jsonObject
 	 */
-	@Deprecated (since = "0.4", forRemoval = true)
+	@Deprecated(since = "0.4", forRemoval = true)
 	public AccountingType(Integer id,
 	                      String name,
 	                      Integer accountCode,
 	                      String description) {
-		this.setId( id ) ;
-		this.setName( name ) ;
-		this.setAccountCode(accountCode) ;
-		this.setDescription( description ) ;
+		this.setId(id);
+		this.setName(name);
+		this.setAccountCode(accountCode);
+		this.setDescription(description);
 		this.subTypes = new ArrayList<>();
 	}
 
@@ -122,101 +92,6 @@ public class AccountingType {
 	// == GETTERS / SETTERS                                   ==
 	// =========================================================
 
-	/**
-	 * Returns the technical identifier.
-	 *
-	 * @return technical identifier, or {@code null} if not set
-	 *
-	 * @since 0.1
-	 */
-	public Integer getId() {
-		return this.id;
-	}
-
-	/**
-	 * Sets the technical identifier.
-	 *
-	 * @param id technical identifier to set
-	 * @return {@code this} instance for fluent chaining
-	 *
-	 * @since 0.1
-	 */
-	public AccountingType setId(Integer id) {
-		this.id = id;
-		return this;
-	}
-
-	/**
-	 * Returns the human-readable name of the root accounting type.
-	 *
-	 * @return name, or {@code null} if not set
-	 *
-	 * @since 0.1
-	 */
-	public String getName() {
-		return this.name;
-	}
-
-	/**
-	 * Sets the human-readable name of the root accounting type.
-	 *
-	 * @param name name to set
-	 * @return {@code this} instance for fluent chaining
-	 *
-	 * @since 0.1
-	 */
-	public AccountingType setName(String name) {
-		this.name = name;
-		return this;
-	}
-
-	/**
-	 * Returns the local accounting code (numeric value).
-	 *
-	 * @return local accounting code, or {@code null} if not set
-	 *
-	 * @since 0.1
-	 */
-	public Integer getAccountCode() {
-		return this.accountCode;
-	}
-
-	/**
-	 * Sets the local accounting code (numeric value).
-	 *
-	 * @param accountCode code to set
-	 * @return {@code this} instance for fluent chaining
-	 *
-	 * @since 0.1
-	 */
-	public AccountingType setAccountCode(Integer accountCode) {
-		this.accountCode = accountCode;
-		return this;
-	}
-
-	/**
-	 * Returns the human-readable description of the root accounting type.
-	 *
-	 * @return description, or {@code null} if not set
-	 *
-	 * @since 0.1
-	 */
-	public String getDescription() {
-		return this.description;
-	}
-
-	/**
-	 * Sets the human-readable description of the root accounting type.
-	 *
-	 * @param description description to set
-	 * @return {@code this} instance for fluent chaining
-	 *
-	 * @since 0.1
-	 */
-	public AccountingType setDescription(String description) {
-		this.description = description;
-		return this;
-	}
 
 	/**
 	 * Returns the list of sub accounting types attached to this root type.
@@ -234,7 +109,8 @@ public class AccountingType {
 	 * If {@code null} is provided, the internal list is replaced by
 	 * an empty {@link ArrayList}.
 	 *
-	 * @param subTypes list of sub accounting types to set
+	 * @param subTypes
+	 * 		list of sub accounting types to set
 	 * @return {@code this} instance for fluent chaining
 	 *
 	 * @since 0.1
@@ -245,11 +121,13 @@ public class AccountingType {
 	}
 
 	public AccountingType setSubTypes(JsonArray subTypes) {
-		if(this.getSubTypes() != null) {this.setSubTypes(new ArrayList<>());}
-		if(!subTypes.isEmpty()){
-				for(JsonObject subType : subTypes.getValuesAs(JsonObject.class)) {
-					this.addSubType(new SubAccountingType(subType));
-				}
+		if (this.getSubTypes() != null) {
+			this.setSubTypes(new ArrayList<>());
+		}
+		if (!subTypes.isEmpty()) {
+			for (JsonObject subType : subTypes.getValuesAs(JsonObject.class)) {
+				this.addSubType(new SubAccountingType(subType));
+			}
 		}
 		return this;
 	}
@@ -262,14 +140,15 @@ public class AccountingType {
 	 * Adds a sub accounting type to the internal list.
 	 * If the given sub type is {@code null}, the call is ignored.
 	 *
-	 * @param subType sub accounting type to add
+	 * @param subType
+	 * 		sub accounting type to add
 	 * @return {@code this} instance for fluent chaining
 	 *
 	 * @since 0.1
 	 */
 	public AccountingType addSubType(SubAccountingType subType) {
 		if (subType != null) {
-			subType.setParentAccountingCode( this.getFullAccountingCode());
+			subType.setParentAccountingCode(this.getFullCode());
 			this.getSubTypes().add(subType);
 		}
 		return this;
@@ -286,7 +165,7 @@ public class AccountingType {
 	 *
 	 * @since 0.1
 	 */
-	public String getFullAccountingCode() {
+	public String getFullCode() {
 		return this.getAccountCode() != null ? this.getAccountCode().toString() : null;
 
 	}
@@ -303,26 +182,17 @@ public class AccountingType {
 	 *
 	 * @return JSON representation of this instance
 	 *
+	 * @version 1.1
+	 * @see AccountElement#toJson()
+	 * @see SubAccountingType#toJson()
 	 * @since 0.1
 	 */
+	@Override
 	public JsonObject toJson() {
-		JsonObjectBuilder builder = Json.createObjectBuilder();
+		JsonObjectBuilder builder = super.getBaseJsonBuilder();
 
-		if (this.getId() != null) {
-			builder.add("id", this.getId());
-		}
-		if (this.getName() != null) {
-			builder.add("name", this.getName());
-		}
-		if (this.getAccountCode() != null) {
-			builder.add("accountCode", this.getAccountCode());
-		}
-		if (this.getDescription() != null) {
-			builder.add("description", this.getDescription());
-		}
-
-		if (this.getFullAccountingCode() != null) {
-			builder.add("fullCodeComptable", this.getFullAccountingCode());
+		if (this.getFullCode() != null) {
+			builder.add("fullCode", this.getFullCode());
 		}
 
 		if (this.getSubTypes() != null) {

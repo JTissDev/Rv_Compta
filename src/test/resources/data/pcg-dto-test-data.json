@@ -1,0 +1,52 @@
+{
+  "AccountingTypeDetails": {
+	"allFields": {
+	  "id": 1,
+	  "name": "Revenue",
+	  "accountCode": 4000,
+	  "description": "Revenue Description",
+	  "parentAccountingCode": "40"
+	},
+	"nameOnly": {
+	  "name": "Revenue"
+	},
+	"nameAndAccountingCode": {
+	  "name": "Revenue",
+	  "accountCode": 4000
+	}
+  },
+  "SubAccountingType": {
+	"fullAccount": {
+	  "id": 1,
+	  "name": "Compte courant",
+	  "description": "Compte courant",
+	  "accountCode": 3,
+	  "parentAccountingCode": "50",
+	  "detailsList": [
+		{ "name": "Capital", "accountCode": 1, "description": "Capital des prêt consenti" },
+		{ "name": "Divers", "accountCode": 9, "description": "Créances diverses" },
+		{ "name": "Intérêts à recevoir", "accountCode": 2, "description": "Interet à recevoir sur les prêts consenti" }
+	  ]
+	},
+	"minimal": {
+	  "id": 1,
+	  "name": "Compte courant"
+	}
+  },
+  "AccountingType": {
+	"fullLevel1": {
+	  "id": 1,
+	  "name": "Patrimoine & Résultat",
+	  "accountCode": 1,
+	  "description": "Patrimoine et epargne long terme",
+	  "subTypes": [
+		{ "name": "Dettes Long Terme", "accountCode": 3, "description": "ensemble des dettes long terme" },
+		{ "name": "Patrimoine net initial", "accountCode": 0, "description": "ensemble des biens et dettes" }
+	  ]
+	},
+	"minimal": {
+	  "name": "Patrimoine & Résultat",
+	  "accountCode": 1
+	}
+  }
+}

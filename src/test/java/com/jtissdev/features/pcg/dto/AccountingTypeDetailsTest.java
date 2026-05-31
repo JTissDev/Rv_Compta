@@ -1,5 +1,6 @@
 package com.jtissdev.features.pcg.dto;
 
+import com.jtissdev.utils.TestDataLoader;
 import com.jtissdev.utils.TestGroup;
 import com.jtissdev.utils.TestResultLogger;
 import jakarta.json.Json;
@@ -26,38 +27,13 @@ public class AccountingTypeDetailsTest {
 	private static final String PARENT_ACCOUNTING_CODE = "40";
 	private static final String FULL_CODE = "404000";
 
-	private static JsonObject accountingTypeDetailsJson;
+	private static JsonObject testData;
 
 	@BeforeAll
-	@DisplayName("Setup Object for Accounting ")
 	static void setUpTest() {
-		accountingTypeDetailsJson = Json.createObjectBuilder()
-				                            .add("idOnly", Json.createObjectBuilder()
-						                                           .add("id", ID).build())
-				                            .add("nameOnly", Json.createObjectBuilder()
-						                                             .add("name", NAME).build())
-				                            .add("accountingCodeOnly", Json.createObjectBuilder()
-						                                                       .add("accountingCode", ACCOUNTING_CODE).build())
-				                            .add("descriptionOnly", Json.createObjectBuilder()
-						                                                    .add("description", DESCRIPTION).build())
-				                            .add("parentAccountingCodeOnly", Json.createObjectBuilder()
-						                                                            .add("parentAccountingCode", PARENT_ACCOUNTING_CODE).build())
-				                            .add("fullCodeOnly", Json.createObjectBuilder()
-						                                                 .add("fullCode", FULL_CODE).build())
-				                            .add("idAndName", Json.createObjectBuilder()
-						                                              .add("id", ID)
-						                                              .add("name", NAME).build())
-				                            .add("nameAndAccountingCode", Json.createObjectBuilder()
-						                                                          .add("name", NAME)
-						                                                          .add("accountingCode", ACCOUNTING_CODE).build())
-				                            .add("allFields", Json.createObjectBuilder()
-						                                              .add("id", ID)
-						                                              .add("name", NAME)
-						                                              .add("accountingCode", ACCOUNTING_CODE)
-						                                              .add("description", DESCRIPTION)
-						                                              .add("parentAccountingCode", PARENT_ACCOUNTING_CODE)
-						                                              .add("fullCode", FULL_CODE).build())
-				                            .build();
+		// Chargement propre depuis le fichier JSON externe
+		testData = TestDataLoader.loadFromResources("data/pcg-dto-test-data.json")
+				           .getJsonObject("AccountingTypeDetails");
 	}
 
 	@Test
@@ -69,7 +45,7 @@ public class AccountingTypeDetailsTest {
 		assertAll("Empty constructor test validation",
 				() -> assertNull(accountingTypeDetails.getId(),"Id should be null"),
 				() -> assertNull(accountingTypeDetails.getName(),"name should be null"),
-				() -> assertNull(accountingTypeDetails.getAccountingCode(),"Code should be null"),
+				() -> assertNull(accountingTypeDetails.getAccountCode(),"Code should be null"),
 				() -> assertNull(accountingTypeDetails.getDescription(),"description should be null"),
 				() -> assertNull(accountingTypeDetails.getParentAccountingCode(),"parent code comptable should be null")
 		);
@@ -84,7 +60,7 @@ public class AccountingTypeDetailsTest {
 		AccountingTypeDetails result = accountingTypeDetails
 				                               .setId(ID)
 				                               .setName(NAME)
-				                               .setAccountingCode(ACCOUNTING_CODE)
+				                               .setAccountCode(ACCOUNTING_CODE)
 				                               .setParentAccountingCode(PARENT_ACCOUNTING_CODE)
 				                               .setDescription(DESCRIPTION);
 
@@ -92,7 +68,7 @@ public class AccountingTypeDetailsTest {
 				() -> assertSame(accountingTypeDetails,result,"Setters must return the same instance"),
 				() -> assertEquals(ID,accountingTypeDetails.getId(),"Id should be set"),
 				() -> assertEquals(NAME,accountingTypeDetails.getName(),"name should be set"),
-				() -> assertEquals(ACCOUNTING_CODE,accountingTypeDetails.getAccountingCode(),"accounting code should be set"),
+				() -> assertEquals(ACCOUNTING_CODE,accountingTypeDetails.getAccountCode(),"accounting code should be set"),
 				() -> assertEquals(PARENT_ACCOUNTING_CODE, accountingTypeDetails.getParentAccountingCode(),"Parent accounting code should be set"),
 				() -> assertEquals(DESCRIPTION, accountingTypeDetails.getDescription(),"description should be set"),
 				() -> assertEquals(FULL_CODE, accountingTypeDetails.getFullCode(),"full code should be set")
@@ -103,11 +79,11 @@ public class AccountingTypeDetailsTest {
 	@Order(3)
 	@DisplayName("Test Full Json Constructor")
 	void testJsonConstructor() {
-		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails(accountingTypeDetailsJson.getJsonObject("allFields"));
+		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails(testData.getJsonObject("allFields"));
 		assertAll("Json constructor test validation",
 				() -> assertEquals(ID, accountingTypeDetails.getId(),"Id should be set"),
 				() -> assertEquals(NAME, accountingTypeDetails.getName(),"name should be set"),
-				() -> assertEquals(ACCOUNTING_CODE, accountingTypeDetails.getAccountingCode(),"Code should be set"),
+				() -> assertEquals(ACCOUNTING_CODE, accountingTypeDetails.getAccountCode(),"Code should be set"),
 				() -> assertEquals(DESCRIPTION, accountingTypeDetails.getDescription(),"description should be set"),
 				() -> assertEquals(PARENT_ACCOUNTING_CODE, accountingTypeDetails.getParentAccountingCode(),"parent code comptable should be set"),
 				() -> assertEquals(FULL_CODE, accountingTypeDetails.getFullCode(),"full code should be set")
@@ -118,12 +94,12 @@ public class AccountingTypeDetailsTest {
 	@Order(3)
 	@DisplayName("Test name Only Json Constructor")
 	void testNameOnlyJsonConstructor() {
-		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails(accountingTypeDetailsJson.getJsonObject("nameOnly"));
+		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails(testData.getJsonObject("nameOnly"));
 
 		assertAll("Json constructor mapping validation with non existing parameters",
 				() -> assertEquals(NAME,accountingTypeDetails.getName(),"name must be mapped"),
 				() -> assertNull(accountingTypeDetails.getId(),"non existing id should'nt be mapped"),
-				() -> assertNull(accountingTypeDetails.getAccountingCode(),"Non existing AccountingCode  should'nt be mapped."),
+				() -> assertNull(accountingTypeDetails.getAccountCode(),"Non existing AccountingCode  should'nt be mapped."),
 				() -> assertNull(accountingTypeDetails.getDescription(),"Non existing Description  should'nt be mapped."),
 				() -> assertNull(accountingTypeDetails.getParentAccountingCode(),"Non existing ParentAccountingCode should'nt be mapped."),
 				() -> assertNull(accountingTypeDetails.getFullCode(),"Non existing FullCode  should'nt be mapped.")
@@ -136,12 +112,12 @@ public class AccountingTypeDetailsTest {
 	@Order(4)
 	@DisplayName("toJson: should only include non-null fields")
 	void testToJsonSerialization() {
-		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails(accountingTypeDetailsJson.getJsonObject("nameAndAccountingCode"));
+		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails(testData.getJsonObject("nameAndAccountingCode"));
 		JsonObject json = accountingTypeDetails.toJson();
 		assertAll("toJson validation",
 				() -> assertFalse(json.containsKey("id"),"Null id should be omitted"),
 				() -> assertEquals(NAME,json.getString("name"),"name should be serialized"),
-				() -> assertEquals(ACCOUNTING_CODE,json.getInt("accountingCode"),"accounting code should be serialized"),
+				() -> assertEquals(ACCOUNTING_CODE,json.getInt("accountCode"),"accounting code should be serialized"),
 				() -> assertFalse(json.containsKey("description"),"Null description should be omitted"),
 				() -> assertFalse(json.containsKey("parentAccountingCode"),"Null parent code comptable should be omitted"),
 				() -> assertFalse(json.containsKey("fullCode"),"No Parent accounting code should be ommited"),
@@ -153,7 +129,7 @@ public class AccountingTypeDetailsTest {
 	@Order(4)
 	@DisplayName("toString : must have required format")
 	void testToStringSerialization(){
-		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails(accountingTypeDetailsJson.getJsonObject("allFields"));
+		AccountingTypeDetails accountingTypeDetails = new AccountingTypeDetails(testData.getJsonObject("allFields"));
 
 
 	}

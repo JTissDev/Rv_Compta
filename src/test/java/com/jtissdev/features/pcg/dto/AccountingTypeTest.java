@@ -1,5 +1,6 @@
 package com.jtissdev.features.pcg.dto;
 
+import com.jtissdev.utils.TestDataLoader;
 import com.jtissdev.utils.TestGroup;
 import com.jtissdev.utils.TestResultLogger;
 import jakarta.json.Json;
@@ -33,36 +34,14 @@ public class AccountingTypeTest {
 	private static final Integer ACCOUNT_CODE = 1;
 	private static final String DESCRIPTION = "Patrimoine et epargne long terme";
 
-	// --- DONNÉES DE TEST (Niveau 2 - Array) ---
-	private static final JsonArray SUB_TYPES_ARRAY = Json.createArrayBuilder()
-			                                                 .add(Json.createObjectBuilder()
-					                                                      .add("name", "Dettes Long Terme")
-					                                                      .add("subType_Num", 3)
-					                                                      .add("subType_desc", "ensemble des dettes long terme"))
-			                                                 .add(Json.createObjectBuilder()
-					                                                      .add("name", "Patrimoine net initial")
-					                                                      .add("subType_Num", 0)
-					                                                      .add("subType_desc", "ensemble des biens et dettes"))
-			                                                 .build();
-
-	private static JsonObject testDataJson;
+	private static JsonObject testData;
+	private static JsonArray subTypesArray;
 
 	@BeforeAll
-	@DisplayName("Setup JSON Objects for Account/Tiers Test")
 	static void setUp() {
-		testDataJson = Json.createObjectBuilder()
-				               .add("fullLevel1", Json.createObjectBuilder()
-						                                  .add("id", ID)
-						                                  .add("name", NAME) // Correspond à "type" dans pcg.json
-						                                  .add("accountCode", ACCOUNT_CODE)
-						                                  .add("description", DESCRIPTION)
-						                                  .add("subTypes", SUB_TYPES_ARRAY) // L'ARRAY EST ICI
-						                                  .build())
-				               .add("minimal", Json.createObjectBuilder()
-						                               .add("name", NAME) // Correspond à "type" dans pcg.json
-						                               .add("accountCode", ACCOUNT_CODE)
-						                               .build())
-				               .build();
+		testData = TestDataLoader.loadFromResources("data/pcg-dto-test-data.json")
+				           .getJsonObject("AccountingType");
+		subTypesArray = testData.getJsonObject("fullLevel1").getJsonArray("subTypes");
 	}
 
 	@Test
@@ -88,7 +67,7 @@ public class AccountingTypeTest {
 				                           .setName(NAME)
 				                           .setAccountCode(ACCOUNT_CODE)
 				                           .setDescription(DESCRIPTION)
-				                           .setSubTypes(SUB_TYPES_ARRAY);
+				                           .setSubTypes(subTypesArray);
 
 		assertAll("Setters must return this check chaining value",
 				() -> assertSame(result,type,"setters must return this"),
@@ -96,7 +75,7 @@ public class AccountingTypeTest {
 				() -> assertEquals(NAME,type.getName(),"name must have been mapped"),
 				() -> assertEquals(ACCOUNT_CODE,type.getAccountCode(),"Account code must have been mapped"),
 				() -> assertEquals(DESCRIPTION,type.getDescription(),"Description must have been mapped"),
-				() -> assertEquals(SUB_TYPES_ARRAY.size(),type.getSubTypes().size(),"SubTypes must have been mapped")
+				() -> assertEquals(subTypesArray.size(),type.getSubTypes().size(),"SubTypes must have been mapped")
 				);
 	}
 
@@ -104,13 +83,13 @@ public class AccountingTypeTest {
 	@Order(3)
 	@DisplayName("Test Full Json Constructor")
 	void tsvFullJsonConstructor(){
-		AccountingType type = new AccountingType(testDataJson.getJsonObject("fullLevel1"));
+		AccountingType type = new AccountingType(testData.getJsonObject("fullLevel1"));
 			assertAll("Json constructor test validation",
 					() -> assertEquals(ID, type.getId(),"Id should be set"),
 					() -> assertEquals(NAME, type.getName(),"name should be set"),
 					() -> assertEquals(ACCOUNT_CODE, type.getAccountCode(),"Account code should be set"),
 					() -> assertEquals(DESCRIPTION, type.getDescription(),"Description should be set"),
-					() -> assertEquals(SUB_TYPES_ARRAY.size(),type.getSubTypes().size(),"SubTypes should be set")
+					() -> assertEquals(subTypesArray.size(),type.getSubTypes().size(),"SubTypes should be set")
 			);
 	}
 
@@ -118,7 +97,7 @@ public class AccountingTypeTest {
 	@Order(3)
 	@DisplayName("Test Constructor from json object with missing elements")
 	void tsvMinimalJsonConstructor(){
-		AccountingType type = new AccountingType(testDataJson.getJsonObject("minimal"));
+		AccountingType type = new AccountingType(testData.getJsonObject("minimal"));
 			assertAll("Json constructor test validation",
 					() -> assertEquals(NAME, type.getName(),"name should be set"),
 					() -> assertEquals(ACCOUNT_CODE, type.getAccountCode(),"Account code should be set"),
@@ -130,21 +109,21 @@ public class AccountingTypeTest {
 
 	@Test @Order(4) @DisplayName("Serialization Test : toJson")
 	void testToJson(){
-		AccountingType type = new AccountingType(testDataJson.getJsonObject("fullLevel1"));
+		AccountingType type = new AccountingType(testData.getJsonObject("fullLevel1"));
 		JsonObject json = type.toJson();
 		assertAll("toJson validation",
 				() -> assertEquals(ID,json.getInt("id"),"Id should be serialized"),
 				() -> assertEquals(NAME,json.getString("name"),"name should be serialized"),
 				() -> assertEquals(ACCOUNT_CODE,json.getInt("accountCode"),"Account code should be serialized"),
 				() -> assertEquals(DESCRIPTION,json.getString("description"),"Description should be serialized"),
-				() -> assertEquals(SUB_TYPES_ARRAY.size(),json.getJsonArray("subTypes").size(),"SubTypes should be serialized")
+				() -> assertEquals(subTypesArray.size(),json.getJsonArray("subTypes").size(),"SubTypes should be serialized")
 		);
 	}
 
 	@Test @Order(4) @DisplayName("Serialization Test : toString")
 	void testToString(){
-		AccountingType type = new AccountingType(testDataJson.getJsonObject("fullLevel1"));
-		SubAccountingType subType = new SubAccountingType(SUB_TYPES_ARRAY.getJsonObject(0)).setParentAccountingCode(type.getFullAccountingCode());
+		AccountingType type = new AccountingType(testData.getJsonObject("fullLevel1"));
+		SubAccountingType subType = new SubAccountingType(subTypesArray.getJsonObject(0)).setParentAccountingCode(type.getFullCode());
 		String subSType = subType.toString();
 		String sType = type.toString();
 

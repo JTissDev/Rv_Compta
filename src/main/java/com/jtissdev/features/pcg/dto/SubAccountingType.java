@@ -20,39 +20,11 @@ import java.util.List;
  * @version 1.3.0
  * @since 0.1
  */
-public class SubAccountingType {
+public class SubAccountingType extends AccountElement<SubAccountingType> {
 
 	// =========================================================
 	// == FIELDS                                              ==
 	// =========================================================
-
-	/**
-	 * Technical identifier used by the database.
-	 *
-	 * @since 0.1
-	 */
-	private Integer id;
-
-	/**
-	 * Human-readable name of the sub accounting type.
-	 *
-	 * @since 0.1
-	 */
-	private String name;
-
-	/**
-	 * Local accounting code (numeric value) for this sub type.
-	 *
-	 * @since 0.1
-	 */
-	private Integer accountingCode;
-
-	/**
-	 * Human-readable description of the sub accounting type.
-	 *
-	 * @since 0.1
-	 */
-	private String description;
 
 	/**
 	 * Parent accounting code.
@@ -67,7 +39,7 @@ public class SubAccountingType {
 	 *
 	 * @since 0.1
 	 */
-	private List<AccountingTypeDetails> detailsList;
+	private List<AccountingTypeDetails> detailsList = new ArrayList<>();
 
 	// =========================================================
 	// == CONSTRUCTORS                                        ==
@@ -82,9 +54,7 @@ public class SubAccountingType {
 	 *
 	 */
 	public SubAccountingType() {
-		if (this.detailsList == null) {
-			this.detailsList = new ArrayList<>();
-		}
+		super();
 	}
 
 	/**
@@ -102,19 +72,8 @@ public class SubAccountingType {
 	 * @since 0.1
 	 */
 	public SubAccountingType(JsonObject json) {
-		this();
-		if (json.containsKey("id")) {
-			this.setId(json.getInt("id"));
-		}
-		if (json.containsKey("name")) {
-			this.setName(json.getString("name"));
-		}
-		if (json.containsKey("accountingCode")) {
-			this.setAccountingCode(json.getInt("accountingCode"));
-		}
-		if (json.containsKey("description")) {
-			this.setDescription(json.getString("description"));
-		}
+		super(json);
+
 		if (json.containsKey("parentAccountingCode")) {
 			this.setParentAccountingCode(json.getString("parentAccountingCode"));
 		}
@@ -149,10 +108,10 @@ public class SubAccountingType {
 	                         String name,
 	                         Integer accountingCode,
 	                         String description) {
-		this.id = id;
-		this.name = name;
-		this.accountingCode = accountingCode;
-		this.description = description;
+		this.setId(id);
+		this.setName(name);
+		this.setAccountCode(accountingCode);
+		this.setDescription(description);
 		this.detailsList = new ArrayList<>();
 	}
 
@@ -183,115 +142,17 @@ public class SubAccountingType {
 	                         String description,
 	                         String parentAccountingCode,
 	                         List<AccountingTypeDetails> detailsList) {
-		this.id = id;
-		this.name = name;
-		this.accountingCode = accountingCode;
-		this.description = description;
-		this.parentAccountingCode = parentAccountingCode;
+		this.setId(id);
+		this.setName(name);
+		this.setAccountCode(accountingCode);
+		this.setDescription(description);
+		this.setParentAccountingCode(parentAccountingCode);
 		this.detailsList = (detailsList != null) ? detailsList : new ArrayList<>();
 	}
 
 	// =========================================================
 	// == GETTERS                                             ==
 	// =========================================================
-
-	/**
-	 * Returns the technical identifier used by the database.
-	 *
-	 * @return the technical identifier
-	 *
-	 * @since 0.1
-	 */
-	public Integer getId() {
-		return this.id;
-	}
-
-	/**
-	 * Sets the technical identifier used by the database.
-	 *
-	 * @param id
-	 * 		the new identifier
-	 * @return {this}
-	 *
-	 * @since 0.1
-	 */
-	public SubAccountingType setId(Integer id) {
-		this.id = id;
-		return this;
-	}
-
-	/**
-	 * Returns the human-readable name of the sub accounting type.
-	 *
-	 * @return the name
-	 *
-	 * @since 0.1
-	 */
-	public String getName() {
-		return this.name;
-	}
-
-	/**
-	 * Sets the human-readable name of the sub accounting type.
-	 *
-	 * @param name
-	 * 		the new name
-	 * @since 0.1
-	 */
-	public SubAccountingType setName(String name) {
-		this.name = name;
-		return this;
-	}
-
-	/**
-	 * Returns the local accounting numeric code.
-	 *
-	 * @return the local accounting code
-	 *
-	 * @since 0.1
-	 */
-	public Integer getAccountingCode() {
-		return this.accountingCode;
-	}
-
-	/**
-	 * Sets the local accounting numeric code.
-	 *
-	 * @param accountingCode
-	 * 		the new local accounting code
-	 * @since 0.1
-	 */
-	public SubAccountingType setAccountingCode(Integer accountingCode) {
-		this.accountingCode = accountingCode;
-		return this;
-	}
-
-	/**
-	 * Returns the human-readable description of the sub accounting type.
-	 *
-	 * @return the description
-	 *
-	 * @since 0.1
-	 */
-	public String getDescription() {
-		return this.description;
-	}
-
-	// =========================================================
-	// == SETTERS                                             ==
-	// =========================================================
-
-	/**
-	 * Sets the human-readable description of the sub accounting type.
-	 *
-	 * @param description
-	 * 		the new description
-	 * @since 0.1
-	 */
-	public SubAccountingType setDescription(String description) {
-		this.description = description;
-		return this;
-	}
 
 	/**
 	 * Returns the parent accounting code.
@@ -302,21 +163,6 @@ public class SubAccountingType {
 	 */
 	public String getParentAccountingCode() {
 		return this.parentAccountingCode;
-	}
-
-	/**
-	 * Sets the parent accounting code.
-	 *
-	 * @param parentAccountingCode
-	 * 		the new parent accounting code
-	 * @since 0.1
-	 */
-	public SubAccountingType setParentAccountingCode(String parentAccountingCode) {
-		this.parentAccountingCode = parentAccountingCode;
-		for (AccountingTypeDetails detail : this.getDetailsList()) {
-			detail.setParentAccountingCode(this.getFullCode());
-		}
-		return this;
 	}
 
 	/**
@@ -333,14 +179,33 @@ public class SubAccountingType {
 	 * @since 0.1
 	 */
 	public String getFullCode() {
-		if (this.getAccountingCode() == null || this.getParentAccountingCode() == null) {
+		if (this.getAccountCode() == null || this.getParentAccountingCode() == null) {
 			return null; // Donnée invalide : orphelin
 		}
 		// Si code detail == parent (ex: Parent 40, Code 40), on ne double pas
-		if (this.getAccountingCode().equals(this.getParentAccountingCode())) {
+		if (this.getAccountCode().equals(this.getParentAccountingCode())) {
 			return this.getParentAccountingCode();
 		}
-		return this.getParentAccountingCode() + this.getAccountingCode();
+		return this.getParentAccountingCode() + this.getAccountCode();
+	}
+
+	// =========================================================
+	// == SETTERS                                             ==
+	// =========================================================
+
+	/**
+	 * Sets the parent accounting code.
+	 *
+	 * @param parentAccountingCode
+	 * 		the new parent accounting code
+	 * @since 0.1
+	 */
+	public SubAccountingType setParentAccountingCode(String parentAccountingCode) {
+		this.parentAccountingCode = parentAccountingCode;
+		for (AccountingTypeDetails detail : this.getDetailsList()) {
+			detail.setParentAccountingCode(this.getFullCode());
+		}
+		return this;
 	}
 
 	/**
@@ -430,20 +295,8 @@ public class SubAccountingType {
 	 * @since 0.1
 	 */
 	public JsonObject toJson() {
-		JsonObjectBuilder builder = Json.createObjectBuilder();
+		JsonObjectBuilder builder = super.getBaseJsonBuilder();
 
-		if (this.getId() != null) {
-			builder.add("id", this.getId());
-		}
-		if (this.getName() != null) {
-			builder.add("name", this.getName());
-		}
-		if (this.getAccountingCode() != null) {
-			builder.add("accountingCode", this.getAccountingCode());
-		}
-		if (this.getDescription() != null) {
-			builder.add("description", this.getDescription());
-		}
 		if (this.getParentAccountingCode() != null) {
 			builder.add("parentAccountingCode", this.getParentAccountingCode());
 		}
@@ -479,7 +332,7 @@ public class SubAccountingType {
 		sb.append("SubAccountingType {")
 				.append("\n    id=").append(this.getId() != null ? this.getId() : "null")
 				.append(",\n    name=").append(this.getName() != null ? this.getName() : "null")
-				.append(",\n    accountingCode=").append(this.getAccountingCode() != null ? this.getAccountingCode() : "null")
+				.append(",\n    accountingCode=").append(this.getAccountCode() != null ? this.getAccountCode() : "null")
 				.append(",\n    description=").append(this.getDescription() != null ? this.getDescription() : "null")
 				.append(",\n    parentAccountingCode=").append(this.getParentAccountingCode() != null ? this.getParentAccountingCode() : "null");
 

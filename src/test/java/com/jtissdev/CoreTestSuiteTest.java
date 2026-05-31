@@ -1,28 +1,30 @@
 package com.jtissdev;
 
-import com.jtissdev.features.pcg.dto.AccountingTypeDetailsTest;
-import com.jtissdev.features.pcg.dto.AccountingTypeTest;
-import com.jtissdev.features.pcg.dto.SubAccountingTypeTest;
-import com.jtissdev.features.pcp.dto.AnalyticDetailTest;
-import com.jtissdev.features.pcp.dto.ContactsTest;
-import com.jtissdev.features.pcp.dto.TiersTest;
 import com.jtissdev.features.compta.dto.JournalDTOTest;
 import com.jtissdev.features.compta.dto.MovementDTOTest;
 import com.jtissdev.features.compta.dto.OperationDTOTest;
-//import com.jtissdev.features.compta.repository.JsonFileJournalRepositoryTest;
+import com.jtissdev.features.pcg.dto.AccountingTypeDetailsTest;
+import com.jtissdev.features.pcg.dto.AccountingTypeTest;
 import com.jtissdev.features.pcg.dto.PcgCoreDTOTest;
+import com.jtissdev.features.pcg.dto.SubAccountingTypeTest;
+import com.jtissdev.features.pcg.mapper.PcgDataMapperTest;
+import com.jtissdev.features.pcg.repository.JsonFilePcgRepositoryTest;
+import com.jtissdev.features.pcp.dto.AnalyticDetailTest;
+import com.jtissdev.features.pcp.dto.ContactsTest;
 import com.jtissdev.features.pcp.dto.PcpCoreDTOTest;
-import com.jtissdev.features.referential.dto.ReferentialCoreDTOTest;
+import com.jtissdev.features.pcp.dto.TiersTest;
 import com.jtissdev.features.referential.dto.OperationStatusTest;
 import com.jtissdev.features.referential.dto.PaymentMethodTest;
-import com.jtissdev.features.pcg.repository.JsonFilePcgRepositoryTest;
-//import com.jtissdev.features.pcp.repository.JsonFilePcpRepositoryTest;
-//import com.jtissdev.features.referential.repository.JsonFileReferentialCoreRepositoryTest;
+import com.jtissdev.features.referential.dto.ReferentialCoreDTOTest;
 import com.jtissdev.utils.TestResultLogger;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
+
+//import com.jtissdev.features.compta.repository.JsonFileJournalRepositoryTest;
+//import com.jtissdev.features.pcp.repository.JsonFilePcpRepositoryTest;
+//import com.jtissdev.features.referential.repository.JsonFileReferentialCoreRepositoryTest;
 
 @Suite
 @DisplayName("🚀 JTissDev API : Rv-Compta - Full Test Suite")
@@ -61,6 +63,10 @@ import org.junit.platform.suite.api.Suite;
 
 		// pcg Repository
 		JsonFilePcgRepositoryTest.class,
+
+		// Mapper
+		PcgDataMapperTest.class,
+
 
 		/* ====================================================================
 	    ===                  COMPTA - JOURNAL & MOUVEMENTS                  ===

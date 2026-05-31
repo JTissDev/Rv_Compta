@@ -1,6 +1,6 @@
 # 📝 Project Tracking - Rv_Compta
 
-## 4. Global RoadMap & Progress
+## Global RoadMap & Progress
 
 - [ ] **Version 1.0: The Stable Console MVP**
   * **Referential & PCG/PCP Modules**:
@@ -62,3 +62,8 @@
   * [ ] **Integrating Entreprise constraint**
     * [ ] **Documentation**
     * [ ] **Rules**
+
+
+## Évolutions / Refactoring
+- [ ] ⚙️ **Stabilisation du Mapping JSON** : Valider le fonctionnement de `AbstractJsonMapper` et de `JsonMappingException` sur l'application `Rv-Compta` actuelle.
+- [ ] 📦 **Modularisation (jtiss-dev-utils)** : Extraire l'infrastructure de mapping (`AbstractJsonMapper` et son exception dédiée) pour les injecter dans un module indépendant de `jtiss-dev-utils` afin de les rendre réutilisables.
