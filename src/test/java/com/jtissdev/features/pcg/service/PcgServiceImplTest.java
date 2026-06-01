@@ -27,7 +27,7 @@ import static org.mockito.Mockito.*;
 @DisplayName("PcgServiceImpl Test Suite")
 @TestGroup("PCG - SERVICE")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class PcgServiceImplTest {
+public class PcgServiceImplTest {
 
 	@Mock
 	private PcgRepository pcgRepository;

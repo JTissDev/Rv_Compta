@@ -25,8 +25,8 @@ public abstract class PcgRepository implements PcgRepositoryInterface{
 	protected final ResourceLoader resourceLoader;
 
 	public PcgRepository(ResourceLoader resourceLoader,
-	                     @Value("${app.seed.folder-path}") String seedFolder,
-	                     @Value("${app.seed.pcg-file-name}") String pcgSeedFileName) {
+	                     String seedFolder,
+	                     String pcgSeedFileName) {
 
 		this.pcgSeedPath = seedFolder + pcgSeedFileName;
 		this.resourceLoader = resourceLoader;

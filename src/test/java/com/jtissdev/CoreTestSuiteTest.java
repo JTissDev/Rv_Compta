@@ -9,6 +9,7 @@ import com.jtissdev.features.pcg.dto.PcgCoreDTOTest;
 import com.jtissdev.features.pcg.dto.SubAccountingTypeTest;
 import com.jtissdev.features.pcg.mapper.PcgDataMapperTest;
 import com.jtissdev.features.pcg.repository.JsonFilePcgRepositoryTest;
+import com.jtissdev.features.pcg.service.PcgServiceImplTest;
 import com.jtissdev.features.pcp.dto.AnalyticDetailTest;
 import com.jtissdev.features.pcp.dto.ContactsTest;
 import com.jtissdev.features.pcp.dto.PcpCoreDTOTest;
@@ -16,6 +17,7 @@ import com.jtissdev.features.pcp.dto.TiersTest;
 import com.jtissdev.features.referential.dto.OperationStatusTest;
 import com.jtissdev.features.referential.dto.PaymentMethodTest;
 import com.jtissdev.features.referential.dto.ReferentialCoreDTOTest;
+import com.jtissdev.features.referential.repository.JsonFileReferentialCoreRepositoryTest;
 import com.jtissdev.utils.TestResultLogger;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,7 +41,7 @@ import org.junit.platform.suite.api.Suite;
 		ReferentialCoreDTOTest.class,
 
 		// Referential Repository
-		//JsonFileReferentialCoreRepositoryTest.class,
+		JsonFileReferentialCoreRepositoryTest.class,
 
 		/* ====================================================================
 	    ===                  pcp - PLAN COMPTABLE PERSONALISE               ===
@@ -61,11 +63,14 @@ import org.junit.platform.suite.api.Suite;
 		// pcg Data holder
 		PcgCoreDTOTest.class,
 
+		// Mapper
+		PcgDataMapperTest.class,
+
 		// pcg Repository
 		JsonFilePcgRepositoryTest.class,
 
-		// Mapper
-		PcgDataMapperTest.class,
+		// Pcg Service
+		PcgServiceImplTest.class,
 
 
 		/* ====================================================================

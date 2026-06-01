@@ -1,6 +1,9 @@
 package com.jtissdev.features.referential.repository;
 
+import com.jtissdev.features.referential.dto.OperationStatus;
+import com.jtissdev.features.referential.dto.PaymentMethod;
 import com.jtissdev.features.referential.dto.ReferentialCoreDTO;
+import com.jtissdev.features.referential.mapper.ReferentialDataMapper;
 import jakarta.json.*;
 import jakarta.json.stream.JsonGenerator;
 import org.slf4j.Logger;
@@ -31,53 +34,49 @@ import java.util.Optional;
  * @since 0.6.0
  */
 @Repository
-public class JsonFileReferentialCoreRepository {
+public class JsonFileReferentialCoreRepository extends AbstractReferentialRepository {
 
 	private static final Logger log = LoggerFactory.getLogger(JsonFileReferentialCoreRepository.class);
 
-	private final ResourceLoader resourceLoader;
-	private final JsonWriterFactory writerFactory;
-
 	private final File statusLiveFile;
 	private final File paymentLiveFile;
-	private final String statusSeedPath;
-	private final String paymentSeedPath;
+	private final ReferentialDataMapper mapper;
+	private final JsonWriterFactory writerFactory;
 
 	/**
 	 * Constructs the repository with dynamic multi-environment property injection.
 	 *
 	 * @param resourceLoader Spring's resource loader to access classpath seeds.
-	 * @param storageDir The destination directory for live data mutations.
-	 * @param seedFolder The source folder prefix inside the application bundle.
-	 * @param statusFilename Name of the operation statuses file.
-	 * @param paymentFilename Name of the payment methods file.
+	 * @param mapper The mapper for converting between DTO and entity representations.
+	 * @param storagePath The destination directory for live data mutations.
+	 * @param statusFileName Name of the operation statuses file.
+	 * @param paymentFileName Name of the payment methods file.
+	 * @param seedPath The source folder prefix inside the application bundle.
 	 * @since 2.0.0
 	 */
 	public JsonFileReferentialCoreRepository(
 			ResourceLoader resourceLoader,
-			@Value("${app.persistence.storage-path}") String storageDir,
-			@Value("${app.persistence.seed-path}") String seedFolder,
-			@Value("${app.persistence.file-name.status}") String statusFilename,
-			@Value("${app.persistence.file-name.paymentMethod}") String paymentFilename) {
+			ReferentialDataMapper mapper,
+			@Value("${app.persistence.storage-path}") String storagePath,
+			@Value("${app.persistence.file-name.status}") String statusFileName,
+			@Value("${app.persistence.file-name.paymentMethod}") String paymentFileName,
+			@Value("${app.persistence.seed-path}") String seedPath) {
 
-		this.resourceLoader = resourceLoader;
+		super(resourceLoader, seedPath + statusFileName, seedPath + paymentFileName);
+		this.mapper = mapper;
+		this.statusLiveFile = new File(storagePath, statusFileName);
+		this.paymentLiveFile = new File(storagePath, paymentFileName);
+		this.writerFactory = Json.createWriterFactory(Map.of(JsonGenerator.PRETTY_PRINTING, true));
 
-		// Definition of live mutable targets
-		this.statusLiveFile = new File(storageDir, statusFilename);
-		this.paymentLiveFile = new File(storageDir, paymentFilename);
-
-		// Definition of immutable bundle seed targets
-		this.statusSeedPath = seedFolder + statusFilename;
-		this.paymentSeedPath = seedFolder + paymentFilename;
-
-		// Pretty printing configuration
-		Map<String, Object> config = new HashMap<>();
-		config.put(JsonGenerator.PRETTY_PRINTING, true);
-		this.writerFactory = Json.createWriterFactory(config);
-
-		log.info("[Persistence] Referential Repository bound to files:\n -> Status: {}\n -> Payments: {}",
-				statusLiveFile.getAbsolutePath(), paymentLiveFile.getAbsolutePath());
+		// Initialisation : Vérifie et déploie les seeds si le dossier est vide
+		checkAndDeploySeeds();
 	}
+
+	@Override
+	public boolean hasData() {
+		return statusLiveFile.exists() && paymentLiveFile.exists();
+	}
+
 
 	/**
 	 * Loads the split JSON structures, applies seed copies if missing, and aggregates them
@@ -86,31 +85,26 @@ public class JsonFileReferentialCoreRepository {
 	 * @return an {@link Optional} containing the hydrated referential object, or {@link Optional#empty()} if recovery fails.
 	 * @since 2.0.0
 	 */
+	@Override
 	public Optional<ReferentialCoreDTO> load() {
 		try {
-			// Trigger seed fallback mechanisms if live files do not exist yet
-			checkAndCopySeed(statusLiveFile, statusSeedPath, "Operation Statuses");
-			checkAndCopySeed(paymentLiveFile, paymentSeedPath, "Payment Methods");
+			ReferentialCoreDTO dto = new ReferentialCoreDTO();
 
-			if (!statusLiveFile.exists() || !paymentLiveFile.exists()) {
-				log.error("[Persistence] Critical reference files are missing even after seed execution.");
-				return Optional.empty();
+			if (isStatusDataPresent()) {
+				try (InputStream is = new FileInputStream(statusLiveFile)) {
+					dto.setOperationStatuses(mapper.toOperationStatusList(is));
+				}
 			}
 
-			// Read native JSON Arrays from disk
-			JsonArray statusArray = readArrayFromFile(statusLiveFile);
-			JsonArray paymentArray = readArrayFromFile(paymentLiveFile);
+			if (isPaymentDataPresent()) {
+				try (InputStream is = new FileInputStream(paymentLiveFile)) {
+					dto.setPaymentMethods(mapper.toPaymentMethodList(is));
+				}
+			}
 
-			// Reconstruct the virtual structural object expected by ReferentialCoreDTO(JsonObject)
-			JsonObject consolidatedJson = Json.createObjectBuilder()
-					                              .add("operationStatuses", statusArray)
-					                              .add("paymentMethods", paymentArray)
-					                              .build();
-
-			return Optional.of(new ReferentialCoreDTO(consolidatedJson));
-
+			return Optional.of(dto);
 		} catch (Exception e) {
-			log.error("[Persistence] Critical failure while orchestrating core referential load loop", e);
+			logger.error("[Persistence] Error loading Referential Data", e);
 			return Optional.empty();
 		}
 	}
@@ -152,34 +146,6 @@ public class JsonFileReferentialCoreRepository {
 	// == PRIVATE UTILITY CORE                                ==
 	// =========================================================
 
-	private void checkAndCopySeed(File liveFile, String seedPath, String contextLabel) throws IOException {
-		if (liveFile.exists()) {
-			return;
-		}
-
-		log.info("[Persistence] Live file for '{}' not found. Activating seed copy from path: {}", contextLabel, seedPath);
-		Resource seedResource = resourceLoader.getResource(seedPath);
-
-		if (!seedResource.exists()) {
-			throw new FileNotFoundException("Seed resource could not be found in the application bundle: " + seedPath);
-		}
-
-		ensureParentDirectoryExists(liveFile);
-
-		try (InputStream in = seedResource.getInputStream()) {
-			Files.copy(in, liveFile.toPath());
-			log.info("[Persistence] Successfully deployed seed data for '{}' to live destination: {}", contextLabel, liveFile.getName());
-		}
-	}
-
-	private JsonArray readArrayFromFile(File file) throws IOException {
-		try (FileInputStream fis = new FileInputStream(file);
-		     InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
-		     JsonReader reader = Json.createReader(isr)) {
-			return reader.readArray();
-		}
-	}
-
 	private void writeArrayToFile(File file, JsonArray array) {
 		try (FileOutputStream fos = new FileOutputStream(file);
 		     OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
@@ -202,4 +168,52 @@ public class JsonFileReferentialCoreRepository {
 	// Getters handles useful for unit testing lifecycles
 	public File getStatusLiveFile() { return statusLiveFile; }
 	public File getPaymentLiveFile() { return paymentLiveFile; }
+
+	/**
+	 * Checks whether the status data is present in the persistence layer.
+	 * This method is intended to be implemented by subclasses to define the specific
+	 * logic for determining the presence of the "status" target seed data.
+	 *
+	 * @return {@code true} if the status data is present, {@code false} otherwise.
+	 *
+	 * @since 1.0.0
+	 */
+	@Override
+	protected boolean isStatusDataPresent() {
+		return statusLiveFile.exists();
+	}
+
+	/**
+	 * Checks whether the payment data is present in the persistence layer.
+	 * This method is intended to be implemented by subclasses to define the specific
+	 * logic for determining the presence of the "payment" target seed data.
+	 *
+	 * @return {@code true} if the payment data is present, {@code false} otherwise.
+	 *
+	 * @since 1.0.0
+	 */
+	@Override
+	protected boolean isPaymentDataPresent() {
+		return paymentLiveFile.exists();
+	}
+
+	/**
+	 * Writes the seed data from the provided input stream to the persistence layer for the specified target type.
+	 * This method is intended to be implemented by subclasses to define the specific logic for persisting
+	 * seed data associated with the given target type.
+	 *
+	 * @param seedStream
+	 * 		the input stream containing the seed data to be written.
+	 * @param targetType
+	 * 		the target type for which the seed data is being written, such as {@code STATUS} or {@code PAYMENT}.
+	 * @throws IOException
+	 * 		if an I/O error occurs while writing the seed data to the persistence layer.
+	 * @since 1.0.0
+	 */
+	@Override
+	protected void writeSeedToStorage(InputStream seedStream, TargetType targetType) throws IOException {
+		File targetFile = (targetType == TargetType.STATUS) ? statusLiveFile : paymentLiveFile;
+		ensureParentDirectoryExists(targetFile);
+		Files.copy(seedStream, targetFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+	}
 }
