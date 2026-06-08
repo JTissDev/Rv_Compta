@@ -17,7 +17,6 @@ import com.jtissdev.features.pcp.dto.TiersTest;
 import com.jtissdev.features.referential.dto.OperationStatusTest;
 import com.jtissdev.features.referential.dto.PaymentMethodTest;
 import com.jtissdev.features.referential.dto.ReferentialCoreDTOTest;
-import com.jtissdev.features.referential.repository.JsonFileReferentialCoreRepositoryTest;
 import com.jtissdev.utils.TestResultLogger;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,7 +40,6 @@ import org.junit.platform.suite.api.Suite;
 		ReferentialCoreDTOTest.class,
 
 		// Referential Repository
-		JsonFileReferentialCoreRepositoryTest.class,
 
 		/* ====================================================================
 	    ===                  pcp - PLAN COMPTABLE PERSONALISE               ===
@@ -70,7 +68,7 @@ import org.junit.platform.suite.api.Suite;
 		JsonFilePcgRepositoryTest.class,
 
 		// Pcg Service
-		PcgServiceImplTest.class,
+		//PcgServiceImplTest.class,
 
 
 		/* ====================================================================

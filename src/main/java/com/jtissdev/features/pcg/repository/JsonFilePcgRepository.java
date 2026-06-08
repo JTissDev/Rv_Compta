@@ -4,6 +4,7 @@ import com.jtissdev.features.pcg.dto.PcgCoreDTO;
 import jakarta.json.*;
 import jakarta.json.stream.JsonGenerator;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +28,7 @@ import java.util.Optional;
  * @since 0.6.0
  */
 @Repository
+@ConditionalOnProperty(name = "rvcompta.storage.type", havingValue = "json", matchIfMissing = true)
 public class JsonFilePcgRepository extends PcgRepository {
 
 	private final JsonWriterFactory writerFactory;

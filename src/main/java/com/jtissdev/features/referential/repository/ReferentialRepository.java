@@ -31,13 +31,18 @@ public interface ReferentialRepository {
 	 * This method persists the given {@code ReferentialCoreDTO} instance,
 	 * allowing the state of referential data to be stored for future use.
 	 *
-	 * @param referentialCoreDTO the data object containing referential core information
-	 *                           to be persisted. Must not be {@code null}.
-	 * @throws IllegalArgumentException if {@code referentialCoreDTO} is {@code null}.
-	 * @throws RuntimeException if an error occurs during the save operation.
+	 * @param referentialCoreDTO
+	 * 		the data object containing referential core information
+	 * 		to be persisted. Must not be {@code null}.
+	 * @return
+	 *
+	 * @throws IllegalArgumentException
+	 * 		if {@code referentialCoreDTO} is {@code null}.
+	 * @throws RuntimeException
+	 * 		if an error occurs during the save operation.
 	 * @since 1.0.0
 	 */
-	void save(ReferentialCoreDTO referentialCoreDTO);
+	ReferentialCoreDTO save(ReferentialCoreDTO referentialCoreDTO);
 
 	/**
 	 * Checks whether referential core data is available in the repository.
