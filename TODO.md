@@ -14,6 +14,8 @@
     - [x] Implement global `JournalDTO` container. *(Validated in v0.3)*
     - [x] Unit Testing for DTOs and business rules. *(Validated in v0.3)*
     - [x] Implement `JournalLoader` (JSON to DTO rehydration). *(Validated in v0.4)*
+    - [x] **Architecture MVC stricte** : Mise en place des couches Controllers, Services, et Mappers.
+    - [x] **Infrastructure JSON** : Création et validation des `AbstractJsonMapper` et gestion des exceptions I/O.
     - [ ] **Excel Import Service**: Implement `.xlsx` / `.csv` parsing (Apache POI).
       - [ ] **Correspondence Map**
       - [ ] **Interactive Mapping**: User-defined Excel row-to-DTO mapping.
@@ -67,3 +69,8 @@
 ## Évolutions / Refactoring
 - [ ] ⚙️ **Stabilisation du Mapping JSON** : Valider le fonctionnement de `AbstractJsonMapper` et de `JsonMappingException` sur l'application `Rv-Compta` actuelle.
 - [ ] 📦 **Modularisation (jtiss-dev-utils)** : Extraire l'infrastructure de mapping (`AbstractJsonMapper` et son exception dédiée) pour les injecter dans un module indépendant de `jtiss-dev-utils` afin de les rendre réutilisables.
+- [ ] **[Refactoring Core]** Extraire la logique d'accès aux fichiers JSON (I/O) dans une classe utilitaire dédiée (`JsonFileUtils` ou `JsonStorageService`).
+  - **Objectif :** Alléger les Repositories (PCG, Referential) de la gestion bas niveau des flux (`FileInputStream`, `JsonWriter`).
+  - **Méthodes prévues :** - `readObject(File)` / `readArray(File)` pour le parsing direct.
+    - `write(File, JsonObject/JsonArray)` pour l'écrasement/création (remplace les `save()` actuels).
+    - `update(File, JsonObject/JsonArray)` pour la modification partielle en mémoire avant réécriture (préparation V2).
