@@ -1,32 +1,32 @@
 [
   {
 	"code": "CB",
-	"nom": "Carte Bancaire",
+	"name": "Carte Bancaire",
 	"description": "Paiement par carte de crédit ou débit via terminal ou internet."
   },
   {
 	"code": "VIR",
-	"nom": "Virement",
+	"name": "Virement",
 	"description": "Transfert de fonds direct entre comptes bancaires (SEPA ou autre)."
   },
   {
 	"code": "VIRINT",
-	"nom": "Virement Interne",
+	"name": "Virement Interne",
 	"description": "Transfert de fonds entre deux comptes appartenant au même utilisateur (Virement de compte à compte)."
   },
   {
 	"code": "CHQ",
-	"nom": "Chèque",
+	"name": "Chèque",
 	"description": "Paiement par chèque bancaire papier."
   },
   {
 	"code": "ESP",
-	"nom": "Espèces",
+	"name": "Espèces",
 	"description": "Paiement en monnaie fiduciaire (billets et pièces)."
   },
   {
 	"code": "PRL",
-	"nom": "Prélèvement",
+	"name": "Prélèvement",
 	"description": "Débit automatique autorisé sur le compte bancaire."
   }
 ]

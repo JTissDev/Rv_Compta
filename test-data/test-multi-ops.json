@@ -1,0 +1,92 @@
+{
+  "name": "Journal de Test - Multi Opérations",
+  "startDate": "2026-05-01",
+  "endDate": "2026-05-31",
+  "journalTypeCode": "Private",
+  "operations": [
+	{
+	  "dateOperation": "2026-05-01",
+	  "dateComptable": "2026-05-01",
+	  "libelle": "Loyer Mai",
+	  "referenceDocument": "FAC-2026-001",
+	  "descriptif": "Paiement du loyer mensuel bureau",
+	  "statutCode": "PAID",
+	  "movements": [
+		{
+		  "paiementCode": "VIR",
+		  "codeComptable": 613,
+		  "codeComplementaire": "",
+		  "codeDetailsComptable": ".LOY",
+		  "montantDebit": 1200.00,
+		  "montantCredit": 0,
+		  "description": "Loyer Immobilier"
+		},
+		{
+		  "paiementCode": "VIR",
+		  "codeComptable": 512,
+		  "codeComplementaire": "",
+		  "codeDetailsComptable": ".BANK",
+		  "montantDebit": 0,
+		  "montantCredit": 1200.00,
+		  "description": "Sortie Banque"
+		}
+	  ]
+	},
+	{
+	  "dateOperation": "2026-05-05",
+	  "dateComptable": "2026-05-06",
+	  "libelle": "Achat Fournitures",
+	  "referenceDocument": "TICK-8892",
+	  "descriptif": "Achat papier et tonner",
+	  "statutCode": "VALID",
+	  "movements": [
+		{
+		  "paiementCode": "CB",
+		  "codeComptable": 606,
+		  "codeComplementaire": "",
+		  "codeDetailsComptable": ".BUR",
+		  "montantDebit": 85.50,
+		  "montantCredit": 0,
+		  "description": "Fournitures bureau"
+		},
+		{
+		  "paiementCode": "CB",
+		  "codeComptable": 512,
+		  "codeComplementaire": "",
+		  "codeDetailsComptable": ".BANK",
+		  "montantDebit": 0,
+		  "montantCredit": 85.50,
+		  "description": "Paiement Carte"
+		}
+	  ]
+	},
+	{
+	  "dateOperation": "2026-05-10",
+	  "dateComptable": "2026-05-10",
+	  "libelle": "Facture Client JTiss",
+	  "referenceDocument": "INV-2026-05",
+	  "descriptif": "Prestation de développement API",
+	  "statutCode": "PENDING",
+	  "movements": [
+		{
+		  "paiementCode": "VIR",
+		  "codeComptable": 411,
+		  "codeComplementaire": "",
+		  "codeDetailsComptable": ".CLI",
+		  "montantDebit": 2500.00,
+		  "montantCredit": 0,
+		  "description": "Créance Client"
+		},
+		{
+		  "paiementCode": "VIR",
+		  "codeComptable": 706,
+		  "codeComplementaire": "",
+		  "codeDetailsComptable": ".DEV",
+		  "montantDebit": 0,
+		  "montantCredit": 2500.00,
+		  "description": "Prestation de services"
+		}
+	  ]
+	}
+  ]
+}

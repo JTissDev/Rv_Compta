@@ -1,0 +1,1150 @@
+{
+  "project" : "Rv_Compta" ,
+  "basePackage" : "com.jtissdev_API" ,
+  "architecture" : "Hybride Orientée Domaine" ,
+  "globaleStructure" : {
+	"root" : {
+	  "pom" : {
+		"type" : "fichier xml" ,
+		"encoding" : "UTF-8" ,
+		"name" : "pom.xml" ,
+		"description" : "Fichier de configuration Maven pour le projet"
+	  } ,
+	  "README" : {
+		"type" : "fichier markdown" ,
+		"encoding" : "UTF-8" ,
+		"name" : "README.md" ,
+		"description" : "Documentation du projet"
+	  } ,
+	  "TODO" : {
+		"type" : "fichier markdown" ,
+		"encoding" : "UTF-8" ,
+		"name" : "TODO.md" ,
+		"description" : "Liste des tâches à accomplir"
+	  } ,
+	  "CHANGELOG" : {
+		"type" : "fichier markdown" ,
+		"encoding" : "UTF-8" ,
+		"name" : "CHANGELOG.md" ,
+		"description" : "Journal des modifications"
+	  } ,
+	  "GITIGNORE" : {
+		"type" : "fichier texte" ,
+		"encoding" : "UTF-8" ,
+		"name" : ".gitignore" ,
+		"description" : "Fichier de configuration pour Git, spécifiant les fichiers et dossiers à ignorer"
+	  } ,
+	  "data" : {
+		"type" : "folder" ,
+		"description" : "Dossier contenant les données du projet"
+	  } ,
+	  "dev-reports" : {
+		"type" : "folder" ,
+		"description" : "Dossier contenant les rapports de développement evolution a chaque lancement d'analyse"
+	  } ,
+	  "logs" : {
+		"type" : "folder" ,
+		"description" : "Dossier contenant les logs générés par les analyses"
+	  } ,
+	  "storage" : {
+		"type" : "folder" ,
+		"description" : "Dossier contenant les fichiers de stockage groupés par dossier en fonction de l'environnement de développement (dev, staging, prod)"
+	  } ,
+	  "src" : {
+		"type" : "folder" ,
+		"description" : "Dossier contenant le code source du projet" ,
+		"subFolders" : {
+		  "main" : {
+			"type" : "folder" ,
+			"description" : "Dossier contenant le code source principal du projet" ,
+			"subFolders" : {
+			  "java" : {
+				"type" : "folder" ,
+				"description" : "Dossier contenant les fichiers Java du projet, organisés selon la structure de packages définie"
+			  } ,
+			  "resources" : {
+				"type" : "folder" ,
+				"description" : "Dossier contenant les ressources du projet (fichiers de configuration, fichiers de données, etc.)" ,
+				"subFolders" : {
+				  ".env" : {
+					"type" : "folder" ,
+					"description" : "Dossier contenant les variables d'environnement du projet" ,
+					"files" : {
+					  "application-dev.properties" : {
+						"type" : "fichier properties" ,
+						"encoding" : "UTF-8" ,
+						"description" : "Fichier de configuration pour l'environnement de développement"
+					  } ,
+					  "application-staging.properties" : {
+						"type" : "fichier properties" ,
+						"encoding" : "UTF-8" ,
+						"description" : "Fichier de configuration pour l'environnement de staging"
+					  } ,
+					  "application-prod.properties" : {
+						"type" : "fichier properties" ,
+						"encoding" : "UTF-8" ,
+						"description" : "Fichier de configuration pour l'environnement de production"
+					  } ,
+					  "application-test.properties" : {
+						"type" : "fichier properties" ,
+						"encoding" : "UTF-8" ,
+						"description" : "Fichier de configuration pour l'environnement de test"
+					  } ,
+					  "application-console.properties" : {
+						"type" : "fichier properties" ,
+						"encoding" : "UTF-8" ,
+						"description" : "Fichier de configuration pour le mode console"
+					  } ,
+					  "application-api.properties" : {
+						"type" : "fichier properties" ,
+						"encoding" : "UTF-8" ,
+						"description" : "Fichier de configuration pour le mode API"
+					  }
+					} ,
+					"data" : { }
+				  } ,
+				  "Files" : {
+					"application.properties" : {
+					  "type" : "fichier properties" ,
+					  "encoding" : "UTF-8" ,
+					  "description" : "Fichier de configuration de l'application"
+					} ,
+					"logback-spring.xml" : {
+					  "type" : "fichier xml" ,
+					  "encoding" : "UTF-8" ,
+					  "description" : "Fichier de configuration de Logback pour l'application"
+					} ,
+					"app-info.properties" : {
+					  "type" : "fichier properties" ,
+					  "encoding" : "UTF-8" ,
+					  "description" : "Fichier contenant des informations sur l'application"
+					}
+				  }
+				}
+			  }
+			}
+		  } ,
+		  "test" : {
+			"type" : "folder" ,
+			"description" : "Dossier contenant les tests du projet" ,
+			"subFolders" : {
+			  "java" : {
+				"type" : "folder" ,
+				"description" : "Dossier contenant les fichiers Java des tests du projet"
+			  } ,
+			  "resources" : {
+				"type" : "folder" ,
+				"description" : "Dossier contenant les ressources des tests du projet (fichiers de configuration, fichiers de données, etc.)" ,
+				"subFolders" : {
+				  "test-data" : {
+					"type" : "folder" ,
+					"description" : "Dossier contenant les données de test"
+				  } ,
+				  "Files" : {
+					"logback-test.xml" : {
+					  "type" : "fichier xml" ,
+					  "encoding" : "UTF-8" ,
+					  "description" : "Fichier de configuration de Logback pour les tests"
+					}
+				  }
+				}
+			  }
+			}
+		  }
+		}
+	  }
+	}
+  } ,
+  "packages" : {
+	"features" : {
+	  "description" : "des fonctionnalité metiers" ,
+	  "subPackages" : {
+		"compta" : {
+		  "description" : "Moteur comptable centralisateur - Journal d'écritures en partie double" ,
+		  "subPackages" : {
+			"dto" : {
+			  "description" : "Agrégats complexes : OperationDTO (contenant la liste des MovementDTO)" ,
+			  "classes" : {
+				"MovementDTO" : {
+				  "type" : "Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Data Transfer Object representing an atomic accounting movement line." ,
+				  "since" : "0.3.0" ,
+				  "fields" : {
+					"id" : {
+					  "type" : "Integer" ,
+					  "visibility" : "private" ,
+					  "description" : "Technical identifier" ,
+					  "since" : "0.3.0"
+					} ,
+					"accountingCode" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "General accounting code" ,
+					  "since" : "0.4"
+					} ,
+					"accountDetailCode" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Detail code in PCP" ,
+					  "since" : "0.3.0"
+					} ,
+					"tiers" : {
+					  "type" : "Tiers" ,
+					  "visibility" : "private" ,
+					  "description" : "Tiers involved" ,
+					  "since" : "0.3.0"
+					} ,
+					"paiementCode" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Payment method code" ,
+					  "since" : "0.3.0"
+					} ,
+					"debitAmount" : {
+					  "type" : "BigDecimal" ,
+					  "visibility" : "private" ,
+					  "description" : "Amount to debit" ,
+					  "since" : "0.3.0"
+					} ,
+					"creditAmount" : {
+					  "type" : "BigDecimal" ,
+					  "visibility" : "private" ,
+					  "description" : "Amount to credit" ,
+					  "since" : "0.3.0"
+					}
+				  } ,
+				  "methods" : {
+					"MovementDTO(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "public" ,
+					  "description" : "Mapping from JSON" ,
+					  "since" : "0.4"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public" ,
+					  "description" : "JSON Export" ,
+					  "since" : "0.4"
+					}
+				  }
+				} ,
+				"OperationDTO" : {
+				  "type" : "Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Header of an accounting operation." ,
+				  "since" : "0.3.0" ,
+				  "fields" : {
+					"id" : {
+					  "type" : "Integer" ,
+					  "visibility" : "private" ,
+					  "description" : "Technical identifier" ,
+					  "since" : "0.3.0"
+					} ,
+					"dateOperation" : {
+					  "type" : "LocalDate" ,
+					  "visibility" : "private" ,
+					  "description" : "Real transaction date" ,
+					  "since" : "0.3.0"
+					} ,
+					"dateComptable" : {
+					  "type" : "LocalDate" ,
+					  "visibility" : "private" ,
+					  "description" : "Accounting record date" ,
+					  "since" : "0.3.0"
+					} ,
+					"movements" : {
+					  "type" : "List<MovementDTO>" ,
+					  "visibility" : "private" ,
+					  "description" : "Atomic lines" ,
+					  "since" : "0.3.0"
+					}
+				  } ,
+				  "methods" : {
+					"OperationDTO(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "public" ,
+					  "description" : "Mapping from JSON" ,
+					  "since" : "0.4"
+					} ,
+					"isBalance()" : {
+					  "returnType" : "Boolean" ,
+					  "visibility" : "public" ,
+					  "description" : "Checks if debit == credit" ,
+					  "since" : "0.4"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public" ,
+					  "description" : "JSON representation" ,
+					  "since" : "0.4"
+					}
+				  }
+				} ,
+				"JournalDTO" : {
+				  "type" : "Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Data Transfer Object representing an Accounting Journal." ,
+				  "since" : "0.3.0" ,
+				  "fields" : {
+					"id" : {
+					  "type" : "Integer" ,
+					  "visibility" : "private" ,
+					  "description" : "Unique technical identifier" ,
+					  "since" : "0.3.0"
+					} ,
+					"name" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Human-readable name" ,
+					  "since" : "0.3.0"
+					} ,
+					"startDate" : {
+					  "type" : "LocalDate" ,
+					  "visibility" : "private" ,
+					  "description" : "The start date of the period" ,
+					  "since" : "0.3.0"
+					} ,
+					"endDate" : {
+					  "type" : "LocalDate" ,
+					  "visibility" : "private" ,
+					  "description" : "The end date of the period" ,
+					  "since" : "0.3.0"
+					} ,
+					"journalTypeCode" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Technical code of journal type" ,
+					  "since" : "0.3.0"
+					} ,
+					"operations" : {
+					  "type" : "List<OperationDTO>" ,
+					  "visibility" : "private" ,
+					  "description" : "List of operations" ,
+					  "since" : "0.3.0"
+					}
+				  } ,
+				  "methods" : {
+					"JournalDTO(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "public" ,
+					  "description" : "Mapping from JSON" ,
+					  "since" : "0.4"
+					} ,
+					"sortedOperations(List<OperationDTO> operations)" : {
+					  "returnType" : "List<OperationDTO>" ,
+					  "visibility" : "private" ,
+					  "description" : "Sorts operations chronologically" ,
+					  "since" : "0.6"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public" ,
+					  "description" : "Converts to JSON representation" ,
+					  "since" : "0.4"
+					}
+				  }
+				}
+			  }
+			} ,
+			"mapper" : {
+			  "description" : "Mappers d'écritures vers modèles planaires relationnels"
+			} ,
+			"repository" : {
+			  "description" : "Persistance JPA des opérations et mouvements équilibrés"
+			} ,
+			"service" : {
+			  "description" : "Validation du théorème de la partie double et gestion des écritures validées"
+			} ,
+			"controller" : {
+			  "description" : "Endpoints de consultation du Grand Livre, de la Balance ou d'injection d'écritures"
+			}
+		  }
+		} ,
+		"core" : {
+		  "description" : "Package de gestion des éléments transverses à tous les modules (ex: exceptions, utils, config, etc.)" ,
+		  "subPackages" : {
+			"mapper" : {
+			  "description" : "Mappers de conversion entre les différents modèles de données (ex: BDD <-> DTO, etc.)" ,
+			  "classes" : {
+				"DataMapper" : {
+				  "type" : "Interface" ,
+				  "visibility" : "public" ,
+				  "description" : "Generic mapping contract" ,
+				  "since" : "Missing" ,
+				  "fields" : { } ,
+				  "methods" : {
+					"toDto(InputStream is)" : {
+					  "returnType" : "T" ,
+					  "visibility" : "public" ,
+					  "description" : "Maps input stream to DTO" ,
+					  "since" : "Missing"
+					}
+				  }
+				} ,
+				"AbstractJsonMapper" : {
+				  "type" : "Abstract Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Base mapper to extract JSON Array from streams" ,
+				  "since" : "0.1" ,
+				  "fields" : {
+					"logger" : {
+					  "type" : "Logger" ,
+					  "visibility" : "protected final" ,
+					  "description" : "SLF4J Logger" ,
+					  "since" : "Missing"
+					}
+				  } ,
+				  "methods" : {
+					"extractJsonArray(InputStream is)" : {
+					  "returnType" : "JsonArray" ,
+					  "visibility" : "protected" ,
+					  "description" : "Extracts JSON array from stream" ,
+					  "since" : "0.6"
+					} ,
+					"unwrapArrayFromObject(JsonObject jsonObject)" : {
+					  "returnType" : "JsonArray" ,
+					  "visibility" : "private" ,
+					  "description" : "Extracts array from 'data' key" ,
+					  "since" : "0.6"
+					}
+				  }
+				}
+			  }
+			}
+		  } ,
+		  "classes" : {
+			"SelectionContext" : {
+			  "type" : "Class" ,
+			  "visibility" : "public" ,
+			  "description" : "Represents a SelectionContext DTO." ,
+			  "since" : "0.6" ,
+			  "fields" : {
+				"type" : {
+				  "type" : "AccountingType" ,
+				  "visibility" : "private" ,
+				  "description" : "Missing Javadoc" ,
+				  "since" : "Missing"
+				} ,
+				"subType" : {
+				  "type" : "SubAccountingType" ,
+				  "visibility" : "private" ,
+				  "description" : "Missing Javadoc" ,
+				  "since" : "Missing"
+				} ,
+				"detail" : {
+				  "type" : "AccountingTypeDetails" ,
+				  "visibility" : "private" ,
+				  "description" : "Missing Javadoc" ,
+				  "since" : "Missing"
+				}
+			  } ,
+			  "methods" : {
+				"setType(AccountingType type)" : {
+				  "returnType" : "SelectionContext" ,
+				  "visibility" : "public" ,
+				  "description" : "Fluent setter" ,
+				  "since" : "Missing"
+				}
+			  }
+			}
+		  }
+		} ,
+		"referential" : {
+		  "description" : "Gestion des référentiels système immuables (Statuts d'opérations et Moyens de paiement)" ,
+		  "subPackages" : {
+			"dto" : {
+			  "description" : "Objets de transfert : OperationStatusDTO, PaymentMethodDTO" ,
+			  "classes" : {
+				"OperationStatus" : {
+				  "type" : "Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Represents the lifecycle status of an accounting operation." ,
+				  "since" : "0.2.0" ,
+				  "fields" : {
+					"code" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Unique technical code for the status." ,
+					  "since" : "0.2.0"
+					} ,
+					"name" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Human-readable name of the status." ,
+					  "since" : "0.2.0"
+					} ,
+					"color" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Hexadecimal color code used for UI display." ,
+					  "since" : "0.2.0"
+					}
+				  } ,
+				  "methods" : {
+					"OperationStatus(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "public" ,
+					  "description" : "Mapping from JSON" ,
+					  "since" : "0.4"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public" ,
+					  "description" : "Converts this operation status into a JsonObject." ,
+					  "since" : "0.2.0"
+					}
+				  }
+				} ,
+				"PaymentMethod" : {
+				  "type" : "Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Represents a payment method used for accounting transactions." ,
+				  "since" : "0.2.0" ,
+				  "fields" : {
+					"code" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Unique technical code for the payment method." ,
+					  "since" : "0.2.0"
+					} ,
+					"name" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Human-readable name of the payment method." ,
+					  "since" : "0.2.0"
+					} ,
+					"description" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Detailed description of the payment method and its usage." ,
+					  "since" : "0.2.0"
+					}
+				  } ,
+				  "methods" : {
+					"PaymentMethod(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "public" ,
+					  "description" : "Mapping from JSON" ,
+					  "since" : "0.4"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public" ,
+					  "description" : "Converts this payment method into a JsonObject." ,
+					  "since" : "0.2.0"
+					}
+				  }
+				} ,
+				"ReferentialCoreDTO" : {
+				  "type" : "Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Central container for all cross-functional referential data." ,
+				  "since" : "0.2.0" ,
+				  "fields" : {
+					"operationStatuses" : {
+					  "type" : "List<OperationStatus>" ,
+					  "visibility" : "private" ,
+					  "description" : "List of all available operation statuses." ,
+					  "since" : "0.2.0"
+					} ,
+					"paymentMethods" : {
+					  "type" : "List<PaymentMethod>" ,
+					  "visibility" : "private" ,
+					  "description" : "List of all available payment methods." ,
+					  "since" : "0.2.0"
+					}
+				  } ,
+				  "methods" : {
+					"ReferentialCoreDTO(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "public" ,
+					  "description" : "Mapping from JSON" ,
+					  "since" : "0.4"
+					} ,
+					"addOperationStatus(OperationStatus status)" : {
+					  "returnType" : "ReferentialCoreDTO" ,
+					  "visibility" : "public" ,
+					  "description" : "Adds an operation status to the internal list." ,
+					  "since" : "0.2.0"
+					} ,
+					"addPaymentMethod(PaymentMethod method)" : {
+					  "returnType" : "ReferentialCoreDTO" ,
+					  "visibility" : "public" ,
+					  "description" : "Adds a payment method to the internal list." ,
+					  "since" : "0.2.0"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public" ,
+					  "description" : "Converts this referential container into a JsonObject." ,
+					  "since" : "0.2.0"
+					}
+				  }
+				}
+			  }
+			} ,
+			"mapper" : {
+			  "description" : "Mappers de conversion BDD <-> DTO"
+			} ,
+			"repository" : {
+			  "description" : "Interfaces Spring Data JPA d'accès aux tables de référence"
+			} ,
+			"service" : {
+			  "description" : "Logique métier, mise en cache et exposition des listes de référence"
+			} ,
+			"controller" : {
+			  "description" : "Points d'entrée REST d'exposition des référentiels"
+			}
+		  }
+		} ,
+		"pcg" : {
+		  "description" : "Package de gestion du plan comptable général (PCG)" ,
+		  "subPackages" : {
+			"dto" : {
+			  "description" : "Package de gestion des objets de transfert de données (DTO) pour le plan comptable général" ,
+			  "classes" : {
+				"AccountElement" : {
+				  "type" : "Abstract Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Represents a base class for accounting elements within the system." ,
+				  "since" : "0.6" ,
+				  "fields" : {
+					"id" : {
+					  "type" : "Integer" ,
+					  "visibility" : "private" ,
+					  "description" : "Unique identifier for the accounting element." ,
+					  "since" : "0.6"
+					} ,
+					"name" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Human-readable name of the accounting element." ,
+					  "since" : "0.6"
+					} ,
+					"accountCode" : {
+					  "type" : "Integer" ,
+					  "visibility" : "private" ,
+					  "description" : "Local accounting code (numeric value) for this accounting element." ,
+					  "since" : "0.6"
+					} ,
+					"description" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Human-readable description of the accounting element." ,
+					  "since" : "0.6"
+					}
+				  } ,
+				  "methods" : {
+					"AccountElement(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "protected" ,
+					  "description" : "Constructs a new instance from a JSON object." ,
+					  "since" : "0.6"
+					} ,
+					"getFullCode()" : {
+					  "returnType" : "String" ,
+					  "visibility" : "public abstract" ,
+					  "description" : "Retrieves the full accounting code of this AccountElement." ,
+					  "since" : "0.6"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public abstract" ,
+					  "description" : "Converts the AccountElement to a JSON object representation." ,
+					  "since" : "0.6"
+					}
+				  }
+				} ,
+				"AccountingType" : {
+				  "type" : "Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Represents a root accounting type (top-level in the hierarchy)." ,
+				  "since" : "0.1" ,
+				  "fields" : {
+					"subTypes" : {
+					  "type" : "List<SubAccountingType>" ,
+					  "visibility" : "private" ,
+					  "description" : "List of sub accounting types attached to this root type." ,
+					  "since" : "0.1"
+					}
+				  } ,
+				  "methods" : {
+					"AccountingType(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "public" ,
+					  "description" : "Mapping from JSON" ,
+					  "since" : "0.1"
+					} ,
+					"addSubType(SubAccountingType subType)" : {
+					  "returnType" : "AccountingType" ,
+					  "visibility" : "public" ,
+					  "description" : "Adds a sub accounting type to the internal list." ,
+					  "since" : "0.1"
+					} ,
+					"getFullCode()" : {
+					  "returnType" : "String" ,
+					  "visibility" : "public" ,
+					  "description" : "Computes the full accounting code of this root type." ,
+					  "since" : "0.1"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public" ,
+					  "description" : "Converts this root accounting type into a JsonObject." ,
+					  "since" : "0.1"
+					}
+				  }
+				} ,
+				"AccountingTypeDetails" : {
+				  "type" : "Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Represents detailed information about an accounting type." ,
+				  "since" : "0.1" ,
+				  "fields" : {
+					"parentAccountingCode" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Parent accounting code used as a prefix." ,
+					  "since" : "0.1"
+					}
+				  } ,
+				  "methods" : {
+					"AccountingTypeDetails(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "public" ,
+					  "description" : "Mapping from JSON" ,
+					  "since" : "0.4"
+					} ,
+					"getFullCode()" : {
+					  "returnType" : "String" ,
+					  "visibility" : "public" ,
+					  "description" : "Returns the full accounting code." ,
+					  "since" : "0.1"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public" ,
+					  "description" : "Converts this instance into a JsonObject." ,
+					  "since" : "0.1"
+					}
+				  }
+				} ,
+				"SubAccountingType" : {
+				  "type" : "Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Represents a sub accounting type (one level above detailed accounting types)." ,
+				  "since" : "0.1" ,
+				  "fields" : {
+					"parentAccountingCode" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Parent accounting code." ,
+					  "since" : "0.1"
+					} ,
+					"detailsList" : {
+					  "type" : "List<AccountingTypeDetails>" ,
+					  "visibility" : "private" ,
+					  "description" : "List of detailed accounting types attached to this sub type." ,
+					  "since" : "0.1"
+					}
+				  } ,
+				  "methods" : {
+					"SubAccountingType(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "public" ,
+					  "description" : "Mapping from JSON" ,
+					  "since" : "0.1"
+					} ,
+					"getFullCode()" : {
+					  "returnType" : "String" ,
+					  "visibility" : "public" ,
+					  "description" : "Returns the full accounting code of this sub type." ,
+					  "since" : "0.1"
+					} ,
+					"addDetails(AccountingTypeDetails details)" : {
+					  "returnType" : "SubAccountingType" ,
+					  "visibility" : "public" ,
+					  "description" : "Adds a new AccountingTypeDetails to this sub type." ,
+					  "since" : "0.1"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public" ,
+					  "description" : "Converts this instance into a JsonObject." ,
+					  "since" : "0.1"
+					}
+				  }
+				} ,
+				"PcgCoreDTO" : {
+				  "type" : "Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Root data transfer object acting as the primary container for the General Chart of Accounts (pcg)." ,
+				  "since" : "0.1" ,
+				  "fields" : {
+					"accountingClasses" : {
+					  "type" : "List<AccountingType>" ,
+					  "visibility" : "private" ,
+					  "description" : "List of main accounting classes (e.g., Class 1, Class 2, etc.)" ,
+					  "since" : "0.1"
+					}
+				  } ,
+				  "methods" : {
+					"PcgCoreDTO(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "public" ,
+					  "description" : "Mapping from JSON" ,
+					  "since" : "0.6"
+					} ,
+					"addAccountingClass(AccountingType accountingType)" : {
+					  "returnType" : "PcgCoreDTO" ,
+					  "visibility" : "public" ,
+					  "description" : "Adds a single accounting class to the container." ,
+					  "since" : "0.1"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public" ,
+					  "description" : "Serializes the PcgCoreDTO object into a JsonObject." ,
+					  "since" : "0.5"
+					}
+				  }
+				}
+			  }
+			} ,
+			"mapper" : {
+			  "description" : "Package de gestion des mappers pour le plan comptable général"
+			} ,
+			"repository" : {
+			  "description" : "Package de gestion des repositories pour le plan comptable général"
+			} ,
+			"service" : {
+			  "description" : "Package de gestion des services pour le plan comptable général"
+			}
+		  }
+		} ,
+		"pcp" : {
+		  "description" : "Plan Comptable Particulier (Comptabilité analytique, auxiliaire et Tiers)" ,
+		  "subPackages" : {
+			"dto" : {
+			  "description" : "Objets de transfert : TiersDTO, AnalyticDetailsDTO" ,
+			  "classes" : {
+				"Tiers" : {
+				  "type" : "Class" ,
+				  "visibility" : "public" ,
+				  "description" : "External entity (Third Party)" ,
+				  "since" : "0.1" ,
+				  "fields" : {
+					"id" : {
+					  "type" : "Integer" ,
+					  "visibility" : "private" ,
+					  "description" : "Unique identifier" ,
+					  "since" : "0.1"
+					} ,
+					"name" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Legal name" ,
+					  "since" : "0.1"
+					} ,
+					"thirdPartyType" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Category" ,
+					  "since" : "0.1"
+					}
+				  } ,
+				  "methods" : {
+					"Tiers(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "public" ,
+					  "description" : "Mapping from JSON" ,
+					  "since" : "0.4"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public" ,
+					  "description" : "JSON format" ,
+					  "since" : "0.1"
+					}
+				  }
+				} ,
+				"PcpCoreDTO" : {
+				  "type" : "Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Main container for PCP" ,
+				  "since" : "0.1" ,
+				  "fields" : {
+					"thirdParties" : {
+					  "type" : "List<Tiers>" ,
+					  "visibility" : "private" ,
+					  "description" : "Registered third parties" ,
+					  "since" : "0.1"
+					} ,
+					"details" : {
+					  "type" : "List<AnalyticDetail>" ,
+					  "visibility" : "private" ,
+					  "description" : "Level 4 details" ,
+					  "since" : "0.1"
+					}
+				  } ,
+				  "methods" : {
+					"PcpCoreDTO(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "public" ,
+					  "description" : "Mapping from JSON" ,
+					  "since" : "0.4"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public" ,
+					  "description" : "JSON representation" ,
+					  "since" : "0.4"
+					}
+				  }
+				} ,
+				"AnalyticDetail" : {
+				  "type" : "Class" ,
+				  "visibility" : "public" ,
+				  "description" : "Specific accounting detail" ,
+				  "since" : "0.1" ,
+				  "fields" : {
+					"code" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Alphanumeric code" ,
+					  "since" : "0.1"
+					} ,
+					"type" : {
+					  "type" : "String" ,
+					  "visibility" : "private" ,
+					  "description" : "Functional group" ,
+					  "since" : "0.1"
+					}
+				  } ,
+				  "methods" : {
+					"AnalyticDetail(JsonObject json)" : {
+					  "returnType" : "Constructor" ,
+					  "visibility" : "public" ,
+					  "description" : "Mapping from JSON" ,
+					  "since" : "0.4"
+					} ,
+					"toJson()" : {
+					  "returnType" : "JsonObject" ,
+					  "visibility" : "public" ,
+					  "description" : "JSON representation" ,
+					  "since" : "0.1"
+					}
+				  }
+				}
+			  }
+			} ,
+			"mapper" : {
+			  "description" : "Mappers pour la gestion analytique et l'affectation fine"
+			} ,
+			"repository" : {
+			  "description" : "Accès persistant aux tables des tiers et des sections analytiques"
+			} ,
+			"service" : {
+			  "description" : "Gestion du cycle de vie des tiers et des structures de coûts de l'utilisateur"
+			} ,
+			"controller" : {
+			  "description" : "Endpoints REST pour la création et la recherche des tiers ou codes PCP"
+			}
+		  }
+		}
+	  }
+	} ,
+	"view" : {
+	  "description" : "Packages pour gérer les vues a changer de modules lors du passage à l'api" ,
+	  "subPackages" : { }
+	} ,
+	"core" : {
+	  "description" : "Packages pour les éléments transverses à tous les modules (ex: exceptions, utils, config, etc.)" ,
+	  "subPackages" : {
+		"exceptions" : {
+		  "JsonMappingException" : {
+			"type" : "Class (extends RuntimeException)" ,
+			"visibility" : "public" ,
+			"description" : "Exception thrown to indicate an issue encountered during the mapping of JSON data." ,
+			"since" : "0.6.0" ,
+			"fields" : { } ,
+			"methods" : {
+			  "JsonMappingException(String message)" : {
+				"returnType" : "Constructor" ,
+				"visibility" : "public" ,
+				"description" : "Constructs exception with message" ,
+				"since" : "0.6.0"
+			  } ,
+			  "JsonMappingException(String message, Throwable cause)" : {
+				"returnType" : "Constructor" ,
+				"visibility" : "public" ,
+				"description" : "Constructs exception with message and cause" ,
+				"since" : "0.6.0"
+			  }
+
+			}
+		  },
+		  "FunctionalException": {
+			"type": "Class (extends RuntimeException)",
+			"description": "Exception liée aux règles métiers (ex: Opération non équilibrée)."
+		  }
+		} ,
+		"utils" : { } ,
+		"config" : { } ,
+		"repository" : {
+		  "description" : "Package de base pour l'abstraction de la persistance (Fichiers JSON et future BDD MariaDB)" ,
+		  "classes" : {
+			"CrudRepository" : {
+			  "type" : "Interface" ,
+			  "visibility" : "public" ,
+			  "description" : "Contrat d'accès aux données générique unifiant les opérations CRUD pour le domaine." ,
+			  "since" : "0.7.0" ,
+			  "fields" : { } ,
+			  "methods" : {
+				"save(T entity)" : {
+				  "returnType" : "T" ,
+				  "visibility" : "public" ,
+				  "description" : "Sauvegarde ou met à jour une entité." ,
+				  "since" : "0.7.0"
+				} ,
+				"findById(ID id)" : {
+				  "returnType" : "Optional<T>" ,
+				  "visibility" : "public" ,
+				  "description" : "Recherche une entité par son identifiant unique." ,
+				  "since" : "0.7.0"
+				} ,
+				"findAll()" : {
+				  "returnType" : "List<T>" ,
+				  "visibility" : "public" ,
+				  "description" : "Récupère l'intégralité des entités de ce type." ,
+				  "since" : "0.7.0"
+				} ,
+				"deleteById(ID id)" : {
+				  "returnType" : "void" ,
+				  "visibility" : "public" ,
+				  "description" : "Supprime une entité par son identifiant." ,
+				  "since" : "0.7.0"
+				}
+			  }
+			} ,
+			"AbstractBaseRepository" : {
+			  "type" : "Abstract Class" ,
+			  "visibility" : "public" ,
+			  "description" : "Classe abstraite racine implémentant CrudRepository. Centralise la logique métier commune (validations, logs, hooks de cycle de vie) indépendante du support de stockage." ,
+			  "since" : "0.7.0" ,
+			  "fields" : {
+				"logger" : {
+				  "type" : "Logger" ,
+				  "visibility" : "protected final" ,
+				  "description" : "Logger SLF4J pour le suivi des opérations de persistance." ,
+				  "since" : "0.7.0"
+				}
+			  } ,
+			  "methods" : {
+				"save(T entity)" : {
+				  "returnType" : "T" ,
+				  "visibility" : "public final" ,
+				  "description" : "Implémentation finale du cycle de sauvegarde : exécute les validations communes puis délègue au support de stockage via la méthode abstraite performSave." ,
+				  "since" : "0.7.0"
+				} ,
+				"validateEntity(T entity)" : {
+				  "returnType" : "void" ,
+				  "visibility" : "protected" ,
+				  "description" : "Méthode de validation commune à exécuter avant toute persistance (ex: vérification des contraintes métiers)." ,
+				  "since" : "0.7.0"
+				} ,
+				"performSave(T entity)" : {
+				  "returnType" : "T" ,
+				  "visibility" : "protected abstract" ,
+				  "description" : "Hook abstrait de sauvegarde à implémenter par le support physique (JSON ou BDD)." ,
+				  "since" : "0.7.0"
+				} ,
+				"performFindById(ID id)" : {
+				  "returnType" : "Optional<T>" ,
+				  "visibility" : "protected abstract" ,
+				  "description" : "Hook abstrait de recherche par ID à implémenter par le support physique." ,
+				  "since" : "0.7.0"
+				} ,
+				"performFindAll()" : {
+				  "returnType" : "List<T>" ,
+				  "visibility" : "protected abstract" ,
+				  "description" : "Hook abstrait de récupération globale à implémenter par le support physique." ,
+				  "since" : "0.7.0"
+				} ,
+				"performDeleteById(ID id)" : {
+				  "returnType" : "void" ,
+				  "visibility" : "protected abstract" ,
+				  "description" : "Hook abstrait de suppression à implémenter par le support physique." ,
+				  "since" : "0.7.0"
+				}
+			  }
+			} ,
+			"AbstractJsonFileRepository" : {
+			  "type" : "Abstract Class" ,
+			  "visibility" : "public" ,
+			  "description" : "Spécialisation abstraite pour le stockage sous forme de fichiers JSON. Gère la désérialisation, l'écriture sur disque et la gestion du dossier de l'environnement courant (.env/storage)." ,
+			  "since" : "0.7.0" ,
+			  "fields" : {
+				"storagePath" : {
+				  "type" : "Path" ,
+				  "visibility" : "private final" ,
+				  "description" : "Chemin d'accès vers le fichier JSON physique dans le dossier storage configuré." ,
+				  "since" : "0.7.0"
+				} ,
+				"entityClass" : {
+				  "type" : "Class<T>" ,
+				  "visibility" : "private final" ,
+				  "description" : "Type de la classe cible pour le mapping JSON." ,
+				  "since" : "0.7.0"
+				}
+			  } ,
+			  "methods" : {
+				"AbstractJsonFileRepository(String fileName, Class<T> entityClass)" : {
+				  "returnType" : "Constructor" ,
+				  "visibility" : "protected" ,
+				  "description" : "Initialise le dépôt en calculant le chemin du fichier selon l'environnement actif." ,
+				  "since" : "0.7.0"
+				} ,
+				"readAllFromFile()" : {
+				  "returnType" : "List<T>" ,
+				  "visibility" : "protected" ,
+				  "description" : "Lit le fichier JSON et convertit son contenu (JsonArray) en liste d'objets Java." ,
+				  "since" : "0.7.0"
+				} ,
+				"writeAllToFile(List<T> entities)" : {
+				  "returnType" : "void" ,
+				  "visibility" : "protected" ,
+				  "description" : "Sérialise la liste complète des entités et l'écrit de manière atomique dans le fichier JSON." ,
+				  "since" : "0.7.0"
+				}
+			  }
+			}
+		  }
+		}
+	  }
+	} ,
+	"controller" : {
+	  "description" : "Packages pour les controllers globaux (ex: authentification, etc.) ou controller du mode console en attendant le passage dans un module externe" ,
+	  "subPackages" : { } ,
+	  "classes" : {
+		"MainController" : {
+		  "type" : "Interface"
+		} ,
+		"AbstractConsoleController" : {
+		  "type" : "Abstract Class" ,
+		  "description" : "Classe abstraite pour les controllers en mode console"
+		} ,
+		"ConsoleMainController" : {
+		  "type" : "Class" ,
+		  "description" : "Classe pour les controllers en mode console"
+		} ,
+		"ConsoleTestController" : {
+		  "type" : "Class" ,
+		  "description" : "Classe pour tester les visuel en mode console et les enchainement des menus"
+		}
+	  }
+	}
+  }
+}
+
