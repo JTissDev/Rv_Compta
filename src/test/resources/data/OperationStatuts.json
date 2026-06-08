@@ -1,0 +1,17 @@
+[
+  {
+	"code": "PENDING",
+	"name": "En attente",
+	"color": "#FFA500"
+  },
+  {
+	"code": "VALIDATED",
+	"name": "Validée",
+	"color": "#00FF00"
+  },
+  {
+	"code": "REJECTED",
+	"name": "Rejetée",
+	"color": "#FF0000"
+  }
+]
