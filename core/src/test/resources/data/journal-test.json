@@ -1,0 +1,233 @@
+{
+  "initialJournal": {
+	"id": 1,
+	"name": "Journal de Banque Mai 2026",
+	"startDate": "2026-05-01",
+	"endDate": "2026-05-31",
+	"journalTypeCode": "BQE",
+	"operations": [
+	  {
+		"id": 101,
+		"dateOperation": "2026-05-15",
+		"dateComptable": "2026-05-16",
+		"libelle": "Paiement Facture Internet",
+		"referenceDocument": "FA-NET-001",
+		"descriptif": "Abonnement fibre optique Mai",
+		"statutCode": "VAL",
+		"position": 1000,
+		"movements": [
+		  {
+			"id": 1001,
+			"accountingCode": "626",
+			"debitAmount": 45.00,
+			"creditAmount": 0.00,
+			"description": "Frais postaux et télécoms",
+			"paymentCode": "PRLV"
+		  },
+		  {
+			"id": 1002,
+			"accountingCode": "512",
+			"debitAmount": 0.00,
+			"creditAmount": 45.00,
+			"description": "Banque",
+			"paymentCode": "PRLV"
+		  }
+		]
+	  },
+	  {
+		"id": 102,
+		"dateOperation": "2026-05-18",
+		"dateComptable": "2026-05-18",
+		"libelle": "Encaissement Client Dupont (Matin)",
+		"referenceDocument": "FA-VTE-042",
+		"descriptif": "Règlement prestation de conseil",
+		"statutCode": "VAL",
+		"position": 1000,
+		"movements": [
+		  {
+			"id": 1003,
+			"accountingCode": "512",
+			"debitAmount": 1200.00,
+			"creditAmount": 0.00,
+			"description": "Banque",
+			"paymentCode": "VIR"
+		  },
+		  {
+			"id": 1004,
+			"accountingCode": "411",
+			"tiersId": 8,
+			"debitAmount": 0.00,
+			"creditAmount": 1200.00,
+			"description": "Client Dupont",
+			"paymentCode": "VIR"
+		  }
+		]
+	  },
+	  {
+		"id": 103,
+		"dateOperation": "2026-05-18",
+		"dateComptable": "2026-05-18",
+		"libelle": "Encaissement Client Martin (Aprem)",
+		"referenceDocument": "FA-VTE-043",
+		"descriptif": "Test de tri sur la même journée",
+		"statutCode": "VAL",
+		"position": 2000,
+		"movements": [
+		  {
+			"id": 1005,
+			"accountingCode": "512",
+			"debitAmount": 500.00,
+			"creditAmount": 0.00,
+			"description": "Banque",
+			"paymentCode": "VIR"
+		  },
+		  {
+			"id": 1006,
+			"accountingCode": "411",
+			"tiersId": 9,
+			"debitAmount": 0.00,
+			"creditAmount": 500.00,
+			"description": "Client Martin",
+			"paymentCode": "VIR"
+		  }
+		]
+	  },
+	  {
+		"id": 104,
+		"dateOperation": "2026-05-25",
+		"dateComptable": "2026-05-25",
+		"libelle": "Achat Matériel (Multi-lignes avec TVA)",
+		"referenceDocument": "FA-MAT-99",
+		"descriptif": "Test d'une opération à 3 mouvements",
+		"statutCode": "VAL",
+		"position": 1000,
+		"movements": [
+		  {
+			"id": 1007,
+			"accountingCode": "604",
+			"debitAmount": 1000.00,
+			"creditAmount": 0.00,
+			"description": "Achat matériel HT"
+		  },
+		  {
+			"id": 1008,
+			"accountingCode": "44566",
+			"debitAmount": 200.00,
+			"creditAmount": 0.00,
+			"description": "TVA Déductible 20%"
+		  },
+		  {
+			"id": 1009,
+			"accountingCode": "512",
+			"debitAmount": 0.00,
+			"creditAmount": 1200.00,
+			"description": "Paiement Banque TTC",
+			"paymentCode": "CB"
+		  }
+		]
+	  }
+	]
+  },
+  "operationsToAdd": [
+	{
+	  "id": 201,
+	  "dateOperation": "2026-05-20",
+	  "dateComptable": "2026-05-21",
+	  "libelle": "Achat Logiciel Développement",
+	  "referenceDocument": "FA-LOG-005",
+	  "descriptif": "Licence annuelle IDE",
+	  "statutCode": "BROUILLON",
+	  "position": 1000,
+	  "movements": [
+		{
+		  "id": 2001,
+		  "accountingCode": "6065",
+		  "debitAmount": 250.00,
+		  "creditAmount": 0.00,
+		  "description": "Logiciels",
+		  "paymentCode": "CB"
+		},
+		{
+		  "id": 2002,
+		  "accountingCode": "512",
+		  "debitAmount": 0.00,
+		  "creditAmount": 250.00,
+		  "description": "Banque",
+		  "paymentCode": "CB"
+		}
+	  ]
+	},
+	{
+	  "id": 202,
+	  "dateOperation": "2026-05-18",
+	  "dateComptable": "2026-05-18",
+	  "libelle": "Insertion Midi (Test Gaps)",
+	  "referenceDocument": "RELEVE-05",
+	  "statutCode": "VAL",
+	  "position": 1500,
+	  "movements": [
+		{
+		  "id": 2003,
+		  "accountingCode": "627",
+		  "debitAmount": 15.50,
+		  "creditAmount": 0.00,
+		  "description": "Services bancaires"
+		},
+		{
+		  "id": 2004,
+		  "accountingCode": "512",
+		  "debitAmount": 0.00,
+		  "creditAmount": 15.50,
+		  "description": "Banque"
+		}
+	  ]
+	},
+	{
+	  "id": 203,
+	  "dateOperation": "2026-05-29",
+	  "libelle": "Opération sans Date Comptable (Test nullsLast)",
+	  "statutCode": "BROUILLON",
+	  "position": 1000,
+	  "movements": [
+		{
+		  "id": 2005,
+		  "accountingCode": "583",
+		  "debitAmount": 100.00,
+		  "creditAmount": 0.00,
+		  "description": "Virement interne en attente"
+		},
+		{
+		  "id": 2006,
+		  "accountingCode": "512",
+		  "debitAmount": 0.00,
+		  "creditAmount": 100.00,
+		  "description": "Banque"
+		}
+	  ]
+	},
+	{
+	  "id": 204,
+	  "dateOperation": "2026-05-30",
+	  "dateComptable": "2026-05-30",
+	  "libelle": "Erreur de saisie (Test isBalance == false)",
+	  "statutCode": "ERR",
+	  "position": 1000,
+	  "movements": [
+		{
+		  "id": 2007,
+		  "accountingCode": "601",
+		  "debitAmount": 500.00,
+		  "creditAmount": 0.00,
+		  "description": "Achat Fournitures"
+		},
+		{
+		  "id": 2008,
+		  "accountingCode": "512",
+		  "debitAmount": 0.00,
+		  "creditAmount": 450.00,
+		  "description": "Banque (Erreur montant)"
+		}
+	  ]
+	}
+  ]
+}
