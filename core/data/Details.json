@@ -1,0 +1,182 @@
+[
+	{
+	  "Code" : ".229",
+	  "type" : "Banque",
+	  "name" : "Compte courant .229",
+	  "description" : "Compte joint leslie à supprimer"
+	},
+	{
+	  "Code" : ".442",
+	  "type" : "Banque",
+	  "name" : "Compte courant .442",
+	  "description" : "Compte courant principal"
+	},
+	{
+	  "Code" : ".Aiz",
+	  "type" : "Immo",
+	  "name" : "Bois Aize",
+	  "description" : "Foncier Bois à Aize"
+	},
+	{
+	  "Code" : ".Ber",
+	  "type" : "Immo",
+	  "name" : "Terrain les Berthiers",
+	  "description" : "Foncier mon verger en cours de création"
+	},
+	{
+	  "Code" : ".Bill1",
+	  "type" : "Immo",
+	  "name" : "Terrain billauderie 92",
+	  "description" : "Foncier Terrain en fermage"
+	},
+	{
+	  "Code" : ".Bill2",
+	  "type" : "Immo",
+	  "name" : "Terrain billauderie 93",
+	  "description" : "Foncier Terrain en fermage"
+	},
+	{
+	  "Code" : ".Chas",
+	  "type" : "Loisirs",
+	  "name" : "Chasse",
+	  "description" : ""
+	},
+	{
+	  "Code" : ".Damp",
+	  "type" : "Immo",
+	  "name" : "Terrain Dampierre",
+	  "description" : "Terrain 1 hectare Vivi à Dampierre"
+	},
+	{
+	  "Code" : ".DanE",
+	  "type" : "Loisirs",
+	  "name" : "Danse Eliana",
+	  "description" : ""
+	},
+	{
+	  "Code" : ".Dev",
+	  "type" : "Revenus",
+	  "name" : "Developpeur",
+	  "description" : "Revenus de mes activités de développement informatique"
+	},
+	{
+	  "Code" : ".Dis",
+	  "type" : "Streaming",
+	  "name" : "Disney+",
+	  "description" : ""
+	},
+	{
+	  "Code" : ".Epi",
+	  "type" : "Revenus",
+	  "name" : "Epines du Berry",
+	  "description" : "Revenus liés a mon activités des épines du berry"
+	},
+	{
+	  "Code" : ".eq",
+	  "type" : "Vehicule",
+	  "name" : "Equipement Divers",
+	  "description" : ""
+	},
+	{
+	  "Code" : ".FooA",
+	  "type" : "Loisirs",
+	  "name" : "FootBall Analia",
+	  "description" : ""
+	},
+	{
+	  "Code" : ".mam",
+	  "type" : "Pret",
+	  "name" : "Pret Maman",
+	  "description" : "Pret consenti a maman"
+	},
+	{
+	  "Code" : ".Meg",
+	  "type" : "Vehicule",
+	  "name" : "Renault Mégane",
+	  "description" : ""
+	},
+	{
+	  "Code" : ".Net",
+	  "type" : "Streaming",
+	  "name" : "Netflix",
+	  "description" : ""
+	},
+	{
+	  "Code" : ".P106",
+	  "type" : "Vehicule",
+	  "name" : "Peugeot 106",
+	  "description" : ""
+	},
+	{
+	  "Code" : ".Pech",
+	  "type" : "Loisirs",
+	  "name" : "Pêche",
+	  "description" : ""
+	},
+	{
+	  "Code" : ".Pont",
+	  "type" : "Immo",
+	  "name" : "Maison le Pont",
+	  "description" : "Maison Vivi"
+	},
+	{
+	  "Code" : ".Pri",
+	  "type" : "Streaming",
+	  "name" : "Prime Vidéo",
+	  "description" : ""
+	},
+	{
+	  "Code" : ".Rou",
+	  "type" : "Immo",
+	  "name" : "Bois Rouvres",
+	  "description" : "Foncier Bois à Rouvres les Bois"
+	},
+	{
+	  "Code" : ".S26",
+	  "type" : "Vehicule",
+	  "name" : "Solis 26",
+	  "description" : ""
+	},
+	{
+	  "Code" : ".Sce",
+	  "type" : "Vehicule",
+	  "name" : "Renault Scenic",
+	  "description" : ""
+	},
+	{
+	  "Code" : ".Vig",
+	  "type" : "Immo",
+	  "name" : "Maison Les vignes",
+	  "description" : "Foncier ma maison principale"
+	},
+	{
+	  "Code" : "LEP-J",
+	  "type" : "Banque",
+	  "name" : "LEP Julien",
+	  "description" : "Epargne long terme Julien"
+	},
+	{
+	  "Code" : "LVA-G",
+	  "type" : "Banque",
+	  "name" : "Livret A Greg",
+	  "description" : "Epargne liquide Grégory"
+	},
+	{
+	  "Code" : "LVA-J",
+	  "type" : "Banque",
+	  "name" : "Livret 1 Julien",
+	  "description" : "Epargne liquide Julien"
+	},
+	{
+	  "Code" : "PS-J",
+	  "type" : "Banque",
+	  "name" : "Part Sociales",
+	  "description" : "Epargnes long terme Julien"
+	},
+	{
+	  "Code" : "Ven",
+	  "type" : "Vehicule",
+	  "name" : "Kia Venga",
+	  "description" : ""
+	}
+  ]
