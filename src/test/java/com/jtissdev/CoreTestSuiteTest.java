@@ -9,7 +9,6 @@ import com.jtissdev.features.pcg.dto.PcgCoreDTOTest;
 import com.jtissdev.features.pcg.dto.SubAccountingTypeTest;
 import com.jtissdev.features.pcg.mapper.PcgDataMapperTest;
 import com.jtissdev.features.pcg.repository.JsonFilePcgRepositoryTest;
-import com.jtissdev.features.pcg.service.PcgServiceImplTest;
 import com.jtissdev.features.pcp.dto.AnalyticDetailTest;
 import com.jtissdev.features.pcp.dto.ContactsTest;
 import com.jtissdev.features.pcp.dto.PcpCoreDTOTest;
@@ -17,6 +16,10 @@ import com.jtissdev.features.pcp.dto.TiersTest;
 import com.jtissdev.features.referential.dto.OperationStatusTest;
 import com.jtissdev.features.referential.dto.PaymentMethodTest;
 import com.jtissdev.features.referential.dto.ReferentialCoreDTOTest;
+import com.jtissdev.features.referential.repository.JsonFileOperationStatusRepositoryTest;
+import com.jtissdev.features.referential.repository.JsonFilePaymentMethodRepositoryTest;
+import com.jtissdev.features.referential.service.impl.OperationStatusServiceImplTest;
+import com.jtissdev.features.referential.service.impl.PaymentMethodServiceImplTest;
 import com.jtissdev.utils.TestResultLogger;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,6 +43,12 @@ import org.junit.platform.suite.api.Suite;
 		ReferentialCoreDTOTest.class,
 
 		// Referential Repository
+		JsonFileOperationStatusRepositoryTest.class,
+		JsonFilePaymentMethodRepositoryTest.class,
+
+		// Referential Services
+		OperationStatusServiceImplTest.class,
+		PaymentMethodServiceImplTest.class,
 
 		/* ====================================================================
 	    ===                  pcp - PLAN COMPTABLE PERSONALISE               ===

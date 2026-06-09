@@ -49,7 +49,7 @@ public abstract class AbstractReferentialJsonRepository<T, ID> extends AbstractJ
 		if (!liveFile.exists()) {
 			log.info("[Referential] Fichier de travail absent. Déploiement du seed depuis : {}", seedResourcePath);
 			ensureParentDirectoryExists();
-			Resource resource = resourceLoader.getResource(resourceLoader.CLASSPATH_URL_PREFIX + seedResourcePath);
+			Resource resource = resourceLoader.getResource( seedResourcePath);
 			try (InputStream is = resource.getInputStream()) {
 				Files.copy(is, liveFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
 				log.info("[Referential] Grappe de données initialisée avec succès pour : {}", liveFile.getName());
