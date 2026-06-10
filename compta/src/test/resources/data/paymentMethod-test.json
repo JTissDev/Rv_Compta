@@ -1,0 +1,28 @@
+{
+  "codeOnly" : {
+	"code" : ""
+  } ,
+  "nameOnly" : {
+	"name" : ""
+  } ,
+  "colorOnly" : {
+	"color" : ""
+  } ,
+  "codeAndName" : {
+	"code" : "" ,
+	"name" : ""
+  } ,
+  "codeAndColor" : {
+	"code" : "" ,
+	"color" : ""
+  } ,
+  "nameAndColor" : {
+	"name" : "" ,
+	"color" : ""
+  } ,
+  "allFields" : {
+	"code" : "" ,
+	"name" : "" ,
+	"color" : ""
+  }
+}

@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
+.idea/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
@@ -43,3 +44,11 @@ logs/
 /Dev-Reports/
 
 report_details.txt
+
+
+exportToHTML/
+
+/src/main/resources/.env/*
+# Ne PAS ignorer les fichiers exemples
+!src/main/resources/.env/application-env.properties.example
+!src/main/resources/application-mode.properties.example

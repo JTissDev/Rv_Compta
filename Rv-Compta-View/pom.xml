@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.jtissdev-API</groupId>
+        <artifactId>Rv_Compta</artifactId>
+        <version>0.6.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>Rv-Compta-View</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Rv_Compta - Console View</name>
+    <description>Interface utilisateur console (Client)</description>
+
+    <dependencies>
+        <!-- 1. Dépendance explicite vers Core (DTOs, Exceptions, Configs) -->
+        <dependency>
+            <groupId>com.jtissdev-API</groupId>
+            <artifactId>core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- 2. Dépendance directe vers le moteur Compta -->
+        <!-- Requise pour les services métiers en architecture monolithique -->
+        <dependency>
+            <groupId>com.jtissdev-API</groupId>
+            <artifactId>compta</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jtissdev-API</groupId>
+            <artifactId>test-utils</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+
+    <build>
+        <plugins>
+            <!-- Active la génération du JAR exécutable (Fat JAR Spring Boot) pour ce module lanceur -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

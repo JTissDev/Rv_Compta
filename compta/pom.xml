@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.jtissdev-API</groupId>
+        <artifactId>Rv_Compta</artifactId>
+        <version>0.6.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>compta</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Rv_Compta - Compta Engine</name>
+    <description>Moteur principal de comptabilité (Services, Repositories)</description>
+
+    <dependencies>
+        <!-- Dépendance vers le socle de base (DTOs) -->
+        <dependency>
+            <groupId>com.jtissdev-API</groupId>
+            <artifactId>core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jtissdev-API</groupId>
+            <artifactId>test-utils</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- L'exécution du plugin Spring Boot est désactivée grâce au pluginManagement du parent -->
+        </plugins>
+    </build>
+</project>
