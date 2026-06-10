@@ -3,7 +3,6 @@ package com.jtissdev.features.pcg.dto;
 import com.jtissdev.utils.TestDataLoader;
 import com.jtissdev.utils.TestGroup;
 import com.jtissdev.utils.TestResultLogger;
-import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import org.junit.jupiter.api.*;

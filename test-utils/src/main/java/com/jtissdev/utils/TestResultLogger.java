@@ -50,8 +50,8 @@ public class TestResultLogger implements BeforeAllCallback, AfterAllCallback, Af
 
 		// 2. GESTION DU BLOC (TestGroup)
 		String groupName = "INDÉPENDANT";
-		if (context.getRequiredTestClass().isAnnotationPresent(TestGroup.class)) {
-			groupName = context.getRequiredTestClass().getAnnotation(TestGroup.class).value();
+		if (context.getRequiredTestClass().isAnnotationPresent(com.jtissdev.utils.TestGroup.class)) {
+			groupName = context.getRequiredTestClass().getAnnotation(com.jtissdev.utils.TestGroup.class).value();
 		}
 
 		// Si on change de groupe, on affiche les stats du groupe précédent

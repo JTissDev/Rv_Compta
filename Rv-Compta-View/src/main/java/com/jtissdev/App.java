@@ -1,7 +1,9 @@
 package com.jtissdev;
 
-import com.jtissdev.logging.banner.AppBanner;
 import com.jtissdev.controller.MainController;
+import com.jtissdev.logging.banner.AppBanner;
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;

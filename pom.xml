@@ -17,6 +17,7 @@
         <module>compta</module>
         <module>api-server</module>
         <module>Rv-Compta-View</module>
+        <module>test-utils</module>
     </modules>
 
     <parent>
@@ -65,6 +66,8 @@
         <!-- Versions centralisées des dépendances pour faciliter la maintenance et les mises à jour -->
         <!-- Version de l'API Jakarta JSON pour la manipulation de données JSON -->
         <jakarta.version>2.1.2</jakarta.version>
+        <!-- -->
+        <junit.version>3.8.1</junit.version>
         <!-- Version de l'implémentation Parson pour faire fonctionner l'API Jakarta JSON -->
         <parson.version>1.1.5</parson.version>
         <!-- Version de la bibliothèque Apache POI pour lire et écrire des fichiers Excel (XLSX) -->
@@ -131,7 +134,27 @@
             <version>${logging.version}</version>
         </dependency>
 
+        <!-- -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>3.2.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <pluginManagement>
