@@ -1,0 +1,22 @@
+[
+  {
+	"code": "PREV",
+	"name": "Prévisionnel",
+	"color": "#3498db"
+  },
+  {
+	"code": "REEL",
+	"name": "Réel / Validé",
+	"color": "#2ecc71"
+  },
+  {
+	"code": "WAIT",
+	"name": "En attente",
+	"color": "#f1c40f"
+  },
+  {
+	"code": "CANC",
+	"name": "Annulé",
+	"color": "#e74c3c"
+  }
+]
