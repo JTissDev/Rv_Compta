@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jtissdev-API</groupId>
-    <artifactId>Rv_Compta</artifactId>
+    <artifactId>Rv-Compta-Parent</artifactId>
     <version>0.6.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -47,7 +47,6 @@
         </developer>
     </developers>
 
-
     <!-- Informations sur la licence -->
     <licenses>
         <license>
@@ -57,12 +56,26 @@
         </license>
     </licenses>
 
+    <!-- ====================================================================== -->
+    <!-- MODULES DÉCLARÉS                                                       -->
+    <!-- ====================================================================== -->
+    <modules>
+        <module>core</module>
+        <module>compta</module>
+        <module>Rv-Compta-View</module>
+        <module>api-server</module>
+    </modules>
+
+    <!-- ====================================================================== -->
+    <!-- PROPRIÉTÉS COMMUNES                                                    -->
+    <!-- ====================================================================== -->
     <properties>
         <!-- Version de Java utilisée pour compiler le projet -->
         <java.version>21</java.version>
         <!-- Encodage utilisé pour compiler le code source et générer les rapports -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        
         <!-- Versions centralisées des dépendances pour faciliter la maintenance et les mises à jour -->
         <!-- Version de l'API Jakarta JSON pour la manipulation de données JSON -->
         <jakarta.version>2.1.2</jakarta.version>
@@ -74,12 +87,65 @@
         <POI.version>5.2.5</POI.version>
         <!-- Version de Lombok pour réduire le code boilerplate (getters, setters, etc.) -->
         <lombock.version>1.18.30</lombock.version>
-        <!-- Version de la bibliothèque de logging personnalisée pour bénéficier de ses fonctionnalités (ex: logger de démarrage) -->
+        <!-- Version de la bibliothèque de logging personnalisée pour bénéficier de ses fonctionnalités -->
         <logging.version>1.2</logging.version>
     </properties>
 
-    <dependencies>
+    <!-- ====================================================================== -->
+    <!-- GESTION DES DÉPENDANCES (Versions centralisées)                        -->
+    <!-- ====================================================================== -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Dépendances inter-modules -->
+            <dependency>
+                <groupId>com.jtissdev-API</groupId>
+                <artifactId>Rv-Compta-Core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
+            <dependency>
+                <groupId>com.jtissdev-API</groupId>
+                <artifactId>Rv-Compta-Compta</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.jtissdev-API</groupId>
+                <artifactId>Rv-Compta-View</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Dépendances externes -->
+            <dependency>
+                <groupId>jakarta.json</groupId>
+                <artifactId>jakarta.json-api</artifactId>
+                <version>${jakarta.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.parsson</groupId>
+                <artifactId>parsson</artifactId>
+                <version>${parson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${POI.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.jtissdev-core</groupId>
+                <artifactId>jtiss-utils-logging</artifactId>
+                <version>${logging.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- ====================================================================== -->
+    <!-- DÉPENDANCES COMMUNES À TOUS LES MODULES                               -->
+    <!-- ====================================================================== -->
+    <dependencies>
         <!-- Fournit les outils de test pour Spring Boot (JUnit, Mockito, etc.) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -87,37 +153,10 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Dépendance de base pour Spring Boot (gestion des logs, auto-configuration, YAML) -->
+        <!-- Dépendance de base pour Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-
-        <!-- Fournit les outils de développement web pour Spring Boot (REST, MVC, etc.) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!-- Interface standard Java pour la manipulation de structures JSON (JSON-Processing) -->
-        <dependency>
-            <groupId>jakarta.json</groupId>
-            <artifactId>jakarta.json-api</artifactId>
-            <version>${jakarta.version}</version>
-        </dependency>
-
-        <!-- Implémentation technique pour faire fonctionner l'API Jakarta JSON -->
-        <dependency>
-            <groupId>org.eclipse.parsson</groupId>
-            <artifactId>parsson</artifactId>
-            <version>${parson.version}</version>
-        </dependency>
-
-        <!-- Bibliothèque permettant de lire et écrire des fichiers Microsoft Excel (XLSX) -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>${POI.version}</version>
         </dependency>
 
         <!-- Permet de regrouper et d'exécuter plusieurs classes de tests comme une suite unique -->
@@ -127,11 +166,10 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Dépendance vers le module de logging pour bénéficier de ses fonctionnalités (ex: logger de démarrage) -->
+        <!-- Dépendance vers le module de logging personnalisé -->
         <dependency>
             <groupId>com.jtissdev-core</groupId>
             <artifactId>jtiss-utils-logging</artifactId>
-            <version>${logging.version}</version>
         </dependency>
 
         <!-- -->
@@ -176,7 +214,7 @@
                 <configuration>
                     <encoding>UTF-8</encoding>
                     <delimiters>
-                        <delimiter>${*}</delimiter> <!-- Force le format standard -->
+                        <delimiter>${*}</delimiter>
                     </delimiters>
                     <useDefaultDelimiters>false</useDefaultDelimiters>
                 </configuration>
@@ -197,7 +235,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Permet d'exécuter des scripts Groovy pour dynamiser Maven (ici : formater la liste des développeurs) -->
+            <!-- Permet d'exécuter des scripts Groovy pour dynamiser Maven -->
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
@@ -211,7 +249,6 @@
                         <configuration>
                             <scripts>
                                 <script>
-                                    // Formate les noms et emails des auteurs pour l'injection dans les ressources
                                     def prefix = "\n## : "
                                     project.properties['project.devs.list'] = project.developers
                                     .collect { "${it.name} (${it.email})" }
@@ -222,7 +259,6 @@
                     </execution>
                 </executions>
                 <dependencies>
-                    <!-- Moteur Groovy nécessaire au fonctionnement du plugin gmavenplus -->
                     <dependency>
                         <groupId>org.apache.groovy</groupId>
                         <artifactId>groovy-all</artifactId>
@@ -233,7 +269,7 @@
                 </dependencies>
             </plugin>
 
-            <!-- Analyse la version actuelle pour la découper en chiffres (Majeur, Mineur, Correctif) -->
+            <!-- Analyse la version actuelle -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -248,7 +284,7 @@
                 </executions>
             </plugin>
 
-            <!-- Met à jour les versions dans le(s) fichier(s) POM (très utile pour tes releases Git) -->
+            <!-- Met à jour les versions dans le(s) fichier(s) POM -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
@@ -256,7 +292,20 @@
             </plugin>
         </plugins>
 
-        <!-- Définition des dossiers de ressources (config, icônes) avec activation du filtrage (injection de variables) -->
+        <pluginManagement>
+            <plugins>
+                <!-- Configuration optionnelle pour spring-boot-maven-plugin dans les modules -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <!-- Définition des dossiers de ressources -->
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
