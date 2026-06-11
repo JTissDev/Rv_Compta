@@ -27,7 +27,7 @@ public class TestMainController extends AbstractConsoleController implements Mai
 	/** File d'attente simulant les saisies utilisateur */
 	private final Queue<String> inputQueue = new LinkedList<>();
 
-	public TestMainController(@Value("${app.data.path}") String dataPath) {
+	public TestMainController(@Value("${app.persistence.storage-path}") String dataPath) {
 		super( dataPath);
 	}
 
