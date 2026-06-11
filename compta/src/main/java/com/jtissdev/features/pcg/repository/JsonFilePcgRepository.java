@@ -49,8 +49,8 @@ public class JsonFilePcgRepository extends PcgRepository {
 	public JsonFilePcgRepository(
 			ResourceLoader resourceLoader,
 			@Value("${app.persistence.storage-path}") String storageDir,
-			@Value("${app.seed.folder-path}") String seedFolder,
-			@Value("${app.seed.pcg-file-name}") String pcgSeedFileName) {
+			@Value("${app.persistence.seed-path}") String seedFolder,
+			@Value("${app.persistence.file-name.pcg}") String pcgSeedFileName) {
 		super(resourceLoader,seedFolder,pcgSeedFileName);
 
 		this.pcgLiveFile = new File(storageDir, pcgSeedFileName);

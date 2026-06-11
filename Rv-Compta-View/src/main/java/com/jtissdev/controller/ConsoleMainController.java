@@ -24,7 +24,7 @@ import java.util.List;
  * @since 0.6
  */
 @Component
-@Profile("console & !test")
+@Profile("!test")
 public class ConsoleMainController extends AbstractConsoleController implements MainController {
 
 
@@ -33,10 +33,10 @@ public class ConsoleMainController extends AbstractConsoleController implements 
 	/* @Value("${app.persistence.storage-path}")
 	private String storageDir;
 
-	@Value("${app.seed.folder-path}")
+	@Value("${app.persistence.seed-path}")
 	private String seedFolder;
 
-	@Value("${app.seed.pcg-file-name}")
+	@Value("${aapp.persistence.file-name.pcg}")
 	private String pcgSeedFileName; */
 	public ConsoleMainController(@Value("${app.persistence.storage-path}") String dataPath) {
 		super(dataPath);
