@@ -10,7 +10,7 @@
     <artifactId>test-utils</artifactId>
     <packaging>jar</packaging>
 
-    <name>test-utils</name>
+    <name>Rv_Compta - Utilitaire de test</name>
     <url>http://maven.apache.org</url>
 
     <properties>

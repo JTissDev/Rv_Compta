@@ -38,7 +38,7 @@ public class ConsoleMainController extends AbstractConsoleController implements 
 
 	@Value("${app.seed.pcg-file-name}")
 	private String pcgSeedFileName; */
-	public ConsoleMainController(@Value("${app.data.path}") String dataPath) {
+	public ConsoleMainController(@Value("${app.persistence.storage-path}") String dataPath) {
 		super(dataPath);
 
 	}
