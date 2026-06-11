@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -10,11 +11,13 @@
     <name>Rv_Compta</name>
     <description>API de gestion Comptable</description>
     <url>http://maven.apache.org</url>
+
     <modules>
         <module>core</module>
         <module>compta</module>
         <module>api-server</module>
         <module>Rv-Compta-View</module>
+        <module>test-utils</module>
     </modules>
 
     <parent>
@@ -63,6 +66,8 @@
         <!-- Versions centralisées des dépendances pour faciliter la maintenance et les mises à jour -->
         <!-- Version de l'API Jakarta JSON pour la manipulation de données JSON -->
         <jakarta.version>2.1.2</jakarta.version>
+        <!-- -->
+        <junit.version>3.8.1</junit.version>
         <!-- Version de l'implémentation Parson pour faire fonctionner l'API Jakarta JSON -->
         <parson.version>1.1.5</parson.version>
         <!-- Version de la bibliothèque Apache POI pour lire et écrire des fichiers Excel (XLSX) -->
@@ -129,17 +134,40 @@
             <version>${logging.version}</version>
         </dependency>
 
+        <!-- -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
-    <build>
-        <plugins>
-            <!-- Permet de packager l'application en un fichier JAR exécutable et de lancer l'app via Maven -->
-            <plugin>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>3.2.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Permet de packager l'application en un fichier JAR exécutable et de lancer l'app via Maven -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
             <!-- Permet de filtrer les ressources (injection de variables) avec un format de délimiteur personnalisé -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -164,10 +192,10 @@
                         <!-- Cible spécifiquement ta classe de suite de tests pour l'exécution -->
                         <include>**/CoreTestSuiteTest.java</include>
                     </includes>
-                        <!-- Force l'encodage UTF-8 pour la JVM des tests -->
-                        <argLine>-Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8</argLine>
-                    </configuration>
-                </plugin>
+                    <!-- Force l'encodage UTF-8 pour la JVM des tests -->
+                    <argLine>-Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8</argLine>
+                </configuration>
+            </plugin>
 
             <!-- Permet d'exécuter des scripts Groovy pour dynamiser Maven (ici : formater la liste des développeurs) -->
             <plugin>
@@ -242,6 +270,4 @@
             </testResource>
         </testResources>
     </build>
-
-
 </project>

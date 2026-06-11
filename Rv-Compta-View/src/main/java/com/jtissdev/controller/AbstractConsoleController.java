@@ -24,8 +24,8 @@ import java.util.Scanner;
  * @version 1.0.0
  * @since 0.6
  */
-@Controller
-public class AbstractConsoleController {
+
+public abstract class AbstractConsoleController {
 
 	protected final Scanner scanner = new Scanner(System.in);
 	protected final MainConsoleView mainConsoleView = new MainConsoleView();
@@ -44,7 +44,7 @@ public class AbstractConsoleController {
 	protected PcpCoreDTO pcpCore;
 
 
-	public AbstractConsoleController(@Value("${app.data.path}") String dataPath) {
+	public AbstractConsoleController( String dataPath) {
 
 		this.dataPath = dataPath;
 		this.pcgCore = pcgLoader.loadPcg("data/PCG.json");
