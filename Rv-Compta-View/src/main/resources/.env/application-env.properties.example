@@ -21,12 +21,12 @@ app.persistence.storage-path=YOUR_PATH/compta-env/
 app.persistence.seed-path=classpath:data/
 
 # --- PERSISTENCE : FICHIERS REFERENTIEL ---
-app.persistence.filename-status=YOUR_STATUS_FILE.json
-app.persistence.filename-payment=YOUR_PAYMENT_FILE.json
+app.persistence.file-name.status=YOUR_STATUS_FILE.json
+app.persistence.file-name.payment=YOUR_PAYMENT_FILE.json
 
 # --- PERSISTENCE : FICHIERS COMPTA ---
 # Nom du fichier cible pour la sauvegarde (ex: svgDev.json, svgTest.json, svgProd.json)
-app.persistence.filename=YOUR_FILENAME.json
+app.persistence.file-name.journal=YOUR_FILENAME.json
 
 
 

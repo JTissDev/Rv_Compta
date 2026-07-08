@@ -41,12 +41,12 @@ public class JsonFileJournalRepository extends JournalRepository implements Jour
 	 * @param storageDir
 	 * 		The directory path configured via {@code app.persistence.path}.
 	 * @param filename
-	 * 		The target file name configured via {@code app.persistence.filename}.
+	 * 		The target file name configured via {@code app.persistence.file-name.journal}.
 	 * @since 0.6.0
 	 */
 	public JsonFileJournalRepository(
 			@Value("${app.persistence.storage-path}") String storageDir,
-			@Value("${app.persistence.filename}") String filename) {
+			@Value("${app.persistence.file-name.journal}") String filename) {
 
 		this.storagePath = Paths.get(storageDir, filename).toAbsolutePath().normalize();
 		logger.info("[Persistence] JSON Repository target path initialized to: {}", this.storagePath);

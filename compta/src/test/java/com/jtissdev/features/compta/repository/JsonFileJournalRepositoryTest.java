@@ -47,7 +47,7 @@ public class JsonFileJournalRepositoryTest {
 	@Value("${app.persistence.storage-path}")
 	private String configuredStorageDir;
 
-	@Value("${app.persistence.filename}")
+	@Value("${app.persistence.file-name.journal}")
 	private String configuredFilename;
 
 	private Path fullTestFilePath;

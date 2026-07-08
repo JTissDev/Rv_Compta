@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in is file.
 
+# Modules Changelog link
+> [**Module Compta**](./compta/CHANGELOG.md) |
+> [**Module Core**](./core/CHANGELOG.md)
 # Changelog
 
 ## [0.6] in progress
@@ -12,6 +15,15 @@ All notable changes to this project will be documented in is file.
 - View `PCG`
 - View `Referential`
 - OperationDTO : Add position management for sorting operation by countable date (e.g., due date, payment date) and not just by creation date.
+- **Rv-Compta-View** : Integration of domain-specific CLI views (`Compta`, `Journal`, `Operation`, `Movement`, `PCP`, `PCG`, `Referential`).
+- **Core Engine** : Added position-based sorting logic in `OperationDTO` to allow financial sorting independently of creation order.
+- **Core Infrastructure** : Solidified `AbstractJsonRepository`, generic `CrudRepository`, and custom `JsonMappingException`.
+
+### Changed
+- **Architecture** : Fully migrated from a monolithic layout to a multi-module Maven structure (`core`, `compta`, `Rv-Compta-View`, `api-server`, `test-utils`).
+
+### Technical Debt / Incoming
+- **Internationalization** : Enforced strict rule requiring all Javadocs and log messages to be written in English (US).
 
 ## [0.5] 2026-05-06
 
