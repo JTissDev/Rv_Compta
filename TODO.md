@@ -1,5 +1,8 @@
 # 📝 Project Tracking - Rv_Compta
 
+# Modules ToDo link
+> [**Module Core**](./core/TODO.md) |
+
 ## Global RoadMap & Progress
 
 - [ ] **Version 1.0: The Stable Console MVP**
@@ -74,3 +77,36 @@
   - **Méthodes prévues :** - `readObject(File)` / `readArray(File)` pour le parsing direct.
     - `write(File, JsonObject/JsonArray)` pour l'écrasement/création (remplace les `save()` actuels).
     - `update(File, JsonObject/JsonArray)` pour la modification partielle en mémoire avant réécriture (préparation V2).
+
+
+
+# 📝 Project Tracking - Rv_Compta
+
+## 📈 Global RoadMap & Progress
+
+### 🔄 En cours : Version 0.6.x (Stabilisation de la Console & Dette Technique Core)
+- [ ] 🌐 **Anglicisation Technique Globale** : Passer l'intégralité des messages de logs et de la Javadoc du module `core` en **Anglais (US)**.
+- [ ] 📝 **Audit & Complétion Javadoc Core** : Injecter les tags obligatoires (`@author J.Tiss`, `@since`, etc.) sur les composants clés identifiés :
+  * [ ] `AbstractJsonRepository`
+  * [ ] `JsonMappingException`
+  * [ ] `NotInTestCondition`
+  * [ ] `CoreTestSuiteTest`
+- [ ] 🎮 **Console UI** : Stabiliser les vues spécialisées (`Compta`, `PCP`, `PCG`, `Referential`) orchestrées par le `ConsoleMainController`.
+- [ ] 🕒 **Position Management** : Finaliser la gestion de `position` dans `OperationDTO` pour le tri chronologique hors création.
+
+### 🎯 Prochainement : Version 1.0 (The Stable Console MVP)
+- [ ] **Real-time Balancing** : Finaliser le `BalanceService` pour le calcul des soldes à la volée.
+- [ ] **Excel Import Service** : Finaliser le parsing via Apache POI (Correspondence Map & Interactive Mapping).
+- [ ] **Validation Engine** : Implémenter la validation stricte `Sum(Debit) == Sum(Credit)` et l'automatisation du code `VIRINT`.
+- [ ] **JSON Persistence** : Finaliser `JsonExportService` pour la sauvegarde complète du Journal.
+
+### 🚀 Versions Futures
+- [ ] **Version 2.0: Relational Persistence** (Migration MariaDB, Spring Data JPA, index composite `(date, position)`, tables de snapshots de balances).
+- [ ] **Version 3.0: The Backend Pivot (REST API)** (Contrôleurs Spring Boot Web dans `api-server`, Swagger/OpenAPI, préparation de l'écosystème ReactJS).
+- [ ] **Version 4.0: Enterprise Security** (Authentification JWT, RBAC, Audit Logging complet).
+- [ ] **Version 5.0: Association Update** (Profils multi-types, contraintes métiers et règles spécifiques).
+- [ ] **Version 6.0: Entreprise Update** (Extensions PCG/PCP spécifiques aux structures commerciales).
+
+## ⚙️ Évolutions / Refactoring Techniques
+- [ ] 📦 **Extraction Utils** : Extraire l'infrastructure de mapping (`AbstractJsonMapper` et son exception) du module `core` vers une dépendance indépendante `jtiss-dev-utils`.
+- [ ] 💾 **Refactoring Core I/O** : Extraire la logique d'accès bas niveau des fichiers dans un utilitaire dédié `JsonFileUtils` pour soulager l' `AbstractJsonRepository`.
