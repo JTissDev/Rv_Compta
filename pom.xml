@@ -4,13 +4,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jtissdev-API</groupId>
-    <artifactId>Rv-Compta-Parent</artifactId>
+    <artifactId>Rv_Compta</artifactId>
     <version>0.6.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Rv-Compta Parent</name>
-    <description>Multi-module Maven parent for Rv_Compta - Accounting Management API</description>
-    <url>https://github.com/JTissDev/Rv_Compta</url>
+    <name>Rv_Compta</name>
+    <description>API de gestion Comptable</description>
+    <url>http://maven.apache.org</url>
+
+    <modules>
+        <module>core</module>
+        <module>compta</module>
+        <module>api-server</module>
+        <module>Rv-Compta-View</module>
+        <module>test-utils</module>
+    </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -39,6 +47,7 @@
         </developer>
     </developers>
 
+
     <!-- Informations sur la licence -->
     <licenses>
         <license>
@@ -48,94 +57,29 @@
         </license>
     </licenses>
 
-    <!-- ====================================================================== -->
-    <!-- MODULES DÉCLARÉS                                                       -->
-    <!-- ====================================================================== -->
-    <modules>
-        <module>core</module>
-        <module>compta</module>
-        <module>Rv-Compta-View</module>
-        <module>api-server</module>
-    </modules>
-
-    <!-- ====================================================================== -->
-    <!-- PROPRIÉTÉS COMMUNES                                                    -->
-    <!-- ====================================================================== -->
     <properties>
         <!-- Version de Java utilisée pour compiler le projet -->
         <java.version>21</java.version>
         <!-- Encodage utilisé pour compiler le code source et générer les rapports -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        
         <!-- Versions centralisées des dépendances pour faciliter la maintenance et les mises à jour -->
         <!-- Version de l'API Jakarta JSON pour la manipulation de données JSON -->
         <jakarta.version>2.1.2</jakarta.version>
+        <!-- -->
+        <junit.version>3.8.1</junit.version>
         <!-- Version de l'implémentation Parson pour faire fonctionner l'API Jakarta JSON -->
         <parson.version>1.1.5</parson.version>
         <!-- Version de la bibliothèque Apache POI pour lire et écrire des fichiers Excel (XLSX) -->
         <POI.version>5.2.5</POI.version>
         <!-- Version de Lombok pour réduire le code boilerplate (getters, setters, etc.) -->
         <lombock.version>1.18.30</lombock.version>
-        <!-- Version de la bibliothèque de logging personnalisée pour bénéficier de ses fonctionnalités -->
+        <!-- Version de la bibliothèque de logging personnalisée pour bénéficier de ses fonctionnalités (ex: logger de démarrage) -->
         <logging.version>1.2</logging.version>
     </properties>
 
-    <!-- ====================================================================== -->
-    <!-- GESTION DES DÉPENDANCES (Versions centralisées)                        -->
-    <!-- ====================================================================== -->
-    <dependencyManagement>
-        <dependencies>
-            <!-- Dépendances inter-modules -->
-            <dependency>
-                <groupId>com.jtissdev-API</groupId>
-                <artifactId>Rv-Compta-Core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.jtissdev-API</groupId>
-                <artifactId>Rv-Compta-Compta</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.jtissdev-API</groupId>
-                <artifactId>Rv-Compta-View</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <!-- Dépendances externes -->
-            <dependency>
-                <groupId>jakarta.json</groupId>
-                <artifactId>jakarta.json-api</artifactId>
-                <version>${jakarta.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.eclipse.parsson</groupId>
-                <artifactId>parsson</artifactId>
-                <version>${parson.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-ooxml</artifactId>
-                <version>${POI.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.jtissdev-core</groupId>
-                <artifactId>jtiss-utils-logging</artifactId>
-                <version>${logging.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <!-- ====================================================================== -->
-    <!-- DÉPENDANCES COMMUNES À TOUS LES MODULES                               -->
-    <!-- ====================================================================== -->
     <dependencies>
+
         <!-- Fournit les outils de test pour Spring Boot (JUnit, Mockito, etc.) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -143,10 +87,37 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Dépendance de base pour Spring Boot -->
+        <!-- Dépendance de base pour Spring Boot (gestion des logs, auto-configuration, YAML) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- Fournit les outils de développement web pour Spring Boot (REST, MVC, etc.) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Interface standard Java pour la manipulation de structures JSON (JSON-Processing) -->
+        <dependency>
+            <groupId>jakarta.json</groupId>
+            <artifactId>jakarta.json-api</artifactId>
+            <version>${jakarta.version}</version>
+        </dependency>
+
+        <!-- Implémentation technique pour faire fonctionner l'API Jakarta JSON -->
+        <dependency>
+            <groupId>org.eclipse.parsson</groupId>
+            <artifactId>parsson</artifactId>
+            <version>${parson.version}</version>
+        </dependency>
+
+        <!-- Bibliothèque permettant de lire et écrire des fichiers Microsoft Excel (XLSX) -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${POI.version}</version>
         </dependency>
 
         <!-- Permet de regrouper et d'exécuter plusieurs classes de tests comme une suite unique -->
@@ -156,25 +127,48 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Dépendance vers le module de logging personnalisé -->
+        <!-- Dépendance vers le module de logging pour bénéficier de ses fonctionnalités (ex: logger de démarrage) -->
         <dependency>
             <groupId>com.jtissdev-core</groupId>
             <artifactId>jtiss-utils-logging</artifactId>
+            <version>${logging.version}</version>
         </dependency>
+
+        <!-- -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
-    <!-- ====================================================================== -->
-    <!-- CONFIGURATION DE BUILD COMMUNE                                        -->
-    <!-- ====================================================================== -->
-    <build>
-        <plugins>
-            <!-- Permet de packager l'application en un fichier JAR exécutable -->
-            <plugin>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>3.2.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-            <!-- Permet de filtrer les ressources (injection de variables) -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Permet de packager l'application en un fichier JAR exécutable et de lancer l'app via Maven -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <!-- Permet de filtrer les ressources (injection de variables) avec un format de délimiteur personnalisé -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -182,7 +176,7 @@
                 <configuration>
                     <encoding>UTF-8</encoding>
                     <delimiters>
-                        <delimiter>${*}</delimiter>
+                        <delimiter>${*}</delimiter> <!-- Force le format standard -->
                     </delimiters>
                     <useDefaultDelimiters>false</useDefaultDelimiters>
                 </configuration>
@@ -194,11 +188,16 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
+                    <includes>
+                        <!-- Cible spécifiquement ta classe de suite de tests pour l'exécution -->
+                        <include>**/CoreTestSuiteTest.java</include>
+                    </includes>
+                    <!-- Force l'encodage UTF-8 pour la JVM des tests -->
                     <argLine>-Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8</argLine>
                 </configuration>
             </plugin>
 
-            <!-- Permet d'exécuter des scripts Groovy pour dynamiser Maven -->
+            <!-- Permet d'exécuter des scripts Groovy pour dynamiser Maven (ici : formater la liste des développeurs) -->
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
@@ -212,6 +211,7 @@
                         <configuration>
                             <scripts>
                                 <script>
+                                    // Formate les noms et emails des auteurs pour l'injection dans les ressources
                                     def prefix = "\n## : "
                                     project.properties['project.devs.list'] = project.developers
                                     .collect { "${it.name} (${it.email})" }
@@ -222,6 +222,7 @@
                     </execution>
                 </executions>
                 <dependencies>
+                    <!-- Moteur Groovy nécessaire au fonctionnement du plugin gmavenplus -->
                     <dependency>
                         <groupId>org.apache.groovy</groupId>
                         <artifactId>groovy-all</artifactId>
@@ -232,7 +233,7 @@
                 </dependencies>
             </plugin>
 
-            <!-- Analyse la version actuelle -->
+            <!-- Analyse la version actuelle pour la découper en chiffres (Majeur, Mineur, Correctif) -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -247,7 +248,7 @@
                 </executions>
             </plugin>
 
-            <!-- Met à jour les versions dans le(s) fichier(s) POM -->
+            <!-- Met à jour les versions dans le(s) fichier(s) POM (très utile pour tes releases Git) -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
@@ -255,20 +256,7 @@
             </plugin>
         </plugins>
 
-        <pluginManagement>
-            <plugins>
-                <!-- Configuration optionnelle pour spring-boot-maven-plugin dans les modules -->
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <configuration>
-                        <skip>true</skip>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
-        <!-- Définition des dossiers de ressources -->
+        <!-- Définition des dossiers de ressources (config, icônes) avec activation du filtrage (injection de variables) -->
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -282,5 +270,4 @@
             </testResource>
         </testResources>
     </build>
-
 </project>

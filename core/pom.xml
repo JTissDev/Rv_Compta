@@ -1,83 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.jtissdev-API</groupId>
-        <artifactId>Rv-Compta-Parent</artifactId>
+        <artifactId>Rv_Compta</artifactId>
         <version>0.6.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>Rv-Compta-Core</artifactId>
+    <artifactId>core</artifactId>
     <packaging>jar</packaging>
 
-    <name>Rv-Compta Core</name>
-    <description>Core infrastructure, shared data models, and common utilities for Rv_Compta</description>
+    <name>Rv_Compta - Core</name>
+    <description>Module central contenant les DTOs, interfaces et classes utilitaires</description>
 
     <dependencies>
-        <!-- Jakarta JSON -->
-        <dependency>
-            <groupId>jakarta.json</groupId>
-            <artifactId>jakarta.json-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.parsson</groupId>
-            <artifactId>parsson</artifactId>
-        </dependency>
-
-        <!-- Spring Web (pour REST future) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
-        <!-- Apache POI -->
         <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.jtissdev-API</groupId>
+            <artifactId>test-utils</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Aucune dépendance inter-module car core est la base -->
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
+            <!-- L'exécution du plugin Spring Boot est désactivée grâce au pluginManagement du parent -->
         </plugins>
     </build>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.jtissdev-API</groupId>
-    <artifactId>Rv_Compta</artifactId>
-    <version>0.6.0-SNAPSHOT</version>
-  </parent>
-
-  <groupId>com.jtissdev.RvCompta</groupId>
-  <artifactId>core</artifactId>
-  <packaging>jar</packaging>
-
-  <name>core</name>
-  <url>http://maven.apache.org</url>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
 </project>
